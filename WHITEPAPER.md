@@ -107,6 +107,13 @@ rights, and this license intentionally withholds those. It's
 source-available: the code is public and free to read and use at any
 scale, but redistribution is reserved.
 
+**Is UFL an SPDX-recognized identifier?**
+No. SPDX maintains a curated list of license identifiers, and UFL isn't
+on it — inclusion requires a submission process this project hasn't
+gone through. Until it is (if ever), the correct SPDX-style reference is
+`LicenseRef-UFL-1.0`, the convention SPDX defines for licenses outside
+its list, not a bare `UFL-1.0` as if it had been registered.
+
 **Can I use UFL-licensed software in a commercial product?**
 Yes, without restriction, as long as you're not redistributing the
 licensed software's own source (modified or not) as part of doing so.

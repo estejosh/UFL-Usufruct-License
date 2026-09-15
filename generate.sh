@@ -1,3 +1,58 @@
+#!/bin/sh
+# generate.sh — fill in a copy of the Usufruct License (UFL) v1.0.
+# POSIX shell, no dependencies beyond sed (present on every POSIX system).
+#
+# Usage:
+#   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-o OUTPUT_PATH]
+# Any flag left out is prompted for. With no -o, the filled license is
+# written to stdout.
+#
+# Piped from curl — pass every flag, since stdin is the script itself in
+# this mode and interactive prompts have nothing to read:
+#   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
+#     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" > LICENSE
+#
+# Tracks UFL 1.0. See CHANGELOG.md for revisions.
+
+set -eu
+
+YEAR=""
+HOLDER=""
+PROJECT=""
+OUT=""
+
+while getopts "y:c:p:o:h" opt; do
+  case "$opt" in
+    y) YEAR=$OPTARG ;;
+    c) HOLDER=$OPTARG ;;
+    p) PROJECT=$OPTARG ;;
+    o) OUT=$OPTARG ;;
+    h)
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-o OUTPUT_PATH]"
+      exit 0
+      ;;
+    *) exit 1 ;;
+  esac
+done
+
+[ -n "$YEAR" ]    || { printf 'Year: ' >&2; read -r YEAR; }
+[ -n "$HOLDER" ]  || { printf 'Copyright holder: ' >&2; read -r HOLDER; }
+[ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
+
+# Escape backslash, ampersand, and the sed delimiter (|) so arbitrary
+# names can't break the substitution below.
+escape() {
+  printf '%s' "$1" | sed -e 's/[\&|]/\\&/g'
+}
+
+YEAR_ESC=$(escape "$YEAR")
+HOLDER_ESC=$(escape "$HOLDER")
+PROJECT_ESC=$(escape "$PROJECT")
+
+FILLED=$(sed \
+  -e "s|\[YEAR\]|$YEAR_ESC|g" \
+  -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
+  -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" <<'UFL_TEMPLATE'
 The Usufruct License (UFL) — Version 1.0
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -61,3 +116,11 @@ requires a separate license.
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
 convention for licenses outside that list, use `LicenseRef-UFL-1.0` —
 not a bare `UFL-1.0`, which would misrepresent it as SPDX-registered.
+UFL_TEMPLATE
+)
+
+if [ -n "$OUT" ]; then
+  printf '%s\n' "$FILLED" > "$OUT"
+else
+  printf '%s\n' "$FILLED"
+fi

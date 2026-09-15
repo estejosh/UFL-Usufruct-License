@@ -1,6 +1,13 @@
+# Custodly is licensed under the Usufruct License (UFL) v1.0
+
+Canonical license text, whitepaper, and FAQ:
+https://github.com/estejosh/UFL-Usufruct-License
+
+---
+
 The Usufruct License (UFL) — Version 1.0
 
-Copyright (c) [YEAR] [COPYRIGHT HOLDER]
+Copyright (c) 2026 Joshua D. Hale
 
 ## 1. Grant of Use
 
@@ -23,8 +30,8 @@ Section 1. They require a separate written license from the Licensor:
       service that is distributed, sold, or otherwise made available to
       third parties.
   (c) Using the Licensor's name, marks, or claims of compatibility
-      ("[PROJECT NAME]-compatible," "built on [PROJECT NAME]," etc.) in
-      connection with a distributed derivative.
+      ("Custodly-compatible," "built on Custodly," etc.) in connection
+      with a distributed derivative.
 
 ## 3. Why "Usufruct"
 
@@ -35,10 +42,9 @@ full use, no transfer.
 
 ## 4. Contributions
 
-Contributions submitted to a Software repository under this license are
-accepted under these same terms and are granted back to the Licensor to
-the extent necessary to keep this license enforceable across the
-combined work.
+Contributions submitted to this repository are accepted under these same
+terms and are granted back to the copyright holder to the extent needed
+to keep this license enforceable across the whole codebase.
 
 ## 5. No Warranty
 
@@ -54,8 +60,8 @@ IN THE SOFTWARE.
 This is a source-available license, not an OSI-approved open source
 license. The Open Source Definition requires unrestricted redistribution
 rights, which Section 2 intentionally withholds. The source is public
-and free to use at any scale; only redistribution of the Software itself
-requires a separate license.
+and free to use at any scale; only redistributing Custodly's own source
+requires a license.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
