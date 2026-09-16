@@ -1,0 +1,31 @@
+name: Check license text sync
+
+on:
+  push:
+    paths:
+      - "LICENSE.txt"
+      - "generate.sh"
+      - "generate.js"
+      - ".github/workflows/check-license-sync.yml"
+  pull_request:
+    paths:
+      - "LICENSE.txt"
+      - "generate.sh"
+      - "generate.js"
+      - ".github/workflows/check-license-sync.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: generate.js output matches LICENSE.txt
+        run: |
+          diff <(printf '%s' "$(node generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]')") \
+               <(printf '%s' "$(cat LICENSE.txt)")
+
+      - name: generate.sh output matches LICENSE.txt
+        run: |
+          diff <(printf '%s' "$(sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]')") \
+               <(printf '%s' "$(cat LICENSE.txt)")
