@@ -47,7 +47,7 @@ interactive version instead.
 
 ## At a glance
 
-![Comparison of source-available license types: what each leaves free vs. what it gates](./assets/license-comparison.svg)
+![How far each source-available license lets you go before you need permission](./assets/license-gates.svg)
 
 Full rationale, the naming story, and the complete FAQ:
 [`WHITEPAPER.md`](./WHITEPAPER.md).

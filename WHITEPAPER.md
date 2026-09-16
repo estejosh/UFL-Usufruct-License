@@ -20,7 +20,7 @@ Redistribution is licensed.
 Every major source-available license answers a slightly different
 question:
 
-![Comparison of source-available license types: what each leaves free vs. what it gates](./assets/license-comparison.svg)
+![How far each source-available license lets you go before you need permission](./assets/license-gates.svg)
 
 | License | What's free | What's gated |
 |---|---|---|
