@@ -1,0 +1,13 @@
+# Force LF line endings and no BOM for files that ship via curl | bash / curl | node
+# or get parsed as license text. Prevents a Windows checkout (core.autocrlf) from
+# silently reintroducing CRLF and breaking the quick-start one-liners in README.md.
+* text=auto eol=lf
+
+generate.sh text eol=lf
+generate.js text eol=lf
+LICENSE.txt text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.svg text eol=lf
+
+assets/*.png binary
