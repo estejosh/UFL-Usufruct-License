@@ -1,0 +1,8 @@
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Usufruct License (UFL)">
+  <rect width="1200" height="260" fill="#0d1117"/>
+  <line x1="60" y1="205" x2="1140" y2="205" stroke="#30363d" stroke-width="1"/>
+  <text x="60" y="120" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="700" fill="#e6edf3" letter-spacing="1">The Usufruct License</text>
+  <text x="60" y="165" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#8b949e">Unrestricted use. Reserved redistribution.</text>
+  <text x="1140" y="232" font-family="Menlo, Consolas, monospace" font-size="16" fill="#58a6ff" text-anchor="end">UFL-1.0</text>
+  <text x="60" y="232" font-family="Menlo, Consolas, monospace" font-size="16" fill="#6e7681">github.com/estejosh/UFL-Usufruct-License</text>
+</svg>

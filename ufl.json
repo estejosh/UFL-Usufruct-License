@@ -1,0 +1,16 @@
+{
+  "name": "The Usufruct License",
+  "shortName": "UFL",
+  "version": "1.0",
+  "spdxIdentifier": "LicenseRef-UFL-1.0",
+  "spdxRegistered": false,
+  "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
+  "licenseText": "LICENSE.txt",
+  "whitepaper": "WHITEPAPER.md",
+  "changelog": "CHANGELOG.md",
+  "generators": {
+    "sh": "generate.sh",
+    "js": "generate.js"
+  },
+  "firstAdoptedBy": "https://github.com/estejosh/Custodly"
+}
