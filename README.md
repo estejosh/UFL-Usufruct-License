@@ -69,4 +69,5 @@ Machine-readable metadata (version, identifier, file paths) is at
 Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]` — by hand or
 with the generator above — and state in your README which version
-you're under (e.g. "Licensed under UFL-1.0").
+you're under (e.g. "Licensed under UFL-1.0"). Keep the canonical-source
+line near the top intact — Section 7 requires it.

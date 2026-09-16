@@ -20,6 +20,7 @@ const fs = require('fs');
 
 const TEMPLATE = [
   'The Usufruct License (UFL) — Version 1.0',
+  'Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License',
   '',
   'Copyright (c) [YEAR] [COPYRIGHT HOLDER]',
   '',
@@ -77,6 +78,14 @@ const TEMPLATE = [
   'rights, which Section 2 intentionally withholds. The source is public',
   'and free to use at any scale; only redistribution of the Software itself',
   'requires a separate license.',
+  '',
+  '## 7. Notice',
+  '',
+  'The canonical-source line at the top of this license text (or an',
+  'equivalent pointer to https://github.com/estejosh/UFL-Usufruct-License)',
+  'must be kept intact when this license text is copied into another',
+  'project. This is a notice requirement on the license text itself, not a',
+  'condition on using the Software — Section 1\'s grant is unconditional.',
   '',
   '---',
   'SPDX identifier: UFL is not on the official SPDX license list. Per SPDX',
