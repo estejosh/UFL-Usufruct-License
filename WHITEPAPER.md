@@ -20,6 +20,8 @@ Redistribution is licensed.
 Every major source-available license answers a slightly different
 question:
 
+![Comparison of source-available license types: what each leaves free vs. what it gates](./assets/license-comparison.svg)
+
 | License | What's free | What's gated |
 |---|---|---|
 | MIT / Apache 2.0 | Everything | Nothing — fully open |

@@ -47,14 +47,7 @@ interactive version instead.
 
 ## At a glance
 
-| License | What's free | What's gated |
-|---|---|---|
-| MIT / Apache 2.0 | Everything | Nothing — fully open |
-| Business Source License (BUSL 1.1) | Use up to an Additional Use Grant | Production use beyond the grant, until a Change Date converts it to Apache/MIT |
-| Server Side Public License (SSPL) | Use and modification | Offering it as a service — triggers open-sourcing your whole service stack |
-| Elastic License 2.0 | Use, modification, redistribution | Offering it as a hosted/managed service |
-| PolyForm Shield 1.0.0 | Use, including commercial | Competing with the licensor |
-| **Usufruct License (UFL)** | **Use, at any scale, including commercial — unconditionally** | **Redistributing the software itself, modified or not** |
+![Comparison of source-available license types: what each leaves free vs. what it gates](./assets/license-comparison.svg)
 
 Full rationale, the naming story, and the complete FAQ:
 [`WHITEPAPER.md`](./WHITEPAPER.md).
