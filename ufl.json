@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "1.0",
-  "spdxIdentifier": "LicenseRef-UFL-1.0",
+  "version": "1.1",
+  "spdxIdentifier": "LicenseRef-UFL-1.1",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",

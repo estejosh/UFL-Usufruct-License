@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-1.0" src="https://img.shields.io/badge/license-UFL--1.0-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--1.0-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-1.1" src="https://img.shields.io/badge/license-UFL--1.1-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--1.1-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 </p>
 
@@ -20,7 +20,7 @@ fold its source into another distributed product.
 
 See it adopted: [Custodly](./examples/custodly/LICENSE).
 
-Current version: **UFL-1.0**, first adopted by
+Current version: **UFL-1.1**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly).
 
 ## Quick start

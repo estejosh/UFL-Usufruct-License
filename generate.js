@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v1.0.
+// generate.js — fill in a copy of the Usufruct License (UFL) v1.1.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -12,14 +12,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" > LICENSE
 //
-// Tracks UFL 1.0. See CHANGELOG.md for revisions.
+// Tracks UFL 1.1. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  'The Usufruct License (UFL) — Version 1.0',
+  'The Usufruct License (UFL) — Version 1.1',
   'Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License',
   '',
   'Copyright (c) [YEAR] [COPYRIGHT HOLDER]',
@@ -36,7 +36,8 @@ const TEMPLATE = [
   '## 2. Reserved Rights',
   '',
   'The following rights are reserved to the Licensor and are NOT granted by',
-  'Section 1. They require a separate written license from the Licensor:',
+  'Section 1. They require a separate written license from the Licensor,',
+  'except as Section 2A permits:',
   '',
   '  (a) Distributing the Software, or any modified version, fork, or',
   '      substantially similar reimplementation of it, to any third party,',
@@ -47,6 +48,28 @@ const TEMPLATE = [
   '  (c) Using the Licensor\'s name, marks, or claims of compatibility',
   '      ("[PROJECT NAME]-compatible," "built on [PROJECT NAME]," etc.) in',
   '      connection with a distributed derivative.',
+  '',
+  '## 2A. Forks of Decentralized or Network Software',
+  '',
+  'If the Software is designed to run as a node, client, or peer in a',
+  'decentralized network, blockchain, or similar peer-to-peer protocol,',
+  'Section 2(a) does not require a separate license for distributing a',
+  'modified version, fork, or independent reimplementation of it —',
+  'including to operate a competing network — provided the distributed',
+  'work:',
+  '',
+  '  (i) prominently and accurately credits [PROJECT NAME] as the origin',
+  '      of the Software or protocol, in its README, whitepaper, or',
+  '      equivalent primary documentation; and',
+  '  (ii) keeps the canonical-source notice required by Section 7 intact.',
+  '',
+  'Distributing a fork that removes, obscures, or falsifies this',
+  'attribution is not permitted under this exception and still requires a',
+  'separate license under Section 2(a). This section does not affect',
+  'Sections 2(b) or 2(c): incorporating the Software into another',
+  'distributed product, and using the Licensor\'s name or marks to claim',
+  'compatibility, still require a separate license regardless of',
+  'attribution.',
   '',
   '## 3. Why "Usufruct"',
   '',
@@ -89,8 +112,8 @@ const TEMPLATE = [
   '',
   '---',
   'SPDX identifier: UFL is not on the official SPDX license list. Per SPDX',
-  'convention for licenses outside that list, use `LicenseRef-UFL-1.0` —',
-  'not a bare `UFL-1.0`, which would misrepresent it as SPDX-registered.',
+  'convention for licenses outside that list, use `LicenseRef-UFL-1.1` —',
+  'not a bare `UFL-1.1`, which would misrepresent it as SPDX-registered.',
   ''
 ].join('\n');
 
