@@ -20,12 +20,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: generate.js output matches LICENSE.txt
+      - name: generate.js default (unconditional) output matches LICENSE.txt
         run: |
-          diff <(printf '%s' "$(node generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]')") \
+          diff <(printf '%s' "$(node generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
                <(printf '%s' "$(cat LICENSE.txt)")
 
-      - name: generate.sh output matches LICENSE.txt
+      - name: generate.sh default (unconditional) output matches LICENSE.txt
         run: |
-          diff <(printf '%s' "$(sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]')") \
+          diff <(printf '%s' "$(sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
                <(printf '%s' "$(cat LICENSE.txt)")
+
+      - name: generate.sh and generate.js agree across every Operational Scope
+        run: |
+          for scope in unconditional no-competing-service no-third-party-hosting noncommercial; do
+            diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s "$scope") \
+                 <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s "$scope")
+          done
+          diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices") \
+               <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices")

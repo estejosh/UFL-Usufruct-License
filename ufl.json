@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "1.1",
-  "spdxIdentifier": "LicenseRef-UFL-1.1",
+  "version": "2.0",
+  "spdxIdentifier": "LicenseRef-UFL-2.0",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -12,16 +12,75 @@
     "sh": "generate.sh",
     "js": "generate.js"
   },
+  "operationalScopes": {
+    "unconditional": {
+      "tag": "UFL-U-1a",
+      "spdxSuffix": "",
+      "summary": "Free use at any scale, including operating a service, with no further condition."
+    },
+    "no-competing-service": {
+      "tag": "UFL-C-1a",
+      "spdxSuffix": "-C",
+      "summary": "Free use except operating the Software, or a fork of it, as a service competing with the Licensor's own offering."
+    },
+    "no-third-party-hosting": {
+      "tag": "UFL-H-1a",
+      "spdxSuffix": "-H",
+      "summary": "Free use except providing the Software to third parties as a hosted or managed service."
+    },
+    "noncommercial": {
+      "tag": "UFL-N-1a",
+      "spdxSuffix": "-N",
+      "summary": "Free for non-commercial use; commercial use requires a separate license."
+    },
+    "seat-limited": {
+      "tag": "UFL-S-1a",
+      "spdxSuffix": "-S",
+      "summary": "Free in production up to a stated seat/device/user threshold; unlimited free non-production use."
+    }
+  },
   "adoptedBy": [
     {
       "name": "Custodly",
       "url": "https://github.com/estejosh/Custodly",
-      "version": "1.0"
+      "version": "1.0",
+      "scope": "unconditional"
     },
     {
       "name": "Hone",
       "url": "https://github.com/shindevlin/hone",
-      "version": "1.1"
+      "version": "1.1",
+      "scope": "unconditional"
+    },
+    {
+      "name": "ferryman",
+      "url": "https://github.com/estejosh/ferryman",
+      "version": "2.0",
+      "scope": "seat-limited"
+    },
+    {
+      "name": "graea",
+      "url": "https://github.com/estejosh/graea",
+      "version": "2.0",
+      "scope": "no-third-party-hosting"
+    },
+    {
+      "name": "oddsports",
+      "url": "https://github.com/estejosh/oddsports",
+      "version": "2.0",
+      "scope": "noncommercial"
+    },
+    {
+      "name": "agent-comm-channel",
+      "url": "https://github.com/estejosh/agent-comm-channel",
+      "version": "2.0",
+      "scope": "noncommercial"
+    },
+    {
+      "name": "bullship_public",
+      "url": "https://github.com/estejosh/bullship_public",
+      "version": "2.0",
+      "scope": "no-competing-service"
     }
   ]
 }
