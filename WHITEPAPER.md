@@ -113,8 +113,8 @@ scale, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-1.0`, the convention SPDX defines for licenses outside
-its list, not a bare `UFL-1.0` as if it had been registered.
+`LicenseRef-UFL-1.1`, the convention SPDX defines for licenses outside
+its list, not a bare `UFL-1.1` as if it had been registered.
 
 **Can I use UFL-licensed software in a commercial product?**
 Yes, without restriction, as long as you're not redistributing the
