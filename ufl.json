@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "2.0",
-  "spdxIdentifier": "LicenseRef-UFL-2.0",
+  "version": "2.1",
+  "spdxIdentifier": "LicenseRef-UFL-2.1",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -55,31 +55,31 @@
     {
       "name": "ferryman",
       "url": "https://github.com/estejosh/ferryman",
-      "version": "2.0",
+      "version": "2.1",
       "scope": "seat-limited"
     },
     {
       "name": "graea",
       "url": "https://github.com/estejosh/graea",
-      "version": "2.0",
+      "version": "2.1",
       "scope": "no-third-party-hosting"
     },
     {
       "name": "oddsports",
       "url": "https://github.com/estejosh/oddsports",
-      "version": "2.0",
+      "version": "2.1",
       "scope": "noncommercial"
     },
     {
       "name": "agent-comm-channel",
       "url": "https://github.com/estejosh/agent-comm-channel",
-      "version": "2.0",
+      "version": "2.1",
       "scope": "noncommercial"
     },
     {
       "name": "bullship_public",
       "url": "https://github.com/estejosh/bullship_public",
-      "version": "2.0",
+      "version": "2.1",
       "scope": "no-competing-service"
     }
   ]

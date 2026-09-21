@@ -4,6 +4,35 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 2.1 — September 2026
+
+Added Section 2B: reproducing this license text. The UFL template itself —
+independent of any particular copy's Operational Scope, copyright holder,
+or project name — may now be freely copied, reproduced, and adapted by
+anyone to license their own software, including verbatim reproduction in a
+project's own LICENSE file. This is not limited by Section 2(a) and applies
+regardless of Operational Scope.
+
+This closes a self-referential gap: this repository's own `LICENSE.txt` is
+the UFL template, so without an explicit carve-out, Section 2(a)'s
+reservation on "distributing the Software" could be read as restricting
+exactly the copying this project depends on — every adopter's LICENSE file
+is a reproduction of this text. Section 2B makes explicit what the project
+already required to function, and is scoped narrowly: it grants reuse of
+the license *text*, not of any Licensor's actual Software.
+
+This repository also now separates its own licensing three ways, since the
+same self-reference applies to hosting UFL's own reference materials:
+`LICENSE.txt` (freely reproducible per Section 2B above), the generator
+tooling — `generate.sh`, `generate.js`, `ufl.json` — under a separate MIT
+grant (`LICENSE-TOOLING`), and the docs (`README.md`, `WHITEPAPER.md`,
+this changelog) freely quotable with attribution.
+
+No other section changes. Custodly (1.0) and Hone (1.1) are unaffected.
+ferryman, graea, oddsports, agent-comm-channel, and bullship_public — the
+2.0 adopters — have had their LICENSE files refreshed to 2.1 text as part
+of this release.
+
 ## 2.0 — September 2026
 
 Added Section 1A: Operational Scope. Section 1's use grant is now

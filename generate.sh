@@ -1,5 +1,5 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v2.0.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v2.1.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
@@ -20,7 +20,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 2.0. See CHANGELOG.md for revisions.
+# Tracks UFL 2.1. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -128,9 +128,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-2.0\`|LicenseRef-UFL-2.0${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-2.0\`|\`UFL-2.0${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 2.0
+  -e "s|LicenseRef-UFL-2.1\`|LicenseRef-UFL-2.1${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-2.1\`|\`UFL-2.1${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 2.1
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -192,6 +192,19 @@ distributed product, and using the Licensor's name or marks to claim
 compatibility, still require a separate license regardless of
 attribution.
 
+## 2B. Reproducing This License Text
+
+The text of this license — this document itself, independent of any
+particular copy's Operational Scope, copyright holder, or project name —
+may be freely copied, reproduced, and adapted by anyone to license their own
+software, including verbatim reproduction in a project's own LICENSE file.
+This permission is not limited by Section 2(a) and applies regardless of
+Operational Scope: licensing your own software under this text is not
+"distributing the Software" of any other project that also uses it, and
+requires no separate permission from any Licensor who has used it. This
+section grants no right to any particular Licensor's Software — only to the
+legal text of this license itself.
+
 ## 3. Why "Usufruct"
 
 In civil law, a usufruct is the right to use property belonging to
@@ -235,8 +248,8 @@ an additional condition on using the Software beyond Section 1A.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-2.0` —
-not a bare `UFL-2.0`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-2.1` —
+not a bare `UFL-2.1`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 
