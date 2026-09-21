@@ -12,5 +12,16 @@
     "sh": "generate.sh",
     "js": "generate.js"
   },
-  "firstAdoptedBy": "https://github.com/estejosh/Custodly"
+  "adoptedBy": [
+    {
+      "name": "Custodly",
+      "url": "https://github.com/estejosh/Custodly",
+      "version": "1.0"
+    },
+    {
+      "name": "Hone",
+      "url": "https://github.com/shindevlin/hone",
+      "version": "1.1"
+    }
+  ]
 }

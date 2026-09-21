@@ -8,6 +8,7 @@
 <a href="./LICENSE.txt"><img alt="License: UFL-1.1" src="https://img.shields.io/badge/license-UFL--1.1-blue"></a>
 <a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--1.1-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
+<a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
 
 A source-available license for unrestricted use and reserved
@@ -18,10 +19,11 @@ fold its source into another distributed product.
 
 **[Full legal text](./LICENSE.txt) · [Whitepaper & FAQ](./WHITEPAPER.md) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)**
 
-See it adopted: [Custodly](./examples/custodly/LICENSE).
+See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE).
 
 Current version: **UFL-1.1**. First adopted (as UFL-1.0) by
-[Custodly](https://github.com/estejosh/Custodly).
+[Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
+[Hone](https://github.com/shindevlin/hone).
 
 ## Quick start
 
@@ -59,8 +61,8 @@ UFL has no scale threshold, no "as a service" clause to interpret, and
 no future conversion date to track — the one condition (don't
 redistribute the source itself) is unambiguous enough to state to the
 user without asking them to interpret it. Generate a filled copy with
-the one-liner above; cite it as `LicenseRef-UFL-1.0`, not a bare
-`UFL-1.0` — see the FAQ in [`WHITEPAPER.md`](./WHITEPAPER.md) for why.
+the one-liner above; cite it as `LicenseRef-UFL-1.1`, not a bare
+`UFL-1.1` — see the FAQ in [`WHITEPAPER.md`](./WHITEPAPER.md) for why.
 Machine-readable metadata (version, identifier, file paths) is at
 [`ufl.json`](./ufl.json).
 
@@ -69,5 +71,5 @@ Machine-readable metadata (version, identifier, file paths) is at
 Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]` — by hand or
 with the generator above — and state in your README which version
-you're under (e.g. "Licensed under UFL-1.0"). Keep the canonical-source
+you're under (e.g. "Licensed under UFL-1.1"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
