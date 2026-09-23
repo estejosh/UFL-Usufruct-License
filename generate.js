@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v2.1.
+// generate.js — fill in a copy of the Usufruct License (UFL) v2.2.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -14,19 +14,22 @@
 // prompted for when SCOPE is seat-limited. With no -o, the filled license
 // is written to stdout.
 //
+// This script fills in the placeholders and picks one Operational Scope —
+// it does not otherwise alter the license text. See Section 2C.
+//
 // Piped from curl — pass every flag, since stdin is the script itself in
 // this mode and interactive prompts have nothing to read:
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 2.1. See CHANGELOG.md for revisions.
+// Tracks UFL 2.2. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  'The Usufruct License (UFL) — Version 2.1',
+  'The Usufruct License (UFL) — Version 2.2',
   'Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License',
   '',
   'Copyright (c) [YEAR] [COPYRIGHT HOLDER]',
@@ -92,14 +95,35 @@ const TEMPLATE = [
   '',
   "The text of this license — this document itself, independent of any",
   "particular copy's Operational Scope, copyright holder, or project name —",
-  'may be freely copied, reproduced, and adapted by anyone to license their own',
-  "software, including verbatim reproduction in a project's own LICENSE file.",
-  'This permission is not limited by Section 2(a) and applies regardless of',
-  'Operational Scope: licensing your own software under this text is not',
-  '"distributing the Software" of any other project that also uses it, and',
-  'requires no separate permission from any Licensor who has used it. This',
-  "section grants no right to any particular Licensor's Software — only to the",
-  'legal text of this license itself.',
+  'may be freely copied and reproduced by anyone to license their own',
+  "software, including verbatim reproduction in a project's own LICENSE",
+  'file. This permission is not limited by Section 2(a) and applies',
+  'regardless of Operational Scope: licensing your own software under this',
+  'text is not "distributing the Software" of any other project that also',
+  'uses it, and requires no separate permission from any Licensor who has',
+  "used it. This section grants no right to any particular Licensor's",
+  'Software — only to the legal text of this license itself.',
+  '',
+  '## 2C. Version Fidelity',
+  '',
+  'The permission granted by Section 2B is a permission to reproduce, not',
+  'to modify. A copy of this text is adopted as-is: the only blanks a',
+  'Licensor may fill in are [YEAR], [COPYRIGHT HOLDER], and [PROJECT NAME],',
+  'and the only choice a Licensor may make is which single Operational',
+  'Scope in Section 1A applies, stated exactly as the canonical text',
+  'provides for that scope. Beyond those fills, no wording in Sections 1',
+  'through 7 of this license, including this section, may be added to,',
+  'removed, or altered in any copy that is presented, cited, or identified',
+  'as "the Usufruct License," "UFL," or by any `LicenseRef-UFL-*`',
+  "identifier. A project that needs different terms is free to write its",
+  "own license, including one derived from this text under its own name —",
+  'it is not free to alter this text and continue to call the result UFL.',
+  '',
+  'Anyone may propose a change for a future version at the canonical',
+  'source named in Section 7. An adopted proposal becomes a new official',
+  'version, never a retroactive edit: once a version of this license is',
+  "published, its text is not changed, and a project that wants a later",
+  "version's provisions adopts that version's text in full.",
   '',
   '## 3. Why "Usufruct"',
   '',
@@ -144,8 +168,8 @@ const TEMPLATE = [
   '',
   '---',
   'SPDX identifier: UFL is not on the official SPDX license list. Per SPDX',
-  'convention for licenses outside that list, use `LicenseRef-UFL-2.1` —',
-  'not a bare `UFL-2.1`, which would misrepresent it as SPDX-registered.',
+  'convention for licenses outside that list, use `LicenseRef-UFL-2.2` —',
+  'not a bare `UFL-2.2`, which would misrepresent it as SPDX-registered.',
   ''
 ].join('\n');
 
@@ -259,8 +283,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-2.1`').join('LicenseRef-UFL-2.1' + scopeSuffix + '`')
-    .split('`UFL-2.1`').join('`UFL-2.1' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-2.2`').join('LicenseRef-UFL-2.2' + scopeSuffix + '`')
+    .split('`UFL-2.2`').join('`UFL-2.2' + scopeSuffix + '`');
 }
 
 function main() {

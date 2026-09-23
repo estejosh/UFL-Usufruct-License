@@ -4,6 +4,34 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 2.2 — September 2026
+
+Tightened Section 2B and added Section 2C: Version Fidelity. Section 2B's
+permission to reproduce the license text was worded to also allow it to be
+"adapted" — that word is removed. Reproducing this text has never included
+a license to rewrite it, and 2.2 makes that explicit: a copy of this
+license may only be filled in ([YEAR], [COPYRIGHT HOLDER], [PROJECT NAME])
+and given exactly one Operational Scope from the canonical menu in
+Section 1A, stated exactly as that scope's text provides. Nothing else in
+Sections 1 through 7 may be added to, removed, or altered in a copy that
+is still called "the Usufruct License," "UFL," or cited by a
+`LicenseRef-UFL-*` identifier.
+
+This is a stance, not just a wording fix: UFL is meant to mean the same
+thing everywhere it's used, so it isn't something a project can privately
+edit and still call UFL. A project that wants different terms writes its
+own license — including a fork of this one under a different name — or
+proposes the change here for a future official version. Proposals are
+welcome at the canonical source (Section 7); adopted ones become a new
+version, never a retroactive edit to one already published. See also
+"Staying current" in the README, which covers the same principle from the
+adopter's side: versions are pinned, and nothing is changed after release.
+
+No other section changes. Custodly (1.0) and Hone (1.1) are unaffected.
+ferryman, graea, oddsports, agent-comm-channel, and bullship_public — the
+2.1 adopters — have had their LICENSE files refreshed to 2.2 text as part
+of this release.
+
 ## 2.1 — September 2026
 
 Added Section 2B: reproducing this license text. The UFL template itself —
@@ -32,6 +60,10 @@ No other section changes. Custodly (1.0) and Hone (1.1) are unaffected.
 ferryman, graea, oddsports, agent-comm-channel, and bullship_public — the
 2.0 adopters — have had their LICENSE files refreshed to 2.1 text as part
 of this release.
+
+**Note (2.2):** Section 2B's original wording ("copied, reproduced, and
+adapted") is superseded by 2.2 above — reproduction of this text was never
+meant to include a license to alter its terms. See 2.2's entry.
 
 ## 2.0 — September 2026
 

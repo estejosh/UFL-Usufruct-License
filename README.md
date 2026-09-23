@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-2.1" src="https://img.shields.io/badge/license-UFL--2.1-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--2.1-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-2.2" src="https://img.shields.io/badge/license-UFL--2.2-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--2.2-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -25,13 +25,15 @@ below.
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-2.1**. First adopted (as UFL-1.0) by
+Current version: **UFL-2.2**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
-Each copy of this license is pinned to the version it names — see
-[Staying current](#staying-current) if you're on an older version and
-want the latest provisions.
+Each copy of this license is pinned to the version it names, and its text
+is fixed — see [Staying current](#staying-current) if you're on an older
+version and want the latest provisions, and Section 2C if you're wondering
+what you're allowed to change (short answer: three placeholders and one
+scope choice, nothing else).
 
 ## Quick start
 
@@ -55,6 +57,11 @@ Piped this way, pass all flags — stdin is already spoken for by the
 script itself, so there's nothing for the interactive prompts to read.
 Run either script from a local clone with no flags for the interactive
 version instead.
+
+Both generators only ever fill in `[YEAR]`, `[COPYRIGHT HOLDER]`,
+`[PROJECT NAME]`, and the single Operational Scope you pass with `-s` —
+they don't give you a way to change anything else in the text, on
+purpose. See Section 2C.
 
 ## Operational Scope (since 2.0)
 
@@ -95,11 +102,17 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-2.1<suffix>` (e.g. `LicenseRef-UFL-2.1-N` for
-Noncommercial), not a bare `UFL-2.1<suffix>` — see the FAQ in
+`LicenseRef-UFL-2.2<suffix>` (e.g. `LicenseRef-UFL-2.2-N` for
+Noncommercial), not a bare `UFL-2.2<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
+
+Do not rewrite, trim, or "clean up" any of the license text beyond
+filling the three placeholders and picking one scope — see Section 2C.
+If a project's needs don't fit any of the five scopes, that is a reason
+to pick a different license or propose a new scope for a future UFL
+version, not to hand-edit this one.
 
 ## Using UFL for your own project
 
@@ -107,21 +120,26 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-2.1, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-2.2, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
 permission from anyone, including from other projects already using it
-— see Section 2B.
+— see Section 2B. That permission does not extend to changing the
+text: beyond the placeholders and your scope choice, the wording is
+fixed, and a modified copy can't be presented as UFL — see Section 2C.
+If UFL's terms don't work for you as written, use a different license,
+or propose a change for a future version instead of altering this one.
 
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 2.1") — UFL is not an evergreen "or any later
+first line (e.g. "Version 2.2") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
-carve-out, or a new protection — Section 2B in 2.1, for example — applies
-only to a project that has actually updated to that version's text.
+carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, for
+example — applies only to a project that has actually updated to that
+version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file
 to the current text (regenerate it, or diff against [`CHANGELOG.md`](./CHANGELOG.md)
@@ -131,17 +149,25 @@ no separate "upgrade" mechanism, and no obligation to update: an older
 copy stays valid under the terms it states for as long as you leave it
 as-is.
 
+This cuts both ways with Section 2C: a published version's text is never
+edited after release, only ever superseded by a new one. Every version's
+exact text is preserved in this repository's Git commit history — nothing
+is force-pushed or rewritten — and each version is dated in
+[`CHANGELOG.md`](./CHANGELOG.md); tagged releases (`v1.0`, `v1.1`, `v2.0`,
+`v2.1`, `v2.2`, …) pointing at those commits are on the way, so a version
+will be checkable by name as well as by date.
+
 ## Adopted by
 
 | Project | Version | Scope |
 |---|---|---|
 | [Custodly](https://github.com/estejosh/Custodly) | 1.0 | Unconditional |
 | [Hone](https://github.com/shindevlin/hone) | 1.1 | Unconditional |
-| [ferryman](https://github.com/estejosh/ferryman) | 2.1 | Seat-Limited (`UFL-S-1a`) |
-| [graea](https://github.com/estejosh/graea) | 2.1 | No-Third-Party-Hosting (`UFL-H-1a`) |
-| [oddsports](https://github.com/estejosh/oddsports) | 2.1 | Noncommercial (`UFL-N-1a`) |
-| [agent-comm-channel](https://github.com/estejosh/agent-comm-channel) | 2.1 | Noncommercial (`UFL-N-1a`) |
-| [bullship_public](https://github.com/estejosh/bullship_public) | 2.1 | No-Competing-Service (`UFL-C-1a`) |
+| [ferryman](https://github.com/estejosh/ferryman) | 2.2 | Seat-Limited (`UFL-S-1a`) |
+| [graea](https://github.com/estejosh/graea) | 2.2 | No-Third-Party-Hosting (`UFL-H-1a`) |
+| [oddsports](https://github.com/estejosh/oddsports) | 2.2 | Noncommercial (`UFL-N-1a`) |
+| [agent-comm-channel](https://github.com/estejosh/agent-comm-channel) | 2.2 | Noncommercial (`UFL-N-1a`) |
+| [bullship_public](https://github.com/estejosh/bullship_public) | 2.2 | No-Competing-Service (`UFL-C-1a`) |
 
 ## Licensing of this repository
 
@@ -153,9 +179,11 @@ Software," and every adopter copying this text is, read naively,
 redistributing it.
 
 - **`LICENSE.txt`** (the license text itself) — governed by its own
-  Section 2B, added in 2.1: freely copyable, reproducible, and
-  adaptable by anyone, for any project, with no separate permission
-  needed from this or any other Licensor using it.
+  Section 2B (reproduction, added in 2.1) and Section 2C (version
+  fidelity — no modification beyond the placeholders and scope choice,
+  added in 2.2): freely copyable and reproducible by anyone, for any
+  project, with no separate permission needed from this or any other
+  Licensor using it — but not editable and still called UFL.
 - **`generate.sh`, `generate.js`, `ufl.json`** (the reference tooling) —
   MIT, see [`LICENSE-TOOLING`](./LICENSE-TOOLING).
 - **`README.md`, `WHITEPAPER.md`, `CHANGELOG.md`** (this project's own
