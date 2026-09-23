@@ -29,6 +29,10 @@ Current version: **UFL-2.1**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
+Each copy of this license is pinned to the version it names — see
+[Staying current](#staying-current) if you're on an older version and
+want the latest provisions.
+
 ## Quick start
 
 Fill in `LICENSE.txt`'s placeholders without hand-editing them. Each
@@ -109,6 +113,23 @@ line near the top intact — Section 7 requires it.
 Copying the license text itself for this purpose needs no separate
 permission from anyone, including from other projects already using it
 — see Section 2B.
+
+## Staying current
+
+Each copy of this license is pinned to the version it names on its own
+first line (e.g. "Version 2.1") — UFL is not an evergreen "or any later
+version" grant, so a newer release's provisions don't automatically
+reach projects already licensed under an older one. A new section, a new
+carve-out, or a new protection — Section 2B in 2.1, for example — applies
+only to a project that has actually updated to that version's text.
+
+If you want the latest provisions, update your project's `LICENSE` file
+to the current text (regenerate it, or diff against [`CHANGELOG.md`](./CHANGELOG.md)
+and hand-apply the changes) and update your README's version citation to
+match. This is the same process as adopting UFL the first time — there's
+no separate "upgrade" mechanism, and no obligation to update: an older
+copy stays valid under the terms it states for as long as you leave it
+as-is.
 
 ## Adopted by
 
