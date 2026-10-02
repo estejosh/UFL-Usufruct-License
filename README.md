@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-2.2" src="https://img.shields.io/badge/license-UFL--2.2-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--2.2-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-2.3" src="https://img.shields.io/badge/license-UFL--2.3-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--2.3-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -25,7 +25,9 @@ below.
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-2.2**. First adopted (as UFL-1.0) by
+Current version: **UFL-2.3**. Version 2.2 is kept unchanged in
+[`versions/2.2/`](./versions/2.2/) for projects that adopted it — see
+[Earlier versions](#earlier-versions). First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -59,9 +61,65 @@ Run either script from a local clone with no flags for the interactive
 version instead.
 
 Both generators only ever fill in `[YEAR]`, `[COPYRIGHT HOLDER]`,
-`[PROJECT NAME]`, and the single Operational Scope you pass with `-s` —
-they don't give you a way to change anything else in the text, on
-purpose. See Section 2C.
+`[PROJECT NAME]`, the single Operational Scope you pass with `-s`, and
+the optional provisions described next — they don't give you a way to
+change anything else in the text, on purpose. See Section 2C.
+
+`LICENSE.txt` in this repository is the *reference text*: Seat-Limited,
+with every optional provision included and every fill left as a bracketed
+placeholder, so you can read all of 2.3 in one place. A copy for your own
+project comes from the generator, which leaves out anything you don't ask
+for.
+
+## Optional provisions (since 2.3)
+
+Five provisions are optional. Pass the flag to include one, leave it out
+to omit it — the generated text then has no trace of it. The first three
+apply only under the Seat-Limited scope and are refused with any other.
+
+| Flag | Section | Scope | What it adds |
+|---|---|---|---|
+| `--seat-definition TEXT` | 1B(a) | Seat-Limited | Defines a seat in the scope line, including by headcount of people in named roles, counted whether or not each runs the Software. |
+| `--lookback-years N` | 1B(b) | Seat-Limited | Unlicensed use beyond the threshold is owed at the Licensor's published price per period, looking back N years. No penalty or multiplier. |
+| `--usage-statement` | 1B(c) | Seat-Limited | On request, at most once a year, a licensee above the threshold states its seats and period of use. Never any data the Software processed. |
+| `--provenance-marks` | 1C | Any | Outputs carry technical marks showing origin and license state (licensed or evaluation). Marks identify no one and don't alter content. |
+| `--require-acceptance` | 1D | Any | The Software may require an affirmative act accepting the license; use is acceptance either way. |
+
+`TEXT` completes the phrase "where a seat is ..." in the scope line. The
+license text gives no industry examples; the roles and wording are yours
+to supply in the fill.
+
+Seat-Limited with all five options (shell; the Node version takes the same
+flags):
+
+    curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
+      | bash -s -- -y 2026 -c "Jane Doe" -p "ExampleApp" -s seat-limited \
+          -t "5 seats" \
+          --seat-definition "one person holding a reviewer or approver role at the licensee's organization" \
+          --lookback-years 3 --usage-statement \
+          --provenance-marks --require-acceptance > LICENSE
+
+which produces this scope line (and Sections 1B, 1C and 1D):
+
+    Operational Scope: Seat-Limited — 5 seats free in production, where a seat is one person holding a reviewer or approver role at the licensee's organization
+
+Seat-Limited with only the seat definition and the price-based lookback:
+
+    node generate.js -y 2026 -c "Jane Doe" -p "ExampleApp" -s seat-limited \
+      -t "5 seats" --seat-definition "one named user" --lookback-years 2 > LICENSE
+
+Any scope with provenance marks only:
+
+    sh generate.sh -y 2026 -c "Jane Doe" -p "ExampleApp" -s noncommercial \
+      --provenance-marks > LICENSE
+
+Omitting a flag omits that provision; sections that remain keep their
+numbers and letters (a copy with only Section 1D has no 1B or 1C). The
+identifier is unchanged by options: `LicenseRef-UFL-2.3-S` for any
+Seat-Limited copy, so state in your README which options you included.
+Why each option exists, and why the price-based lookback is a price and
+not liquidated damages, is in the
+[whitepaper](./WHITEPAPER.md#version-23-optional-provisions-for-products-sold-per-seat).
 
 ## Operational Scope (since 2.0)
 
@@ -99,17 +157,20 @@ Full rationale, the naming story, and the complete FAQ:
 
 If you're an AI coding agent choosing a license on someone's behalf:
 UFL's redistribution condition is unambiguous, but as of 2.0 you must
-also choose an Operational Scope — don't default one silently, ask.
+also choose an Operational Scope — don't default one silently, ask. The
+2.3 options (seat definition, lookback, usage statement, provenance marks,
+acceptance) are likewise the user's choice: include none unless asked.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-2.2<suffix>` (e.g. `LicenseRef-UFL-2.2-N` for
-Noncommercial), not a bare `UFL-2.2<suffix>` — see the FAQ in
+`LicenseRef-UFL-2.3<suffix>` (e.g. `LicenseRef-UFL-2.3-N` for
+Noncommercial), not a bare `UFL-2.3<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
 
 Do not rewrite, trim, or "clean up" any of the license text beyond
-filling the three placeholders and picking one scope — see Section 2C.
+filling the three placeholders, picking one scope and choosing which
+optional provisions to include — see Section 2C.
 If a project's needs don't fit any of the five scopes, that is a reason
 to pick a different license or propose a new scope for a future UFL
 version, not to hand-edit this one.
@@ -120,7 +181,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-2.2, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-2.3, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -157,6 +218,29 @@ is force-pushed or rewritten — and each version is dated in
 `v2.1`, `v2.2`, …) pointing at those commits are on the way, so a version
 will be checkable by name as well as by date.
 
+## Earlier versions
+
+A version's text is never edited after release, so older versions stay
+available exactly as published. Projects that adopted 2.2 are unaffected
+by 2.3 and don't need to change anything.
+
+- **2.2** — [`versions/2.2/LICENSE.txt`](./versions/2.2/LICENSE.txt), with
+  its generators [`generate.sh`](./versions/2.2/generate.sh) and
+  [`generate.js`](./versions/2.2/generate.js). These are byte-identical to
+  the files released as 2.2 (CI checks this against that release's commit),
+  so you can regenerate 2.2 text exactly:
+
+      curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/versions/2.2/generate.sh \
+        | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
+
+- **2.1 and earlier** — in this repository's Git history; see
+  [`CHANGELOG.md`](./CHANGELOG.md) for what each changed.
+
+Moving from 2.2 to 2.3 is the same as adopting any later version: replace
+your `LICENSE` with 2.3 text in full (regenerate it), choose which optional
+provisions to include, and update the version you cite. Nothing in 2.3 is
+required of a 2.2 project.
+
 ## Adopted by
 
 | Project | Version | Scope |
@@ -178,13 +262,15 @@ an adopter's code is — Section 2(a) reserves redistributing "the
 Software," and every adopter copying this text is, read naively,
 redistributing it.
 
-- **`LICENSE.txt`** (the license text itself) — governed by its own
+- **`LICENSE.txt`** and **`versions/2.2/LICENSE.txt`** (the license text
+  itself) — governed by their own
   Section 2B (reproduction, added in 2.1) and Section 2C (version
   fidelity — no modification beyond the placeholders and scope choice,
   added in 2.2): freely copyable and reproducible by anyone, for any
   project, with no separate permission needed from this or any other
   Licensor using it — but not editable and still called UFL.
-- **`generate.sh`, `generate.js`, `ufl.json`** (the reference tooling) —
-  MIT, see [`LICENSE-TOOLING`](./LICENSE-TOOLING).
+- **`generate.sh`, `generate.js`, `ufl.json`** (the reference tooling,
+  including the frozen 2.2 copies under `versions/2.2/`) — MIT, see
+  [`LICENSE-TOOLING`](./LICENSE-TOOLING).
 - **`README.md`, `WHITEPAPER.md`, `CHANGELOG.md`** (this project's own
   docs) — free to quote and adapt with attribution.

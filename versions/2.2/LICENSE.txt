@@ -1,9 +1,9 @@
-The Usufruct License (UFL) — Version 2.3
+The Usufruct License (UFL) — Version 2.2
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
 
-Operational Scope: Seat-Limited — [THRESHOLD] free in production, where a seat is [SEAT DEFINITION]
+Operational Scope: Unconditional
 
 ## 1. Grant of Use
 
@@ -20,51 +20,10 @@ built on top of it, as scoped by Section 1A.
 The Operational Scope declared above states the only limit, if any, on
 Section 1's grant. Exactly one scope applies to this Software:
 
-Seat-Limited — Section 1's grant is unconditional for non-production
-use. Production use is free up to [THRESHOLD]; production use beyond
-that threshold requires a paid, separate written license from the
-Licensor.
-
-## 1B. Seat-Limited Terms
-
-This section applies only if the Operational Scope is Seat-Limited.
-
-  (a) Seat definition. The Licensor defines a seat in the Operational
-      Scope line above, and that definition decides how seats are
-      counted. A definition may count the people who hold roles the
-      Licensor names at the licensee's organization. If it does, each
-      such person is a seat whether or not that person runs the
-      Software.
-  (b) Use beyond the threshold. Production use beyond the free
-      threshold requires a paid, separate written license from the
-      Licensor, as Section 1A states. A licensee that makes production
-      use beyond the threshold without that license owes the Licensor,
-      for each period of that use, the price the Licensor had published
-      for that period for a license covering that use, and no more than
-      that price for the use itself. The Licensor may claim this only
-      for periods that began within the [LOOKBACK YEARS]-year period
-      ending on the date of its written request for payment. Paying the
-      amount owed for a period licenses the use in that period.
-  (c) Usage statement. On the Licensor's written request, made no more
-      than once in any twelve months, a licensee whose production use
-      is above the free threshold provides a written statement of the
-      number of seats and the period of use, within a reasonable time.
-      The Licensor may not require the statement to include any data
-      the Software processed, or anything contained in that data.
-
-## 1C. Provenance Marks
-
-The Software places technical marks in the outputs it produces. A mark
-shows that an output came from the Software and the license state of
-the copy that produced it, licensed or evaluation. A mark identifies no
-person or organization, and does not change the substantive content of
-an output. Removing, altering, or forging a mark is not permitted.
-
-## 1D. Acceptance
-
-The Software may require an affirmative act accepting this license
-before first use. Whether or not it does, use of the Software
-constitutes acceptance of this license.
+Unconditional — Section 1's grant is unconditional: it includes
+running the Software, deploying it, integrating with it, and operating
+a product or service built on top of it, commercially or otherwise, at
+any scale, with no further condition.
 
 ## 2. Reserved Rights
 
@@ -120,25 +79,18 @@ Software — only to the legal text of this license itself.
 ## 2C. Version Fidelity
 
 The permission granted by Section 2B is a permission to reproduce, not
-to modify. A copy of this text is adopted as-is. The blanks a Licensor
-may fill in are the copyright year, the copyright holder, and the
-project name given near the top of this text, together with the
-statements this text invites a Licensor to make: the free threshold and
-the seat definition in the Operational Scope line, and the number of
-lookback years in Section 1B. The choices a Licensor may make are which
-single Operational Scope in Section 1A applies, and which, if any, of
-the optional provisions in Sections 1B (paragraphs (a), (b) and (c)),
-1C and 1D are included. Each fill and each choice is stated exactly as
-the canonical text provides for it. A provision that is left out is
-left out whole, and the sections and paragraphs that remain keep their
-numbers and letters. Beyond those fills and choices, no wording in
-Sections 1 through 7 of this license, including this section, may be
-added to, removed, or altered in any copy that is presented, cited, or
-identified as "the Usufruct License," "UFL," or by any
-`LicenseRef-UFL-*` identifier. A project that needs different terms is
-free to write its own license, including one derived from this text
-under its own name — it is not free to alter this text and continue to
-call the result UFL.
+to modify. A copy of this text is adopted as-is: the only blanks a
+Licensor may fill in are the copyright year, the copyright holder, and
+the project name given near the top of this text, and the only choice
+a Licensor may make is which single Operational Scope in Section 1A
+applies, stated exactly as the canonical text provides for that scope.
+Beyond those fills, no wording in Sections 1 through 7 of this
+license, including this section, may be added to, removed, or altered
+in any copy that is presented, cited, or identified as "the Usufruct
+License," "UFL," or by any `LicenseRef-UFL-*` identifier. A project
+that needs different terms is free to write its own license, including
+one derived from this text under its own name — it is not free to
+alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical
 source named in Section 7. An adopted proposal becomes a new official
@@ -185,10 +137,9 @@ The canonical-source line at the top of this license text (or an
 equivalent pointer to https://github.com/estejosh/UFL-Usufruct-License)
 must be kept intact when this license text is copied into another
 project. This is a notice requirement on the license text itself, not
-an additional condition on using the Software beyond Sections 1A, 1B, 1C
-and 1D.
+an additional condition on using the Software beyond Section 1A.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-2.3-S` —
-not a bare `UFL-2.3-S`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-2.2` —
+not a bare `UFL-2.2`, which would misrepresent it as SPDX-registered.

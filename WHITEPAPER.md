@@ -137,6 +137,107 @@ That's between you and whoever holds the copyright on the specific
 project — UFL is the license template, not a registry. Check that
 project's LICENSE file for contact terms.
 
+## Version 2.3: optional provisions for products sold per seat
+
+The plain description above is the unconditional base: no seat count, no
+threshold. Since 2.0 a project can instead declare the Seat-Limited
+scope, free in production up to a stated threshold. 2.3 adds five
+optional provisions around that scope. Each is included whole or left
+out whole, chosen when the license is generated (Section 2C), and each
+is written without examples from any industry: a project's own fill
+supplies the specifics.
+
+Why a new version and not an edit: 2.2 had no way to say what a seat is,
+what happens past the threshold, or how a licensee shows its usage, and
+Section 2C forbids adding wording to a copy. So these live in a new
+version that a project adopts in full. 2.2 itself is untouched and kept
+in `versions/2.2/`.
+
+### Seat definition (Section 1B(a))
+
+A threshold of "5 seats" means little until a seat is defined. The
+Licensor may define it in the Operational Scope line. The definition may
+count people in roles the Licensor names at the licensee's organization,
+and each such person is a seat whether or not that person runs the
+Software. That second part is the point: a seat counted by who runs the
+Software is easy to get around by letting one person run it for many.
+Counting the people the software serves closes that. A project that
+prefers to count devices or accounts simply does not use this flag and
+states its threshold as before.
+
+### Use beyond the threshold (Section 1B(b))
+
+Under 2.2, production use beyond the threshold already needed a paid
+license. The gap was what follows when a licensee did not get one. 2.3
+answers with a price: the licensee owes the Licensor's published price
+for each period of the unlicensed use, no more, and the Licensor may
+claim only periods within a lookback the Licensor states, counted back
+from its written request. Paying for a period licenses that period.
+
+The choice of price over liquidated damages is deliberate. A liquidated
+damages clause fixes a sum in advance for a breach. In many common-law
+systems such a clause is enforced only if the sum is a reasonable
+pre-estimate of the loss the breach would cause, and a sum chosen to
+deter instead of compensate is treated as a penalty and not enforced. A
+multiple of the license fee is the usual shape that draws that
+challenge. Civil-law systems differ: many enforce penalty clauses but let
+a court reduce an excessive one. Either way, the Licensor ends up
+defending the number.
+
+A price claim avoids that fight. It asks for what the license would have
+cost, which is observable (the published price) and is already the
+Licensor's own statement of what the permission is worth. Nothing in it
+depends on forecasting a loss. Courts also commonly use a license fee as
+a measure of what unlicensed use was worth, so the claim lines up with a
+familiar measure.
+
+What it gives up is deterrence. A licensee who expects not to be found
+pays no more than it would have paid anyway. 2.3 accepts that trade: a
+term more likely to hold up and be used is worth more than a harsher one
+that may be struck down. The lookback limit keeps exposure bounded and
+predictable for a licensee acting in good faith. The Licensor states the
+number of years in its fill, so it is a choice made per project and not
+fixed by UFL.
+
+This section explains a drafting choice. It is not a prediction of how
+any court will rule, and enforceability depends on the jurisdiction and on
+who the licensee is (an individual, a business, a consumer). Questions
+left open are listed with the pull request that introduced 2.3.
+
+### Usage statement (Section 1B(c))
+
+A price claim needs facts about use. The statement is the lightest way to
+get them: on written request, at most once a year, a licensee above the
+free threshold says how many seats it had and for what period. It is not
+an audit. It gives the Licensor no access to systems or records, and it
+may not require any data the Software processed, or anything contained in
+it. For software that handles confidential material, a right that reached
+processed data would make the license unusable for the people it is sold
+to, and the Licensor does not need that data to count seats.
+
+### Provenance marks (Section 1C, all scopes)
+
+The Licensor may state that the Software places technical marks in its
+outputs. A mark shows that an output came from the Software and whether
+the copy that made it was licensed or in evaluation. Two limits keep this
+from becoming something else. A mark identifies no person or
+organization, so it cannot be used to track who made an output. And it
+does not alter the substantive content of an output, so it cannot change
+what the output says. Removing, altering or forging a mark is not
+permitted, which keeps a mark meaning what it says. This is a statement
+about the Software's outputs, not a restriction on what a licensee may do
+with its own data.
+
+### Acceptance (Section 1D, all scopes)
+
+The Software may ask for an affirmative act, such as agreeing in a prompt,
+before first use. That gives a clear record of assent where one is
+wanted. Because some uses never reach a prompt (automated installs, a
+library called from other code), the section also says that use is
+acceptance either way. Whether either route binds a given person is a
+question of the law that applies to them; the section states the intent
+and does not try to settle it.
+
 ## Versioning
 
 This is UFL version 1.0. Future revisions will version as UFL-1.1,
@@ -144,6 +245,13 @@ UFL-2.0, etc., following the same pattern as other source-available
 licenses (BUSL 1.0 → 1.1). A project using UFL should state which
 version it's under; UFL 1.0's terms don't change retroactively for
 projects that adopted it.
+
+The current version is UFL 2.3. Each published version's text is fixed:
+2.2 is kept unchanged in `versions/2.2/` (license text and generators), and
+a project that adopted it stays on it until it chooses to adopt a later
+version in full. The narrative sections above describe the unconditional
+base and were written for 1.0; the scopes added in 2.0 and the options
+added in 2.3 are covered in the README and the section above.
 
 ## Adoption
 

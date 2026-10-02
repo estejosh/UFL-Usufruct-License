@@ -1,13 +1,11 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v2.3.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v2.2.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
 # Usage:
 #   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
-#     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] \
-#     [--seat-definition TEXT] [--lookback-years N] [--usage-statement] \
-#     [--provenance-marks] [--require-acceptance]
+#     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
 # no-third-party-hosting, noncommercial, seat-limited. THRESHOLD is only
@@ -17,29 +15,15 @@
 # prompted for when SCOPE is seat-limited. With no -o, the filled license
 # is written to stdout.
 #
-# Optional provisions (new in 2.3). Leave a flag out and the text is
-# produced without that provision:
-#   --seat-definition TEXT   Section 1B(a). Completes "a seat is ..." in
-#                            the Operational Scope line. seat-limited only.
-#   --lookback-years N       Section 1B(b). Use beyond the threshold is
-#                            owed at the published price, looking back N
-#                            years. seat-limited only.
-#   --usage-statement        Section 1B(c). Annual usage statement on
-#                            request. seat-limited only.
-#   --provenance-marks       Section 1C. Any scope.
-#   --require-acceptance     Section 1D. Any scope.
-#
-# This script fills in the placeholders, picks one Operational Scope and
-# includes or leaves out each optional provision — it does not otherwise
-# alter the license text. See Section 2C.
+# This script fills in the placeholders and picks one Operational Scope —
+# it does not otherwise alter the license text. See Section 2C.
 #
 # Piped from curl — pass every flag, since stdin is the script itself in
 # this mode and interactive prompts have nothing to read:
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 2.3. See CHANGELOG.md for revisions. The 2.2 generator is
-# kept unchanged at versions/2.2/generate.sh.
+# Tracks UFL 2.2. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -49,40 +33,21 @@ PROJECT=""
 SCOPE="unconditional"
 THRESHOLD=""
 OUT=""
-SEAT_DEF=""
-LOOKBACK=""
-USAGE_STATEMENT=0
-MARKS=0
-ACCEPTANCE=0
 
-USAGE_LINE="Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] [--seat-definition TEXT] [--lookback-years N] [--usage-statement] [--provenance-marks] [--require-acceptance]"
-
-need_value() {
-  [ "$#" -ge 2 ] || { echo "Missing value for $1" >&2; exit 1; }
-}
-
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    -y) need_value "$@"; YEAR=$2; shift 2 ;;
-    -c) need_value "$@"; HOLDER=$2; shift 2 ;;
-    -p) need_value "$@"; PROJECT=$2; shift 2 ;;
-    -s) need_value "$@"; SCOPE=$2; shift 2 ;;
-    -t) need_value "$@"; THRESHOLD=$2; shift 2 ;;
-    -o) need_value "$@"; OUT=$2; shift 2 ;;
-    --seat-definition) need_value "$@"; SEAT_DEF=$2; shift 2 ;;
-    --seat-definition=*) SEAT_DEF=${1#--seat-definition=}; shift ;;
-    --lookback-years) need_value "$@"; LOOKBACK=$2; shift 2 ;;
-    --lookback-years=*) LOOKBACK=${1#--lookback-years=}; shift ;;
-    --usage-statement) USAGE_STATEMENT=1; shift ;;
-    --provenance-marks) MARKS=1; shift ;;
-    --require-acceptance) ACCEPTANCE=1; shift ;;
-    -h|--help)
-      echo "$USAGE_LINE"
+while getopts "y:c:p:s:t:o:h" opt; do
+  case "$opt" in
+    y) YEAR=$OPTARG ;;
+    c) HOLDER=$OPTARG ;;
+    p) PROJECT=$OPTARG ;;
+    s) SCOPE=$OPTARG ;;
+    t) THRESHOLD=$OPTARG ;;
+    o) OUT=$OPTARG ;;
+    h)
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]"
       echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited"
-      echo "--seat-definition, --lookback-years and --usage-statement apply only to SCOPE seat-limited."
       exit 0
       ;;
-    *) echo "Unknown argument: $1" >&2; exit 1 ;;
+    *) exit 1 ;;
   esac
 done
 
@@ -99,25 +64,6 @@ case "$SCOPE" in
     ;;
 esac
 
-if [ "$SCOPE" != "seat-limited" ]; then
-  if [ -n "$SEAT_DEF" ] || [ -n "$LOOKBACK" ] || [ "$USAGE_STATEMENT" = 1 ]; then
-    echo "--seat-definition, --lookback-years and --usage-statement apply only to SCOPE seat-limited." >&2
-    exit 1
-  fi
-fi
-
-if [ -n "$LOOKBACK" ]; then
-  # A whole number of years, or a bracketed placeholder (used only to
-  # render the reference text in LICENSE.txt).
-  case "$LOOKBACK" in
-    \[*\]) ;;
-    *[!0-9]*|0|0[0-9]*|???*)
-      echo "--lookback-years must be a whole number from 1 to 99." >&2
-      exit 1
-      ;;
-  esac
-fi
-
 if [ "$SCOPE" = "seat-limited" ]; then
   [ -n "$THRESHOLD" ] || { printf 'Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ' >&2; read -r THRESHOLD; }
 fi
@@ -131,6 +77,7 @@ escape() {
 YEAR_ESC=$(escape "$YEAR")
 HOLDER_ESC=$(escape "$HOLDER")
 PROJECT_ESC=$(escape "$PROJECT")
+THRESHOLD_ESC=$(escape "$THRESHOLD")
 
 case "$SCOPE" in
   unconditional)
@@ -168,9 +115,6 @@ from the Licensor."
     ;;
   seat-limited)
     SCOPE_LINE="Seat-Limited — ${THRESHOLD} free in production"
-    if [ -n "$SEAT_DEF" ]; then
-      SCOPE_LINE="${SCOPE_LINE}, where a seat is ${SEAT_DEF}"
-    fi
     SCOPE_SUFFIX="-S"
     SCOPE_BODY="Seat-Limited — Section 1's grant is unconditional for non-production
 use. Production use is free up to ${THRESHOLD}; production use beyond
@@ -179,116 +123,17 @@ Licensor."
     ;;
 esac
 
-# Optional provisions. Each block is empty unless its flag was passed.
-S1B_A=""
-S1B_B=""
-S1B_C=""
-S1B=""
-S1C=""
-S1D=""
-REFS="1A"
-
-if [ -n "$SEAT_DEF" ]; then
-  S1B_A="  (a) Seat definition. The Licensor defines a seat in the Operational
-      Scope line above, and that definition decides how seats are
-      counted. A definition may count the people who hold roles the
-      Licensor names at the licensee's organization. If it does, each
-      such person is a seat whether or not that person runs the
-      Software."
-fi
-
-if [ -n "$LOOKBACK" ]; then
-  S1B_B="  (b) Use beyond the threshold. Production use beyond the free
-      threshold requires a paid, separate written license from the
-      Licensor, as Section 1A states. A licensee that makes production
-      use beyond the threshold without that license owes the Licensor,
-      for each period of that use, the price the Licensor had published
-      for that period for a license covering that use, and no more than
-      that price for the use itself. The Licensor may claim this only
-      for periods that began within the ${LOOKBACK}-year period
-      ending on the date of its written request for payment. Paying the
-      amount owed for a period licenses the use in that period."
-fi
-
-if [ "$USAGE_STATEMENT" = 1 ]; then
-  S1B_C="  (c) Usage statement. On the Licensor's written request, made no more
-      than once in any twelve months, a licensee whose production use
-      is above the free threshold provides a written statement of the
-      number of seats and the period of use, within a reasonable time.
-      The Licensor may not require the statement to include any data
-      the Software processed, or anything contained in that data."
-fi
-
-if [ -n "$S1B_A$S1B_B$S1B_C" ]; then
-  S1B="## 1B. Seat-Limited Terms
-
-This section applies only if the Operational Scope is Seat-Limited.
-"
-  for part in "$S1B_A" "$S1B_B" "$S1B_C"; do
-    [ -n "$part" ] && S1B="$S1B
-$part"
-  done
-  REFS="$REFS 1B"
-fi
-
-if [ "$MARKS" = 1 ]; then
-  S1C="## 1C. Provenance Marks
-
-The Software places technical marks in the outputs it produces. A mark
-shows that an output came from the Software and the license state of
-the copy that produced it, licensed or evaluation. A mark identifies no
-person or organization, and does not change the substantive content of
-an output. Removing, altering, or forging a mark is not permitted."
-  REFS="$REFS 1C"
-fi
-
-if [ "$ACCEPTANCE" = 1 ]; then
-  S1D="## 1D. Acceptance
-
-The Software may require an affirmative act accepting this license
-before first use. Whether or not it does, use of the Software
-constitutes acceptance of this license."
-  REFS="$REFS 1D"
-fi
-
-# "Section 1A" / "Sections 1A and 1B" / "Sections 1A, 1B and 1D"
-set -- $REFS
-if [ "$#" -eq 1 ]; then
-  REF_TEXT="Section $1"
-else
-  REF_TEXT="Sections"
-  i=1
-  for r in "$@"; do
-    if [ "$i" -eq 1 ]; then REF_TEXT="$REF_TEXT $r"
-    elif [ "$i" -eq "$#" ]; then REF_TEXT="$REF_TEXT and $r"
-    else REF_TEXT="$REF_TEXT, $r"
-    fi
-    i=$((i + 1))
-  done
-fi
-
-# Greedy word wrap to 72 columns.
-wrap() {
-  awk '{
-    n = split($0, w, " "); line = ""
-    for (i = 1; i <= n; i++) {
-      if (line == "") line = w[i]
-      else if (length(line) + 1 + length(w[i]) <= 72) line = line " " w[i]
-      else { print line; line = w[i] }
-    }
-    if (line != "") print line
-  }'
-}
-
-S7_TAIL=$(printf '%s\n' "an additional condition on using the Software beyond ${REF_TEXT}." | wrap)
+SCOPE_LINE_ESC=$(escape "$SCOPE_LINE")
+SCOPE_SUFFIX_ESC=$(escape "$SCOPE_SUFFIX")
 
 FILLED=$(sed \
   -e "s|\[YEAR\]|$YEAR_ESC|g" \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
-  -e "s|LicenseRef-UFL-2.3\`|LicenseRef-UFL-2.3$SCOPE_SUFFIX\`|g" \
-  -e "s|\`UFL-2.3\`|\`UFL-2.3$SCOPE_SUFFIX\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 2.3
+  -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
+  -e "s|LicenseRef-UFL-2.2\`|LicenseRef-UFL-2.2${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-2.2\`|\`UFL-2.2${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 2.2
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -312,7 +157,7 @@ Section 1's grant. Exactly one scope applies to this Software:
 
 [OPERATIONAL SCOPE BODY]
 
-[OPTIONAL SECTIONS]## 2. Reserved Rights
+## 2. Reserved Rights
 
 The following rights are reserved to the Licensor and are NOT granted by
 Section 1. They require a separate written license from the Licensor,
@@ -366,25 +211,18 @@ Software — only to the legal text of this license itself.
 ## 2C. Version Fidelity
 
 The permission granted by Section 2B is a permission to reproduce, not
-to modify. A copy of this text is adopted as-is. The blanks a Licensor
-may fill in are the copyright year, the copyright holder, and the
-project name given near the top of this text, together with the
-statements this text invites a Licensor to make: the free threshold and
-the seat definition in the Operational Scope line, and the number of
-lookback years in Section 1B. The choices a Licensor may make are which
-single Operational Scope in Section 1A applies, and which, if any, of
-the optional provisions in Sections 1B (paragraphs (a), (b) and (c)),
-1C and 1D are included. Each fill and each choice is stated exactly as
-the canonical text provides for it. A provision that is left out is
-left out whole, and the sections and paragraphs that remain keep their
-numbers and letters. Beyond those fills and choices, no wording in
-Sections 1 through 7 of this license, including this section, may be
-added to, removed, or altered in any copy that is presented, cited, or
-identified as "the Usufruct License," "UFL," or by any
-`LicenseRef-UFL-*` identifier. A project that needs different terms is
-free to write its own license, including one derived from this text
-under its own name — it is not free to alter this text and continue to
-call the result UFL.
+to modify. A copy of this text is adopted as-is: the only blanks a
+Licensor may fill in are the copyright year, the copyright holder, and
+the project name given near the top of this text, and the only choice
+a Licensor may make is which single Operational Scope in Section 1A
+applies, stated exactly as the canonical text provides for that scope.
+Beyond those fills, no wording in Sections 1 through 7 of this
+license, including this section, may be added to, removed, or altered
+in any copy that is presented, cited, or identified as "the Usufruct
+License," "UFL," or by any `LicenseRef-UFL-*` identifier. A project
+that needs different terms is free to write its own license, including
+one derived from this text under its own name — it is not free to
+alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical
 source named in Section 7. An adopted proposal becomes a new official
@@ -431,32 +269,17 @@ The canonical-source line at the top of this license text (or an
 equivalent pointer to https://github.com/estejosh/UFL-Usufruct-License)
 must be kept intact when this license text is copied into another
 project. This is a notice requirement on the license text itself, not
-[SECTION 7 TAIL]
+an additional condition on using the Software beyond Section 1A.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-2.3` —
-not a bare `UFL-2.3`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-2.2` —
+not a bare `UFL-2.2`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 
-# Insert the scope, optional sections and Section 7 tail. Values travel
-# through the environment, not -v, so backslashes and & in a fill are
-# never interpreted. This runs after the placeholder substitution above,
-# so a fill that happens to contain a bracketed token is left as typed.
-FILLED=$(printf '%s\n' "$FILLED" \
-  | UFL_SCOPE_LINE=$SCOPE_LINE UFL_SCOPE_BODY=$SCOPE_BODY \
-    UFL_S1B=$S1B UFL_S1C=$S1C UFL_S1D=$S1D UFL_S7_TAIL=$S7_TAIL \
-    awk '
-  $0 == "Operational Scope: [OPERATIONAL SCOPE]" { print "Operational Scope: " ENVIRON["UFL_SCOPE_LINE"]; next }
-  $0 == "[OPERATIONAL SCOPE BODY]" { print ENVIRON["UFL_SCOPE_BODY"]; next }
-  $0 == "[SECTION 7 TAIL]" { print ENVIRON["UFL_S7_TAIL"]; next }
-  index($0, "[OPTIONAL SECTIONS]") == 1 {
-    n = split("UFL_S1B UFL_S1C UFL_S1D", names, " ")
-    for (i = 1; i <= n; i++) if (ENVIRON[names[i]] != "") { print ENVIRON[names[i]]; print "" }
-    print substr($0, length("[OPTIONAL SECTIONS]") + 1)
-    next
-  }
+FILLED=$(printf '%s\n' "$FILLED" | awk -v body="$SCOPE_BODY" '
+  $0 == "[OPERATIONAL SCOPE BODY]" { print body; next }
   { print }
 ')
 
