@@ -11,3 +11,8 @@ LICENSE.txt text eol=lf
 *.svg text eol=lf
 
 assets/*.png binary
+# Release artifacts: hashes in SHA256SUMS depend on exact bytes.
+*.pdf binary
+*.mp4 binary
+SHA256SUMS text eol=lf
+pdf/*.txt text eol=lf

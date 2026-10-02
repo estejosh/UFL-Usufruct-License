@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-2.2" src="https://img.shields.io/badge/license-UFL--2.2-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--2.2-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.0" src="https://img.shields.io/badge/license-UFL--3.0-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.0-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -19,13 +19,20 @@ fold its source into another distributed product.
 
 Since 2.0, that base grant can also be narrowed to exactly one declared
 Operational Scope — see [Operational Scope](#operational-scope-since-20)
-below.
+below. Since 3.0, the license itself also sets how a use the scope
+withholds is paid for: at the Licensor's published price, on the
+license's own terms, with no side agreement. See [Paid use](#paid-use-since-30).
 
-**[Full legal text](./LICENSE.txt) · [Whitepaper & FAQ](./WHITEPAPER.md) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)**
+**[Full legal text](./LICENSE.txt) · [Reference PDFs](./pdf) · [Whitepaper & FAQ](./WHITEPAPER.md) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)**
+
+<p align="center">
+  <a href="./assets/ufl-3.0-explainer.mp4"><img src="./assets/ufl-3.0-explainer-poster.png" alt="Watch the UFL 3.0 explainer (1:52)" width="270"></a><br>
+  <a href="./assets/ufl-3.0-explainer.mp4">Watch the UFL 3.0 explainer (1:52)</a>
+</p>
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-2.2**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.0**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -74,7 +81,7 @@ Scope:` line at the top of the license text, the `scope` field in
 | Scope | Repo tag | What it restricts |
 |---|---|---|
 | Unconditional (default) | `UFL-U-1a` | Nothing — Section 1's grant applies as written. |
-| Seat-Limited | `UFL-S-1a` | Production use beyond a stated seat/device/user threshold. |
+| Seat-Limited | `UFL-S-1a` | Production use beyond a stated seat/device/user threshold (Paid Use above it). |
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
@@ -82,6 +89,48 @@ Scope:` line at the top of the license text, the `scope` field in
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
 above applies.
+
+## Paid use (since 3.0)
+
+Every scope except Unconditional withholds something from the free
+grant. Under 3.0 that use is **Paid Use** (Section 8): licensed under UFL
+itself, on all of its terms, at the price the Licensor publishes in the
+repo or docs. The price is a number, never extra terms. If someone uses
+past the scope without paying, Section 12 licenses it after the fact:
+the published price if they disclose it first, three times that if the
+Licensor finds it, plus interest, three years back at most. The grant is
+never revoked for nonpayment (Section 13). Disputes go to mediation,
+then arbitration, in California, by video if the parties want
+(Section 14). Section 15 makes the license the whole deal: no addendum,
+no side terms.
+
+For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
+No-Competing-Service, that means publishing a price list somewhere in
+the repo or docs. Nothing else.
+
+## Reference PDFs and checksums
+
+[`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
+plain text it was made from, with the year, holder, and project name
+left blank (and the threshold, for Seat-Limited):
+
+| Scope | PDF | Text |
+|---|---|---|
+| Unconditional | [UFL-3.0-unconditional.pdf](./pdf/UFL-3.0-unconditional.pdf) | [.txt](./pdf/UFL-3.0-unconditional.txt) |
+| Seat-Limited | [UFL-3.0-seat-limited.pdf](./pdf/UFL-3.0-seat-limited.pdf) | [.txt](./pdf/UFL-3.0-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.0-no-third-party-hosting.pdf](./pdf/UFL-3.0-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.0-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.0-no-competing-service.pdf](./pdf/UFL-3.0-no-competing-service.pdf) | [.txt](./pdf/UFL-3.0-no-competing-service.txt) |
+| Noncommercial | [UFL-3.0-noncommercial.pdf](./pdf/UFL-3.0-noncommercial.pdf) | [.txt](./pdf/UFL-3.0-noncommercial.txt) |
+
+Each PDF footer carries the SHA-256 of its license text, and
+[`SHA256SUMS`](./SHA256SUMS) lists the hash of every release file. To
+check a copy:
+
+    sha256sum -c SHA256SUMS
+
+The PDFs and generators are built from one source in [`src/`](./src)
+(`build.py` renders `LICENSE.txt` and both generators; `make_pdfs.py`
+renders the PDFs and `SHA256SUMS`).
 
 An adopting project is expected to also carry its tag (`UFL-<letter>-1a`)
 somewhere visible — its repo description or README — so the scope is
@@ -102,8 +151,8 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-2.2<suffix>` (e.g. `LicenseRef-UFL-2.2-N` for
-Noncommercial), not a bare `UFL-2.2<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.0<suffix>` (e.g. `LicenseRef-UFL-3.0-N` for
+Noncommercial), not a bare `UFL-3.0<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
@@ -120,7 +169,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-2.2, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.0, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -134,11 +183,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 2.2") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.0") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
-carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, for
-example — applies only to a project that has actually updated to that
+carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
+paid-use terms in 3.0, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file
@@ -154,7 +203,7 @@ edited after release, only ever superseded by a new one. Every version's
 exact text is preserved in this repository's Git commit history — nothing
 is force-pushed or rewritten — and each version is dated in
 [`CHANGELOG.md`](./CHANGELOG.md); tagged releases (`v1.0`, `v1.1`, `v2.0`,
-`v2.1`, `v2.2`, …) pointing at those commits are on the way, so a version
+`v2.1`, `v2.2`, `v3.0`, …) pointing at those commits are on the way, so a version
 will be checkable by name as well as by date.
 
 ## Adopted by

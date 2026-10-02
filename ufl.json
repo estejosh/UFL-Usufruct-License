@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "2.2",
-  "spdxIdentifier": "LicenseRef-UFL-2.2",
+  "version": "3.0",
+  "spdxIdentifier": "LicenseRef-UFL-3.0",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -22,22 +22,22 @@
     "no-competing-service": {
       "tag": "UFL-C-1a",
       "spdxSuffix": "-C",
-      "summary": "Free use except operating the Software, or a fork of it, as a service competing with the Licensor's own offering."
+      "summary": "Free use except operating the Software, or a fork of it, as a service competing with the Licensor's own offering; that use is Paid Use at the Licensor's Published Price."
     },
     "no-third-party-hosting": {
       "tag": "UFL-H-1a",
       "spdxSuffix": "-H",
-      "summary": "Free use except providing the Software to third parties as a hosted or managed service."
+      "summary": "Free use except providing the Software to third parties as a hosted or managed service; that use is Paid Use at the Licensor's Published Price."
     },
     "noncommercial": {
       "tag": "UFL-N-1a",
       "spdxSuffix": "-N",
-      "summary": "Free for non-commercial use; commercial use requires a separate license."
+      "summary": "Free for non-commercial use; commercial use is Paid Use at the Licensor's Published Price."
     },
     "seat-limited": {
       "tag": "UFL-S-1a",
       "spdxSuffix": "-S",
-      "summary": "Free in production up to a stated seat/device/user threshold; unlimited free non-production use."
+      "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price."
     }
   },
   "adoptedBy": [

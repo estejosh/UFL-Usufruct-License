@@ -4,6 +4,60 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.0 — October 2026
+
+Paid use is now part of the license itself. Four of the five Operational
+Scopes withhold something from the free grant (a seat threshold,
+commercial use, third-party hosting, a competing service). Through 2.2,
+the license said those uses needed "a separate written license" and
+stopped there, leaving every Licensor to invent the rest in side
+documents. 3.0 writes the rest into the text, the same for every project:
+
+- **Section 1B, Definitions.** Licensee, Production Use, Non-Production
+  Use, and Seat (counted by role, not by who runs the Software).
+- **Section 8, Paid Use.** A withheld use is licensed under UFL itself,
+  on all of its terms, at the Licensor's Published Price. A price is
+  only a price: it cannot add or change a term.
+- **Section 9, Acceptance.** Using the Software is acceptance. Scoped
+  projects must present an affirmative click-through or prompt naming
+  the version before first use, recorded only on the Licensee's
+  systems. The Licensee acknowledges the Software is under copyright
+  whether or not registered, and that withheld use without a license
+  is use outside the license.
+- **Section 10, Usage Statements.** For scoped projects, a signed,
+  content-free usage statement on request, at most once a year. The
+  license never requires or permits the Software to report use to the
+  Licensor for enforcement.
+- **Section 11, Output Marks.** Disclosed, non-identifying marks showing
+  what produced an output and under which license state.
+- **Section 12, Retroactive Licenses.** Use beyond the scope without
+  paying is licensed after the fact at the Published Price if the
+  Licensee discloses it first, or three times the Published Price if the
+  Licensor finds it, plus interest, with a three-year lookback.
+- **Section 13, Continued Use.** Section 1's grant is never revoked for
+  nonpayment. A Licensee that owes money keeps using the Software and
+  is brought current by paying or by a written payment agreement.
+- **Section 14, Disputes.** California law; mediation within 30 days,
+  then binding arbitration in California after 60 days; both may be
+  held entirely by video; court injunctions remain available for
+  conduct Section 2 reserves.
+- **Section 15, Entire License.** No other document adds to or changes
+  the license. There is no addendum.
+
+Section 5 adds that neither the Licensor nor the license claims the
+Software's output is accurate, complete, or compliant. Section 2C now
+states the rule plainly: a Licensor chooses a version and one
+Operational Scope, fills in three blanks, and nothing else. The
+Noncommercial, Seat-Limited, No-Third-Party-Hosting, and
+No-Competing-Service scope texts now point to Section 8 instead of to
+"a separate written license."
+
+Projects on 1.0 through 2.2 are unaffected unless they adopt 3.0. A
+project that moves to 3.0 and today keeps pricing or terms in a
+separate file (for example a `COMMERCIAL.md`) should reduce that file to
+a price list, since Section 15 gives terms in any other document no
+effect.
+
 ## 2.2 — September 2026
 
 Tightened Section 2B and added Section 2C: Version Fidelity. Section 2B's

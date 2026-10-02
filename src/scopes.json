@@ -1,0 +1,12 @@
+{
+ "unconditional": {"line": "Unconditional", "suffix": "",
+   "body": "Unconditional — Section 1's grant is unconditional: it includes running the Software, deploying it, integrating with it, and operating a product or service built on top of it, commercially or otherwise, at any scale, with no further condition."},
+ "no-competing-service": {"line": "No-Competing-Service", "suffix": "-C",
+   "body": "No-Competing-Service — Section 1's free grant excludes operating the Software, or a modified version or fork of it, as a product or service offered to third parties in competition with a product or service the Licensor offers using the Software. That excluded use is Paid Use under Section 8. All other uses described in Section 1 are unconditional."},
+ "no-third-party-hosting": {"line": "No-Third-Party-Hosting", "suffix": "-H",
+   "body": "No-Third-Party-Hosting — Section 1's free grant excludes providing the Software to third parties as a hosted or managed service that gives those third parties access to substantially all of the Software's features or functionality. That excluded use is Paid Use under Section 8. All other uses described in Section 1 are unconditional."},
+ "noncommercial": {"line": "Noncommercial", "suffix": "-N",
+   "body": "Noncommercial — Section 1's free grant is limited to non-commercial use. Commercial use of the Software is Paid Use under Section 8."},
+ "seat-limited": {"line": "Seat-Limited — @THRESHOLD@ free in production", "suffix": "-S",
+   "body": "Seat-Limited — Section 1's grant is unconditional for Non-Production Use. Production Use is free up to @THRESHOLD@; Production Use beyond that threshold is Paid Use under Section 8."}
+}
