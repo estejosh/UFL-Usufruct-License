@@ -6,12 +6,14 @@ on:
       - "LICENSE.txt"
       - "generate.sh"
       - "generate.js"
+      - "versions/**"
       - ".github/workflows/check-license-sync.yml"
   pull_request:
     paths:
       - "LICENSE.txt"
       - "generate.sh"
       - "generate.js"
+      - "versions/**"
       - ".github/workflows/check-license-sync.yml"
 
 jobs:
@@ -19,22 +21,70 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: generate.js default (unconditional) output matches LICENSE.txt
+      # LICENSE.txt is the reference text: Seat-Limited, every optional
+      # provision included, every fill left as a bracketed placeholder.
+      - name: generate.js reference output matches LICENSE.txt
         run: |
-          diff <(printf '%s' "$(node generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
+          diff <(printf '%s' "$(node generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s seat-limited -t '[THRESHOLD]' --seat-definition '[SEAT DEFINITION]' --lookback-years '[LOOKBACK YEARS]' --usage-statement --provenance-marks --require-acceptance)") \
                <(printf '%s' "$(cat LICENSE.txt)")
 
-      - name: generate.sh default (unconditional) output matches LICENSE.txt
+      - name: generate.sh reference output matches LICENSE.txt
         run: |
-          diff <(printf '%s' "$(sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
+          diff <(printf '%s' "$(sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s seat-limited -t '[THRESHOLD]' --seat-definition '[SEAT DEFINITION]' --lookback-years '[LOOKBACK YEARS]' --usage-statement --provenance-marks --require-acceptance)") \
                <(printf '%s' "$(cat LICENSE.txt)")
 
-      - name: generate.sh and generate.js agree across every Operational Scope
+      - name: generate.sh and generate.js agree across every scope and option
         run: |
-          for scope in unconditional no-competing-service no-third-party-hosting noncommercial; do
-            diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s "$scope") \
-                 <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s "$scope")
+          for scope in unconditional no-competing-service no-third-party-hosting noncommercial seat-limited; do
+            for marks in "" "--provenance-marks"; do
+              for accept in "" "--require-acceptance"; do
+                if [ "$scope" = seat-limited ]; then
+                  for seat in "" "--seat-definition=a_seat_is_a_person"; do
+                    for look in "" "--lookback-years=3"; do
+                      for usage in "" "--usage-statement"; do
+                        diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "5 seats" $marks $accept $seat $look $usage) \
+                             <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "5 seats" $marks $accept $seat $look $usage)
+                      done
+                    done
+                  done
+                else
+                  diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s "$scope" $marks $accept) \
+                       <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s "$scope" $marks $accept)
+                fi
+              done
+            done
           done
-          diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices") \
-               <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices")
+
+      - name: omitting every optional flag omits every optional provision
+        run: |
+          for scope in unconditional seat-limited; do
+            out=$(node generate.js -y 2026 -c "Test Holder" -p TestProject -s "$scope" -t "5 seats")
+            if printf '%s\n' "$out" | grep -E '^## 1[BCD]\.'; then
+              echo "optional section present without its flag"; exit 1
+            fi
+          done
+
+      - name: seat-limited-only flags are refused under other scopes
+        run: |
+          for flag in "--seat-definition=x" "--lookback-years=3" "--usage-statement"; do
+            if node generate.js -y 2026 -c T -p P -s noncommercial $flag >/dev/null 2>&1; then echo "node accepted $flag"; exit 1; fi
+            if sh generate.sh -y 2026 -c T -p P -s noncommercial $flag >/dev/null 2>&1; then echo "sh accepted $flag"; exit 1; fi
+          done
+
+      # 2.2 is never edited (Section 2C). These checks keep the frozen
+      # copies byte-identical to what was released.
+      - name: versions/2.2 is byte-identical to the 2.2 release
+        run: |
+          for f in LICENSE.txt generate.sh generate.js; do
+            git show 6e7e43e:"$f" | cmp - "versions/2.2/$f"
+          done
+
+      - name: frozen 2.2 generators still reproduce versions/2.2/LICENSE.txt
+        run: |
+          diff <(printf '%s' "$(node versions/2.2/generate.js -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
+               <(printf '%s' "$(cat versions/2.2/LICENSE.txt)")
+          diff <(printf '%s' "$(sh versions/2.2/generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s unconditional)") \
+               <(printf '%s' "$(cat versions/2.2/LICENSE.txt)")

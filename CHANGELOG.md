@@ -4,6 +4,80 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 2.3 — October 2026
+
+Added optional provisions for products sold per seat, and amended Section
+2C to say how a copy may include them. Under 2C, a copy of 2.2 could not
+be extended, and 2.2 had no way to say what a seat is, what is owed for
+use past the free threshold, or how a licensee shows its usage. 2.3 is
+therefore a new version, adopted in full. 2.2 is not edited: its text and
+its generators are kept unchanged in `versions/2.2/`, and a project on
+2.2 stays on 2.2 unless it chooses to adopt 2.3.
+
+Every provision below is optional. A copy includes each one whole or
+leaves it out whole, chosen with a generator flag; omit the flag and the
+text is produced without that provision. Sections that remain keep their
+numbers and letters.
+
+Seat-Limited scope only (new Section 1B):
+
+- **1B(a) Seat definition** (`--seat-definition`). The Licensor may
+  define in the Operational Scope line what a seat is, including a
+  headcount of people in named roles at the licensee's organization,
+  counted whether or not each person runs the Software. The text itself
+  gives no examples; a project's own fill names its roles.
+- **1B(b) Use beyond the threshold** (`--lookback-years`). Production use
+  beyond the free threshold already needed a paid license under 2.2. Now,
+  unlicensed use beyond the threshold is owed at the Licensor's published
+  price for each period of that use, looking back a number of years the
+  Licensor states. No penalty or multiplier. The whitepaper explains why
+  this is a price and not liquidated damages.
+- **1B(c) Usage statement** (`--usage-statement`). On written request, at
+  most once a year, a licensee above the free threshold states its seats
+  and period of use. It may not be required to include any data the
+  Software processed. This flag was not in the original proposal's flag
+  list; it is added so that each of the five provisions can be chosen on
+  its own.
+
+All scopes (new Sections 1C and 1D):
+
+- **1C Provenance marks** (`--provenance-marks`). The Software places
+  technical marks in its outputs showing they came from the Software and
+  the license state (licensed or evaluation). Marks identify no person or
+  organization and do not change an output's substantive content.
+  Removing, altering or forging a mark is not permitted.
+- **1D Acceptance** (`--require-acceptance`). The Software may require an
+  affirmative act accepting the license before first use. Use is
+  acceptance either way.
+
+Changes to text carried over from 2.2:
+
+- **Section 2C** now allows, besides the three placeholders and one
+  Operational Scope, the free-threshold, seat-definition and lookback
+  fills and the choice to include or leave out each optional provision.
+  The rest of 2C, including the rule that a published version is never
+  edited and a later version is adopted in full, is unchanged.
+- **Section 7**'s closing clause names the optional sections that are
+  present, since a usage statement, provenance marks or an acceptance step
+  are conditions on use beyond Section 1A. A copy with no optional
+  provision reads exactly as in 2.2.
+- The version line and SPDX identifier read 2.3 (`LicenseRef-UFL-2.3`,
+  with the same `-C`, `-H`, `-N`, `-S` scope suffixes).
+
+Kept as in 2.2, word for word: Sections 1, 1A, 2, 2A, 2B, 3, 4, 5, 6
+(the "source-available, not OSI open source" classification) and the
+Section 7 notice requirement.
+
+Tooling: `generate.sh` and `generate.js` gain `--seat-definition`,
+`--lookback-years`, `--usage-statement`, `--provenance-marks` and
+`--require-acceptance`. The first three are refused unless the scope is
+`seat-limited`. `LICENSE.txt` is now the reference text: Seat-Limited with
+every optional provision included and every fill left as a bracketed
+placeholder, and CI checks both generators reproduce it exactly.
+
+Projects on 2.2 (ferryman, graea, oddsports, agent-comm-channel,
+bullship_public) and earlier versions are unaffected.
+
 ## 2.2 — September 2026
 
 Tightened Section 2B and added Section 2C: Version Fidelity. Section 2B's
