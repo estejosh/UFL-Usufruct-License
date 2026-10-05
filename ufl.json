@@ -38,6 +38,11 @@
       "tag": "UFL-S-1a",
       "spdxSuffix": "-S",
       "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price."
+    },
+    "decentralized": {
+      "tag": "UFL-D-1a",
+      "spdxSuffix": "-D",
+      "summary": "Free use with no Paid Use. Disputes go to exclusive online ICC arbitration, individual claims only, with the Licensor's liability limited to a nominal remedy paid in a named token."
     }
   },
   "adoptedBy": [

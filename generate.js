@@ -168,18 +168,19 @@ const TEMPLATE = [
   "of this license to adopt, and which single Operational Scope in Section",
   "1A applies, stated exactly as that version's canonical text provides for",
   "that scope, including the free threshold the Seat-Limited scope calls",
-  "for. The only blanks a Licensor fills in are the copyright year, the",
-  "copyright holder, and the project name given near the top of this text.",
-  "Every other term, including the terms on paid use, acceptance, usage",
-  "statements, retroactive licenses, and disputes, is set by this text and",
-  "is the same for every project under this version. No wording in this",
-  "license, including this section, may be added to, removed, or altered in",
-  "any copy that is presented, cited, or identified as \"the Usufruct",
-  "License,\" \"UFL,\" or by any `LicenseRef-UFL-*` identifier, and no",
-  "separate document may add to or change its terms (see Section 15). A",
-  "project that needs different terms is free to write its own license,",
-  "including one derived from this text under its own name — it is not free",
-  "to alter this text and continue to call the result UFL.",
+  "for and the remedy token the Decentralized scope calls for. The only",
+  "blanks a Licensor fills in are the copyright year, the copyright holder,",
+  "and the project name given near the top of this text. Every other term,",
+  "including the terms on paid use, acceptance, usage statements,",
+  "retroactive licenses, and disputes, is set by this text and is the same",
+  "for every project under this version. No wording in this license,",
+  "including this section, may be added to, removed, or altered in any copy",
+  "that is presented, cited, or identified as \"the Usufruct License,\"",
+  "\"UFL,\" or by any `LicenseRef-UFL-*` identifier, and no separate document",
+  "may add to or change its terms (see Section 15). A project that needs",
+  "different terms is free to write its own license, including one derived",
+  "from this text under its own name — it is not free to alter this text",
+  "and continue to call the result UFL.",
   "",
   "Anyone may propose a change for a future version at the canonical source",
   "named in Section 7. An adopted proposal becomes a new official version,",
@@ -360,15 +361,16 @@ const TEMPLATE = [
   "## 14. Disputes",
   "",
   "This license is governed by California law, without regard to its",
-  "conflict-of-laws rules.",
+  "conflict-of-laws rules, unless the Operational Scope states otherwise.",
   "",
-  "Mediation and arbitration under this section cover a dispute between the",
-  "Licensor and a Licensee about whether a use is Paid Use, about any",
-  "amount owed under Section 8, 12, or 13, or about a usage statement under",
-  "Section 10 (a \"Payment Dispute\"). They do not cover a Licensee's use",
-  "under Section 1's free grant that raises none of those questions. Any",
-  "other dispute arising out of this license or the Software is left to the",
-  "law and the courts that would otherwise apply.",
+  "Unless the Operational Scope provides its own dispute process, mediation",
+  "and arbitration under this section cover a dispute between the Licensor",
+  "and a Licensee about whether a use is Paid Use, about any amount owed",
+  "under Section 8, 12, or 13, or about a usage statement under Section 10",
+  "(a \"Payment Dispute\"). They do not cover a Licensee's use under Section",
+  "1's free grant that raises none of those questions. Any other dispute",
+  "arising out of this license or the Software is left to the law and the",
+  "courts that would otherwise apply.",
   "",
   "A Payment Dispute goes first to mediation. Either party may start",
   "mediation by written notice to the other, and the mediation must begin",
@@ -460,17 +462,44 @@ const SCOPES = {
       "Use. Production Use is free up to @THRESHOLD@; Production Use beyond",
       "that threshold is Paid Use under Section 8."
     ]
+  },
+  "decentralized": {
+    line: "Decentralized — remedy token @TOKEN@",
+    suffix: "-D",
+    body: [
+      "Decentralized — Section 1's grant is unconditional, as in Unconditional,",
+      "and no use is Paid Use, so Sections 8 through 13 do not operate. The",
+      "Software is released as is to the public. Every dispute arising from its",
+      "use is decided exclusively by arbitration under the Rules of Arbitration",
+      "of the International Chamber of Commerce, conducted online before a",
+      "single arbitrator, on an individual basis and not as a class or",
+      "collective action, and no party consents to the jurisdiction of any",
+      "court by using the Software. The arbitrator applies the UNIDROIT",
+      "Principles of International Commercial Contracts and, for any matter",
+      "they do not answer, California law. The Licensor's total liability to",
+      "any Licensee for all claims arising from the Software or this license is",
+      "limited, to the extent the law allows, to the lesser of one United",
+      "States dollar and one unit of @TOKEN@, payable in @TOKEN@ from the fund",
+      "the Licensor maintains for that purpose to a wallet address the claimant",
+      "provides. If that payment cannot be made, because the token has no",
+      "market, the fund is empty, or the law prohibits it, the limit is one",
+      "United States dollar in money. Nothing in this scope limits liability",
+      "that the law does not allow to be limited, waives a claim or right that",
+      "the law gives a party and does not allow to be waived, or limits the",
+      "Licensor's rights under Section 2, including its right to seek an",
+      "injunction in court for conduct that Section 2 reserves."
+    ]
   }
 };
 
-function buildScope(scopeKey, threshold) {
+function buildScope(scopeKey, threshold, token) {
   const s = SCOPES[scopeKey];
-  const t = (x) => x.split('@THRESHOLD@').join(threshold);
+  const t = (x) => x.split('@THRESHOLD@').join(threshold).split('@TOKEN@').join(token);
   return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };
 }
 
 function parseArgs(argv) {
-  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, out: null, release: false };
+  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, token: null, out: null, release: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '-y') { out.year = argv[++i]; }
@@ -478,12 +507,13 @@ function parseArgs(argv) {
     else if (a === '-p') { out.project = argv[++i]; }
     else if (a === '-s') { out.scope = argv[++i]; }
     else if (a === '-t') { out.threshold = argv[++i]; }
+    else if (a === '-k') { out.token = argv[++i]; }
     else if (a === '-o') { out.out = argv[++i]; }
     else if (a === '-r' || a === '--release-statement') { out.release = true; }
     else if (a === '-h' || a === '--help') {
       process.stderr.write(
-        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD]\n' +
-        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited\n'
+        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]\n' +
+        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized\n'
       );
       process.exit(0);
     } else {
@@ -527,7 +557,7 @@ function main() {
   const holder = args.release ? '' : args.holder || prompt('Copyright holder: ');
   const project = args.release ? '' : args.project || prompt('Project name: ');
 
-  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited'];
+  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'decentralized'];
   if (validScopes.indexOf(args.scope) === -1) {
     process.stderr.write('Unknown SCOPE: ' + args.scope + '\n');
     process.stderr.write('Must be one of: ' + validScopes.join(' | ') + '\n');
@@ -539,7 +569,12 @@ function main() {
     threshold = prompt('Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ');
   }
 
-  const scope = buildScope(args.scope, threshold);
+  let token = args.token;
+  if (args.scope === 'decentralized' && !token) {
+    token = prompt('Remedy token (name, e.g. "HONE"): ');
+  }
+
+  const scope = buildScope(args.scope, threshold, token);
   if (args.release) {
     const stmt = 'UFL 3.3, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.3' + scope.suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }

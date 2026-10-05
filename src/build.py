@@ -43,7 +43,7 @@ lic = TPL.replace("[OPERATIONAL SCOPE BODY]", "\n".join(body_lines("unconditiona
 sh = (R / "generate.sh").read_text()
 sh = re.sub(r"(<<'UFL_TEMPLATE'\n).*?(\nUFL_TEMPLATE\n)", lambda m: m.group(1) + TPL.rstrip("\n") + m.group(2), sh, flags=re.S)
 for key in SC:
-    lines = "\n".join(body_lines(key)).replace("@THRESHOLD@", "${THRESHOLD}")
+    lines = "\n".join(body_lines(key)).replace("@THRESHOLD@", "${THRESHOLD}").replace("@TOKEN@", "${TOKEN}")
     sh = re.sub(rf'(  {key}\)\n(?:    SCOPE_LINE=[^\n]*\n)(?:    SCOPE_SUFFIX=[^\n]*\n)    SCOPE_BODY=").*?(")(\n    ;;)',
                 lambda m: m.group(1) + lines + m.group(2) + m.group(3), sh, flags=re.S)
 sh = sh.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
@@ -59,8 +59,8 @@ def jsbody(key):
     return "[\n" + ",\n".join("      " + json.dumps(l, ensure_ascii=False) for l in body_lines(key)) + "\n    ]"
 scopes_js = "const SCOPES = {\n" + ",\n".join(
     f"  {json.dumps(k)}: {{\n    line: {json.dumps(SC[k]['line'], ensure_ascii=False)},\n    suffix: {json.dumps(SC[k]['suffix'])},\n    body: {jsbody(k)}\n  }}"
-    for k in SC) + "\n};\n\nfunction buildScope(scopeKey, threshold) {\n  const s = SCOPES[scopeKey];\n  const t = (x) => x.split('@THRESHOLD@').join(threshold);\n  return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };\n}"
-js = re.sub(r"const SCOPES = \{.*?\n\};\n\nfunction buildScope\(scopeKey, threshold\) \{.*?\n\}", lambda m: scopes_js, js, flags=re.S)
+    for k in SC) + "\n};\n\nfunction buildScope(scopeKey, threshold, token) {\n  const s = SCOPES[scopeKey];\n  const t = (x) => x.split('@THRESHOLD@').join(threshold).split('@TOKEN@').join(token);\n  return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };\n}"
+js = re.sub(r"const SCOPES = \{.*?\n\};\n\nfunction buildScope\(scopeKey, threshold, token\) \{.*?\n\}", lambda m: scopes_js, js, flags=re.S)
 js = js.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
        .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}") \
        .replace(f"UFL {VER_OLD}, Operational", f"UFL {VER}, Operational")

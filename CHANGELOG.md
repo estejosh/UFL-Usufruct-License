@@ -26,6 +26,32 @@ was the wrong reach.
   video conduct, court injunctions for Section 2 conduct, and fees to the
   prevailing party.
 
+New Operational Scope: **Decentralized** (suffix `-D`, tag `UFL-D-1a`),
+for software released to the public with no owner able to run a normal
+dispute process. It is the Unconditional free grant with no Paid Use, so
+Sections 8 through 13 do not operate. Under it:
+
+- Every dispute from use goes exclusively to online ICC arbitration
+  before a single arbitrator, on an individual basis, not as a class or
+  collective action. No party consents to any court's jurisdiction by
+  using the Software.
+- The arbitrator applies the UNIDROIT Principles of International
+  Commercial Contracts and, for anything they do not answer, California
+  law. Section 14's California-law sentence now yields to the scope.
+- The Licensor's total liability is limited, to the extent the law
+  allows, to the lesser of one US dollar and one unit of a named remedy
+  token, paid in that token from a fund the Licensor maintains to a
+  wallet the claimant provides. If it cannot be paid in the token (no
+  market, empty fund, or prohibited by law), the limit is one US dollar
+  in money.
+- Nothing limits liability the law does not allow to be limited, waives
+  a non-waivable right, or limits the Licensor's Section 2 rights,
+  including court injunctions for Section 2 conduct.
+
+The remedy token is a fill point for this scope, like the seat threshold
+for Seat-Limited. `generate.sh` and `generate.js` take it with `-k`.
+Section 2C names it among the things a Licensor may fill.
+
 Every other section is the same as 3.2 apart from version strings.
 SPDX identifier: `LicenseRef-UFL-3.3`, with the same `-C`, `-H`, `-N`,
 `-S` suffixes. Projects on 1.0 through 3.2 are unaffected unless they

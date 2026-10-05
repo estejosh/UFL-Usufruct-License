@@ -42,6 +42,8 @@ jobs:
           done
           diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices") \
                <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices")
+          diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s decentralized -k TESTTOKEN) \
+               <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s decentralized -k TESTTOKEN)
 
       - name: LICENSE.txt and generators are what src/ builds
         run: |

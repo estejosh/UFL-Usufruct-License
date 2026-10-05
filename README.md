@@ -87,6 +87,7 @@ Scope:` line at the top of the license text, the `scope` field in
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
+| Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and the Licensor's liability is limited to a nominal remedy paid in a named token. Needs a remedy token (`-k`). |
 
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
@@ -182,7 +183,7 @@ What it does and does not do:
 
 [`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
 plain text it was made from, with the year, holder, and project name
-left blank (and the threshold, for Seat-Limited):
+left blank (and the threshold for Seat-Limited, or the remedy token for Decentralized):
 
 | Scope | PDF | Text |
 |---|---|---|
@@ -191,6 +192,7 @@ left blank (and the threshold, for Seat-Limited):
 | No-Third-Party-Hosting | [UFL-3.3-no-third-party-hosting.pdf](./pdf/UFL-3.3-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.3-no-third-party-hosting.txt) |
 | No-Competing-Service | [UFL-3.3-no-competing-service.pdf](./pdf/UFL-3.3-no-competing-service.pdf) | [.txt](./pdf/UFL-3.3-no-competing-service.txt) |
 | Noncommercial | [UFL-3.3-noncommercial.pdf](./pdf/UFL-3.3-noncommercial.pdf) | [.txt](./pdf/UFL-3.3-noncommercial.txt) |
+| Decentralized | [UFL-3.3-decentralized.pdf](./pdf/UFL-3.3-decentralized.pdf) | [.txt](./pdf/UFL-3.3-decentralized.txt) |
 
 The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
 
@@ -231,7 +233,7 @@ Noncommercial), not a bare `UFL-3.3<suffix>` — see the FAQ in
 
 Do not rewrite, trim, or "clean up" any of the license text beyond
 filling the three placeholders and picking one scope — see Section 2C.
-If a project's needs don't fit any of the five scopes, that is a reason
+If a project's needs don't fit any of the six scopes, that is a reason
 to pick a different license or propose a new scope for a future UFL
 version, not to hand-edit this one.
 

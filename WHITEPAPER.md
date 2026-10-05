@@ -117,6 +117,7 @@ from this menu, or none (which defaults to Unconditional):
 | **No-Third-Party-Hosting** | Offering the Software to third parties as a hosted or managed service. |
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
+| **Decentralized** (since 3.3) | Nothing is withheld and nothing is paid. It replaces the dispute process and limits the Licensor's liability. |
 
 Section 2 (redistribution reserved) and Section 2A (the decentralized-
 fork attribution carve-out, below) sit on a separate, always-on axis,
@@ -174,7 +175,7 @@ published.
 
 ## Paid use (since 3.0)
 
-Four of the five Operational Scopes withhold something from the free
+Four of the six Operational Scopes withhold something from the free
 grant. Through 2.2, the license said those uses needed "a separate
 written license" and stopped there. That left the scopes promising a
 paid path the license never described, and every Licensor writing its
@@ -316,6 +317,33 @@ choices, version and Operational Scope, now made for each Release. Nothing
 else can be added, so a Ruling License is the canonical text of that
 version and nothing more.
 
+## Decentralized scope (since 3.3)
+
+Some projects have no owner who can run a normal dispute process: a
+network with users in many countries and no company behind it. For them
+3.2's Section 14, which sent every dispute to California, was the wrong
+tool, and a clause that names no forum is worse, because it lets any
+court in the world hear a claim.
+
+The Decentralized scope is the Unconditional free grant with no Paid Use.
+It names one forum for everything: online arbitration under ICC rules,
+individual claims only, no class actions, and no consent to any court's
+jurisdiction by using the software. The arbitrator applies the UNIDROIT
+Principles of International Commercial Contracts, which are written for
+cross-border deals, and California law for gaps.
+
+The Licensor's liability is capped at the lesser of one US dollar and one
+unit of a named remedy token, paid in that token from a fund the Licensor
+keeps. Three limits keep the cap from being struck. If the token cannot
+be paid, the cap is one US dollar in money. Nothing limits liability the
+law does not allow to be limited. And the Licensor keeps its Section 2
+rights, including court injunctions.
+
+What it does not do: it does not make the project ownerless, it does not
+remove a user's non-waivable local rights, and it does not make a claim
+impossible. It makes a nominal claim not worth the arbitration fees, and
+it gives a serious one exactly one place to go.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -449,7 +477,8 @@ updates it:
   which version and Operational Scope rule it, fixed and irrevocable for
   that Release; Section 2C applies the two choices per Release.
 - **3.3** — disputes: Section 14 covers payment disputes only, under ICC
-  arbitration rules; free-grant use is outside it.
+  arbitration rules; and a new Decentralized scope sends all disputes to
+  one online arbitration with a nominal token-paid liability cap.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

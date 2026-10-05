@@ -9,7 +9,8 @@
 #   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
-# no-third-party-hosting, noncommercial, seat-limited. THRESHOLD is only
+# no-third-party-hosting, noncommercial, seat-limited, decentralized. TOKEN is
+# required when SCOPE is decentralized (the token the remedy is paid in). THRESHOLD is only
 # used (and required) when SCOPE is seat-limited — free text describing
 # the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
 # Any flag left out is prompted for, except THRESHOLD, which is only
@@ -37,21 +38,23 @@ HOLDER=""
 PROJECT=""
 SCOPE="unconditional"
 THRESHOLD=""
+TOKEN=""
 OUT=""
 RELEASE=0
 
-while getopts "y:c:p:s:t:o:rh" opt; do
+while getopts "y:c:p:s:t:k:o:rh" opt; do
   case "$opt" in
     y) YEAR=$OPTARG ;;
     c) HOLDER=$OPTARG ;;
     p) PROJECT=$OPTARG ;;
     s) SCOPE=$OPTARG ;;
     t) THRESHOLD=$OPTARG ;;
+    k) TOKEN=$OPTARG ;;
     o) OUT=$OPTARG ;;
     r) RELEASE=1 ;;
     h)
-      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD]"
-      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited"
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]"
+      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized"
       exit 0
       ;;
     *) exit 1 ;;
@@ -63,16 +66,20 @@ done
 [ "$RELEASE" = 1 ] || [ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
 
 case "$SCOPE" in
-  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited) ;;
+  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|decentralized) ;;
   *)
     echo "Unknown SCOPE: $SCOPE" >&2
-    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited" >&2
+    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized" >&2
     exit 1
     ;;
 esac
 
 if [ "$SCOPE" = "seat-limited" ]; then
   [ -n "$THRESHOLD" ] || { printf 'Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ' >&2; read -r THRESHOLD; }
+fi
+
+if [ "$SCOPE" = "decentralized" ]; then
+  [ -n "$TOKEN" ] || { printf 'Remedy token (name, e.g. "HONE"): ' >&2; read -r TOKEN; }
 fi
 
 # Escape backslash, ampersand, and the sed delimiter (|) so arbitrary
@@ -118,6 +125,31 @@ features or functionality. That excluded use is Paid Use under Section
     SCOPE_SUFFIX="-N"
     SCOPE_BODY="Noncommercial — Section 1's free grant is limited to non-commercial use.
 Commercial use of the Software is Paid Use under Section 8."
+    ;;
+  decentralized)
+    SCOPE_LINE="Decentralized — remedy token ${TOKEN}"
+    SCOPE_SUFFIX="-D"
+    SCOPE_BODY="Decentralized — Section 1's grant is unconditional, as in Unconditional,
+and no use is Paid Use, so Sections 8 through 13 do not operate. The
+Software is released as is to the public. Every dispute arising from its
+use is decided exclusively by arbitration under the Rules of Arbitration
+of the International Chamber of Commerce, conducted online before a
+single arbitrator, on an individual basis and not as a class or
+collective action, and no party consents to the jurisdiction of any
+court by using the Software. The arbitrator applies the UNIDROIT
+Principles of International Commercial Contracts and, for any matter
+they do not answer, California law. The Licensor's total liability to
+any Licensee for all claims arising from the Software or this license is
+limited, to the extent the law allows, to the lesser of one United
+States dollar and one unit of ${TOKEN}, payable in ${TOKEN} from the fund
+the Licensor maintains for that purpose to a wallet address the claimant
+provides. If that payment cannot be made, because the token has no
+market, the fund is empty, or the law prohibits it, the limit is one
+United States dollar in money. Nothing in this scope limits liability
+that the law does not allow to be limited, waives a claim or right that
+the law gives a party and does not allow to be waived, or limits the
+Licensor's rights under Section 2, including its right to seek an
+injunction in court for conduct that Section 2 reserves."
     ;;
   seat-limited)
     SCOPE_LINE="Seat-Limited — ${THRESHOLD} free in production"
@@ -278,18 +310,19 @@ to modify. A copy of this text is adopted as-is. For each Release
 of this license to adopt, and which single Operational Scope in Section
 1A applies, stated exactly as that version's canonical text provides for
 that scope, including the free threshold the Seat-Limited scope calls
-for. The only blanks a Licensor fills in are the copyright year, the
-copyright holder, and the project name given near the top of this text.
-Every other term, including the terms on paid use, acceptance, usage
-statements, retroactive licenses, and disputes, is set by this text and
-is the same for every project under this version. No wording in this
-license, including this section, may be added to, removed, or altered in
-any copy that is presented, cited, or identified as "the Usufruct
-License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no
-separate document may add to or change its terms (see Section 15). A
-project that needs different terms is free to write its own license,
-including one derived from this text under its own name — it is not free
-to alter this text and continue to call the result UFL.
+for and the remedy token the Decentralized scope calls for. The only
+blanks a Licensor fills in are the copyright year, the copyright holder,
+and the project name given near the top of this text. Every other term,
+including the terms on paid use, acceptance, usage statements,
+retroactive licenses, and disputes, is set by this text and is the same
+for every project under this version. No wording in this license,
+including this section, may be added to, removed, or altered in any copy
+that is presented, cited, or identified as "the Usufruct License,"
+"UFL," or by any `LicenseRef-UFL-*` identifier, and no separate document
+may add to or change its terms (see Section 15). A project that needs
+different terms is free to write its own license, including one derived
+from this text under its own name — it is not free to alter this text
+and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical source
 named in Section 7. An adopted proposal becomes a new official version,
@@ -470,15 +503,16 @@ Licensor's remedies for conduct that Section 2 reserves.
 ## 14. Disputes
 
 This license is governed by California law, without regard to its
-conflict-of-laws rules.
+conflict-of-laws rules, unless the Operational Scope states otherwise.
 
-Mediation and arbitration under this section cover a dispute between the
-Licensor and a Licensee about whether a use is Paid Use, about any
-amount owed under Section 8, 12, or 13, or about a usage statement under
-Section 10 (a "Payment Dispute"). They do not cover a Licensee's use
-under Section 1's free grant that raises none of those questions. Any
-other dispute arising out of this license or the Software is left to the
-law and the courts that would otherwise apply.
+Unless the Operational Scope provides its own dispute process, mediation
+and arbitration under this section cover a dispute between the Licensor
+and a Licensee about whether a use is Paid Use, about any amount owed
+under Section 8, 12, or 13, or about a usage statement under Section 10
+(a "Payment Dispute"). They do not cover a Licensee's use under Section
+1's free grant that raises none of those questions. Any other dispute
+arising out of this license or the Software is left to the law and the
+courts that would otherwise apply.
 
 A Payment Dispute goes first to mediation. Either party may start
 mediation by written notice to the other, and the mediation must begin
