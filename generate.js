@@ -168,19 +168,19 @@ const TEMPLATE = [
   "of this license to adopt, and which single Operational Scope in Section",
   "1A applies, stated exactly as that version's canonical text provides for",
   "that scope, including the free threshold the Seat-Limited scope calls",
-  "for and the remedy token the Decentralized scope calls for. The only",
-  "blanks a Licensor fills in are the copyright year, the copyright holder,",
-  "and the project name given near the top of this text. Every other term,",
-  "including the terms on paid use, acceptance, usage statements,",
-  "retroactive licenses, and disputes, is set by this text and is the same",
-  "for every project under this version. No wording in this license,",
-  "including this section, may be added to, removed, or altered in any copy",
-  "that is presented, cited, or identified as \"the Usufruct License,\"",
-  "\"UFL,\" or by any `LicenseRef-UFL-*` identifier, and no separate document",
-  "may add to or change its terms (see Section 15). A project that needs",
-  "different terms is free to write its own license, including one derived",
-  "from this text under its own name — it is not free to alter this text",
-  "and continue to call the result UFL.",
+  "for and the native token, or none, that the Decentralized scope names.",
+  "The only blanks a Licensor fills in are the copyright year, the",
+  "copyright holder, and the project name given near the top of this text.",
+  "Every other term, including the terms on paid use, acceptance, usage",
+  "statements, retroactive licenses, and disputes, is set by this text and",
+  "is the same for every project under this version. No wording in this",
+  "license, including this section, may be added to, removed, or altered in",
+  "any copy that is presented, cited, or identified as \"the Usufruct",
+  "License,\" \"UFL,\" or by any `LicenseRef-UFL-*` identifier, and no",
+  "separate document may add to or change its terms (see Section 15). A",
+  "project that needs different terms is free to write its own license,",
+  "including one derived from this text under its own name — it is not free",
+  "to alter this text and continue to call the result UFL.",
   "",
   "Anyone may propose a change for a future version at the canonical source",
   "named in Section 7. An adopted proposal becomes a new official version,",
@@ -464,7 +464,7 @@ const SCOPES = {
     ]
   },
   "decentralized": {
-    line: "Decentralized — remedy token @TOKEN@",
+    line: "Decentralized",
     suffix: "-D",
     body: [
       "Decentralized — Section 1's grant is unconditional, as in Unconditional,",
@@ -476,18 +476,19 @@ const SCOPES = {
       "collective action, and no party consents to the jurisdiction of any",
       "court by using the Software. The arbitrator applies the UNIDROIT",
       "Principles of International Commercial Contracts and, for any matter",
-      "they do not answer, California law. The Licensor's total liability to",
-      "any Licensee for all claims arising from the Software or this license is",
-      "limited, to the extent the law allows, to the lesser of one United",
-      "States dollar and one unit of @TOKEN@, payable in @TOKEN@ from the fund",
-      "the Licensor maintains for that purpose to a wallet address the claimant",
-      "provides. If that payment cannot be made, because the token has no",
-      "market, the fund is empty, or the law prohibits it, the limit is one",
-      "United States dollar in money. Nothing in this scope limits liability",
-      "that the law does not allow to be limited, waives a claim or right that",
-      "the law gives a party and does not allow to be waived, or limits the",
-      "Licensor's rights under Section 2, including its right to seek an",
-      "injunction in court for conduct that Section 2 reserves."
+      "they do not answer, California law. Native token of the Software:",
+      "@TOKEN@. Each party's total liability to the other for all claims",
+      "arising from the Software or this license is limited, to the extent the",
+      "law allows, to one United States dollar in value, paid in money or, if a",
+      "native token is named in this paragraph, in that token valued at one",
+      "United States dollar at its market price when paid, as the paying party",
+      "chooses. If the token cannot be priced or delivered when payment is due,",
+      "payment is one United States dollar in money. Nothing in this scope",
+      "limits liability that the law does not allow to be limited, waives a",
+      "claim or right that the law gives a party and does not allow to be",
+      "waived, or limits a party's right to seek an injunction in court to stop",
+      "conduct that Section 2 reserves or that infringes the Licensor's",
+      "intellectual property."
     ]
   }
 };
@@ -569,10 +570,7 @@ function main() {
     threshold = prompt('Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ');
   }
 
-  let token = args.token;
-  if (args.scope === 'decentralized' && !token) {
-    token = prompt('Remedy token (name, e.g. "HONE"): ');
-  }
+  const token = args.token || 'none';
 
   const scope = buildScope(args.scope, threshold, token);
   if (args.release) {

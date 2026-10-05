@@ -135,19 +135,19 @@ to modify. A copy of this text is adopted as-is. For each Release
 of this license to adopt, and which single Operational Scope in Section
 1A applies, stated exactly as that version's canonical text provides for
 that scope, including the free threshold the Seat-Limited scope calls
-for and the remedy token the Decentralized scope calls for. The only
-blanks a Licensor fills in are the copyright year, the copyright holder,
-and the project name given near the top of this text. Every other term,
-including the terms on paid use, acceptance, usage statements,
-retroactive licenses, and disputes, is set by this text and is the same
-for every project under this version. No wording in this license,
-including this section, may be added to, removed, or altered in any copy
-that is presented, cited, or identified as "the Usufruct License,"
-"UFL," or by any `LicenseRef-UFL-*` identifier, and no separate document
-may add to or change its terms (see Section 15). A project that needs
-different terms is free to write its own license, including one derived
-from this text under its own name — it is not free to alter this text
-and continue to call the result UFL.
+for and the native token, or none, that the Decentralized scope names.
+The only blanks a Licensor fills in are the copyright year, the
+copyright holder, and the project name given near the top of this text.
+Every other term, including the terms on paid use, acceptance, usage
+statements, retroactive licenses, and disputes, is set by this text and
+is the same for every project under this version. No wording in this
+license, including this section, may be added to, removed, or altered in
+any copy that is presented, cited, or identified as "the Usufruct
+License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no
+separate document may add to or change its terms (see Section 15). A
+project that needs different terms is free to write its own license,
+including one derived from this text under its own name — it is not free
+to alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical source
 named in Section 7. An adopted proposal becomes a new official version,

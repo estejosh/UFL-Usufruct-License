@@ -87,7 +87,7 @@ Scope:` line at the top of the license text, the `scope` field in
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
-| Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and the Licensor's liability is limited to a nominal remedy paid in a named token. Needs a remedy token (`-k`). |
+| Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and each party's liability to the other is limited to US$1 in value, payable in money or the project's native token (`-k`, optional). |
 
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
@@ -183,7 +183,7 @@ What it does and does not do:
 
 [`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
 plain text it was made from, with the year, holder, and project name
-left blank (and the threshold for Seat-Limited, or the remedy token for Decentralized):
+left blank (and the threshold for Seat-Limited, or the native token, if any, for Decentralized):
 
 | Scope | PDF | Text |
 |---|---|---|

@@ -10,7 +10,8 @@
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
 # no-third-party-hosting, noncommercial, seat-limited, decentralized. TOKEN is
-# required when SCOPE is decentralized (the token the remedy is paid in). THRESHOLD is only
+# used only when SCOPE is decentralized: the native token of the Software
+# (default "none"), in which the $1 remedy may be paid. THRESHOLD is only
 # used (and required) when SCOPE is seat-limited — free text describing
 # the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
 # Any flag left out is prompted for, except THRESHOLD, which is only
@@ -78,9 +79,8 @@ if [ "$SCOPE" = "seat-limited" ]; then
   [ -n "$THRESHOLD" ] || { printf 'Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ' >&2; read -r THRESHOLD; }
 fi
 
-if [ "$SCOPE" = "decentralized" ]; then
-  [ -n "$TOKEN" ] || { printf 'Remedy token (name, e.g. "HONE"): ' >&2; read -r TOKEN; }
-fi
+# Decentralized only: the project's native token, if it has one.
+[ -n "$TOKEN" ] || TOKEN="none"
 
 # Escape backslash, ampersand, and the sed delimiter (|) so arbitrary
 # names can't break the substitution below.
@@ -127,7 +127,7 @@ features or functionality. That excluded use is Paid Use under Section
 Commercial use of the Software is Paid Use under Section 8."
     ;;
   decentralized)
-    SCOPE_LINE="Decentralized — remedy token ${TOKEN}"
+    SCOPE_LINE="Decentralized"
     SCOPE_SUFFIX="-D"
     SCOPE_BODY="Decentralized — Section 1's grant is unconditional, as in Unconditional,
 and no use is Paid Use, so Sections 8 through 13 do not operate. The
@@ -138,18 +138,19 @@ single arbitrator, on an individual basis and not as a class or
 collective action, and no party consents to the jurisdiction of any
 court by using the Software. The arbitrator applies the UNIDROIT
 Principles of International Commercial Contracts and, for any matter
-they do not answer, California law. The Licensor's total liability to
-any Licensee for all claims arising from the Software or this license is
-limited, to the extent the law allows, to the lesser of one United
-States dollar and one unit of ${TOKEN}, payable in ${TOKEN} from the fund
-the Licensor maintains for that purpose to a wallet address the claimant
-provides. If that payment cannot be made, because the token has no
-market, the fund is empty, or the law prohibits it, the limit is one
-United States dollar in money. Nothing in this scope limits liability
-that the law does not allow to be limited, waives a claim or right that
-the law gives a party and does not allow to be waived, or limits the
-Licensor's rights under Section 2, including its right to seek an
-injunction in court for conduct that Section 2 reserves."
+they do not answer, California law. Native token of the Software:
+${TOKEN}. Each party's total liability to the other for all claims
+arising from the Software or this license is limited, to the extent the
+law allows, to one United States dollar in value, paid in money or, if a
+native token is named in this paragraph, in that token valued at one
+United States dollar at its market price when paid, as the paying party
+chooses. If the token cannot be priced or delivered when payment is due,
+payment is one United States dollar in money. Nothing in this scope
+limits liability that the law does not allow to be limited, waives a
+claim or right that the law gives a party and does not allow to be
+waived, or limits a party's right to seek an injunction in court to stop
+conduct that Section 2 reserves or that infringes the Licensor's
+intellectual property."
     ;;
   seat-limited)
     SCOPE_LINE="Seat-Limited — ${THRESHOLD} free in production"
@@ -310,19 +311,19 @@ to modify. A copy of this text is adopted as-is. For each Release
 of this license to adopt, and which single Operational Scope in Section
 1A applies, stated exactly as that version's canonical text provides for
 that scope, including the free threshold the Seat-Limited scope calls
-for and the remedy token the Decentralized scope calls for. The only
-blanks a Licensor fills in are the copyright year, the copyright holder,
-and the project name given near the top of this text. Every other term,
-including the terms on paid use, acceptance, usage statements,
-retroactive licenses, and disputes, is set by this text and is the same
-for every project under this version. No wording in this license,
-including this section, may be added to, removed, or altered in any copy
-that is presented, cited, or identified as "the Usufruct License,"
-"UFL," or by any `LicenseRef-UFL-*` identifier, and no separate document
-may add to or change its terms (see Section 15). A project that needs
-different terms is free to write its own license, including one derived
-from this text under its own name — it is not free to alter this text
-and continue to call the result UFL.
+for and the native token, or none, that the Decentralized scope names.
+The only blanks a Licensor fills in are the copyright year, the
+copyright holder, and the project name given near the top of this text.
+Every other term, including the terms on paid use, acceptance, usage
+statements, retroactive licenses, and disputes, is set by this text and
+is the same for every project under this version. No wording in this
+license, including this section, may be added to, removed, or altered in
+any copy that is presented, cited, or identified as "the Usufruct
+License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no
+separate document may add to or change its terms (see Section 15). A
+project that needs different terms is free to write its own license,
+including one derived from this text under its own name — it is not free
+to alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical source
 named in Section 7. An adopted proposal becomes a new official version,

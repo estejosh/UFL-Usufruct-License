@@ -332,12 +332,14 @@ jurisdiction by using the software. The arbitrator applies the UNIDROIT
 Principles of International Commercial Contracts, which are written for
 cross-border deals, and California law for gaps.
 
-The Licensor's liability is capped at the lesser of one US dollar and one
-unit of a named remedy token, paid in that token from a fund the Licensor
-keeps. Three limits keep the cap from being struck. If the token cannot
-be paid, the cap is one US dollar in money. Nothing limits liability the
-law does not allow to be limited. And the Licensor keeps its Section 2
-rights, including court injunctions.
+Each party's total liability to the other is capped at one US dollar in
+value. The payer chooses money or, if the project names a native token,
+that token valued at one dollar at its market price when paid. The value
+is fixed, so a falling token price cannot push the cap toward zero. If
+the token cannot be priced or delivered, the cap is paid in money. The
+cap is mutual, which is what makes it hard to call one-sided. Nothing
+limits liability the law does not allow to be limited, and either party
+can still ask a court for an injunction against Section 2 conduct.
 
 What it does not do: it does not make the project ownerless, it does not
 remove a user's non-waivable local rights, and it does not make a claim

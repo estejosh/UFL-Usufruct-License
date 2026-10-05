@@ -42,7 +42,7 @@
     "decentralized": {
       "tag": "UFL-D-1a",
       "spdxSuffix": "-D",
-      "summary": "Free use with no Paid Use. Disputes go to exclusive online ICC arbitration, individual claims only, with the Licensor's liability limited to a nominal remedy paid in a named token."
+      "summary": "Free use with no Paid Use. Disputes go to exclusive online ICC arbitration, individual claims only, with each party's liability limited to US$1 in value, payable in money or the project's native token."
     }
   },
   "adoptedBy": [

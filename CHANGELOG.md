@@ -38,19 +38,21 @@ Sections 8 through 13 do not operate. Under it:
 - The arbitrator applies the UNIDROIT Principles of International
   Commercial Contracts and, for anything they do not answer, California
   law. Section 14's California-law sentence now yields to the scope.
-- The Licensor's total liability is limited, to the extent the law
-  allows, to the lesser of one US dollar and one unit of a named remedy
-  token, paid in that token from a fund the Licensor maintains to a
-  wallet the claimant provides. If it cannot be paid in the token (no
-  market, empty fund, or prohibited by law), the limit is one US dollar
-  in money.
+- Each party's total liability to the other is limited, to the extent
+  the law allows, to one US dollar in value. It is paid in money or, if
+  the project names a native token, in that token valued at one dollar
+  at its market price when paid, as the paying party chooses. If the
+  token cannot be priced or delivered, it is paid in money. The cap is
+  mutual, so it limits the Licensor's money claims too.
 - Nothing limits liability the law does not allow to be limited, waives
-  a non-waivable right, or limits the Licensor's Section 2 rights,
-  including court injunctions for Section 2 conduct.
+  a non-waivable right, or stops either party seeking a court injunction
+  against conduct Section 2 reserves or that infringes the Licensor's
+  intellectual property.
 
-The remedy token is a fill point for this scope, like the seat threshold
-for Seat-Limited. `generate.sh` and `generate.js` take it with `-k`.
-Section 2C names it among the things a Licensor may fill.
+The native token is a fill point for this scope, like the seat threshold
+for Seat-Limited. It is optional and defaults to "none". `generate.sh`
+and `generate.js` take it with `-k`. Section 2C names it among the
+things a Licensor may fill.
 
 Every other section is the same as 3.2 apart from version strings.
 SPDX identifier: `LicenseRef-UFL-3.3`, with the same `-C`, `-H`, `-N`,
