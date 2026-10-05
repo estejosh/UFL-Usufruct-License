@@ -2,7 +2,7 @@
 
 ### A source-available license for unrestricted use and reserved redistribution
 
-Version 3.2 — October 2026
+Version 3.3 — October 2026
 
 ## Abstract
 
@@ -22,7 +22,7 @@ noncommercial-only limit — stated once, in the open, on the license
 itself. As of 3.0, the license also sets how a withheld use is paid
 for: at the Licensor's published price, on UFL's own terms, with the
 same acceptance, usage-statement, retroactive-license, and dispute
-rules for every project. There are no side agreements and no addendum.
+rules for every project. There are no side agreements and no side documents.
 A project that declares no scope gets exactly the unconditional 1.0
 grant this whitepaper originally described.
 
@@ -117,6 +117,7 @@ from this menu, or none (which defaults to Unconditional):
 | **No-Third-Party-Hosting** | Offering the Software to third parties as a hosted or managed service. |
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
+| **Decentralized** (since 3.3) | Nothing is withheld and nothing is paid. It replaces the dispute process and limits the Licensor's liability. |
 
 Section 2 (redistribution reserved) and Section 2A (the decentralized-
 fork attribution carve-out, below) sit on a separate, always-on axis,
@@ -174,7 +175,7 @@ published.
 
 ## Paid use (since 3.0)
 
-Four of the five Operational Scopes withhold something from the free
+Four of the six Operational Scopes withhold something from the free
 grant. Through 2.2, the license said those uses needed "a separate
 written license" and stopped there. That left the scopes promising a
 paid path the license never described, and every Licensor writing its
@@ -211,10 +212,12 @@ the license, identical for every project:
 - **Never revoked (Section 13).** The use grant is perpetual. A user who
   owes money keeps using the software and is brought current by paying
   or by a written payment agreement.
-- **Disputes (Section 14).** California law. Mediation within 30 days,
-  binding arbitration in California after 60, both available entirely
-  by video. Court injunctions stay available for unlicensed
-  redistribution.
+- **Disputes (Section 14).** California law. Payment disputes (whether a
+  use is Paid Use, amounts owed, usage statements) go to mediation
+  within 30 days, then binding ICC arbitration seated in California
+  after 60, both available entirely by video. Use under the free grant
+  is not in that process. Court injunctions stay available for
+  unlicensed redistribution.
 - **Entire license (Section 15).** No other document adds to or changes
   the license. A Licensor chooses a version and a scope and publishes a
   price. That's all.
@@ -314,6 +317,58 @@ choices, version and Operational Scope, now made for each Release. Nothing
 else can be added, so a Ruling License is the canonical text of that
 version and nothing more.
 
+## Decentralized scope (since 3.3)
+
+Some projects have no owner who can run a normal dispute process: a
+network with users in many countries and no company behind it. For them
+3.2's Section 14, which sent every dispute to California, was the wrong
+tool, and a clause that names no forum is worse, because it lets any
+court in the world hear a claim.
+
+The Decentralized scope is the Unconditional free grant with no Paid Use.
+It names one forum for everything: online arbitration under ICC rules,
+individual claims only, no class actions, and no consent to any court's
+jurisdiction by using the software. The arbitrator applies the UNIDROIT
+Principles of International Commercial Contracts, which are written for
+cross-border deals, and California law for gaps.
+
+Each party's total liability to the other is capped at one US dollar in
+value. The payer chooses money or, if the project names a native token,
+that token valued at one dollar at its market price when paid, and the
+payee must accept the token if the payer chooses it. The value is fixed,
+so a falling token price cannot push the cap toward zero. A token that is
+unlisted, with no published market price, is treated as worth one dollar.
+If money is paid because the token cannot be delivered, the payee bears
+the wire or transfer cost. The payer pays
+in the token by written notice that payment is available. A payee with
+no wallet has 90 days to give an address, after which the payment is
+complete. Anyone who will not set up a wallet for a dollar's worth of a
+project's token is unlikely to bring a claim, which is part of the
+point. The cap is mutual, which is what makes it hard to call one-sided.
+Nothing limits liability the law does not allow to be limited, and
+either party can still ask a court for an injunction against Section 2
+conduct.
+
+The cap only works if the user agreed to it. So the scope's terms take
+effect only through a click-through that the Software presents before
+first use (Section 9 now applies here, not only where a use is withheld),
+and the software does not run until it is done. A user who has not
+agreed has no use, so nothing is left to dispute; a user who bypasses the
+step has breached the license, is running a modified copy, and is owed
+nothing by the Licensor, not even the dollar. A project that does not build the gate in is
+licensed as Unconditional. Forks are a different matter. A
+fork, or a reimplementation, is not the Software for this scope, and
+whoever makes, distributes, or uses one does so entirely at their own
+risk. The Licensor has no liability for it, not even the dollar. That
+protects the Licensor between the parties who agreed, but it cannot bind
+someone who never saw the step, such as a person using a fork that
+removed it.
+
+What it does not do: it does not make the project ownerless, it does not
+remove a user's non-waivable local rights, and it does not make a claim
+impossible. It makes a nominal claim not worth the arbitration fees, and
+it gives a serious one exactly one place to go.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -355,9 +410,9 @@ scope applies, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-3.2` (with a scope suffix where one applies, e.g.
-`LicenseRef-UFL-3.2-N` for Noncommercial), the convention SPDX defines
-for licenses outside its list — not a bare `UFL-3.2` as if it had been
+`LicenseRef-UFL-3.3` (with a scope suffix where one applies, e.g.
+`LicenseRef-UFL-3.3-N` for Noncommercial), the convention SPDX defines
+for licenses outside its list — not a bare `UFL-3.3` as if it had been
 registered.
 
 **Can I use UFL-licensed software in a commercial product?**
@@ -446,6 +501,9 @@ updates it:
 - **3.2** — releases: Section 1C lets a Licensor state, for each Release,
   which version and Operational Scope rule it, fixed and irrevocable for
   that Release; Section 2C applies the two choices per Release.
+- **3.3** — disputes: Section 14 covers payment disputes only, under ICC
+  arbitration rules; and a new Decentralized scope sends all disputes to
+  one online arbitration with a nominal token-paid liability cap.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

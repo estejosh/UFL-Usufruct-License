@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.2.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.3.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -27,14 +27,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.2. See CHANGELOG.md for revisions.
+// Tracks UFL 3.3. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.2",
+  "The Usufruct License (UFL) — Version 3.3",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -88,7 +88,7 @@ const TEMPLATE = [
   "",
   "With each Release, the Licensor states which version of this license,",
   "and which Operational Scope, governs that Release (its \"Ruling",
-  "License\"). The statement names both, for example \"UFL 3.2, Operational",
+  "License\"). The statement names both, for example \"UFL 3.3, Operational",
   "Scope: Noncommercial\", and appears where users get the Release: in its",
   "release notes, its tag, or its package metadata. The Release includes",
   "the full text of its Ruling License. If a Release does not state its",
@@ -168,7 +168,8 @@ const TEMPLATE = [
   "of this license to adopt, and which single Operational Scope in Section",
   "1A applies, stated exactly as that version's canonical text provides for",
   "that scope, including the free threshold the Seat-Limited scope calls",
-  "for. The only blanks a Licensor fills in are the copyright year, the",
+  "for and the native token, or none, that the Decentralized scope names.",
+  "The only blanks a Licensor fills in are the copyright year, the",
   "copyright holder, and the project name given near the top of this text.",
   "Every other term, including the terms on paid use, acceptance, usage",
   "statements, retroactive licenses, and disputes, is set by this text and",
@@ -276,8 +277,10 @@ const TEMPLATE = [
   "## 9. Acceptance",
   "",
   "Using the Software is acceptance of this license. Where the Operational",
-  "Scope withholds any use, the Software presents, before first use, an",
-  "affirmative step that names this license's version and must be",
+  "Scope withholds any use, or sets its own limit of liability and dispute",
+  "process (as the Decentralized scope does), the Software presents, before",
+  "first use, an affirmative step that names this license's version and",
+  "Operational Scope, shows any such limit and process, and must be",
   "completed: an on-screen agreement, an interactive prompt, or, for",
   "non-interactive use, an explicit setting or flag naming the version.",
   "Under any other Operational Scope, the Licensor may build in the same",
@@ -360,14 +363,24 @@ const TEMPLATE = [
   "## 14. Disputes",
   "",
   "This license is governed by California law, without regard to its",
-  "conflict-of-laws rules.",
+  "conflict-of-laws rules, unless the Operational Scope states otherwise.",
   "",
-  "Any dispute arising out of this license or the Software goes first to",
-  "mediation. Either party may start mediation by written notice to the",
-  "other, and the mediation must begin within 30 days of that notice. If",
-  "the dispute is not resolved within 60 days of the notice, either party",
-  "may submit it to binding arbitration before a single arbitrator seated",
-  "in California. The parties may agree in writing to a different schedule.",
+  "Unless the Operational Scope provides its own dispute process, mediation",
+  "and arbitration under this section cover a dispute between the Licensor",
+  "and a Licensee about whether a use is Paid Use, about any amount owed",
+  "under Section 8, 12, or 13, or about a usage statement under Section 10",
+  "(a \"Payment Dispute\"). They do not cover a Licensee's use under Section",
+  "1's free grant that raises none of those questions. Any other dispute",
+  "arising out of this license or the Software is left to the law and the",
+  "courts that would otherwise apply.",
+  "",
+  "A Payment Dispute goes first to mediation. Either party may start",
+  "mediation by written notice to the other, and the mediation must begin",
+  "within 30 days of that notice. If the dispute is not resolved within 60",
+  "days of the notice, either party may submit it to binding arbitration",
+  "under the Rules of Arbitration of the International Chamber of Commerce,",
+  "before a single arbitrator seated in California. The parties may agree",
+  "in writing to a different schedule.",
   "",
   "Mediation and arbitration may be conducted entirely by video conference",
   "and electronic submission, and no party is required to attend in person",
@@ -397,8 +410,8 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.2` —",
-  "not a bare `UFL-3.2`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.3` —",
+  "not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
 
@@ -451,17 +464,69 @@ const SCOPES = {
       "Use. Production Use is free up to @THRESHOLD@; Production Use beyond",
       "that threshold is Paid Use under Section 8."
     ]
+  },
+  "decentralized": {
+    line: "Decentralized",
+    suffix: "-D",
+    body: [
+      "Decentralized — Section 1's grant is unconditional, as in Unconditional,",
+      "and no use is Paid Use, so Sections 8 through 13 do not operate. The",
+      "Software is released as is to the public. Every dispute arising from its",
+      "use is decided exclusively by arbitration under the Rules of Arbitration",
+      "of the International Chamber of Commerce, conducted online before a",
+      "single arbitrator, on an individual basis and not as a class or",
+      "collective action, and no party consents to the jurisdiction of any",
+      "court by using the Software. The arbitrator applies the UNIDROIT",
+      "Principles of International Commercial Contracts and, for any matter",
+      "they do not answer, California law. Native token of the Software:",
+      "@TOKEN@. Each party's total liability to the other for all claims",
+      "arising from the Software or this license is limited, to the extent the",
+      "law allows, to one United States dollar in value. The paying party",
+      "chooses whether to pay in money or, if a native token is named in this",
+      "paragraph, in that token valued at one United States dollar at its",
+      "market price when paid, and the party being paid must accept payment in",
+      "the token if the paying party chooses it. The paying party pays in the",
+      "token by notifying the other party in writing that payment is available;",
+      "if that party gives no wallet address within 90 days of the notice, the",
+      "payment is complete and the obligation is discharged. A token is",
+      "unlisted if no exchange or public price source publishes a market price",
+      "for it when payment is made, and one unit of an unlisted token is",
+      "treated as worth one United States dollar. If the token cannot be",
+      "delivered for any reason other than the payee's failure to give an",
+      "address, payment is one United States dollar in money, and the payee",
+      "bears the cost of the wire or transfer, which the paying party may",
+      "deduct from the payment. This scope's dispute process, limit of",
+      "liability, and own-risk terms take effect for a Licensee only when the",
+      "Licensee completes the affirmative step in Section 9, which the Software",
+      "must present before first use and which shows them. The Software must",
+      "not run until the Licensee has completed that step, and running the",
+      "Software with that step bypassed, removed, or forged breaches this",
+      "license and makes that copy a modified version, so the Licensor owes the",
+      "person running it no liability of any kind, including the amount stated",
+      "below. A Licensor adopts this scope only by building that step into the",
+      "Software as a gate, and Software that does not have it is licensed under",
+      "the Unconditional scope instead. A modified version, fork, or",
+      "independent reimplementation of the Software is not the Software for the",
+      "purposes of this scope. Whoever creates, distributes, or uses one does",
+      "so entirely at their own risk, and the Licensor has no liability for it",
+      "of any kind, including the amount stated above. Nothing in this scope",
+      "limits liability that the law does not allow to be limited, waives a",
+      "claim or right that the law gives a party and does not allow to be",
+      "waived, or limits a party's right to seek an injunction in court to stop",
+      "conduct that Section 2 reserves or that infringes the Licensor's",
+      "intellectual property."
+    ]
   }
 };
 
-function buildScope(scopeKey, threshold) {
+function buildScope(scopeKey, threshold, token) {
   const s = SCOPES[scopeKey];
-  const t = (x) => x.split('@THRESHOLD@').join(threshold);
+  const t = (x) => x.split('@THRESHOLD@').join(threshold).split('@TOKEN@').join(token);
   return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };
 }
 
 function parseArgs(argv) {
-  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, out: null, release: false };
+  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, token: null, out: null, release: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '-y') { out.year = argv[++i]; }
@@ -469,12 +534,13 @@ function parseArgs(argv) {
     else if (a === '-p') { out.project = argv[++i]; }
     else if (a === '-s') { out.scope = argv[++i]; }
     else if (a === '-t') { out.threshold = argv[++i]; }
+    else if (a === '-k') { out.token = argv[++i]; }
     else if (a === '-o') { out.out = argv[++i]; }
     else if (a === '-r' || a === '--release-statement') { out.release = true; }
     else if (a === '-h' || a === '--help') {
       process.stderr.write(
-        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD]\n' +
-        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited\n'
+        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]\n' +
+        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized\n'
       );
       process.exit(0);
     } else {
@@ -507,8 +573,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.2`').join('LicenseRef-UFL-3.2' + scopeSuffix + '`')
-    .split('`UFL-3.2`').join('`UFL-3.2' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.3`').join('LicenseRef-UFL-3.3' + scopeSuffix + '`')
+    .split('`UFL-3.3`').join('`UFL-3.3' + scopeSuffix + '`');
 }
 
 function main() {
@@ -518,7 +584,7 @@ function main() {
   const holder = args.release ? '' : args.holder || prompt('Copyright holder: ');
   const project = args.release ? '' : args.project || prompt('Project name: ');
 
-  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited'];
+  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'decentralized'];
   if (validScopes.indexOf(args.scope) === -1) {
     process.stderr.write('Unknown SCOPE: ' + args.scope + '\n');
     process.stderr.write('Must be one of: ' + validScopes.join(' | ') + '\n');
@@ -530,9 +596,14 @@ function main() {
     threshold = prompt('Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ');
   }
 
-  const scope = buildScope(args.scope, threshold);
+  const token = args.token || 'none';
+  if (args.scope === 'decentralized' && !args.release) {
+    process.stderr.write('Note: Decentralized takes effect only if your Software presents the Section 9 click-through before first use. Without it, the Software is licensed as Unconditional.\n');
+  }
+
+  const scope = buildScope(args.scope, threshold, token);
   if (args.release) {
-    const stmt = 'UFL 3.2, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.2' + scope.suffix + ')\n';
+    const stmt = 'UFL 3.3, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.3' + scope.suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }
     return;
   }

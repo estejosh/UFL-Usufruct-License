@@ -1,215 +1,9 @@
-#!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.3.
-# POSIX shell, no dependencies beyond sed and awk (present on every POSIX
-# system).
-#
-# Usage:
-#   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
-#     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]
-#   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
-#
-# SCOPE is one of: unconditional (default), no-competing-service,
-# no-third-party-hosting, noncommercial, seat-limited, decentralized. TOKEN is
-# used only when SCOPE is decentralized: the native token of the Software
-# (default "none"), in which the $1 remedy may be paid. THRESHOLD is only
-# used (and required) when SCOPE is seat-limited — free text describing
-# the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
-# Any flag left out is prompted for, except THRESHOLD, which is only
-# prompted for when SCOPE is seat-limited. With no -o, the filled license
-# is written to stdout.
-#
-# -r prints the Release statement (Section 1C) for SCOPE instead of a
-# license: the line to publish with each Release, naming its Ruling
-# License. It asks for no year, holder, or project.
-#
-# This script fills in the placeholders and picks one Operational Scope —
-# it does not otherwise alter the license text. See Section 2C.
-#
-# Piped from curl — pass every flag, since stdin is the script itself in
-# this mode and interactive prompts have nothing to read:
-#   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
-#     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
-#
-# Tracks UFL 3.3. See CHANGELOG.md for revisions.
-
-set -eu
-
-YEAR=""
-HOLDER=""
-PROJECT=""
-SCOPE="unconditional"
-THRESHOLD=""
-TOKEN=""
-OUT=""
-RELEASE=0
-
-while getopts "y:c:p:s:t:k:o:rh" opt; do
-  case "$opt" in
-    y) YEAR=$OPTARG ;;
-    c) HOLDER=$OPTARG ;;
-    p) PROJECT=$OPTARG ;;
-    s) SCOPE=$OPTARG ;;
-    t) THRESHOLD=$OPTARG ;;
-    k) TOKEN=$OPTARG ;;
-    o) OUT=$OPTARG ;;
-    r) RELEASE=1 ;;
-    h)
-      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]"
-      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized"
-      exit 0
-      ;;
-    *) exit 1 ;;
-  esac
-done
-
-[ "$RELEASE" = 1 ] || [ -n "$YEAR" ] || { printf 'Year: ' >&2; read -r YEAR; }
-[ "$RELEASE" = 1 ] || [ -n "$HOLDER" ]  || { printf 'Copyright holder: ' >&2; read -r HOLDER; }
-[ "$RELEASE" = 1 ] || [ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
-
-case "$SCOPE" in
-  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|decentralized) ;;
-  *)
-    echo "Unknown SCOPE: $SCOPE" >&2
-    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized" >&2
-    exit 1
-    ;;
-esac
-
-if [ "$SCOPE" = "seat-limited" ]; then
-  [ -n "$THRESHOLD" ] || { printf 'Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ' >&2; read -r THRESHOLD; }
-fi
-
-# Decentralized only: the project's native token, if it has one.
-[ -n "$TOKEN" ] || TOKEN="none"
-if [ "$SCOPE" = "decentralized" ] && [ "$RELEASE" != 1 ]; then
-  echo "Note: Decentralized takes effect only if your Software presents the Section 9 click-through before first use. Without it, the Software is licensed as Unconditional." >&2
-fi
-
-# Escape backslash, ampersand, and the sed delimiter (|) so arbitrary
-# names can't break the substitution below.
-escape() {
-  printf '%s' "$1" | sed -e 's/[\&|]/\\&/g'
-}
-
-YEAR_ESC=$(escape "$YEAR")
-HOLDER_ESC=$(escape "$HOLDER")
-PROJECT_ESC=$(escape "$PROJECT")
-THRESHOLD_ESC=$(escape "$THRESHOLD")
-
-case "$SCOPE" in
-  unconditional)
-    SCOPE_LINE="Unconditional"
-    SCOPE_SUFFIX=""
-    SCOPE_BODY="Unconditional — Section 1's grant is unconditional: it includes running
-the Software, deploying it, integrating with it, and operating a product
-or service built on top of it, commercially or otherwise, at any scale,
-with no further condition."
-    ;;
-  no-competing-service)
-    SCOPE_LINE="No-Competing-Service"
-    SCOPE_SUFFIX="-C"
-    SCOPE_BODY="No-Competing-Service — Section 1's free grant excludes operating the
-Software, or a modified version or fork of it, as a product or service
-offered to third parties in competition with a product or service the
-Licensor offers using the Software. That excluded use is Paid Use under
-Section 8. All other uses described in Section 1 are unconditional."
-    ;;
-  no-third-party-hosting)
-    SCOPE_LINE="No-Third-Party-Hosting"
-    SCOPE_SUFFIX="-H"
-    SCOPE_BODY="No-Third-Party-Hosting — Section 1's free grant excludes providing the
-Software to third parties as a hosted or managed service that gives
-those third parties access to substantially all of the Software's
-features or functionality. That excluded use is Paid Use under Section
-8. All other uses described in Section 1 are unconditional."
-    ;;
-  noncommercial)
-    SCOPE_LINE="Noncommercial"
-    SCOPE_SUFFIX="-N"
-    SCOPE_BODY="Noncommercial — Section 1's free grant is limited to non-commercial use.
-Commercial use of the Software is Paid Use under Section 8."
-    ;;
-  decentralized)
-    SCOPE_LINE="Decentralized"
-    SCOPE_SUFFIX="-D"
-    SCOPE_BODY="Decentralized — Section 1's grant is unconditional, as in Unconditional,
-and no use is Paid Use, so Sections 8 through 13 do not operate. The
-Software is released as is to the public. Every dispute arising from its
-use is decided exclusively by arbitration under the Rules of Arbitration
-of the International Chamber of Commerce, conducted online before a
-single arbitrator, on an individual basis and not as a class or
-collective action, and no party consents to the jurisdiction of any
-court by using the Software. The arbitrator applies the UNIDROIT
-Principles of International Commercial Contracts and, for any matter
-they do not answer, California law. Native token of the Software:
-${TOKEN}. Each party's total liability to the other for all claims
-arising from the Software or this license is limited, to the extent the
-law allows, to one United States dollar in value. The paying party
-chooses whether to pay in money or, if a native token is named in this
-paragraph, in that token valued at one United States dollar at its
-market price when paid, and the party being paid must accept payment in
-the token if the paying party chooses it. The paying party pays in the
-token by notifying the other party in writing that payment is available;
-if that party gives no wallet address within 90 days of the notice, the
-payment is complete and the obligation is discharged. A token is
-unlisted if no exchange or public price source publishes a market price
-for it when payment is made, and one unit of an unlisted token is
-treated as worth one United States dollar. If the token cannot be
-delivered for any reason other than the payee's failure to give an
-address, payment is one United States dollar in money, and the payee
-bears the cost of the wire or transfer, which the paying party may
-deduct from the payment. This scope's dispute process, limit of
-liability, and own-risk terms take effect for a Licensee only when the
-Licensee completes the affirmative step in Section 9, which the Software
-must present before first use and which shows them. The Software must
-not run until the Licensee has completed that step, and running the
-Software with that step bypassed, removed, or forged breaches this
-license and makes that copy a modified version, so the Licensor owes the
-person running it no liability of any kind, including the amount stated
-below. A Licensor adopts this scope only by building that step into the
-Software as a gate, and Software that does not have it is licensed under
-the Unconditional scope instead. A modified version, fork, or
-independent reimplementation of the Software is not the Software for the
-purposes of this scope. Whoever creates, distributes, or uses one does
-so entirely at their own risk, and the Licensor has no liability for it
-of any kind, including the amount stated above. Nothing in this scope
-limits liability that the law does not allow to be limited, waives a
-claim or right that the law gives a party and does not allow to be
-waived, or limits a party's right to seek an injunction in court to stop
-conduct that Section 2 reserves or that infringes the Licensor's
-intellectual property."
-    ;;
-  seat-limited)
-    SCOPE_LINE="Seat-Limited — ${THRESHOLD} free in production"
-    SCOPE_SUFFIX="-S"
-    SCOPE_BODY="Seat-Limited — Section 1's grant is unconditional for Non-Production
-Use. Production Use is free up to ${THRESHOLD}; Production Use beyond
-that threshold is Paid Use under Section 8."
-    ;;
-esac
-
-if [ "$RELEASE" = 1 ]; then
-  STMT="UFL 3.3, Operational Scope: $SCOPE_LINE (LicenseRef-UFL-3.3${SCOPE_SUFFIX})"
-  if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
-  exit 0
-fi
-
-SCOPE_LINE_ESC=$(escape "$SCOPE_LINE")
-SCOPE_SUFFIX_ESC=$(escape "$SCOPE_SUFFIX")
-
-FILLED=$(sed \
-  -e "s|\[YEAR\]|$YEAR_ESC|g" \
-  -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
-  -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
-  -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.3\`|LicenseRef-UFL-3.3${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.3\`|\`UFL-3.3${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
 The Usufruct License (UFL) — Version 3.3
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
 
-Operational Scope: [OPERATIONAL SCOPE]
+Operational Scope: Seat-Limited — [THRESHOLD] free in production
 
 ## 1. Grant of Use
 
@@ -227,7 +21,9 @@ grant is licensed under Section 8, on the terms of this license.
 The Operational Scope declared above states the only limit, if any, on
 Section 1's free grant. Exactly one scope applies to this Software:
 
-[OPERATIONAL SCOPE BODY]
+Seat-Limited — Section 1's grant is unconditional for Non-Production
+Use. Production Use is free up to [THRESHOLD]; Production Use beyond
+that threshold is Paid Use under Section 8.
 
 ## 1B. Definitions
 
@@ -580,18 +376,5 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.3` —
-not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.
-UFL_TEMPLATE
-)
-
-FILLED=$(printf '%s\n' "$FILLED" | awk -v body="$SCOPE_BODY" '
-  $0 == "[OPERATIONAL SCOPE BODY]" { print body; next }
-  { print }
-')
-
-if [ -n "$OUT" ]; then
-  printf '%s\n' "$FILLED" > "$OUT"
-else
-  printf '%s\n' "$FILLED"
-fi
+convention for licenses outside that list, use `LicenseRef-UFL-3.3-S` —
+not a bare `UFL-3.3-S`, which would misrepresent it as SPDX-registered.

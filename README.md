@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.2" src="https://img.shields.io/badge/license-UFL--3.2-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.2-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.3" src="https://img.shields.io/badge/license-UFL--3.3-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.3-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -34,7 +34,7 @@ also says what a contributor gives the project — see
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.2**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.3**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -87,6 +87,7 @@ Scope:` line at the top of the license text, the `scope` field in
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
+| Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and each party's liability to the other is limited to US$1 in value, payable in money or the project's native token (`-k`, optional). |
 
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
@@ -101,14 +102,36 @@ repo or docs. The price is a number, never extra terms. If someone uses
 past the scope without paying, Section 12 licenses it after the fact:
 the published price if they disclose it first, three times that if the
 Licensor finds it, plus interest, three years back at most. The grant is
-never revoked for nonpayment (Section 13). Disputes go to mediation,
-then arbitration, in California, by video if the parties want
-(Section 14). Section 15 makes the license the whole deal: no addendum,
-no side terms.
+never revoked for nonpayment (Section 13). Payment disputes go to
+mediation, then ICC arbitration seated in California, by video if the
+parties want (Section 14). Using the software on the free grant puts
+no one in that process. Section 15 makes the license the whole deal: no
+side documents, no side terms.
 
 For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
 No-Competing-Service, that means publishing a price list somewhere in
 the repo or docs. Nothing else.
+
+## Adopting the Decentralized scope (since 3.3)
+
+The scope's dispute process, US$1 limit, and own-risk terms bind a user
+only if the user agreed to them. So a project that picks Decentralized
+must build a click-through into its software. Without one, the scope does
+not take effect and the project is licensed as Unconditional.
+
+The click-through must, before first use:
+
+- name the license version and the Operational Scope (for example,
+  "UFL 3.3, Decentralized");
+- show the limit of liability and the dispute process, or the full
+  license text, and ask for an affirmative step (a button, a typed
+  confirmation, or for headless use an explicit flag or setting naming the
+  version, such as `--accept-ufl 3.3`);
+- not run at all until the step is done (a gate, not a notice);
+- record the version and time on the user's own machine only.
+
+If the project has a native token, pass it with `-k`. If not, leave it
+off and the remedy is paid in money.
 
 ## Releases (since 3.2)
 
@@ -119,7 +142,7 @@ license text with it:
 
 ```
 ./generate.sh -r -s noncommercial
-UFL 3.2, Operational Scope: Noncommercial (LicenseRef-UFL-3.2-N)
+UFL 3.3, Operational Scope: Noncommercial (LicenseRef-UFL-3.3-N)
 ```
 
 Put that line in the Release's notes, its tag, or its package metadata.
@@ -181,15 +204,16 @@ What it does and does not do:
 
 [`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
 plain text it was made from, with the year, holder, and project name
-left blank (and the threshold, for Seat-Limited):
+left blank (and the threshold for Seat-Limited, or the native token, if any, for Decentralized):
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.2-unconditional.pdf](./pdf/UFL-3.2-unconditional.pdf) | [.txt](./pdf/UFL-3.2-unconditional.txt) |
-| Seat-Limited | [UFL-3.2-seat-limited.pdf](./pdf/UFL-3.2-seat-limited.pdf) | [.txt](./pdf/UFL-3.2-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.2-no-third-party-hosting.pdf](./pdf/UFL-3.2-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.2-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.2-no-competing-service.pdf](./pdf/UFL-3.2-no-competing-service.pdf) | [.txt](./pdf/UFL-3.2-no-competing-service.txt) |
-| Noncommercial | [UFL-3.2-noncommercial.pdf](./pdf/UFL-3.2-noncommercial.pdf) | [.txt](./pdf/UFL-3.2-noncommercial.txt) |
+| Unconditional | [UFL-3.3-unconditional.pdf](./pdf/UFL-3.3-unconditional.pdf) | [.txt](./pdf/UFL-3.3-unconditional.txt) |
+| Seat-Limited | [UFL-3.3-seat-limited.pdf](./pdf/UFL-3.3-seat-limited.pdf) | [.txt](./pdf/UFL-3.3-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.3-no-third-party-hosting.pdf](./pdf/UFL-3.3-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.3-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.3-no-competing-service.pdf](./pdf/UFL-3.3-no-competing-service.pdf) | [.txt](./pdf/UFL-3.3-no-competing-service.txt) |
+| Noncommercial | [UFL-3.3-noncommercial.pdf](./pdf/UFL-3.3-noncommercial.pdf) | [.txt](./pdf/UFL-3.3-noncommercial.txt) |
+| Decentralized | [UFL-3.3-decentralized.pdf](./pdf/UFL-3.3-decentralized.pdf) | [.txt](./pdf/UFL-3.3-decentralized.txt) |
 
 The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
 
@@ -222,15 +246,15 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.2<suffix>` (e.g. `LicenseRef-UFL-3.2-N` for
-Noncommercial), not a bare `UFL-3.2<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.3<suffix>` (e.g. `LicenseRef-UFL-3.3-N` for
+Noncommercial), not a bare `UFL-3.3<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
 
 Do not rewrite, trim, or "clean up" any of the license text beyond
 filling the three placeholders and picking one scope — see Section 2C.
-If a project's needs don't fit any of the five scopes, that is a reason
+If a project's needs don't fit any of the six scopes, that is a reason
 to pick a different license or propose a new scope for a future UFL
 version, not to hand-edit this one.
 
@@ -240,7 +264,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.2, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.3, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -254,11 +278,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.2") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.3") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
-paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, for example — applies only to a project that has actually updated to that
+paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, or the narrower dispute clause in 3.3, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file

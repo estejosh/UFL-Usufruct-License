@@ -1,5 +1,5 @@
 @@RAW
-The Usufruct License (UFL) — Version 3.2
+The Usufruct License (UFL) — Version 3.3
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -29,7 +29,7 @@ The Operational Scope declared above states the only limit, if any, on Section 1
 
 A "Release" is a version of the Software that the Licensor publishes under its own version number, tag, or date. This license applies to each Release separately, and where it refers to the Software, it means the Release the Licensee uses.
 
-With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.2, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
+With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.3, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
 
 A Release's Ruling License is fixed when the Release is published. For that Release, the Licensor grants every Licensee the rights its Ruling License gives, perpetually and irrevocably, on that Ruling License's own terms. Nothing the Licensor later does, including publishing a later Release, changing the license in the Software's repository, or adopting a later version of this license, changes, narrows, or ends those rights.
 
@@ -58,7 +58,7 @@ The text of this license — this document itself, independent of any particular
 
 ## 2C. Version Fidelity
 
-The permission granted by Section 2B is a permission to reproduce, not to modify. A copy of this text is adopted as-is. For each Release (Section 1C), a Licensor makes two choices and no others: which version of this license to adopt, and which single Operational Scope in Section 1A applies, stated exactly as that version's canonical text provides for that scope, including the free threshold the Seat-Limited scope calls for. The only blanks a Licensor fills in are the copyright year, the copyright holder, and the project name given near the top of this text. Every other term, including the terms on paid use, acceptance, usage statements, retroactive licenses, and disputes, is set by this text and is the same for every project under this version. No wording in this license, including this section, may be added to, removed, or altered in any copy that is presented, cited, or identified as "the Usufruct License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no separate document may add to or change its terms (see Section 15). A project that needs different terms is free to write its own license, including one derived from this text under its own name — it is not free to alter this text and continue to call the result UFL.
+The permission granted by Section 2B is a permission to reproduce, not to modify. A copy of this text is adopted as-is. For each Release (Section 1C), a Licensor makes two choices and no others: which version of this license to adopt, and which single Operational Scope in Section 1A applies, stated exactly as that version's canonical text provides for that scope, including the free threshold the Seat-Limited scope calls for and the native token, or none, that the Decentralized scope names. The only blanks a Licensor fills in are the copyright year, the copyright holder, and the project name given near the top of this text. Every other term, including the terms on paid use, acceptance, usage statements, retroactive licenses, and disputes, is set by this text and is the same for every project under this version. No wording in this license, including this section, may be added to, removed, or altered in any copy that is presented, cited, or identified as "the Usufruct License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no separate document may add to or change its terms (see Section 15). A project that needs different terms is free to write its own license, including one derived from this text under its own name — it is not free to alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical source named in Section 7. An adopted proposal becomes a new official version, never a retroactive edit: once a version of this license is published, its text is not changed, and a project that wants a later version's provisions adopts that version's text in full.
 
@@ -100,7 +100,7 @@ Paid Use is licensed for the period the Published Price covers and renews at the
 
 ## 9. Acceptance
 
-Using the Software is acceptance of this license. Where the Operational Scope withholds any use, the Software presents, before first use, an affirmative step that names this license's version and must be completed: an on-screen agreement, an interactive prompt, or, for non-interactive use, an explicit setting or flag naming the version. Under any other Operational Scope, the Licensor may build in the same step. Where the Software provides that step, the Licensee will complete it and will not bypass it. The Software may record the license version accepted, the time, and the name of the accepting party, and keeps that record only on the Licensee's own systems.
+Using the Software is acceptance of this license. Where the Operational Scope withholds any use, or sets its own limit of liability and dispute process (as the Decentralized scope does), the Software presents, before first use, an affirmative step that names this license's version and Operational Scope, shows any such limit and process, and must be completed: an on-screen agreement, an interactive prompt, or, for non-interactive use, an explicit setting or flag naming the version. Under any other Operational Scope, the Licensor may build in the same step. Where the Software provides that step, the Licensee will complete it and will not bypass it. The Software may record the license version accepted, the time, and the name of the accepting party, and keeps that record only on the Licensee's own systems.
 
 In accepting this license, the Licensee acknowledges that the Software is protected by copyright from its creation, whether or not that copyright is registered, and that any use the Operational Scope withholds, made without Paid Use or a Retroactive License covering it, is use of a copyrighted work outside this license. Nothing in this license limits the Licensor's rights and remedies under copyright law.
 
@@ -131,9 +131,11 @@ The grant in Section 1 is perpetual and is not revoked for nonpayment. A License
 
 ## 14. Disputes
 
-This license is governed by California law, without regard to its conflict-of-laws rules.
+This license is governed by California law, without regard to its conflict-of-laws rules, unless the Operational Scope states otherwise.
 
-Any dispute arising out of this license or the Software goes first to mediation. Either party may start mediation by written notice to the other, and the mediation must begin within 30 days of that notice. If the dispute is not resolved within 60 days of the notice, either party may submit it to binding arbitration before a single arbitrator seated in California. The parties may agree in writing to a different schedule.
+Unless the Operational Scope provides its own dispute process, mediation and arbitration under this section cover a dispute between the Licensor and a Licensee about whether a use is Paid Use, about any amount owed under Section 8, 12, or 13, or about a usage statement under Section 10 (a "Payment Dispute"). They do not cover a Licensee's use under Section 1's free grant that raises none of those questions. Any other dispute arising out of this license or the Software is left to the law and the courts that would otherwise apply.
+
+A Payment Dispute goes first to mediation. Either party may start mediation by written notice to the other, and the mediation must begin within 30 days of that notice. If the dispute is not resolved within 60 days of the notice, either party may submit it to binding arbitration under the Rules of Arbitration of the International Chamber of Commerce, before a single arbitrator seated in California. The parties may agree in writing to a different schedule.
 
 Mediation and arbitration may be conducted entirely by video conference and electronic submission, and no party is required to attend in person unless the parties agree otherwise. Judgment on an arbitration award may be entered in any court with jurisdiction.
 
@@ -150,6 +152,6 @@ If any provision of this license is held unenforceable, the remaining provisions
 @@RAW
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.2` —
-not a bare `UFL-3.2`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.3` —
+not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.
 @@END

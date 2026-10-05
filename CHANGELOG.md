@@ -4,6 +4,82 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.3 — October 2026
+
+Section 14 now covers payment disputes, not every use. Through 3.2 it
+sent any dispute "arising out of this license or the Software" to
+mediation and arbitration in California, which bound every user,
+including one who only runs the software on the free grant and owes
+nothing. For a decentralized project with users in many countries, that
+was the wrong reach.
+
+- Mediation and arbitration cover a "Payment Dispute": whether a use is
+  Paid Use, an amount owed under Section 8, 12, or 13, or a usage
+  statement under Section 10.
+- A Licensee's use under the free grant that raises none of those
+  questions is not covered. Any other dispute is left to the law and
+  courts that would otherwise apply.
+- Arbitration is under the Rules of Arbitration of the International
+  Chamber of Commerce, by a single arbitrator, still seated in
+  California, with California governing law.
+- Unchanged: the 30-day mediation start and 60-day arbitration trigger,
+  video conduct, court injunctions for Section 2 conduct, and fees to the
+  prevailing party.
+
+New Operational Scope: **Decentralized** (suffix `-D`, tag `UFL-D-1a`),
+for software released to the public with no owner able to run a normal
+dispute process. It is the Unconditional free grant with no Paid Use, so
+Sections 8 through 13 do not operate. Under it:
+
+- Every dispute from use goes exclusively to online ICC arbitration
+  before a single arbitrator, on an individual basis, not as a class or
+  collective action. No party consents to any court's jurisdiction by
+  using the Software.
+- The arbitrator applies the UNIDROIT Principles of International
+  Commercial Contracts and, for anything they do not answer, California
+  law. Section 14's California-law sentence now yields to the scope.
+- Each party's total liability to the other is limited, to the extent
+  the law allows, to one US dollar in value. The paying party chooses
+  money or, if the project names a native token, that token valued at one
+  dollar at its market price when paid, and the party being paid must
+  accept the token if it is chosen. The payer pays in the token by
+  written notice that payment is available; if no wallet address is
+  given within 90 days of the notice, the payment is complete. If the
+  token is unlisted (no exchange or public price source publishes a
+  price for it), one token is treated as worth one US dollar. If it
+  cannot be delivered for any other reason, payment is one US dollar in
+  money, and the payee bears the cost of the wire or transfer, which the
+  payer may deduct. The cap is mutual, so it limits the Licensor's
+  money claims too.
+- The scope's dispute process, limit of liability and own-risk terms
+  take effect for a Licensee only when the Licensee completes the
+  Section 9 click-through, which the Software must present before first
+  use and which shows them. The Software must not run until the step is
+  done. Running it with the step bypassed, removed or forged breaches
+  the license and makes that copy a modified version, so the Licensor
+  owes the person running it nothing, including the one dollar. A Licensor adopts the scope only by building the step in as
+  a gate. Software without it is licensed under Unconditional instead.
+- A modified version, fork, or independent reimplementation is not the
+  Software for this scope. Whoever creates, distributes, or uses one does
+  so entirely at their own risk, and the Licensor has no liability for
+  it, including the one dollar.
+- Nothing limits liability the law does not allow to be limited, waives
+  a non-waivable right, or stops either party seeking a court injunction
+  against conduct Section 2 reserves or that infringes the Licensor's
+  intellectual property.
+
+The native token is a fill point for this scope, like the seat threshold
+for Seat-Limited. It is optional and defaults to "none". `generate.sh`
+and `generate.js` take it with `-k`. Section 2C names it among the
+things a Licensor may fill.
+
+Section 9's affirmative step now also applies where a scope sets its own
+limit of liability and dispute process. Every other section is the same
+as 3.2 apart from version strings.
+SPDX identifier: `LicenseRef-UFL-3.3`, with the same `-C`, `-H`, `-N`,
+`-S` suffixes. Projects on 1.0 through 3.2 are unaffected unless they
+adopt 3.3.
+
 ## 3.2 — October 2026
 
 Adds Section 1C, Releases. A project can now move to a newer version of

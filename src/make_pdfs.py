@@ -18,7 +18,7 @@ VER = json.loads((R / "ufl.json").read_text())["version"]
 SCOPES = json.loads((R / "ufl.json").read_text())["operationalScopes"]
 NAMES = {"unconditional": "Unconditional", "seat-limited": "Seat-Limited",
          "no-third-party-hosting": "No-Third-Party-Hosting",
-         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial"}
+         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized"}
 
 F = "/usr/share/fonts/truetype/dejavu/"
 pdfmetrics.registerFont(TTFont("Serif", F + "DejaVuSerif.ttf"))
@@ -71,7 +71,7 @@ def story_for(text):
 sums = []
 for key, name in NAMES.items():
     txt = subprocess.check_output(["sh", str(R / "generate.sh"), "-y", "[YEAR]", "-c", "[COPYRIGHT HOLDER]",
-                                   "-p", "[PROJECT NAME]", "-s", key, "-t", "[THRESHOLD]"], text=True)
+                                   "-p", "[PROJECT NAME]", "-s", key, "-t", "[THRESHOLD]", "-k", "[NATIVE TOKEN]"], text=True)
     digest = hashlib.sha256(txt.encode()).hexdigest()
     spdx = f"LicenseRef-UFL-{VER}{SCOPES[key]['spdxSuffix']}"
     scope_line = re.search(r"^Operational Scope: (.*)$", txt, re.M).group(1)
@@ -96,7 +96,7 @@ for key, name in NAMES.items():
           Spacer(1, 4),
           Paragraph("Copyright (c) [YEAR] [COPYRIGHT HOLDER]", meta),
           Paragraph("Reference copy. This PDF is read-only. A Licensor adopts this text by filling in only the year, "
-                    "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ",")
+                    "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if key == "decentralized" else ",")
                     + " in its own LICENSE file (Section 2C). The SHA-256 below identifies this exact text.", meta),
           Spacer(1, 6), HRFlowable(width="100%", thickness=0.8, color=MAROON), Spacer(1, 4)]
     st += story_for(txt)
