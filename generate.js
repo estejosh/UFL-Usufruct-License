@@ -486,14 +486,16 @@ const SCOPES = {
       "the token if the paying party chooses it. The paying party pays in the",
       "token by notifying the other party in writing that payment is available;",
       "if that party gives no wallet address within 90 days of the notice, the",
-      "payment is complete and the obligation is discharged. If the token",
-      "cannot be priced or delivered for any reason other than the payee's",
-      "failure to give an address, payment is one United States dollar in",
-      "money. Nothing in this scope limits liability that the law does not",
-      "allow to be limited, waives a claim or right that the law gives a party",
-      "and does not allow to be waived, or limits a party's right to seek an",
-      "injunction in court to stop conduct that Section 2 reserves or that",
-      "infringes the Licensor's intellectual property."
+      "payment is complete and the obligation is discharged. If the token's",
+      "market price cannot be ascertained when payment is made, one unit of the",
+      "token is treated as worth one United States dollar. If the token cannot",
+      "be delivered for any reason other than the payee's failure to give an",
+      "address, payment is one United States dollar in money. Nothing in this",
+      "scope limits liability that the law does not allow to be limited, waives",
+      "a claim or right that the law gives a party and does not allow to be",
+      "waived, or limits a party's right to seek an injunction in court to stop",
+      "conduct that Section 2 reserves or that infringes the Licensor's",
+      "intellectual property."
     ]
   }
 };
