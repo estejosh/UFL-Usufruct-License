@@ -1,11 +1,12 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.1.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v3.2.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
 # Usage:
 #   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
 #     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]
+#   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
 # no-third-party-hosting, noncommercial, seat-limited. THRESHOLD is only
@@ -15,6 +16,10 @@
 # prompted for when SCOPE is seat-limited. With no -o, the filled license
 # is written to stdout.
 #
+# -r prints the Release statement (Section 1C) for SCOPE instead of a
+# license: the line to publish with each Release, naming its Ruling
+# License. It asks for no year, holder, or project.
+#
 # This script fills in the placeholders and picks one Operational Scope —
 # it does not otherwise alter the license text. See Section 2C.
 #
@@ -23,7 +28,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 3.1. See CHANGELOG.md for revisions.
+# Tracks UFL 3.2. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -33,8 +38,9 @@ PROJECT=""
 SCOPE="unconditional"
 THRESHOLD=""
 OUT=""
+RELEASE=0
 
-while getopts "y:c:p:s:t:o:h" opt; do
+while getopts "y:c:p:s:t:o:rh" opt; do
   case "$opt" in
     y) YEAR=$OPTARG ;;
     c) HOLDER=$OPTARG ;;
@@ -42,8 +48,9 @@ while getopts "y:c:p:s:t:o:h" opt; do
     s) SCOPE=$OPTARG ;;
     t) THRESHOLD=$OPTARG ;;
     o) OUT=$OPTARG ;;
+    r) RELEASE=1 ;;
     h)
-      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]"
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD]"
       echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited"
       exit 0
       ;;
@@ -51,9 +58,9 @@ while getopts "y:c:p:s:t:o:h" opt; do
   esac
 done
 
-[ -n "$YEAR" ]    || { printf 'Year: ' >&2; read -r YEAR; }
-[ -n "$HOLDER" ]  || { printf 'Copyright holder: ' >&2; read -r HOLDER; }
-[ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
+[ "$RELEASE" = 1 ] || [ -n "$YEAR" ] || { printf 'Year: ' >&2; read -r YEAR; }
+[ "$RELEASE" = 1 ] || [ -n "$HOLDER" ]  || { printf 'Copyright holder: ' >&2; read -r HOLDER; }
+[ "$RELEASE" = 1 ] || [ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
 
 case "$SCOPE" in
   unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited) ;;
@@ -121,6 +128,12 @@ that threshold is Paid Use under Section 8."
     ;;
 esac
 
+if [ "$RELEASE" = 1 ]; then
+  STMT="UFL 3.2, Operational Scope: $SCOPE_LINE (LicenseRef-UFL-3.2${SCOPE_SUFFIX})"
+  if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
+  exit 0
+fi
+
 SCOPE_LINE_ESC=$(escape "$SCOPE_LINE")
 SCOPE_SUFFIX_ESC=$(escape "$SCOPE_SUFFIX")
 
@@ -129,9 +142,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.1\`|LicenseRef-UFL-3.1${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.1\`|\`UFL-3.1${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 3.1
+  -e "s|LicenseRef-UFL-3.2\`|LicenseRef-UFL-3.2${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-3.2\`|\`UFL-3.2${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 3.2
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -175,6 +188,36 @@ individual operates the Software. Individuals whose contact with the
 Software or its output is incidental or one-time are not Seats. Where a
 count of Seats matters under this license, it is the highest number of
 Seats at any time during the period being counted.
+
+## 1C. Releases
+
+A "Release" is a version of the Software that the Licensor publishes
+under its own version number, tag, or date. This license applies to each
+Release separately, and where it refers to the Software, it means the
+Release the Licensee uses.
+
+With each Release, the Licensor states which version of this license,
+and which Operational Scope, governs that Release (its "Ruling
+License"). The statement names both, for example "UFL 3.2, Operational
+Scope: Noncommercial", and appears where users get the Release: in its
+release notes, its tag, or its package metadata. The Release includes
+the full text of its Ruling License. If a Release does not state its
+Ruling License, the license text included with it governs; if none is
+included, the license text in the Software's repository at the commit
+the Release was made from governs.
+
+A Release's Ruling License is fixed when the Release is published. For
+that Release, the Licensor grants every Licensee the rights its Ruling
+License gives, perpetually and irrevocably, on that Ruling License's own
+terms. Nothing the Licensor later does, including publishing a later
+Release, changing the license in the Software's repository, or adopting
+a later version of this license, changes, narrows, or ends those rights.
+
+The Licensor may license a later Release under a later version of this
+license, under a different Operational Scope, or under other terms. A
+Licensee who uses that later Release does so under its Ruling License. A
+Licensee who keeps using an earlier Release keeps the Ruling License
+that Release states.
 
 ## 2. Reserved Rights
 
@@ -230,23 +273,23 @@ Software — only to the legal text of this license itself.
 ## 2C. Version Fidelity
 
 The permission granted by Section 2B is a permission to reproduce, not
-to modify. A copy of this text is adopted as-is. A Licensor makes two
-choices and no others: which version of this license to adopt, and which
-single Operational Scope in Section 1A applies, stated exactly as that
-version's canonical text provides for that scope, including the free
-threshold the Seat-Limited scope calls for. The only blanks a Licensor
-fills in are the copyright year, the copyright holder, and the project
-name given near the top of this text. Every other term, including the
-terms on paid use, acceptance, usage statements, retroactive licenses,
-and disputes, is set by this text and is the same for every project
-under this version. No wording in this license, including this section,
-may be added to, removed, or altered in any copy that is presented,
-cited, or identified as "the Usufruct License," "UFL," or by any
-`LicenseRef-UFL-*` identifier, and no separate document may add to or
-change its terms (see Section 15). A project that needs different terms
-is free to write its own license, including one derived from this text
-under its own name — it is not free to alter this text and continue to
-call the result UFL.
+to modify. A copy of this text is adopted as-is. For each Release
+(Section 1C), a Licensor makes two choices and no others: which version
+of this license to adopt, and which single Operational Scope in Section
+1A applies, stated exactly as that version's canonical text provides for
+that scope, including the free threshold the Seat-Limited scope calls
+for. The only blanks a Licensor fills in are the copyright year, the
+copyright holder, and the project name given near the top of this text.
+Every other term, including the terms on paid use, acceptance, usage
+statements, retroactive licenses, and disputes, is set by this text and
+is the same for every project under this version. No wording in this
+license, including this section, may be added to, removed, or altered in
+any copy that is presented, cited, or identified as "the Usufruct
+License," "UFL," or by any `LicenseRef-UFL-*` identifier, and no
+separate document may add to or change its terms (see Section 15). A
+project that needs different terms is free to write its own license,
+including one derived from this text under its own name — it is not free
+to alter this text and continue to call the result UFL.
 
 Anyone may propose a change for a future version at the canonical source
 named in Section 7. An adopted proposal becomes a new official version,
@@ -464,8 +507,8 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.1` —
-not a bare `UFL-3.1`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.2` —
+not a bare `UFL-3.2`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 

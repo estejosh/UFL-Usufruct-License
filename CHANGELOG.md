@@ -4,6 +4,44 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.2 — October 2026
+
+Adds Section 1C, Releases. A project can now move to a newer version of
+this license, or a different Operational Scope, for later versions of its
+software, and still keep every earlier version of the software on the
+terms it was released under.
+
+With each Release the Licensor states which version of UFL, and which
+Operational Scope, is that Release's Ruling License. The statement is
+fixed when the Release is published. For that Release, the Licensor
+grants the rights its Ruling License gives, perpetually and irrevocably,
+on that Ruling License's own terms. Nothing done later, including
+changing the repository's license or publishing a newer Release, narrows
+or ends them. If a Release states nothing, the license text included with
+it governs, or failing that the text in the repository at the commit it
+was made from.
+
+Section 2C now says a Licensor makes its two choices (version and
+Operational Scope) for each Release rather than once. The text of every
+other section is unchanged from 3.1 apart from version strings.
+
+Why: through 3.1 a project adopted one version and one scope for the whole
+project, and the license said nothing about which terms a given release
+carries once the project's license changes. Users of an old release had
+only the commit history to show which terms applied to it.
+
+`generate.sh` and `generate.js` gain `-r` (`--release-statement` in the
+JS version), which prints the line to publish with a Release, for example
+`UFL 3.2, Operational Scope: Noncommercial (LicenseRef-UFL-3.2-N)`. It
+needs no year, holder, or project. SPDX identifier: `LicenseRef-UFL-3.2`,
+with the same `-C`, `-H`, `-N`, `-S` suffixes.
+
+This is a choice the Licensor makes, not the user. It is not an "or any
+later version" grant: a Licensee never moves to a later version on their
+own.
+
+Projects on 1.0 through 3.1 are unaffected unless they adopt 3.2.
+
 ## 3.1 — October 2026
 
 Section 4 now says what a contributor gives the project. Through 3.0 it

@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.1" src="https://img.shields.io/badge/license-UFL--3.1-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.1-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.2" src="https://img.shields.io/badge/license-UFL--3.2-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.2-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -34,7 +34,7 @@ also says what a contributor gives the project — see
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.1**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.2**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -110,6 +110,29 @@ For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
 No-Competing-Service, that means publishing a price list somewhere in
 the repo or docs. Nothing else.
 
+## Releases (since 3.2)
+
+A project can change its license over time without changing the terms
+of software people already have. With each Release, state which version
+of UFL and which Operational Scope rules that Release, and ship the
+license text with it:
+
+```
+./generate.sh -r -s noncommercial
+UFL 3.2, Operational Scope: Noncommercial (LicenseRef-UFL-3.2-N)
+```
+
+Put that line in the Release's notes, its tag, or its package metadata.
+
+- The statement is fixed when the Release is published. The Licensor
+  grants those terms perpetually and irrevocably for that Release.
+- Later Releases can use a later version, another scope, or other terms.
+  Anyone who keeps using the earlier Release keeps the earlier terms.
+- If a Release states nothing, the license text shipped with it governs,
+  or else the text in the repository at the commit it was made from.
+- This is the Licensor's choice for each Release. It is not an "or any
+  later version" grant, and nobody moves to a newer version on their own.
+
 ## Contributions (since 3.1)
 
 Section 4 says what happens when someone submits a fix, change, or
@@ -162,11 +185,11 @@ left blank (and the threshold, for Seat-Limited):
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.1-unconditional.pdf](./pdf/UFL-3.1-unconditional.pdf) | [.txt](./pdf/UFL-3.1-unconditional.txt) |
-| Seat-Limited | [UFL-3.1-seat-limited.pdf](./pdf/UFL-3.1-seat-limited.pdf) | [.txt](./pdf/UFL-3.1-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.1-no-third-party-hosting.pdf](./pdf/UFL-3.1-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.1-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.1-no-competing-service.pdf](./pdf/UFL-3.1-no-competing-service.pdf) | [.txt](./pdf/UFL-3.1-no-competing-service.txt) |
-| Noncommercial | [UFL-3.1-noncommercial.pdf](./pdf/UFL-3.1-noncommercial.pdf) | [.txt](./pdf/UFL-3.1-noncommercial.txt) |
+| Unconditional | [UFL-3.2-unconditional.pdf](./pdf/UFL-3.2-unconditional.pdf) | [.txt](./pdf/UFL-3.2-unconditional.txt) |
+| Seat-Limited | [UFL-3.2-seat-limited.pdf](./pdf/UFL-3.2-seat-limited.pdf) | [.txt](./pdf/UFL-3.2-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.2-no-third-party-hosting.pdf](./pdf/UFL-3.2-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.2-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.2-no-competing-service.pdf](./pdf/UFL-3.2-no-competing-service.pdf) | [.txt](./pdf/UFL-3.2-no-competing-service.txt) |
+| Noncommercial | [UFL-3.2-noncommercial.pdf](./pdf/UFL-3.2-noncommercial.pdf) | [.txt](./pdf/UFL-3.2-noncommercial.txt) |
 
 The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
 
@@ -199,8 +222,8 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.1<suffix>` (e.g. `LicenseRef-UFL-3.1-N` for
-Noncommercial), not a bare `UFL-3.1<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.2<suffix>` (e.g. `LicenseRef-UFL-3.2-N` for
+Noncommercial), not a bare `UFL-3.2<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
@@ -217,7 +240,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.1, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.2, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -231,11 +254,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.1") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.2") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
-paid-use terms in 3.0 or the contribution terms in 3.1, for example — applies only to a project that has actually updated to that
+paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file
@@ -250,9 +273,7 @@ This cuts both ways with Section 2C: a published version's text is never
 edited after release, only ever superseded by a new one. Every version's
 exact text is preserved in this repository's Git commit history — nothing
 is force-pushed or rewritten — and each version is dated in
-[`CHANGELOG.md`](./CHANGELOG.md); tagged releases (`v1.0`, `v1.1`, `v2.0`,
-`v2.1`, `v2.2`, `v3.0`, `v3.1`, …) pointing at those commits are on the way, so a version
-will be checkable by name as well as by date.
+[`CHANGELOG.md`](./CHANGELOG.md); every version is tagged (`v1.0`, `v1.1`, `v2.0`, `v2.1`, `v2.2`, `v3.0`, …) and has a GitHub Release, so a version is checkable by name as well as by date. A new version is tagged and released when it is merged. Tags for 1.0 through 3.0 were added after the fact and point at the commit that released each one.
 
 ## Adopted by
 
