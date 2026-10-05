@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.3.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.4.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -27,14 +27,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.3. See CHANGELOG.md for revisions.
+// Tracks UFL 3.4. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.3",
+  "The Usufruct License (UFL) — Version 3.4",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -88,7 +88,7 @@ const TEMPLATE = [
   "",
   "With each Release, the Licensor states which version of this license,",
   "and which Operational Scope, governs that Release (its \"Ruling",
-  "License\"). The statement names both, for example \"UFL 3.3, Operational",
+  "License\"). The statement names both, for example \"UFL 3.4, Operational",
   "Scope: Noncommercial\", and appears where users get the Release: in its",
   "release notes, its tag, or its package metadata. The Release includes",
   "the full text of its Ruling License. If a Release does not state its",
@@ -391,8 +391,9 @@ const TEMPLATE = [
   "that Section 2 reserves or that infringes the Licensor's intellectual",
   "property, without first mediating or arbitrating.",
   "",
-  "In any arbitration or court proceeding under this license, the",
-  "prevailing party is entitled to its reasonable attorney fees and costs.",
+  "Unless the Operational Scope provides its own rule on costs, in any",
+  "arbitration or court proceeding under this license, the prevailing party",
+  "is entitled to its reasonable attorney fees and costs.",
   "",
   "## 15. Entire License",
   "",
@@ -410,8 +411,8 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.3` —",
-  "not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.4` —",
+  "not a bare `UFL-3.4`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
 
@@ -470,28 +471,30 @@ const SCOPES = {
     suffix: "-D",
     body: [
       "Decentralized — Section 1's grant is unconditional, as in Unconditional,",
-      "and no use is Paid Use, so Sections 8 through 13 do not operate. The",
-      "Software is released as is to the public. Every dispute arising from its",
-      "use is decided exclusively by arbitration under the Rules of Arbitration",
-      "of the International Chamber of Commerce, conducted online before a",
-      "single arbitrator, on an individual basis and not as a class or",
-      "collective action, and no party consents to the jurisdiction of any",
-      "court by using the Software. The arbitrator applies the UNIDROIT",
-      "Principles of International Commercial Contracts and, for any matter",
-      "they do not answer, California law. Native token of the Software:",
-      "@TOKEN@. Each party's total liability to the other for all claims",
-      "arising from the Software or this license is limited, to the extent the",
-      "law allows, to one United States dollar in value. The paying party",
-      "chooses whether to pay in money or, if a native token is named in this",
-      "paragraph, in that token valued at one United States dollar at its",
-      "market price when paid, and the party being paid must accept payment in",
-      "the token if the paying party chooses it. The paying party pays in the",
-      "token by notifying the other party in writing that payment is available;",
-      "if that party gives no wallet address within 90 days of the notice, the",
-      "payment is complete and the obligation is discharged. A token is",
-      "unlisted if no exchange or public price source publishes a market price",
-      "for it when payment is made, and one unit of an unlisted token is",
-      "treated as worth one United States dollar. If the token cannot be",
+      "and no use is Paid Use, so Sections 8 and 10 through 13 do not operate",
+      "and Section 9 does. The Software is released as is to the public. Every",
+      "dispute arising from its use is decided exclusively by arbitration under",
+      "the Rules of Arbitration of the International Chamber of Commerce,",
+      "conducted online before a single arbitrator seated in California, on an",
+      "individual basis and not as a class or collective action, and no party",
+      "consents to the jurisdiction of any court by using the Software. The",
+      "arbitrator applies the UNIDROIT Principles of International Commercial",
+      "Contracts and, for any matter they do not answer, California law. Native",
+      "token of the Software: @TOKEN@. Each party's total liability to the",
+      "other for all claims arising from the Software or this license is",
+      "limited, to the extent the law allows, to one United States dollar in",
+      "value. The paying party chooses whether to pay in money or, if a native",
+      "token is named in this paragraph, in that token valued at one United",
+      "States dollar at its market price when paid, and the party being paid",
+      "must accept payment in the token if the paying party chooses it. The",
+      "paying party pays in the token by notifying the other party in writing",
+      "that payment is available; if that party gives no wallet address within",
+      "90 days of the notice, the payment is complete and the obligation is",
+      "discharged. The market price of the token is its volume-weighted average",
+      "price over the 24 hours before payment on the exchange with the highest",
+      "trading volume for it. A token is unlisted if no exchange publishes such",
+      "a price for it when payment is made, and one unit of an unlisted token",
+      "is treated as worth one United States dollar. If the token cannot be",
       "delivered for any reason other than the payee's failure to give an",
       "address, payment is one United States dollar in money, and the payee",
       "bears the cost of the wire or transfer, which the paying party may",
@@ -499,7 +502,8 @@ const SCOPES = {
       "liability, and own-risk terms take effect for a Licensee only when the",
       "Licensee completes the affirmative step in Section 9, which the Software",
       "must present before first use and which shows them. The Software must",
-      "not run until the Licensee has completed that step, and running the",
+      "not run until the Licensee has completed that step, so a Licensee found",
+      "running the Software is treated as having completed it, and running the",
       "Software with that step bypassed, removed, or forged breaches this",
       "license and makes that copy a modified version, so the Licensor owes the",
       "person running it no liability of any kind, including the amount stated",
@@ -509,11 +513,15 @@ const SCOPES = {
       "independent reimplementation of the Software is not the Software for the",
       "purposes of this scope. Whoever creates, distributes, or uses one does",
       "so entirely at their own risk, and the Licensor has no liability for it",
-      "of any kind, including the amount stated above. Nothing in this scope",
-      "limits liability that the law does not allow to be limited, waives a",
-      "claim or right that the law gives a party and does not allow to be",
-      "waived, or limits a party's right to seek an injunction in court to stop",
-      "conduct that Section 2 reserves or that infringes the Licensor's",
+      "of any kind, including the amount stated above. In any arbitration or",
+      "court proceeding under this license, each party bears its own costs and",
+      "attorney fees, except that the arbitrator or court may award reasonable",
+      "costs and fees against a party whose claim or defense is frivolous or",
+      "brought in bad faith, and that award is outside the limit. Nothing in",
+      "this scope limits liability that the law does not allow to be limited,",
+      "waives a claim or right that the law gives a party and does not allow to",
+      "be waived, or limits a party's right to seek an injunction in court to",
+      "stop conduct that Section 2 reserves or that infringes the Licensor's",
       "intellectual property."
     ]
   }
@@ -573,8 +581,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.3`').join('LicenseRef-UFL-3.3' + scopeSuffix + '`')
-    .split('`UFL-3.3`').join('`UFL-3.3' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.4`').join('LicenseRef-UFL-3.4' + scopeSuffix + '`')
+    .split('`UFL-3.4`').join('`UFL-3.4' + scopeSuffix + '`');
 }
 
 function main() {
@@ -603,7 +611,7 @@ function main() {
 
   const scope = buildScope(args.scope, threshold, token);
   if (args.release) {
-    const stmt = 'UFL 3.3, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.3' + scope.suffix + ')\n';
+    const stmt = 'UFL 3.4, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.4' + scope.suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }
     return;
   }

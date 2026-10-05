@@ -2,7 +2,7 @@
 
 ### A source-available license for unrestricted use and reserved redistribution
 
-Version 3.3 — October 2026
+Version 3.4 — October 2026
 
 ## Abstract
 
@@ -364,6 +364,16 @@ protects the Licensor between the parties who agreed, but it cannot bind
 someone who never saw the step, such as a person using a fork that
 removed it.
 
+Fees work differently here than under the other scopes. Loser-pays would
+turn a one dollar claim into a fee-chasing opportunity for a lawyer who
+wins it, so each side bears its own costs unless a claim or defense is
+frivolous or in bad faith, and then the arbitrator or court may shift
+them, outside the cap. The arbitration is seated in California so the ICC
+Court does not choose a seat. Because the software does not run until the
+step is done, a person found running it is treated as having completed it,
+which answers how acceptance is proved when the record stays on the
+user's machine.
+
 What it does not do: it does not make the project ownerless, it does not
 remove a user's non-waivable local rights, and it does not make a claim
 impossible. It makes a nominal claim not worth the arbitration fees, and
@@ -410,9 +420,9 @@ scope applies, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-3.3` (with a scope suffix where one applies, e.g.
-`LicenseRef-UFL-3.3-N` for Noncommercial), the convention SPDX defines
-for licenses outside its list — not a bare `UFL-3.3` as if it had been
+`LicenseRef-UFL-3.4` (with a scope suffix where one applies, e.g.
+`LicenseRef-UFL-3.4-N` for Noncommercial), the convention SPDX defines
+for licenses outside its list — not a bare `UFL-3.4` as if it had been
 registered.
 
 **Can I use UFL-licensed software in a commercial product?**
@@ -504,6 +514,10 @@ updates it:
 - **3.3** — disputes: Section 14 covers payment disputes only, under ICC
   arbitration rules; and a new Decentralized scope sends all disputes to
   one online arbitration with a nominal token-paid liability cap.
+- **3.4** — Decentralized fixes: Section 9 now operates under the scope,
+  the arbitration has a California seat, costs and fees follow a
+  frivolous-claim rule outside the cap, running the software is treated
+  as acceptance, and the token price source is defined.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and
