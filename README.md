@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.0" src="https://img.shields.io/badge/license-UFL--3.0-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.0-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.1" src="https://img.shields.io/badge/license-UFL--3.1-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.1-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -21,7 +21,9 @@ Since 2.0, that base grant can also be narrowed to exactly one declared
 Operational Scope — see [Operational Scope](#operational-scope-since-20)
 below. Since 3.0, the license itself also sets how a use the scope
 withholds is paid for: at the Licensor's published price, on the
-license's own terms, with no side agreement. See [Paid use](#paid-use-since-30).
+license's own terms, with no side agreement. See [Paid use](#paid-use-since-30). Since 3.1, it
+also says what a contributor gives the project — see
+[Contributions](#contributions-since-31).
 
 **[Full legal text](./LICENSE.txt) · [Reference PDFs](./pdf) · [Whitepaper & FAQ](./WHITEPAPER.md) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)**
 
@@ -32,7 +34,7 @@ license's own terms, with no side agreement. See [Paid use](#paid-use-since-30).
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.0**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.1**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -108,6 +110,50 @@ For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
 No-Competing-Service, that means publishing a price list somewhere in
 the repo or docs. Nothing else.
 
+## Contributions (since 3.1)
+
+Section 4 says what happens when someone submits a fix, change, or
+addition to a UFL project. The author grants the Licensor a perpetual,
+irrevocable, royalty-free license to it (patents included, and the right
+to relicense it), keeps ownership, and is owed nothing. That is the
+tradeoff for using the project. Submitting is agreement, and where the
+Licensor requires a recorded step, such as a CLA comment, the author
+completes it. The step records agreement to Section 4 and adds no term:
+Section 15 means a separate CLA document cannot carry terms of its own,
+so the terms are in the license and the CLA is only the record.
+
+Git cannot enforce a license, but GitHub can refuse to merge until
+agreement is on record. [`templates/cla/`](./templates/cla) is the kit:
+
+| File | Goes to | Does |
+|---|---|---|
+| `cla.yml` | `.github/workflows/cla.yml` | Comments on each pull request until the author signs; fails the `CLAAssistant` check until then. |
+| `CLA.md` | repo root | The acknowledgement the bot links to. Adds no term. |
+| `CONTRIBUTING.md` | repo root | Pull requests only, sign once, signed commits. |
+| `setup.sh` | run once | Creates the `cla-signatures` branch and requires a pull request, the `CLAAssistant` check and signed commits on `main`, using a GitHub PAT in `$GITHUB_PAT`. |
+
+What it does and does not do:
+
+- It means something only under **3.1 or later**. The Section 4 in 3.0 and
+  earlier grants back only "to the extent necessary to keep this license
+  enforceable."
+- The signature is a line in `signatures/cla.json` on the `cla-signatures`
+  branch, tied to the contributor's GitHub account. It does not depend on
+  the merged commit. A squash merge replaces the contributor's commits with
+  one commit authored by whoever merged, so the contributor's signature on
+  their own commits is not in the project's history, and a `Signed-off-by`
+  trailer survives only if the merge message keeps it. That is why this
+  uses a CLA record and not a DCO sign-off.
+- Signed commits show who made a commit before it is merged. After a
+  squash or web merge the commit is signed by the merger (GitHub signs web
+  merges), so the evidence of agreement is the CLA record plus the pull
+  request, not the merged commit.
+- It cannot stop anyone pushing to their own fork or sending a patch
+  elsewhere. It controls only what the project accepts.
+- A pull request from an automated agent is submitted by whoever runs the
+  agent. Add an agent account to the `allowlist` only if its operator has
+  signed.
+
 ## Reference PDFs and checksums
 
 [`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
@@ -116,11 +162,13 @@ left blank (and the threshold, for Seat-Limited):
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.0-unconditional.pdf](./pdf/UFL-3.0-unconditional.pdf) | [.txt](./pdf/UFL-3.0-unconditional.txt) |
-| Seat-Limited | [UFL-3.0-seat-limited.pdf](./pdf/UFL-3.0-seat-limited.pdf) | [.txt](./pdf/UFL-3.0-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.0-no-third-party-hosting.pdf](./pdf/UFL-3.0-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.0-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.0-no-competing-service.pdf](./pdf/UFL-3.0-no-competing-service.pdf) | [.txt](./pdf/UFL-3.0-no-competing-service.txt) |
-| Noncommercial | [UFL-3.0-noncommercial.pdf](./pdf/UFL-3.0-noncommercial.pdf) | [.txt](./pdf/UFL-3.0-noncommercial.txt) |
+| Unconditional | [UFL-3.1-unconditional.pdf](./pdf/UFL-3.1-unconditional.pdf) | [.txt](./pdf/UFL-3.1-unconditional.txt) |
+| Seat-Limited | [UFL-3.1-seat-limited.pdf](./pdf/UFL-3.1-seat-limited.pdf) | [.txt](./pdf/UFL-3.1-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.1-no-third-party-hosting.pdf](./pdf/UFL-3.1-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.1-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.1-no-competing-service.pdf](./pdf/UFL-3.1-no-competing-service.pdf) | [.txt](./pdf/UFL-3.1-no-competing-service.txt) |
+| Noncommercial | [UFL-3.1-noncommercial.pdf](./pdf/UFL-3.1-noncommercial.pdf) | [.txt](./pdf/UFL-3.1-noncommercial.txt) |
+
+The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
 
 Each PDF footer carries the SHA-256 of its license text, and
 [`SHA256SUMS`](./SHA256SUMS) lists the hash of every release file. To
@@ -151,8 +199,8 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.0<suffix>` (e.g. `LicenseRef-UFL-3.0-N` for
-Noncommercial), not a bare `UFL-3.0<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.1<suffix>` (e.g. `LicenseRef-UFL-3.1-N` for
+Noncommercial), not a bare `UFL-3.1<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
@@ -169,7 +217,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.0, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.1, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -183,11 +231,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.0") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.1") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
-paid-use terms in 3.0, for example — applies only to a project that has actually updated to that
+paid-use terms in 3.0 or the contribution terms in 3.1, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file
@@ -203,7 +251,7 @@ edited after release, only ever superseded by a new one. Every version's
 exact text is preserved in this repository's Git commit history — nothing
 is force-pushed or rewritten — and each version is dated in
 [`CHANGELOG.md`](./CHANGELOG.md); tagged releases (`v1.0`, `v1.1`, `v2.0`,
-`v2.1`, `v2.2`, `v3.0`, …) pointing at those commits are on the way, so a version
+`v2.1`, `v2.2`, `v3.0`, `v3.1`, …) pointing at those commits are on the way, so a version
 will be checkable by name as well as by date.
 
 ## Adopted by

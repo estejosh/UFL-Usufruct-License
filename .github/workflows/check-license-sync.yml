@@ -6,12 +6,16 @@ on:
       - "LICENSE.txt"
       - "generate.sh"
       - "generate.js"
+      - "src/**"
+      - "templates/**"
       - ".github/workflows/check-license-sync.yml"
   pull_request:
     paths:
       - "LICENSE.txt"
       - "generate.sh"
       - "generate.js"
+      - "src/**"
+      - "templates/**"
       - ".github/workflows/check-license-sync.yml"
 
 jobs:
@@ -38,3 +42,14 @@ jobs:
           done
           diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices") \
                <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices")
+
+      - name: LICENSE.txt and generators are what src/ builds
+        run: |
+          python3 src/build.py
+          git diff --exit-code -- LICENSE.txt generate.sh generate.js
+
+      - name: CLA kit is well-formed
+        run: |
+          python3 -c "import yaml,sys; yaml.safe_load(open('templates/cla/cla.yml'))"
+          sh -n templates/cla/setup.sh
+          DRY_RUN=1 GITHUB_PAT=x sh templates/cla/setup.sh octo/demo

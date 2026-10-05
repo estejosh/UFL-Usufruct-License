@@ -4,6 +4,47 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.1 — October 2026
+
+Section 4 now says what a contributor gives the project. Through 3.0 it
+accepted contributions "under these same terms" and granted them back to
+the Licensor only "to the extent necessary to keep this license
+enforceable," which does not cover relicensing a fix, patents, or whether
+the author had the right to submit it. A project that lives on its users'
+fixes needed more, and the terms had to be in the license: Section 15
+means a separate CLA document cannot add terms of its own.
+
+- **Section 4, Contributions.** A "Contribution" is any fix, change, or
+  addition submitted to the Licensor by any means, accepted or not. By
+  submitting it, the author grants the Licensor a perpetual, worldwide,
+  irrevocable, royalty-free, non-exclusive license to use, reproduce,
+  modify, distribute, sublicense, and relicense it, under this license or
+  any other terms, including the author's patent rights in it. Nothing is
+  owed to the author. The author keeps ownership. Submitting is the
+  author's agreement to Section 4, and the author must have the right (or
+  the employer's or client's authority) to license what is submitted. A
+  Contribution that becomes part of the Software is licensed to everyone
+  under this license, Section 2's reservations included. Where the Licensor
+  requires a recorded step before considering a Contribution, such as a
+  signed acknowledgement in a pull request, the author completes it; the
+  step records agreement to Section 4 and adds no term.
+- **Section 15, Entire License.** Adds the author's recorded
+  acknowledgement of Section 4 to the short list of agreements the license
+  recognizes, so a CLA check is consistent with "no other document adds
+  terms."
+
+Nothing else in the license text changes. Sections 1 through 3 and 5
+through 14 are word for word as in 3.0 apart from the version line and the
+SPDX identifier (`LicenseRef-UFL-3.1`, same `-C`, `-H`, `-N`, `-S`
+suffixes).
+
+New, and not part of the license text: `templates/cla/`, a kit for
+enforcing Section 4 on GitHub (a CLA check as a required status check,
+signed commits, and a one-time setup script). The kit records agreement to
+Section 4 and adds no term. It means something only under 3.1 or later.
+
+Projects on 1.0 through 3.0 are unaffected unless they adopt 3.1.
+
 ## 3.0 — October 2026
 
 Paid use is now part of the license itself. Four of the five Operational
