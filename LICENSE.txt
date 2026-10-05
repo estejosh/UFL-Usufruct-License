@@ -244,8 +244,10 @@ use, that use is not available under this license.
 ## 9. Acceptance
 
 Using the Software is acceptance of this license. Where the Operational
-Scope withholds any use, the Software presents, before first use, an
-affirmative step that names this license's version and must be
+Scope withholds any use, or sets its own limit of liability and dispute
+process (as the Decentralized scope does), the Software presents, before
+first use, an affirmative step that names this license's version and
+Operational Scope, shows any such limit and process, and must be
 completed: an on-screen agreement, an interactive prompt, or, for
 non-interactive use, an explicit setting or flag naming the version.
 Under any other Operational Scope, the Licensor may build in the same

@@ -349,6 +349,16 @@ Nothing limits liability the law does not allow to be limited, and
 either party can still ask a court for an injunction against Section 2
 conduct.
 
+The cap only works if the user agreed to it, so the Software must show it
+and ask for an affirmative step before first use (Section 9 now applies
+here, not only where a use is withheld). Forks are a different matter. A
+fork, or a reimplementation, is not the Software for this scope, and
+whoever makes, distributes, or uses one does so entirely at their own
+risk. The Licensor has no liability for it, not even the dollar. That
+protects the Licensor between the parties who agreed, but it cannot bind
+someone who never saw the step, such as a person using a fork that
+removed it.
+
 What it does not do: it does not make the project ownerless, it does not
 remove a user's non-waivable local rights, and it does not make a claim
 impossible. It makes a nominal claim not worth the arbitration fees, and

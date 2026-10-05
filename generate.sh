@@ -155,11 +155,19 @@ treated as worth one United States dollar. If the token cannot be
 delivered for any reason other than the payee's failure to give an
 address, payment is one United States dollar in money, and the payee
 bears the cost of the wire or transfer, which the paying party may
-deduct from the payment. Nothing in this scope limits liability that the
-law does not allow to be limited, waives a claim or right that the law
-gives a party and does not allow to be waived, or limits a party's right
-to seek an injunction in court to stop conduct that Section 2 reserves
-or that infringes the Licensor's intellectual property."
+deduct from the payment. Before first use, the Software requires the
+affirmative step in Section 9, which shows this limit of liability and
+dispute process, and the Licensee's completing it is the Licensee's
+agreement to them. A modified version, fork, or independent
+reimplementation of the Software is not the Software for the purposes of
+this scope. Whoever creates, distributes, or uses one does so entirely
+at their own risk, and the Licensor has no liability for it of any kind,
+including the amount stated above. Nothing in this scope limits
+liability that the law does not allow to be limited, waives a claim or
+right that the law gives a party and does not allow to be waived, or
+limits a party's right to seek an injunction in court to stop conduct
+that Section 2 reserves or that infringes the Licensor's intellectual
+property."
     ;;
   seat-limited)
     SCOPE_LINE="Seat-Limited — ${THRESHOLD} free in production"
@@ -429,8 +437,10 @@ use, that use is not available under this license.
 ## 9. Acceptance
 
 Using the Software is acceptance of this license. Where the Operational
-Scope withholds any use, the Software presents, before first use, an
-affirmative step that names this license's version and must be
+Scope withholds any use, or sets its own limit of liability and dispute
+process (as the Decentralized scope does), the Software presents, before
+first use, an affirmative step that names this license's version and
+Operational Scope, shows any such limit and process, and must be
 completed: an on-screen agreement, an interactive prompt, or, for
 non-interactive use, an explicit setting or flag naming the version.
 Under any other Operational Scope, the Licensor may build in the same

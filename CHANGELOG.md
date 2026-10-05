@@ -51,6 +51,14 @@ Sections 8 through 13 do not operate. Under it:
   money, and the payee bears the cost of the wire or transfer, which the
   payer may deduct. The cap is mutual, so it limits the Licensor's
   money claims too.
+- Before first use, the Software requires the affirmative step in
+  Section 9, which now also applies to this scope and shows the limit of
+  liability and dispute process. Completing it is the Licensee's
+  agreement to them.
+- A modified version, fork, or independent reimplementation is not the
+  Software for this scope. Whoever creates, distributes, or uses one does
+  so entirely at their own risk, and the Licensor has no liability for
+  it, including the one dollar.
 - Nothing limits liability the law does not allow to be limited, waives
   a non-waivable right, or stops either party seeking a court injunction
   against conduct Section 2 reserves or that infringes the Licensor's
@@ -61,7 +69,9 @@ for Seat-Limited. It is optional and defaults to "none". `generate.sh`
 and `generate.js` take it with `-k`. Section 2C names it among the
 things a Licensor may fill.
 
-Every other section is the same as 3.2 apart from version strings.
+Section 9's affirmative step now also applies where a scope sets its own
+limit of liability and dispute process. Every other section is the same
+as 3.2 apart from version strings.
 SPDX identifier: `LicenseRef-UFL-3.3`, with the same `-C`, `-H`, `-N`,
 `-S` suffixes. Projects on 1.0 through 3.2 are unaffected unless they
 adopt 3.3.
