@@ -4,6 +4,39 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.4 — October 2026
+
+Fixes in the Decentralized scope, found in review after 3.3 was
+published. Published versions are never edited (Section 2C), so these are
+a new version. Every other section is unchanged apart from Section 14's
+fee paragraph and version strings.
+
+- **Section 9 now operates under Decentralized.** 3.3 said Sections 8
+  through 13 do not operate, but Section 9 (Acceptance) is in that range
+  and the scope depends on it. It now says Sections 8 and 10 through 13
+  do not operate and Section 9 does.
+- **A seat for the arbitration.** Online ICC arbitration is now seated in
+  California, matching Section 14, so the ICC Court does not choose it.
+- **Costs and fees.** Under 3.3, Section 14's prevailing-party fees would
+  have applied to arbitration under the scope with no answer on whether
+  they count toward the one dollar limit. Under Decentralized each party
+  now bears its own costs and fees, except that the arbitrator or court
+  may award them against a party whose claim or defense is frivolous or in
+  bad faith, outside the limit. Section 14's fee paragraph yields to a
+  scope that has its own rule.
+- **Proof of acceptance.** The Software does not run until the step is
+  done, so a Licensee found running it is treated as having completed it.
+  The acceptance record still stays only on the Licensee's own systems.
+- **Which price.** The token's market price is its volume-weighted
+  average over the 24 hours before payment on the exchange with the
+  highest volume for it. A token with no such price is unlisted and is
+  treated as one dollar.
+
+SPDX identifier: `LicenseRef-UFL-3.4`, with the same `-C`, `-H`, `-N`,
+`-S`, `-D` suffixes. Projects on 1.0 through 3.3 are unaffected unless
+they adopt 3.4. A project that adopted Decentralized under 3.3 keeps those
+terms for the releases that state them (Section 1C).
+
 ## 3.3 — October 2026
 
 Section 14 now covers payment disputes, not every use. Through 3.2 it
