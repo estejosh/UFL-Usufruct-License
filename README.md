@@ -138,11 +138,15 @@ What it does and does not do:
   earlier grants back only "to the extent necessary to keep this license
   enforceable."
 - The signature is a line in `signatures/cla.json` on the `cla-signatures`
-  branch, tied to the contributor's GitHub account. It survives squash
-  merges, which drop `Signed-off-by` trailers. That is why this uses a CLA
-  record and not a DCO sign-off.
-- Signed commits show who made a commit. A squash or web merge is signed by
-  GitHub, so the evidence of agreement is the CLA record plus the pull
+  branch, tied to the contributor's GitHub account. It does not depend on
+  the merged commit. A squash merge replaces the contributor's commits with
+  one commit authored by whoever merged, so the contributor's signature on
+  their own commits is not in the project's history, and a `Signed-off-by`
+  trailer survives only if the merge message keeps it. That is why this
+  uses a CLA record and not a DCO sign-off.
+- Signed commits show who made a commit before it is merged. After a
+  squash or web merge the commit is signed by the merger (GitHub signs web
+  merges), so the evidence of agreement is the CLA record plus the pull
   request, not the merged commit.
 - It cannot stop anyone pushing to their own fork or sending a patch
   elsewhere. It controls only what the project accepts.

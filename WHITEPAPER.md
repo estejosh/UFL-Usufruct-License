@@ -260,10 +260,12 @@ no term. Section 15 recognizes it by name.
 Why a CLA record and not a DCO sign-off. A `Signed-off-by` line certifies
 the right to submit under the project's license, and the standard
 certificate is worded around open-source licenses, which UFL is not. It
-also lives in the commit message, and a squash merge, which most projects
-use, discards the contributor's commits and their trailers. A CLA record
-lives outside the commit, tied to the contributor's account, and survives
-the merge.
+also lives in the commit message. A squash merge, which many projects use,
+replaces the contributor's commits with one commit authored by whoever
+merged, so the contributor's own signature is gone from the history, and a
+trailer survives only if the merge message happens to keep it. A CLA record
+lives outside the commit, tied to the contributor's account, and does not
+depend on how the merge is done.
 
 What git can and cannot do. Git is a content tracker; it cannot make
 anyone agree to anything. GitHub can, in effect, refuse to merge until
