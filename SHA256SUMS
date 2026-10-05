@@ -14,12 +14,12 @@ e0c04aae2ba94a54d2add37df764a00b0ffc1a82c45cc4e48c10ef4c38b998c8  pdf/UFL-3.2-no
 4a0adbf3a1f33506157fd09f388048e0490d60054b9bc95840aac1b43ce311ce  pdf/UFL-3.2-noncommercial.pdf
 3ea42ace0dc34121269b02cd7a69561926eb928cdb70e12f76335e98268a9746  pdf/UFL-3.2-seat-limited.pdf
 e86497143fb70cd4769edfc4ac0b2bedf7091f910a48fe6ac4cc8958d8f7e20f  pdf/UFL-3.2-unconditional.pdf
-e7ac296a635161938ee8c85b0610a9d120672df8ef4926027c3f8bdd8d732e06  pdf/UFL-3.3-decentralized.pdf
-6383f3d3c117443ebabf8e12e3ba46fbf90e2b5501fc6d725c7f118bb9742661  pdf/UFL-3.3-no-competing-service.pdf
-85174819ec5d872946fa345492dd14c5dec5d19f7892fee50ca8a54ab87196c6  pdf/UFL-3.3-no-third-party-hosting.pdf
-28d5385d8177dcb29fa6bc062e4ee81cd5584ae0d538748896266250f65697fe  pdf/UFL-3.3-noncommercial.pdf
-3edb71f1cc04c6ed22c24c4d17471637f45ba88ffaed0a3f253d159c5014b8b1  pdf/UFL-3.3-seat-limited.pdf
-15f57735cc5dbe2b46e1bf725caddfcf8586de0cc7b7e2bb3bcefccb6fd8e35c  pdf/UFL-3.3-unconditional.pdf
+e0523f7168cff5dac84cde60e9ca861bf05869f7aedaeca58d0ea0ad8a05df90  pdf/UFL-3.3-decentralized.pdf
+fe3286e3f579ec3412cf4e4d614dd6616219ea6de84e8c19f83172f485819990  pdf/UFL-3.3-no-competing-service.pdf
+aa79d846559e08db282a76ca04f9b08f87bc3a220f986f04c9c3811022dab665  pdf/UFL-3.3-no-third-party-hosting.pdf
+ea0c6cc599b3648da9168a9094617f765b9cdd055ebfd19c48d1386165dfe6d0  pdf/UFL-3.3-noncommercial.pdf
+04bf0f8a5c98546ab09169c7672fdde5ae06e44d58839846a913699ad940451b  pdf/UFL-3.3-seat-limited.pdf
+2c69c4a66da45da2f605afaf979f57e5462300c9b617d55ac41baefe39329c9d  pdf/UFL-3.3-unconditional.pdf
 eb1e822156c1267cc43bbe9ee5b8a9501bcd658fa58323100c21d6d47a47f34e  pdf/UFL-3.0-no-competing-service.txt
 2ccdc32ece7286d863867c0d263f14eec7c73dfdca58a1820a7466fd0d03c766  pdf/UFL-3.0-no-third-party-hosting.txt
 f7875591be9b8e4cb4c0772147a0f334226832de796afc4bf10096c9e933ff7f  pdf/UFL-3.0-noncommercial.txt
@@ -35,7 +35,7 @@ cebb122550329700c04896eb9e202aa5e6255c4ba161b7ff7aa174d5fc4faf4c  pdf/UFL-3.2-no
 77d584530c2df12741cd9a212222b8db0396077ddbb4304948451701f06d71e3  pdf/UFL-3.2-noncommercial.txt
 8a957bd4c0bb3f2b9b9d5520dd6299a0411b9b19dd42fedfce5e47dbe8e58a1a  pdf/UFL-3.2-seat-limited.txt
 d3c8b8f07e0f00d90a67c32d66fbd78160a7d49801bf9cce0a0df6a4a6089f9f  pdf/UFL-3.2-unconditional.txt
-e21c268906be49464a54225b668cdf86f2822e95929c8539778596a3f57f61c5  pdf/UFL-3.3-decentralized.txt
+5354e4bce23196806025c6fd4df62b24b8415cc37401a0f5e2c10fa15670d187  pdf/UFL-3.3-decentralized.txt
 dfac1f40490e8a8c00e837e45b63c001a5c0824157b6d5336b925dd60db7ff70  pdf/UFL-3.3-no-competing-service.txt
 003000a1ff6685b135b0ad91e112d4b143c95df2fd670dcb0e347d79c963cc8b  pdf/UFL-3.3-no-third-party-hosting.txt
 71c88ac69810ed239f3b1ff254bc9ec89ece2d8f8ea615a0183ad5998cebc94a  pdf/UFL-3.3-noncommercial.txt

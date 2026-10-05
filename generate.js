@@ -495,19 +495,21 @@ const SCOPES = {
       "delivered for any reason other than the payee's failure to give an",
       "address, payment is one United States dollar in money, and the payee",
       "bears the cost of the wire or transfer, which the paying party may",
-      "deduct from the payment. Before first use, the Software requires the",
-      "affirmative step in Section 9, which shows this limit of liability and",
-      "dispute process, and the Licensee's completing it is the Licensee's",
-      "agreement to them. A modified version, fork, or independent",
-      "reimplementation of the Software is not the Software for the purposes of",
-      "this scope. Whoever creates, distributes, or uses one does so entirely",
-      "at their own risk, and the Licensor has no liability for it of any kind,",
-      "including the amount stated above. Nothing in this scope limits",
-      "liability that the law does not allow to be limited, waives a claim or",
-      "right that the law gives a party and does not allow to be waived, or",
-      "limits a party's right to seek an injunction in court to stop conduct",
-      "that Section 2 reserves or that infringes the Licensor's intellectual",
-      "property."
+      "deduct from the payment. This scope's dispute process, limit of",
+      "liability, and own-risk terms take effect for a Licensee only when the",
+      "Licensee completes the affirmative step in Section 9, which the Software",
+      "must present before first use and which shows them. A Licensor adopts",
+      "this scope only by building that step into the Software, and Software",
+      "that does not have it is licensed under the Unconditional scope instead.",
+      "A modified version, fork, or independent reimplementation of the",
+      "Software is not the Software for the purposes of this scope. Whoever",
+      "creates, distributes, or uses one does so entirely at their own risk,",
+      "and the Licensor has no liability for it of any kind, including the",
+      "amount stated above. Nothing in this scope limits liability that the law",
+      "does not allow to be limited, waives a claim or right that the law gives",
+      "a party and does not allow to be waived, or limits a party's right to",
+      "seek an injunction in court to stop conduct that Section 2 reserves or",
+      "that infringes the Licensor's intellectual property."
     ]
   }
 };
@@ -590,6 +592,9 @@ function main() {
   }
 
   const token = args.token || 'none';
+  if (args.scope === 'decentralized' && !args.release) {
+    process.stderr.write('Note: Decentralized takes effect only if your Software presents the Section 9 click-through before first use. Without it, the Software is licensed as Unconditional.\n');
+  }
 
   const scope = buildScope(args.scope, threshold, token);
   if (args.release) {

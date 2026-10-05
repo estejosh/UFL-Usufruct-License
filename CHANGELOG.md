@@ -51,10 +51,12 @@ Sections 8 through 13 do not operate. Under it:
   money, and the payee bears the cost of the wire or transfer, which the
   payer may deduct. The cap is mutual, so it limits the Licensor's
   money claims too.
-- Before first use, the Software requires the affirmative step in
-  Section 9, which now also applies to this scope and shows the limit of
-  liability and dispute process. Completing it is the Licensee's
-  agreement to them.
+- The scope's dispute process, limit of liability and own-risk terms
+  take effect for a Licensee only when the Licensee completes the
+  Section 9 click-through, which the Software must present before first
+  use and which shows them. A Licensor adopts the scope only by building
+  that step in. Software without it is licensed under Unconditional
+  instead.
 - A modified version, fork, or independent reimplementation is not the
   Software for this scope. Whoever creates, distributes, or uses one does
   so entirely at their own risk, and the Licensor has no liability for

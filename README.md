@@ -112,6 +112,27 @@ For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
 No-Competing-Service, that means publishing a price list somewhere in
 the repo or docs. Nothing else.
 
+## Adopting the Decentralized scope (since 3.3)
+
+The scope's dispute process, US$1 limit, and own-risk terms bind a user
+only if the user agreed to them. So a project that picks Decentralized
+must build a click-through into its software. Without one, the scope does
+not take effect and the project is licensed as Unconditional.
+
+The click-through must, before first use:
+
+- name the license version and the Operational Scope (for example,
+  "UFL 3.3, Decentralized");
+- show the limit of liability and the dispute process, or the full
+  license text, and ask for an affirmative step (a button, a typed
+  confirmation, or for headless use an explicit flag or setting naming the
+  version, such as `--accept-ufl 3.3`);
+- refuse to run until the step is done;
+- record the version and time on the user's own machine only.
+
+If the project has a native token, pass it with `-k`. If not, leave it
+off and the remedy is paid in money.
+
 ## Releases (since 3.2)
 
 A project can change its license over time without changing the terms
