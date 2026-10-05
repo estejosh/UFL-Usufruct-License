@@ -354,7 +354,8 @@ effect only through a click-through that the Software presents before
 first use (Section 9 now applies here, not only where a use is withheld),
 and the software does not run until it is done. A user who has not
 agreed has no use, so nothing is left to dispute; a user who bypasses the
-step is not licensed. A project that does not build the gate in is
+step has breached the license, is running a modified copy, and is owed
+nothing by the Licensor, not even the dollar. A project that does not build the gate in is
 licensed as Unconditional. Forks are a different matter. A
 fork, or a reimplementation, is not the Software for this scope, and
 whoever makes, distributes, or uses one does so entirely at their own

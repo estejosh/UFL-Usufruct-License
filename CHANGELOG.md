@@ -55,8 +55,9 @@ Sections 8 through 13 do not operate. Under it:
   take effect for a Licensee only when the Licensee completes the
   Section 9 click-through, which the Software must present before first
   use and which shows them. The Software must not run until the step is
-  done, and a Licensee who bypasses it is not licensed to use the
-  Software. A Licensor adopts the scope only by building the step in as
+  done. Running it with the step bypassed, removed or forged breaches
+  the license and makes that copy a modified version, so the Licensor
+  owes the person running it nothing, including the one dollar. A Licensor adopts the scope only by building the step in as
   a gate. Software without it is licensed under Unconditional instead.
 - A modified version, fork, or independent reimplementation is not the
   Software for this scope. Whoever creates, distributes, or uses one does
