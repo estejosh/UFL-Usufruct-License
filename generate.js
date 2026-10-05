@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.2.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.3.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -27,14 +27,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.2. See CHANGELOG.md for revisions.
+// Tracks UFL 3.3. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.2",
+  "The Usufruct License (UFL) — Version 3.3",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -88,7 +88,7 @@ const TEMPLATE = [
   "",
   "With each Release, the Licensor states which version of this license,",
   "and which Operational Scope, governs that Release (its \"Ruling",
-  "License\"). The statement names both, for example \"UFL 3.2, Operational",
+  "License\"). The statement names both, for example \"UFL 3.3, Operational",
   "Scope: Noncommercial\", and appears where users get the Release: in its",
   "release notes, its tag, or its package metadata. The Release includes",
   "the full text of its Ruling License. If a Release does not state its",
@@ -362,12 +362,21 @@ const TEMPLATE = [
   "This license is governed by California law, without regard to its",
   "conflict-of-laws rules.",
   "",
-  "Any dispute arising out of this license or the Software goes first to",
-  "mediation. Either party may start mediation by written notice to the",
-  "other, and the mediation must begin within 30 days of that notice. If",
-  "the dispute is not resolved within 60 days of the notice, either party",
-  "may submit it to binding arbitration before a single arbitrator seated",
-  "in California. The parties may agree in writing to a different schedule.",
+  "Mediation and arbitration under this section cover a dispute between the",
+  "Licensor and a Licensee about whether a use is Paid Use, about any",
+  "amount owed under Section 8, 12, or 13, or about a usage statement under",
+  "Section 10 (a \"Payment Dispute\"). They do not cover a Licensee's use",
+  "under Section 1's free grant that raises none of those questions. Any",
+  "other dispute arising out of this license or the Software is left to the",
+  "law and the courts that would otherwise apply.",
+  "",
+  "A Payment Dispute goes first to mediation. Either party may start",
+  "mediation by written notice to the other, and the mediation must begin",
+  "within 30 days of that notice. If the dispute is not resolved within 60",
+  "days of the notice, either party may submit it to binding arbitration",
+  "under the Rules of Arbitration of the International Chamber of Commerce,",
+  "before a single arbitrator seated in California. The parties may agree",
+  "in writing to a different schedule.",
   "",
   "Mediation and arbitration may be conducted entirely by video conference",
   "and electronic submission, and no party is required to attend in person",
@@ -397,8 +406,8 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.2` —",
-  "not a bare `UFL-3.2`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.3` —",
+  "not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
 
@@ -507,8 +516,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.2`').join('LicenseRef-UFL-3.2' + scopeSuffix + '`')
-    .split('`UFL-3.2`').join('`UFL-3.2' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.3`').join('LicenseRef-UFL-3.3' + scopeSuffix + '`')
+    .split('`UFL-3.3`').join('`UFL-3.3' + scopeSuffix + '`');
 }
 
 function main() {
@@ -532,7 +541,7 @@ function main() {
 
   const scope = buildScope(args.scope, threshold);
   if (args.release) {
-    const stmt = 'UFL 3.2, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.2' + scope.suffix + ')\n';
+    const stmt = 'UFL 3.3, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.3' + scope.suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }
     return;
   }

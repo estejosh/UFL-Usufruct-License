@@ -2,7 +2,7 @@
 
 ### A source-available license for unrestricted use and reserved redistribution
 
-Version 3.2 — October 2026
+Version 3.3 — October 2026
 
 ## Abstract
 
@@ -22,7 +22,7 @@ noncommercial-only limit — stated once, in the open, on the license
 itself. As of 3.0, the license also sets how a withheld use is paid
 for: at the Licensor's published price, on UFL's own terms, with the
 same acceptance, usage-statement, retroactive-license, and dispute
-rules for every project. There are no side agreements and no addendum.
+rules for every project. There are no side agreements and no side documents.
 A project that declares no scope gets exactly the unconditional 1.0
 grant this whitepaper originally described.
 
@@ -211,10 +211,12 @@ the license, identical for every project:
 - **Never revoked (Section 13).** The use grant is perpetual. A user who
   owes money keeps using the software and is brought current by paying
   or by a written payment agreement.
-- **Disputes (Section 14).** California law. Mediation within 30 days,
-  binding arbitration in California after 60, both available entirely
-  by video. Court injunctions stay available for unlicensed
-  redistribution.
+- **Disputes (Section 14).** California law. Payment disputes (whether a
+  use is Paid Use, amounts owed, usage statements) go to mediation
+  within 30 days, then binding ICC arbitration seated in California
+  after 60, both available entirely by video. Use under the free grant
+  is not in that process. Court injunctions stay available for
+  unlicensed redistribution.
 - **Entire license (Section 15).** No other document adds to or changes
   the license. A Licensor chooses a version and a scope and publishes a
   price. That's all.
@@ -355,9 +357,9 @@ scope applies, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-3.2` (with a scope suffix where one applies, e.g.
-`LicenseRef-UFL-3.2-N` for Noncommercial), the convention SPDX defines
-for licenses outside its list — not a bare `UFL-3.2` as if it had been
+`LicenseRef-UFL-3.3` (with a scope suffix where one applies, e.g.
+`LicenseRef-UFL-3.3-N` for Noncommercial), the convention SPDX defines
+for licenses outside its list — not a bare `UFL-3.3` as if it had been
 registered.
 
 **Can I use UFL-licensed software in a commercial product?**
@@ -446,6 +448,8 @@ updates it:
 - **3.2** — releases: Section 1C lets a Licensor state, for each Release,
   which version and Operational Scope rule it, fixed and irrevocable for
   that Release; Section 2C applies the two choices per Release.
+- **3.3** — disputes: Section 14 covers payment disputes only, under ICC
+  arbitration rules; free-grant use is outside it.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

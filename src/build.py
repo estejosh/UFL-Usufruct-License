@@ -1,9 +1,9 @@
-"""Single source of truth for UFL 3.2: src/template.txt + src/scopes.json ->
+"""Single source of truth for UFL 3.3: src/template.txt + src/scopes.json ->
 LICENSE.txt, and the template/scope blocks inside generate.sh and generate.js."""
 import json, re, textwrap
 from pathlib import Path
 R = Path(__file__).resolve().parent.parent; S = R / "src"
-VER_OLD, VER = "3.1", "3.2"
+VER_OLD, VER = "3.2", "3.3"
 
 def wrap_par(p, w=72):
     lines = p.split("\n")
@@ -47,7 +47,8 @@ for key in SC:
     sh = re.sub(rf'(  {key}\)\n(?:    SCOPE_LINE=[^\n]*\n)(?:    SCOPE_SUFFIX=[^\n]*\n)    SCOPE_BODY=").*?(")(\n    ;;)',
                 lambda m: m.group(1) + lines + m.group(2) + m.group(3), sh, flags=re.S)
 sh = sh.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
-       .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}")
+       .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}") \
+       .replace(f"UFL {VER_OLD}, Operational", f"UFL {VER}, Operational")
 (R / "generate.sh").write_text(sh)
 
 # ---- generate.js
@@ -61,6 +62,7 @@ scopes_js = "const SCOPES = {\n" + ",\n".join(
     for k in SC) + "\n};\n\nfunction buildScope(scopeKey, threshold) {\n  const s = SCOPES[scopeKey];\n  const t = (x) => x.split('@THRESHOLD@').join(threshold);\n  return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };\n}"
 js = re.sub(r"const SCOPES = \{.*?\n\};\n\nfunction buildScope\(scopeKey, threshold\) \{.*?\n\}", lambda m: scopes_js, js, flags=re.S)
 js = js.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
-       .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}")
+       .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}") \
+       .replace(f"UFL {VER_OLD}, Operational", f"UFL {VER}, Operational")
 (R / "generate.js").write_text(js)
 print("built", len(lic.splitlines()), "lines")

@@ -4,6 +4,33 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.3 — October 2026
+
+Section 14 now covers payment disputes, not every use. Through 3.2 it
+sent any dispute "arising out of this license or the Software" to
+mediation and arbitration in California, which bound every user,
+including one who only runs the software on the free grant and owes
+nothing. For a decentralized project with users in many countries, that
+was the wrong reach.
+
+- Mediation and arbitration cover a "Payment Dispute": whether a use is
+  Paid Use, an amount owed under Section 8, 12, or 13, or a usage
+  statement under Section 10.
+- A Licensee's use under the free grant that raises none of those
+  questions is not covered. Any other dispute is left to the law and
+  courts that would otherwise apply.
+- Arbitration is under the Rules of Arbitration of the International
+  Chamber of Commerce, by a single arbitrator, still seated in
+  California, with California governing law.
+- Unchanged: the 30-day mediation start and 60-day arbitration trigger,
+  video conduct, court injunctions for Section 2 conduct, and fees to the
+  prevailing party.
+
+Every other section is the same as 3.2 apart from version strings.
+SPDX identifier: `LicenseRef-UFL-3.3`, with the same `-C`, `-H`, `-N`,
+`-S` suffixes. Projects on 1.0 through 3.2 are unaffected unless they
+adopt 3.3.
+
 ## 3.2 — October 2026
 
 Adds Section 1C, Releases. A project can now move to a newer version of

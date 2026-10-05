@@ -1,5 +1,5 @@
 @@RAW
-The Usufruct License (UFL) — Version 3.2
+The Usufruct License (UFL) — Version 3.3
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -29,7 +29,7 @@ The Operational Scope declared above states the only limit, if any, on Section 1
 
 A "Release" is a version of the Software that the Licensor publishes under its own version number, tag, or date. This license applies to each Release separately, and where it refers to the Software, it means the Release the Licensee uses.
 
-With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.2, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
+With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.3, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
 
 A Release's Ruling License is fixed when the Release is published. For that Release, the Licensor grants every Licensee the rights its Ruling License gives, perpetually and irrevocably, on that Ruling License's own terms. Nothing the Licensor later does, including publishing a later Release, changing the license in the Software's repository, or adopting a later version of this license, changes, narrows, or ends those rights.
 
@@ -133,7 +133,9 @@ The grant in Section 1 is perpetual and is not revoked for nonpayment. A License
 
 This license is governed by California law, without regard to its conflict-of-laws rules.
 
-Any dispute arising out of this license or the Software goes first to mediation. Either party may start mediation by written notice to the other, and the mediation must begin within 30 days of that notice. If the dispute is not resolved within 60 days of the notice, either party may submit it to binding arbitration before a single arbitrator seated in California. The parties may agree in writing to a different schedule.
+Mediation and arbitration under this section cover a dispute between the Licensor and a Licensee about whether a use is Paid Use, about any amount owed under Section 8, 12, or 13, or about a usage statement under Section 10 (a "Payment Dispute"). They do not cover a Licensee's use under Section 1's free grant that raises none of those questions. Any other dispute arising out of this license or the Software is left to the law and the courts that would otherwise apply.
+
+A Payment Dispute goes first to mediation. Either party may start mediation by written notice to the other, and the mediation must begin within 30 days of that notice. If the dispute is not resolved within 60 days of the notice, either party may submit it to binding arbitration under the Rules of Arbitration of the International Chamber of Commerce, before a single arbitrator seated in California. The parties may agree in writing to a different schedule.
 
 Mediation and arbitration may be conducted entirely by video conference and electronic submission, and no party is required to attend in person unless the parties agree otherwise. Judgment on an arbitration award may be entered in any court with jurisdiction.
 
@@ -150,6 +152,6 @@ If any provision of this license is held unenforceable, the remaining provisions
 @@RAW
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.2` —
-not a bare `UFL-3.2`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.3` —
+not a bare `UFL-3.3`, which would misrepresent it as SPDX-registered.
 @@END

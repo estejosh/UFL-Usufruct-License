@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.2" src="https://img.shields.io/badge/license-UFL--3.2-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.2-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.3" src="https://img.shields.io/badge/license-UFL--3.3-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.3-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -34,7 +34,7 @@ also says what a contributor gives the project — see
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.2**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.3**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -101,10 +101,11 @@ repo or docs. The price is a number, never extra terms. If someone uses
 past the scope without paying, Section 12 licenses it after the fact:
 the published price if they disclose it first, three times that if the
 Licensor finds it, plus interest, three years back at most. The grant is
-never revoked for nonpayment (Section 13). Disputes go to mediation,
-then arbitration, in California, by video if the parties want
-(Section 14). Section 15 makes the license the whole deal: no addendum,
-no side terms.
+never revoked for nonpayment (Section 13). Payment disputes go to
+mediation, then ICC arbitration seated in California, by video if the
+parties want (Section 14). Using the software on the free grant puts
+no one in that process. Section 15 makes the license the whole deal: no
+side documents, no side terms.
 
 For a project on Seat-Limited, Noncommercial, No-Third-Party-Hosting, or
 No-Competing-Service, that means publishing a price list somewhere in
@@ -119,7 +120,7 @@ license text with it:
 
 ```
 ./generate.sh -r -s noncommercial
-UFL 3.2, Operational Scope: Noncommercial (LicenseRef-UFL-3.2-N)
+UFL 3.3, Operational Scope: Noncommercial (LicenseRef-UFL-3.3-N)
 ```
 
 Put that line in the Release's notes, its tag, or its package metadata.
@@ -185,11 +186,11 @@ left blank (and the threshold, for Seat-Limited):
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.2-unconditional.pdf](./pdf/UFL-3.2-unconditional.pdf) | [.txt](./pdf/UFL-3.2-unconditional.txt) |
-| Seat-Limited | [UFL-3.2-seat-limited.pdf](./pdf/UFL-3.2-seat-limited.pdf) | [.txt](./pdf/UFL-3.2-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.2-no-third-party-hosting.pdf](./pdf/UFL-3.2-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.2-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.2-no-competing-service.pdf](./pdf/UFL-3.2-no-competing-service.pdf) | [.txt](./pdf/UFL-3.2-no-competing-service.txt) |
-| Noncommercial | [UFL-3.2-noncommercial.pdf](./pdf/UFL-3.2-noncommercial.pdf) | [.txt](./pdf/UFL-3.2-noncommercial.txt) |
+| Unconditional | [UFL-3.3-unconditional.pdf](./pdf/UFL-3.3-unconditional.pdf) | [.txt](./pdf/UFL-3.3-unconditional.txt) |
+| Seat-Limited | [UFL-3.3-seat-limited.pdf](./pdf/UFL-3.3-seat-limited.pdf) | [.txt](./pdf/UFL-3.3-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.3-no-third-party-hosting.pdf](./pdf/UFL-3.3-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.3-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.3-no-competing-service.pdf](./pdf/UFL-3.3-no-competing-service.pdf) | [.txt](./pdf/UFL-3.3-no-competing-service.txt) |
+| Noncommercial | [UFL-3.3-noncommercial.pdf](./pdf/UFL-3.3-noncommercial.pdf) | [.txt](./pdf/UFL-3.3-noncommercial.txt) |
 
 The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
 
@@ -222,8 +223,8 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.2<suffix>` (e.g. `LicenseRef-UFL-3.2-N` for
-Noncommercial), not a bare `UFL-3.2<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.3<suffix>` (e.g. `LicenseRef-UFL-3.3-N` for
+Noncommercial), not a bare `UFL-3.3<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
@@ -240,7 +241,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.2, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.3, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -254,11 +255,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.2") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.3") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
-paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, for example — applies only to a project that has actually updated to that
+paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, or the narrower dispute clause in 3.3, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file
