@@ -2,7 +2,7 @@
 
 ### A source-available license for unrestricted use and reserved redistribution
 
-Version 3.1 — October 2026
+Version 3.2 — October 2026
 
 ## Abstract
 
@@ -282,6 +282,38 @@ jurisdiction enforces the grant as written, and how the recorded
 acknowledgement is weighed, depends on where and against whom it is
 asserted.
 
+## Releases and ruling licenses (since 3.2)
+
+Through 3.1 a project adopted one version and one scope, once. That left
+two gaps. A project that wanted to move to newer terms for new work had no
+way to say that the software people already had stayed on the terms it
+shipped with, and a user of an old release had only the commit history to
+show which terms covered it.
+
+Section 1C closes both. Each Release names its Ruling License, a version
+and a single Operational Scope, and carries the text. The Licensor grants
+those terms for that Release perpetually and irrevocably. Later changes to
+the repository, later Releases, and later versions of UFL do not reach it.
+A later Release can use newer terms; the Licensee who uses it uses it under
+those terms, and the one who stays on an old Release stays on the old ones.
+
+Three choices are worth stating.
+
+**The Licensor chooses, per Release.** This is not GPL-style "or later,"
+where the downstream user may pick a newer version. Here only the Licensor
+moves a Release to newer terms, and only by publishing a new Release.
+
+**The statement is the record.** It has to appear where users get the
+Release. If it is missing, the fallback is the license text shipped with
+the Release, then the text in the repository at the commit the Release was
+made from. A project that skips the statement still has an answer, but a
+weaker one.
+
+**The terms stay the same for everyone.** Section 2C still allows only two
+choices, version and Operational Scope, now made for each Release. Nothing
+else can be added, so a Ruling License is the canonical text of that
+version and nothing more.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -323,9 +355,9 @@ scope applies, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-3.1` (with a scope suffix where one applies, e.g.
-`LicenseRef-UFL-3.1-N` for Noncommercial), the convention SPDX defines
-for licenses outside its list — not a bare `UFL-3.1` as if it had been
+`LicenseRef-UFL-3.2` (with a scope suffix where one applies, e.g.
+`LicenseRef-UFL-3.2-N` for Noncommercial), the convention SPDX defines
+for licenses outside its list — not a bare `UFL-3.2` as if it had been
 registered.
 
 **Can I use UFL-licensed software in a commercial product?**
@@ -411,6 +443,9 @@ updates it:
   irrevocable, royalty-free license to every contribution (patents and
   relicensing included), with a recorded-acknowledgement step that adds no
   term; Section 15 recognizes that step.
+- **3.2** — releases: Section 1C lets a Licensor state, for each Release,
+  which version and Operational Scope rule it, fixed and irrevocable for
+  that Release; Section 2C applies the two choices per Release.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and
