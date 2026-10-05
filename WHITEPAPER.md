@@ -336,8 +336,10 @@ Each party's total liability to the other is capped at one US dollar in
 value. The payer chooses money or, if the project names a native token,
 that token valued at one dollar at its market price when paid, and the
 payee must accept the token if the payer chooses it. The value is fixed,
-so a falling token price cannot push the cap toward zero. If no market price
-can be found, one token is treated as one dollar. The payer pays
+so a falling token price cannot push the cap toward zero. A token that is
+unlisted, with no published market price, is treated as worth one dollar.
+If money is paid because the token cannot be delivered, the payee bears
+the wire or transfer cost. The payer pays
 in the token by written notice that payment is available. A payee with
 no wallet has 90 days to give an address, after which the payment is
 complete. Anyone who will not set up a wallet for a dollar's worth of a

@@ -45,9 +45,11 @@ Sections 8 through 13 do not operate. Under it:
   accept the token if it is chosen. The payer pays in the token by
   written notice that payment is available; if no wallet address is
   given within 90 days of the notice, the payment is complete. If the
-  token's market price cannot be ascertained, one token is treated as
-  worth one US dollar. If it cannot be delivered for any other reason,
-  payment is one US dollar in money. The cap is mutual, so it limits the Licensor's
+  token is unlisted (no exchange or public price source publishes a
+  price for it), one token is treated as worth one US dollar. If it
+  cannot be delivered for any other reason, payment is one US dollar in
+  money, and the payee bears the cost of the wire or transfer, which the
+  payer may deduct. The cap is mutual, so it limits the Licensor's
   money claims too.
 - Nothing limits liability the law does not allow to be limited, waives
   a non-waivable right, or stops either party seeking a court injunction
