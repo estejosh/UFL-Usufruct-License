@@ -39,11 +39,15 @@ Sections 8 through 13 do not operate. Under it:
   Commercial Contracts and, for anything they do not answer, California
   law. Section 14's California-law sentence now yields to the scope.
 - Each party's total liability to the other is limited, to the extent
-  the law allows, to one US dollar in value. It is paid in money or, if
-  the project names a native token, in that token valued at one dollar
-  at its market price when paid, as the paying party chooses. If the
-  token cannot be priced or delivered, it is paid in money. The cap is
-  mutual, so it limits the Licensor's money claims too.
+  the law allows, to one US dollar in value. The paying party chooses
+  money or, if the project names a native token, that token valued at one
+  dollar at its market price when paid, and the party being paid must
+  accept the token if it is chosen. The payer pays in the token by
+  written notice that payment is available; if no wallet address is
+  given within 90 days of the notice, the payment is complete. If the
+  token cannot be priced or delivered for any other reason, payment is
+  one US dollar in money. The cap is mutual, so it limits the Licensor's
+  money claims too.
 - Nothing limits liability the law does not allow to be limited, waives
   a non-waivable right, or stops either party seeking a court injunction
   against conduct Section 2 reserves or that infringes the Licensor's

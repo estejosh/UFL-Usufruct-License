@@ -33,16 +33,21 @@ Principles of International Commercial Contracts and, for any matter
 they do not answer, California law. Native token of the Software:
 [NATIVE TOKEN]. Each party's total liability to the other for all claims
 arising from the Software or this license is limited, to the extent the
-law allows, to one United States dollar in value, paid in money or, if a
-native token is named in this paragraph, in that token valued at one
-United States dollar at its market price when paid, as the paying party
-chooses. If the token cannot be priced or delivered when payment is due,
-payment is one United States dollar in money. Nothing in this scope
-limits liability that the law does not allow to be limited, waives a
-claim or right that the law gives a party and does not allow to be
-waived, or limits a party's right to seek an injunction in court to stop
-conduct that Section 2 reserves or that infringes the Licensor's
-intellectual property.
+law allows, to one United States dollar in value. The paying party
+chooses whether to pay in money or, if a native token is named in this
+paragraph, in that token valued at one United States dollar at its
+market price when paid, and the party being paid must accept payment in
+the token if the paying party chooses it. The paying party pays in the
+token by notifying the other party in writing that payment is available;
+if that party gives no wallet address within 90 days of the notice, the
+payment is complete and the obligation is discharged. If the token
+cannot be priced or delivered for any reason other than the payee's
+failure to give an address, payment is one United States dollar in
+money. Nothing in this scope limits liability that the law does not
+allow to be limited, waives a claim or right that the law gives a party
+and does not allow to be waived, or limits a party's right to seek an
+injunction in court to stop conduct that Section 2 reserves or that
+infringes the Licensor's intellectual property.
 
 ## 1B. Definitions
 
