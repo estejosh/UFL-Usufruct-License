@@ -352,7 +352,10 @@ conduct.
 The cap only works if the user agreed to it. So the scope's terms take
 effect only through a click-through that the Software presents before
 first use (Section 9 now applies here, not only where a use is withheld),
-and a project that does not build it in is licensed as Unconditional. Forks are a different matter. A
+and the software does not run until it is done. A user who has not
+agreed has no use, so nothing is left to dispute; a user who bypasses the
+step is not licensed. A project that does not build the gate in is
+licensed as Unconditional. Forks are a different matter. A
 fork, or a reimplementation, is not the Software for this scope, and
 whoever makes, distributes, or uses one does so entirely at their own
 risk. The Licensor has no liability for it, not even the dollar. That

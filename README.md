@@ -127,7 +127,7 @@ The click-through must, before first use:
   license text, and ask for an affirmative step (a button, a typed
   confirmation, or for headless use an explicit flag or setting naming the
   version, such as `--accept-ufl 3.3`);
-- refuse to run until the step is done;
+- not run at all until the step is done (a gate, not a notice);
 - record the version and time on the user's own machine only.
 
 If the project has a native token, pass it with `-k`. If not, leave it

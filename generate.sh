@@ -161,11 +161,13 @@ bears the cost of the wire or transfer, which the paying party may
 deduct from the payment. This scope's dispute process, limit of
 liability, and own-risk terms take effect for a Licensee only when the
 Licensee completes the affirmative step in Section 9, which the Software
-must present before first use and which shows them. A Licensor adopts
-this scope only by building that step into the Software, and Software
-that does not have it is licensed under the Unconditional scope instead.
-A modified version, fork, or independent reimplementation of the
-Software is not the Software for the purposes of this scope. Whoever
+must present before first use and which shows them. The Software must
+not run until the Licensee has completed that step, and a Licensee who
+bypasses the step is not licensed to use the Software. A Licensor adopts
+this scope only by building that step into the Software as a gate, and
+Software that does not have it is licensed under the Unconditional scope
+instead. A modified version, fork, or independent reimplementation of
+the Software is not the Software for the purposes of this scope. Whoever
 creates, distributes, or uses one does so entirely at their own risk,
 and the Licensor has no liability for it of any kind, including the
 amount stated above. Nothing in this scope limits liability that the law

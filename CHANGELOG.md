@@ -54,9 +54,10 @@ Sections 8 through 13 do not operate. Under it:
 - The scope's dispute process, limit of liability and own-risk terms
   take effect for a Licensee only when the Licensee completes the
   Section 9 click-through, which the Software must present before first
-  use and which shows them. A Licensor adopts the scope only by building
-  that step in. Software without it is licensed under Unconditional
-  instead.
+  use and which shows them. The Software must not run until the step is
+  done, and a Licensee who bypasses it is not licensed to use the
+  Software. A Licensor adopts the scope only by building the step in as
+  a gate. Software without it is licensed under Unconditional instead.
 - A modified version, fork, or independent reimplementation is not the
   Software for this scope. Whoever creates, distributes, or uses one does
   so entirely at their own risk, and the Licensor has no liability for
