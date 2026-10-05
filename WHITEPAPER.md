@@ -2,7 +2,7 @@
 
 ### A source-available license for unrestricted use and reserved redistribution
 
-Version 3.0 — October 2026
+Version 3.1 — October 2026
 
 ## Abstract
 
@@ -219,6 +219,67 @@ the license, identical for every project:
   the license. A Licensor chooses a version and a scope and publishes a
   price. That's all.
 
+## Contributions (since 3.1)
+
+Through 3.0, Section 4 said contributions were accepted under the same
+terms and granted back to the Licensor "to the extent necessary to keep
+this license enforceable." That is a thin hook. It does not say the
+Licensor may relicense a fix, include it in a paid version, or carry it
+into a future version of the license, and it says nothing about patents
+or about whether the person submitting had the right to. 3.1 replaces it
+with what a project that lives on its users' fixes needs:
+
+- **A license, not an assignment.** The author grants the Licensor a
+  perpetual, worldwide, irrevocable, royalty-free, non-exclusive license
+  and keeps ownership. Contributors accept this far more readily than a
+  transfer of copyright, and it gives the Licensor what it needs.
+- **The right to relicense.** The license runs "under this license or any
+  other terms." A fix that could only ever be used under the version it
+  arrived in would be stranded the first time the project moves to a new
+  version.
+- **Patents.** The grant includes the author's patent rights that the fix,
+  alone or combined with the Software, would infringe. Without that, a
+  contributor could hand over code and keep the right to sue over it.
+- **Nothing owed.** No fee, now or later. This is the tradeoff for using
+  the project: a fix you send is free to the project for good.
+- **Authority.** An author submits only what the author can license. If an
+  employer or client has rights in the work, the author needs that party's
+  authority first.
+- **Submitting is agreeing.** No signature is needed for the grant to
+  take effect. That matters because the grant must hold even where the
+  recorded step is missed or contested.
+
+Why the CLA is a record and not a contract. Section 15 says no other
+document adds to or changes the license's terms, and Section 2C says the
+same of any separate document. A conventional CLA is a separate document
+with terms of its own, which would put it at odds with both. So the terms
+live in Section 4, and the last paragraph of Section 4 lets a Licensor
+require a recorded step. That step records agreement to Section 4 and adds
+no term. Section 15 recognizes it by name.
+
+Why a CLA record and not a DCO sign-off. A `Signed-off-by` line certifies
+the right to submit under the project's license, and the standard
+certificate is worded around open-source licenses, which UFL is not. It
+also lives in the commit message, and a squash merge, which most projects
+use, discards the contributor's commits and their trailers. A CLA record
+lives outside the commit, tied to the contributor's account, and survives
+the merge.
+
+What git can and cannot do. Git is a content tracker; it cannot make
+anyone agree to anything. GitHub can, in effect, refuse to merge until
+agreement is on record: a required status check that fails until the
+author signs, branch protection that makes the check mandatory, and
+signed commits for identity. That controls what a project accepts. It
+does not reach a fork nobody submits, a patch sent by email, or a fix
+someone keeps to themselves, and it is not meant to: Section 4 covers what
+is submitted. The kit in `templates/cla/` sets this up, and the README
+lists what it does and does not do.
+
+This section explains a drafting choice. Whether a given court or
+jurisdiction enforces the grant as written, and how the recorded
+acknowledgement is weighed, depends on where and against whom it is
+asserted.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -260,9 +321,9 @@ scope applies, but redistribution is reserved.
 No. SPDX maintains a curated list of license identifiers, and UFL isn't
 on it — inclusion requires a submission process this project hasn't
 gone through. Until it is (if ever), the correct SPDX-style reference is
-`LicenseRef-UFL-3.0` (with a scope suffix where one applies, e.g.
-`LicenseRef-UFL-3.0-N` for Noncommercial), the convention SPDX defines
-for licenses outside its list — not a bare `UFL-3.0` as if it had been
+`LicenseRef-UFL-3.1` (with a scope suffix where one applies, e.g.
+`LicenseRef-UFL-3.1-N` for Noncommercial), the convention SPDX defines
+for licenses outside its list — not a bare `UFL-3.1` as if it had been
 registered.
 
 **Can I use UFL-licensed software in a commercial product?**
@@ -344,6 +405,10 @@ updates it:
   Use at the Licensor's published price (8), acceptance (9), usage
   statements (10), output marks (11), retroactive licenses (12),
   no revocation (13), disputes (14), and entire license (15).
+- **3.1** — contributions: Section 4 now grants the Licensor a perpetual,
+  irrevocable, royalty-free license to every contribution (patents and
+  relicensing included), with a recorded-acknowledgement step that adds no
+  term; Section 15 recognizes that step.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.0.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.1.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -22,14 +22,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.0. See CHANGELOG.md for revisions.
+// Tracks UFL 3.1. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.0",
+  "The Usufruct License (UFL) — Version 3.1",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -161,10 +161,32 @@ const TEMPLATE = [
   "",
   "## 4. Contributions",
   "",
-  "Contributions submitted to a Software repository under this license are",
-  "accepted under these same terms and are granted back to the Licensor to",
-  "the extent necessary to keep this license enforceable across the",
-  "combined work.",
+  "A \"Contribution\" is any fix, change, or addition to the Software that",
+  "someone submits to the Licensor, by pull request, patch, message, or any",
+  "other means, whether or not the Licensor accepts it.",
+  "",
+  "By submitting a Contribution, its author grants the Licensor a",
+  "perpetual, worldwide, irrevocable, royalty-free, non-exclusive license",
+  "to use, reproduce, modify, distribute, sublicense, and relicense that",
+  "Contribution, as part of the Software or any other work, under this",
+  "license or any other terms. The grant includes every patent right the",
+  "author holds that the Contribution, or its combination with the",
+  "Software, would infringe. Nothing is owed to the author for this",
+  "license, now or later. The author keeps ownership of the Contribution.",
+  "",
+  "Submitting a Contribution is the author's agreement to this Section 4.",
+  "An author submits only what the author has the right to license: if an",
+  "employer, client, or anyone else has rights in a Contribution, the",
+  "author must have that party's authority to grant this license before",
+  "submitting it.",
+  "",
+  "A Contribution that becomes part of the Software is licensed to everyone",
+  "under this license, including the reservations in Section 2.",
+  "",
+  "Where the Licensor requires a recorded step before it will consider a",
+  "Contribution, such as a signed acknowledgement in a pull request, the",
+  "author will complete it. The step records the author's agreement to this",
+  "Section 4 and adds no term to it.",
   "",
   "## 5. No Warranty",
   "",
@@ -330,9 +352,9 @@ const TEMPLATE = [
   "No other document, including any document the Licensor publishes, adds",
   "to, removes, or changes these terms. A Published Price sets an amount",
   "only. The only other agreements this license recognizes are a written",
-  "agreement under Section 13 on paying amounts already owed, and a",
-  "separate license for the rights Section 2 reserves, which this license",
-  "does not grant.",
+  "agreement under Section 13 on paying amounts already owed, an author's",
+  "recorded acknowledgement of Section 4, and a separate license for the",
+  "rights Section 2 reserves, which this license does not grant.",
   "",
   "If any provision of this license is held unenforceable, the remaining",
   "provisions stay in effect, and the unenforceable provision is enforced",
@@ -340,8 +362,8 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.0` —",
-  "not a bare `UFL-3.0`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.1` —",
+  "not a bare `UFL-3.1`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
 
@@ -449,8 +471,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.0`').join('LicenseRef-UFL-3.0' + scopeSuffix + '`')
-    .split('`UFL-3.0`').join('`UFL-3.0' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.1`').join('LicenseRef-UFL-3.1' + scopeSuffix + '`')
+    .split('`UFL-3.1`').join('`UFL-3.1' + scopeSuffix + '`');
 }
 
 function main() {
