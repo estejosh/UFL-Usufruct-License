@@ -18,7 +18,7 @@ VER = json.loads((R / "ufl.json").read_text())["version"]
 SCOPES = json.loads((R / "ufl.json").read_text())["operationalScopes"]
 NAMES = {"unconditional": "Unconditional", "seat-limited": "Seat-Limited",
          "no-third-party-hosting": "No-Third-Party-Hosting",
-         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized"}
+         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized", "paid": "Paid"}
 
 F = "/usr/share/fonts/truetype/dejavu/"
 pdfmetrics.registerFont(TTFont("Serif", F + "DejaVuSerif.ttf"))

@@ -3,7 +3,7 @@ Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-Li
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
 
-Operational Scope: Unconditional
+Operational Scope: Paid
 
 ## 1. Grant of Use
 
@@ -21,10 +21,10 @@ grant is licensed under Section 8, on the terms of this license.
 The Operational Scope declared above states the only limit, if any, on
 Section 1's free grant. Exactly one scope applies to this Software:
 
-Unconditional — Section 1's grant is unconditional: it includes running
-the Software, deploying it, integrating with it, and operating a product
-or service built on top of it, commercially or otherwise, at any scale,
-with no further condition.
+Paid — Section 1's free grant is limited to reading and studying the
+Software's source and to Non-Production Use. Every Production Use of the
+Software, by any Licensee, whether an organization or an individual and
+whether for business or personal purposes, is Paid Use under Section 8.
 
 ## 1B. Definitions
 
@@ -378,5 +378,5 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.5` —
-not a bare `UFL-3.5`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.5-P` —
+not a bare `UFL-3.5-P`, which would misrepresent it as SPDX-registered.

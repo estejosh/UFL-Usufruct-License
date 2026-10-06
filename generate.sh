@@ -1,15 +1,26 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.4.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v3.5.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
 # Usage:
 #   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
-#     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]
+#     [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH]
 #   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
-# no-third-party-hosting, noncommercial, seat-limited, decentralized. TOKEN is
+# no-third-party-hosting, noncommercial, seat-limited, decentralized, paid.
+# SCOPE governs all of the Software that no Component covers. -C declares a
+# Component, a part of the Software with its own scope (since 3.5), as
+# NAME=SCOPE:PATH[,PATH...], for example
+#   -C "snifrig-fix=paid:fix/**,crates/snifrig-fix"
+# and may be repeated. NAME is lowercase letters, digits, and hyphens. A
+# Component's SCOPE is one of unconditional, no-competing-service,
+# no-third-party-hosting, noncommercial, paid; SCOPE for the rest of the
+# Software may be any scope except decentralized, which allows no Components.
+# A PATH is a path or glob relative to the root of the Release, or a package
+# name; it may not contain a backslash or a comma. A file that more than one
+# Component covers belongs to the Component listed first. TOKEN is
 # used only when SCOPE is decentralized: the native token of the Software
 # (default "none"), in which the $1 remedy may be paid. THRESHOLD is only
 # used (and required) when SCOPE is seat-limited — free text describing
@@ -30,7 +41,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 3.4. See CHANGELOG.md for revisions.
+# Tracks UFL 3.5. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -40,10 +51,11 @@ PROJECT=""
 SCOPE="unconditional"
 THRESHOLD=""
 TOKEN=""
+COMPS=""
 OUT=""
 RELEASE=0
 
-while getopts "y:c:p:s:t:k:o:rh" opt; do
+while getopts "y:c:p:s:t:k:C:o:rh" opt; do
   case "$opt" in
     y) YEAR=$OPTARG ;;
     c) HOLDER=$OPTARG ;;
@@ -51,11 +63,14 @@ while getopts "y:c:p:s:t:k:o:rh" opt; do
     s) SCOPE=$OPTARG ;;
     t) THRESHOLD=$OPTARG ;;
     k) TOKEN=$OPTARG ;;
+    C) COMPS="${COMPS:+$COMPS
+}$OPTARG" ;;
     o) OUT=$OPTARG ;;
     r) RELEASE=1 ;;
     h)
-      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]"
-      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized"
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]..."
+      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid"
+      echo "COMPONENT: NAME=SCOPE:PATH[,PATH...]  (SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid)"
       exit 0
       ;;
     *) exit 1 ;;
@@ -67,10 +82,10 @@ done
 [ "$RELEASE" = 1 ] || [ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
 
 case "$SCOPE" in
-  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|decentralized) ;;
+  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|decentralized|paid) ;;
   *)
     echo "Unknown SCOPE: $SCOPE" >&2
-    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized" >&2
+    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid" >&2
     exit 1
     ;;
 esac
@@ -96,7 +111,8 @@ HOLDER_ESC=$(escape "$HOLDER")
 PROJECT_ESC=$(escape "$PROJECT")
 THRESHOLD_ESC=$(escape "$THRESHOLD")
 
-case "$SCOPE" in
+set_scope() {
+case "$1" in
   unconditional)
     SCOPE_LINE="Unconditional"
     SCOPE_SUFFIX=""
@@ -193,14 +209,135 @@ intellectual property."
 Use. Production Use is free up to ${THRESHOLD}; Production Use beyond
 that threshold is Paid Use under Section 8."
     ;;
+  paid)
+    SCOPE_LINE="Paid"
+    SCOPE_SUFFIX="-P"
+    SCOPE_BODY="Paid — Section 1's free grant is limited to reading and studying the
+Software's source and to Non-Production Use. Every Production Use of the
+Software, by any Licensee, whether an organization or an individual and
+whether for business or personal purposes, is Paid Use under Section 8."
+    ;;
 esac
+}
+set_scope "$SCOPE"
+
+# ---- Components (since 3.5): parts of the Software with their own scope.
+die() { echo "$*" >&2; exit 1; }
+scope_letter() {
+  case "$1" in
+    unconditional) echo U ;; no-competing-service) echo C ;;
+    no-third-party-hosting) echo H ;; noncommercial) echo N ;;
+    seat-limited) echo S ;; decentralized) echo D ;; paid) echo P ;;
+  esac
+}
+comp_intro() {
+cat <<'UFL_COMPONENTS'
+Components. This Release may declare Components in the header above. A
+Component is a part of the Software that the header identifies by file
+path, glob, directory, or package name, and for which it states its own
+Operational Scope. A path or glob is read relative to the root of the
+Release, where * matches within one path segment and ** matches across
+segments; a name that is not a path identifies the package of that name
+in the Release. The scope stated first governs all of the Software that
+no Component covers. Each Component is governed by the scope the header
+states for it. The statement above that exactly one scope applies is
+read as applying once to the Software outside the Components and once to
+each Component. In the scope that governs a Component, "the Software"
+means that Component, and in the scope stated first it means the
+Software outside the Components. A file or package that more than one
+Component covers belongs to the Component the header lists first.
+
+A use of a Component is any use of the Software that runs code of that
+Component, whether directly or through a call from other code. Code of a
+Component that is present in a copy of the Software but is never run is
+not used. A Licensee that uses only the Software outside the Components,
+and Components whose scope leaves that use free, owes nothing for any
+Component whose scope withholds a use. A Component whose scope withholds
+a use does not make any other part of the Software Paid Use and does not
+limit the Licensee's rights in any other part of it.
+
+Sections 8 through 13 apply to each Component whose scope withholds a
+use as if that Component were the whole Software. Each such Component
+has its own Published Price, which is a price for that Component only.
+Amounts owed, usage statements under Section 10, output marks under
+Section 11, and Retroactive Licenses under Section 12 are figured
+Component by Component, and each mark identifies only the Component that
+produced the output. Paying for Paid Use of one part of the Software
+covers only that part. The step that Section 9 requires is presented,
+for each Component whose scope withholds a use, before that Component
+first runs. It names this license's version, the Component, and its
+scope, and shows where that Component's Published Price is published.
+Sections 1C, 2 through 7, 14, and 15 treat the Software and all of its
+Components as one.
+
+A Release that declares Components makes the choice described in Section
+2C once for the Software outside the Components and once for each
+Component. The name of each Component, the paths or packages that
+identify it, and its scope are filled in as the copyright year, holder,
+and project name are, and no other term of this license changes. The
+scope of a Component may be any Operational Scope in this Section 1A
+except Seat-Limited and Decentralized. The scope of the Software outside
+the Components may be any Operational Scope except Decentralized, which
+applies only to a Release without Components. The statement of the
+Release's Ruling License under Section 1C names this version, the scope
+stated first, and each Component with its scope.
+UFL_COMPONENTS
+}
+DEF_LINE=$SCOPE_LINE
+DEF_BODY=$SCOPE_BODY
+COMP_HDR=""
+COMP_STMT=""
+if [ -n "$COMPS" ]; then
+  [ "$SCOPE" != "decentralized" ] || die "SCOPE decentralized allows no Components (-C)."
+  NL='
+'
+  SEEN="|"
+  COMP_BLOCK=""
+  SPDX_COMPS=""
+  while IFS= read -r spec; do
+    case "$spec" in
+      *=*:*) ;;
+      *) die "Bad -C value: $spec (expected NAME=SCOPE:PATH[,PATH...])" ;;
+    esac
+    cname=${spec%%=*}
+    crest=${spec#*=}
+    cscope=${crest%%:*}
+    cpats=${crest#*:}
+    printf '%s' "$cname" | grep -Eq '^[a-z0-9][a-z0-9-]*$' || die "Bad Component name: $cname (lowercase letters, digits, hyphens)"
+    case "$SEEN" in *"|$cname|"*) die "Duplicate Component name: $cname" ;; esac
+    SEEN="$SEEN$cname|"
+    case "$cscope" in
+      unconditional|no-competing-service|no-third-party-hosting|noncommercial|paid) ;;
+      *) die "Bad Component scope: $cscope. Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid" ;;
+    esac
+    [ "$cscope" != "$SCOPE" ] || die "Component $cname has the same scope as the rest of the Software; omit it."
+    case "$cpats" in *\\*) die "Component $cname: a PATH may not contain a backslash." ;; esac
+    cnorm=$(printf '%s\n' "$cpats" | awk -F, '{ for (i = 1; i <= NF; i++) { gsub(/^[ \t]+|[ \t]+$/, "", $i); if ($i == "") bad = 1; else { sep = (out == "" ? "" : ", "); out = out sep $i } } if (bad || out == "") exit 1; printf "%s", out }') || die "Component $cname: PATH list is empty or has an empty item."
+    set_scope "$cscope"
+    COMP_HDR="${COMP_HDR:+$COMP_HDR$NL}Component $cname: $SCOPE_LINE ($cnorm)"
+    COMP_STMT="$COMP_STMT; Component $cname: $SCOPE_LINE"
+    COMP_BLOCK="${COMP_BLOCK:+$COMP_BLOCK$NL$NL}Component $cname (covers $cnorm):$NL$SCOPE_BODY"
+    SPDX_COMPS="$SPDX_COMPS.$(scope_letter "$cscope")-$cname"
+  done <<UFL_COMPLIST
+$COMPS
+UFL_COMPLIST
+  SCOPE_LINE=$DEF_LINE
+  SCOPE_BODY="$DEF_BODY$NL$NL$(comp_intro)$NL$NL$COMP_BLOCK"
+  SCOPE_SUFFIX="-$(scope_letter "$SCOPE")$SPDX_COMPS"
+else
+  SCOPE_LINE=$DEF_LINE
+  SCOPE_BODY=$DEF_BODY
+fi
 
 if [ "$RELEASE" = 1 ]; then
-  STMT="UFL 3.4, Operational Scope: $SCOPE_LINE (LicenseRef-UFL-3.4${SCOPE_SUFFIX})"
+  STMT="UFL 3.5, Operational Scope: $DEF_LINE$COMP_STMT (LicenseRef-UFL-3.5${SCOPE_SUFFIX})"
   if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
   exit 0
 fi
 
+if [ -n "$COMPS" ]; then
+  SCOPE_LINE="$DEF_LINE (the Software outside the Components below)"
+fi
 SCOPE_LINE_ESC=$(escape "$SCOPE_LINE")
 SCOPE_SUFFIX_ESC=$(escape "$SCOPE_SUFFIX")
 
@@ -209,9 +346,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.4\`|LicenseRef-UFL-3.4${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.4\`|\`UFL-3.4${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 3.4
+  -e "s|LicenseRef-UFL-3.5\`|LicenseRef-UFL-3.5${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-3.5\`|\`UFL-3.5${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 3.5
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -265,7 +402,7 @@ Release the Licensee uses.
 
 With each Release, the Licensor states which version of this license,
 and which Operational Scope, governs that Release (its "Ruling
-License"). The statement names both, for example "UFL 3.4, Operational
+License"). The statement names both, for example "UFL 3.5, Operational
 Scope: Noncommercial", and appears where users get the Release: in its
 release notes, its tag, or its package metadata. The Release includes
 the full text of its Ruling License. If a Release does not state its
@@ -588,13 +725,14 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.4` —
-not a bare `UFL-3.4`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.5` —
+not a bare `UFL-3.5`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 
-FILLED=$(printf '%s\n' "$FILLED" | awk -v body="$SCOPE_BODY" '
+FILLED=$(printf '%s\n' "$FILLED" | awk -v body="$SCOPE_BODY" -v hdr="$COMP_HDR" '
   $0 == "[OPERATIONAL SCOPE BODY]" { print body; next }
+  /^Operational Scope: / && !done { print; if (hdr != "") print hdr; done = 1; next }
   { print }
 ')
 

@@ -107,8 +107,10 @@ open too.
 Section 1 of the license grants unconditional use by default. As of
 version 2.0, a Licensor may instead narrow that grant to **exactly one**
 declared scope, stated on an `Operational Scope:` line at the top of the
-license text. Scopes are never combined or stacked — a project picks one
-from this menu, or none (which defaults to Unconditional):
+license text. Scopes are never combined or stacked over the same code — a
+project picks one from this menu, or none (which defaults to Unconditional).
+Since 3.5, a project can also give separate parts of itself their own scope
+(see Components, below):
 
 | Scope | What it restricts |
 |---|---|
@@ -118,6 +120,7 @@ from this menu, or none (which defaults to Unconditional):
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
 | **Decentralized** (since 3.3) | Nothing is withheld and nothing is paid. It replaces the dispute process and limits the Licensor's liability. |
+| **Paid** (since 3.5) | Every production use, by anyone. Reading the source and non-production use stay free. Meant for one Component. |
 
 Section 2 (redistribution reserved) and Section 2A (the decentralized-
 fork attribution carve-out, below) sit on a separate, always-on axis,
@@ -379,6 +382,112 @@ remove a user's non-waivable local rights, and it does not make a claim
 impossible. It makes a nominal claim not worth the arbitration fees, and
 it gives a serious one exactly one place to go.
 
+## Components (since 3.5)
+
+A single scope for a whole project is the wrong fit when the project is
+really two things. Take Snifrig. Its monitor and detector should be free to
+everyone, because the more machines they watch, the better. Its fixer, the
+part that remediates what the detector finds, is the product. Before 3.5 a
+Licensor had two bad options: make the whole thing Unconditional and give
+the fixer away, or pick a scope that withholds a use and make the detector
+paid too (there is no scope that is paid only for part of the code).
+
+3.5 lets one LICENSE give parts of the Software different scopes:
+
+```sh
+sh generate.sh -y 2026 -c "Snifrig Holder" -p Snifrig -s unconditional \
+  -C "snifrig-fix=paid:fix/**,crates/snifrig-fix" -o LICENSE
+```
+
+The `Operational Scope:` line in the header still names the scope for the
+rest of the Software. Under it, one `Component` line per part names the
+part, its scope, and the paths or packages that make it up. Section 1A
+carries a fixed block of text for Components, followed by each Component's
+scope text.
+
+**Why this stays inside Section 2C.** Section 2C lets a Licensor choose a
+version and a scope and fill in the blanks, and nothing else. A Component
+list is another fill-in: names, patterns, and one scope per name from the
+same menu. No term of the license is added or changed by hand; the
+generators produce the Component text, and a license without Components is
+byte for byte the 3.4 text with the version number changed.
+
+**The Paid scope.** Free to read and study the source, and free for
+Non-Production Use (evaluating, developing, testing, demonstrating, as
+Section 1B already defines it). Every Production Use is Paid Use under
+Section 8, personal or business, individual or organization. Section 8 is
+unchanged: the Published Price is a price and nothing else.
+
+**What each question comes out to.**
+
+- *Does a user of the free core owe anything for the paid part?* No. A
+  Component is used only when code of it runs, and code that is present and
+  never run is not used. A paid Component does not make any other part Paid
+  Use.
+- *Can the core be Noncommercial and one Component Paid?* Yes. They are
+  different code. A company using only the core commercially owes for the
+  core; a home user running the Paid part owes for that part. Paying for
+  one never covers the other.
+- *What combinations are not allowed?* Decentralized allows no Components,
+  and no Component may be Decentralized or Seat-Limited. Decentralized says
+  nothing is Paid Use and sets one dispute process for the whole Software,
+  which cannot sit next to a paid part. A Seat-Limited Component would need
+  its own threshold, and the generator takes a threshold for the whole
+  Software only.
+- *Overlaps and leftovers.* Everything no Component covers belongs to the
+  scope stated first. A file two Components cover belongs to the one listed
+  first.
+- *Output marks (Section 11) and Retroactive Licenses (Section 12).* Both
+  are figured Component by Component. A mark on output identifies only the
+  Component that produced it. A Retroactive License reaches back for use of
+  the paid Component only, at that Component's Published Price.
+- *Acceptance (Section 9).* The step for a Component that withholds a use
+  appears before that Component first runs, names the version, the Component
+  and its scope, and shows where its Published Price is published.
+- *SPDX.* `LicenseRef-UFL-3.5-U.P-snifrig-fix`: the rest of the Software's
+  scope letter, then `.` plus each Component's letter, `-`, and name. An
+  SPDX `LicenseRef` allows only letters, digits, `.` and `-`, so a form with
+  `+` and parentheses would not be a valid identifier.
+
+**Checking payment offline.** Section 10 says the license does not require
+or permit the Software to send information about a Licensee's use to the
+Licensor for enforcement. A paid Component can still check that its user
+paid, with no network at all. The reference design, in
+[`examples/snifrig/offline-key`](./examples/snifrig/offline-key):
+
+1. After payment, the Licensor signs a small record with an Ed25519 private
+   key it keeps offline: license version, Component name, Licensee, seat
+   count, paid period start and end.
+2. The Licensor delivers the signed key to the Licensee (a download or an
+   email). The Software never fetches it.
+3. The Software embeds only the Licensor's public key. At start it verifies
+   the signature, the Component name, and that the local clock is inside the
+   paid period. It imports no network library and makes no call.
+4. Renewal is a new key for a new period at the Published Price in effect
+   then, as Section 8 says.
+5. The seat count in the key is a record, not an enforcement: counting
+   Seats is the Licensee's statement under Section 10, not something the
+   Software can check offline.
+
+Whether the Software refuses to run a paid Component's production mode
+without a valid key is the Licensor's design choice. The license neither
+requires nor forbids it. The key check proves payment, not identity: a key
+can be shared, and the Licensor's remedies for that are the license's own
+(Sections 9, 12, and 14).
+
+**Worked example.** [`examples/snifrig`](./examples/snifrig) has the
+generated LICENSE, the Release statement, who owes what, the acceptance
+screen, and the key check.
+
+**Honest limits.** A Component boundary is a line in a repository, and
+software is often not that clean: a paid part linked into the same binary as
+the free core, a free part that calls the paid part, a user who copies the
+paid code into the free core and runs it there. The license answers by
+what runs and by Section 2's reservation of distribution, not by guessing
+how the code is linked. A Licensor who wants a hard boundary should keep the
+paid Component in its own package. The clearer the boundary, the clearer the
+license.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -518,6 +627,9 @@ updates it:
   the arbitration has a California seat, costs and fees follow a
   frivolous-claim rule outside the cap, running the software is treated
   as acceptance, and the token price source is defined.
+- **3.5** — Components: a Release may give separate parts of the Software
+  their own Operational Scope, by generator flag, with a new Paid scope for
+  a part that is sold while the rest stays free.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

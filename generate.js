@@ -1,14 +1,26 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.4.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.5.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
 //   node generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
-//     [-s SCOPE] [-t THRESHOLD] [-o OUTPUT_PATH]
-//   node generate.js -r [-s SCOPE] [-t THRESHOLD]
+//     [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH]
+//   node generate.js -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]...
 //
 // SCOPE is one of: unconditional (default), no-competing-service,
-// no-third-party-hosting, noncommercial, seat-limited. THRESHOLD is only
+// no-third-party-hosting, noncommercial, seat-limited, decentralized, paid.
+// SCOPE governs all of the Software that no Component covers. -C declares a
+// Component, a part of the Software with its own scope (since 3.5), as
+// NAME=SCOPE:PATH[,PATH...], for example
+//   -C "snifrig-fix=paid:fix/**,crates/snifrig-fix"
+// and may be repeated. NAME is lowercase letters, digits, and hyphens. A
+// Component's SCOPE is one of unconditional, no-competing-service,
+// no-third-party-hosting, noncommercial, paid; SCOPE for the rest of the
+// Software may be any scope except decentralized, which allows no Components.
+// A PATH is a path or glob relative to the root of the Release, or a package
+// name; it may not contain a backslash or a comma. A file that more than one
+// Component covers belongs to the Component listed first. TOKEN is only used
+// when SCOPE is decentralized (the native token, default "none"). THRESHOLD is only
 // used (and required) when SCOPE is seat-limited — free text describing
 // the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
 // Any flag left out is prompted for, except THRESHOLD, which is only
@@ -27,14 +39,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.4. See CHANGELOG.md for revisions.
+// Tracks UFL 3.5. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.4",
+  "The Usufruct License (UFL) — Version 3.5",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -88,7 +100,7 @@ const TEMPLATE = [
   "",
   "With each Release, the Licensor states which version of this license,",
   "and which Operational Scope, governs that Release (its \"Ruling",
-  "License\"). The statement names both, for example \"UFL 3.4, Operational",
+  "License\"). The statement names both, for example \"UFL 3.5, Operational",
   "Scope: Noncommercial\", and appears where users get the Release: in its",
   "release notes, its tag, or its package metadata. The Release includes",
   "the full text of its Ruling License. If a Release does not state its",
@@ -411,10 +423,62 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.4` —",
-  "not a bare `UFL-3.4`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.5` —",
+  "not a bare `UFL-3.5`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
+
+const COMPONENT_INTRO = [
+  "Components. This Release may declare Components in the header above. A",
+  "Component is a part of the Software that the header identifies by file",
+  "path, glob, directory, or package name, and for which it states its own",
+  "Operational Scope. A path or glob is read relative to the root of the",
+  "Release, where * matches within one path segment and ** matches across",
+  "segments; a name that is not a path identifies the package of that name",
+  "in the Release. The scope stated first governs all of the Software that",
+  "no Component covers. Each Component is governed by the scope the header",
+  "states for it. The statement above that exactly one scope applies is",
+  "read as applying once to the Software outside the Components and once to",
+  "each Component. In the scope that governs a Component, \"the Software\"",
+  "means that Component, and in the scope stated first it means the",
+  "Software outside the Components. A file or package that more than one",
+  "Component covers belongs to the Component the header lists first.",
+  "",
+  "A use of a Component is any use of the Software that runs code of that",
+  "Component, whether directly or through a call from other code. Code of a",
+  "Component that is present in a copy of the Software but is never run is",
+  "not used. A Licensee that uses only the Software outside the Components,",
+  "and Components whose scope leaves that use free, owes nothing for any",
+  "Component whose scope withholds a use. A Component whose scope withholds",
+  "a use does not make any other part of the Software Paid Use and does not",
+  "limit the Licensee's rights in any other part of it.",
+  "",
+  "Sections 8 through 13 apply to each Component whose scope withholds a",
+  "use as if that Component were the whole Software. Each such Component",
+  "has its own Published Price, which is a price for that Component only.",
+  "Amounts owed, usage statements under Section 10, output marks under",
+  "Section 11, and Retroactive Licenses under Section 12 are figured",
+  "Component by Component, and each mark identifies only the Component that",
+  "produced the output. Paying for Paid Use of one part of the Software",
+  "covers only that part. The step that Section 9 requires is presented,",
+  "for each Component whose scope withholds a use, before that Component",
+  "first runs. It names this license's version, the Component, and its",
+  "scope, and shows where that Component's Published Price is published.",
+  "Sections 1C, 2 through 7, 14, and 15 treat the Software and all of its",
+  "Components as one.",
+  "",
+  "A Release that declares Components makes the choice described in Section",
+  "2C once for the Software outside the Components and once for each",
+  "Component. The name of each Component, the paths or packages that",
+  "identify it, and its scope are filled in as the copyright year, holder,",
+  "and project name are, and no other term of this license changes. The",
+  "scope of a Component may be any Operational Scope in this Section 1A",
+  "except Seat-Limited and Decentralized. The scope of the Software outside",
+  "the Components may be any Operational Scope except Decentralized, which",
+  "applies only to a Release without Components. The statement of the",
+  "Release's Ruling License under Section 1C names this version, the scope",
+  "stated first, and each Component with its scope."
+];
 
 const SCOPES = {
   "unconditional": {
@@ -524,6 +588,16 @@ const SCOPES = {
       "stop conduct that Section 2 reserves or that infringes the Licensor's",
       "intellectual property."
     ]
+  },
+  "paid": {
+    line: "Paid",
+    suffix: "-P",
+    body: [
+      "Paid — Section 1's free grant is limited to reading and studying the",
+      "Software's source and to Non-Production Use. Every Production Use of the",
+      "Software, by any Licensee, whether an organization or an individual and",
+      "whether for business or personal purposes, is Paid Use under Section 8."
+    ]
   }
 };
 
@@ -534,7 +608,7 @@ function buildScope(scopeKey, threshold, token) {
 }
 
 function parseArgs(argv) {
-  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, token: null, out: null, release: false };
+  const out = { year: null, holder: null, project: null, scope: 'unconditional', threshold: null, token: null, components: [], out: null, release: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '-y') { out.year = argv[++i]; }
@@ -543,12 +617,14 @@ function parseArgs(argv) {
     else if (a === '-s') { out.scope = argv[++i]; }
     else if (a === '-t') { out.threshold = argv[++i]; }
     else if (a === '-k') { out.token = argv[++i]; }
+    else if (a === '-C') { out.components.push(argv[++i]); }
     else if (a === '-o') { out.out = argv[++i]; }
     else if (a === '-r' || a === '--release-statement') { out.release = true; }
     else if (a === '-h' || a === '--help') {
       process.stderr.write(
-        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN]\n' +
-        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized\n'
+        'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]...\n' +
+        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid\n' +
+        'COMPONENT: NAME=SCOPE:PATH[,PATH...]  (SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid)\n'
       );
       process.exit(0);
     } else {
@@ -581,8 +657,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.4`').join('LicenseRef-UFL-3.4' + scopeSuffix + '`')
-    .split('`UFL-3.4`').join('`UFL-3.4' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.5`').join('LicenseRef-UFL-3.5' + scopeSuffix + '`')
+    .split('`UFL-3.5`').join('`UFL-3.5' + scopeSuffix + '`');
 }
 
 function main() {
@@ -592,7 +668,7 @@ function main() {
   const holder = args.release ? '' : args.holder || prompt('Copyright holder: ');
   const project = args.release ? '' : args.project || prompt('Project name: ');
 
-  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'decentralized'];
+  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'decentralized', 'paid'];
   if (validScopes.indexOf(args.scope) === -1) {
     process.stderr.write('Unknown SCOPE: ' + args.scope + '\n');
     process.stderr.write('Must be one of: ' + validScopes.join(' | ') + '\n');
@@ -610,12 +686,47 @@ function main() {
   }
 
   const scope = buildScope(args.scope, threshold, token);
+  const fail = (m) => { process.stderr.write(m + '\n'); process.exit(1); };
+  const letters = { 'unconditional': 'U', 'no-competing-service': 'C', 'no-third-party-hosting': 'H', 'noncommercial': 'N', 'seat-limited': 'S', 'decentralized': 'D', 'paid': 'P' };
+  const compScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'paid'];
+  let compHdr = '', compStmt = '', suffix = scope.suffix, bodyLines = scope.body, headerLine = scope.line;
+  if (args.components.length) {
+    if (args.scope === 'decentralized') fail('SCOPE decentralized allows no Components (-C).');
+    const seen = {}, hdr = [], blocks = [];
+    let spdx = '';
+    for (const spec of args.components) {
+      const m = /^([^=]*)=([^:]*):(.*)$/s.exec(spec);
+      if (!m) fail('Bad -C value: ' + spec + ' (expected NAME=SCOPE:PATH[,PATH...])');
+      const [, cname, cscope, cpats] = m;
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(cname)) fail('Bad Component name: ' + cname + ' (lowercase letters, digits, hyphens)');
+      if (seen[cname]) fail('Duplicate Component name: ' + cname);
+      seen[cname] = true;
+      if (compScopes.indexOf(cscope) === -1) fail('Bad Component scope: ' + cscope + '. Must be one of: ' + compScopes.join(' | '));
+      if (cscope === args.scope) fail('Component ' + cname + ' has the same scope as the rest of the Software; omit it.');
+      if (cpats.indexOf('\\') !== -1) fail('Component ' + cname + ': a PATH may not contain a backslash.');
+      const items = cpats.split(',').map((x) => x.replace(/^[ \t]+|[ \t]+$/g, ''));
+      if (items.some((x) => x === '')) fail('Component ' + cname + ': PATH list is empty or has an empty item.');
+      const cnorm = items.join(', ');
+      const cs = buildScope(cscope, threshold, token);
+      hdr.push('Component ' + cname + ': ' + cs.line + ' (' + cnorm + ')');
+      compStmt += '; Component ' + cname + ': ' + cs.line;
+      blocks.push('Component ' + cname + ' (covers ' + cnorm + '):\n' + cs.body.join('\n'));
+      spdx += '.' + letters[cscope] + '-' + cname;
+    }
+    compHdr = hdr.join('\n');
+    bodyLines = scope.body.concat(['', COMPONENT_INTRO.join('\n'), '', blocks.join('\n\n')]);
+    suffix = '-' + letters[args.scope] + spdx;
+    headerLine = scope.line + ' (the Software outside the Components below)';
+  }
   if (args.release) {
-    const stmt = 'UFL 3.4, Operational Scope: ' + scope.line + ' (LicenseRef-UFL-3.4' + scope.suffix + ')\n';
+    const stmt = 'UFL 3.5, Operational Scope: ' + scope.line + compStmt + ' (LicenseRef-UFL-3.5' + suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }
     return;
   }
-  const filled = fill(TEMPLATE, year, holder, project, scope.line, scope.body, scope.suffix);
+  let filled = fill(TEMPLATE, year, holder, project, headerLine, bodyLines, suffix);
+  if (compHdr) {
+    filled = filled.replace(/^Operational Scope: .*$/m, (h) => h + '\n' + compHdr);
+  }
 
   if (args.out) {
     fs.writeFileSync(args.out, filled);

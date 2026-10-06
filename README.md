@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.4" src="https://img.shields.io/badge/license-UFL--3.4-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.4-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.5" src="https://img.shields.io/badge/license-UFL--3.5-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.5-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -34,7 +34,7 @@ also says what a contributor gives the project — see
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.4**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.5**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -75,7 +75,9 @@ purpose. See Section 2C.
 ## Operational Scope (since 2.0)
 
 Section 1's use grant is either fully unconditional, or narrowed by
-**exactly one** declared scope — scopes are never combined or stacked.
+**exactly one** declared scope — scopes are never combined or stacked
+across the same part of the Software. (Since 3.5, different parts of one
+project can each have their own scope; see [Components](#components-since-35).)
 The scope is stated in three places that must agree: the `Operational
 Scope:` line at the top of the license text, the `scope` field in
 `ufl.json`, and the required `-s` flag on both generators.
@@ -88,10 +90,43 @@ Scope:` line at the top of the license text, the `scope` field in
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
 | Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and each party's liability to the other is limited to US$1 in value, payable in money or the project's native token (`-k`, optional). |
+| Paid (since 3.5) | `UFL-P-1a` | Every production use, by anyone. Reading the source and non-production use stay free. Meant for one Component of a larger project. |
 
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
 above applies.
+
+## Components (since 3.5)
+
+One project can have a free core and a paid part under one LICENSE. Name
+the parts when you generate the license, and give each its own scope:
+
+```sh
+sh generate.sh -y 2026 -c "Jane Doe" -p Snifrig -s unconditional \
+  -C "snifrig-fix=paid:fix/**,crates/snifrig-fix" -o LICENSE
+```
+
+`-s` sets the scope for everything no Component covers. `-C
+NAME=SCOPE:PATH[,PATH...]` declares a Component and may be repeated. A
+path is relative to the root of the Release (`*` within a segment, `**`
+across segments) or a package name. A file two Components cover belongs to
+the one listed first. A Component's scope may be unconditional,
+no-competing-service, no-third-party-hosting, noncommercial, or paid. Seat-Limited
+and Decentralized are not available for a Component, and Decentralized
+allows no Components.
+
+- A Component is used only when its code runs. A user of the free core
+  owes nothing for the paid Component, and code on disk that is never run
+  is not used.
+- Each Component has its own Published Price, usage statements, output
+  marks, and Retroactive License. Paying for one covers only that one.
+- The Section 9 step for a paid Component appears before it first runs
+  and names the version, the Component, its scope, and where its Published
+  Price is published.
+- The SPDX identifier is `LicenseRef-UFL-3.5-U.P-snifrig-fix`. `sh
+  generate.sh -r ...` with the same flags prints the Release statement.
+- Checking payment offline, without sending anything to the Licensor, is
+  shown in [`examples/snifrig`](./examples/snifrig).
 
 ## Paid use (since 3.0)
 
@@ -122,11 +157,11 @@ not take effect and the project is licensed as Unconditional.
 The click-through must, before first use:
 
 - name the license version and the Operational Scope (for example,
-  "UFL 3.4, Decentralized");
+  "UFL 3.5, Decentralized");
 - show the limit of liability and the dispute process, or the full
   license text, and ask for an affirmative step (a button, a typed
   confirmation, or for headless use an explicit flag or setting naming the
-  version, such as `--accept-ufl 3.4`);
+  version, such as `--accept-ufl 3.5`);
 - not run at all until the step is done (a gate, not a notice);
 - record the version and time on the user's own machine only.
 
@@ -142,7 +177,7 @@ license text with it:
 
 ```
 ./generate.sh -r -s noncommercial
-UFL 3.4, Operational Scope: Noncommercial (LicenseRef-UFL-3.4-N)
+UFL 3.5, Operational Scope: Noncommercial (LicenseRef-UFL-3.5-N)
 ```
 
 Put that line in the Release's notes, its tag, or its package metadata.
@@ -208,14 +243,15 @@ left blank (and the threshold for Seat-Limited, or the native token, if any, for
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.4-unconditional.pdf](./pdf/UFL-3.4-unconditional.pdf) | [.txt](./pdf/UFL-3.4-unconditional.txt) |
-| Seat-Limited | [UFL-3.4-seat-limited.pdf](./pdf/UFL-3.4-seat-limited.pdf) | [.txt](./pdf/UFL-3.4-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.4-no-third-party-hosting.pdf](./pdf/UFL-3.4-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.4-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.4-no-competing-service.pdf](./pdf/UFL-3.4-no-competing-service.pdf) | [.txt](./pdf/UFL-3.4-no-competing-service.txt) |
-| Noncommercial | [UFL-3.4-noncommercial.pdf](./pdf/UFL-3.4-noncommercial.pdf) | [.txt](./pdf/UFL-3.4-noncommercial.txt) |
-| Decentralized | [UFL-3.4-decentralized.pdf](./pdf/UFL-3.4-decentralized.pdf) | [.txt](./pdf/UFL-3.4-decentralized.txt) |
+| Unconditional | [UFL-3.5-unconditional.pdf](./pdf/UFL-3.5-unconditional.pdf) | [.txt](./pdf/UFL-3.5-unconditional.txt) |
+| Seat-Limited | [UFL-3.5-seat-limited.pdf](./pdf/UFL-3.5-seat-limited.pdf) | [.txt](./pdf/UFL-3.5-seat-limited.txt) |
+| No-Third-Party-Hosting | [UFL-3.5-no-third-party-hosting.pdf](./pdf/UFL-3.5-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.5-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.5-no-competing-service.pdf](./pdf/UFL-3.5-no-competing-service.pdf) | [.txt](./pdf/UFL-3.5-no-competing-service.txt) |
+| Noncommercial | [UFL-3.5-noncommercial.pdf](./pdf/UFL-3.5-noncommercial.pdf) | [.txt](./pdf/UFL-3.5-noncommercial.txt) |
+| Decentralized | [UFL-3.5-decentralized.pdf](./pdf/UFL-3.5-decentralized.pdf) | [.txt](./pdf/UFL-3.5-decentralized.txt) |
+| Paid | [UFL-3.5-paid.pdf](./pdf/UFL-3.5-paid.pdf) | [.txt](./pdf/UFL-3.5-paid.txt) |
 
-The 3.0 PDFs stay in [`pdf/`](./pdf) under their own names, unchanged.
+The PDFs of earlier versions stay in [`pdf/`](./pdf) under their own names, unchanged.
 
 Each PDF footer carries the SHA-256 of its license text, and
 [`SHA256SUMS`](./SHA256SUMS) lists the hash of every release file. To
@@ -246,15 +282,16 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.4<suffix>` (e.g. `LicenseRef-UFL-3.4-N` for
-Noncommercial), not a bare `UFL-3.4<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.5<suffix>` (e.g. `LicenseRef-UFL-3.5-N` for
+Noncommercial), not a bare `UFL-3.5<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
 
 Do not rewrite, trim, or "clean up" any of the license text beyond
-filling the three placeholders and picking one scope — see Section 2C.
-If a project's needs don't fit any of the six scopes, that is a reason
+filling the three placeholders and picking one scope (or one scope per
+Component, since 3.5) — see Section 2C.
+If a project's needs don't fit any of the seven scopes, that is a reason
 to pick a different license or propose a new scope for a future UFL
 version, not to hand-edit this one.
 
@@ -264,7 +301,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.4, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.5, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -278,11 +315,11 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.4") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.5") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
-paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, or the narrower dispute clause in 3.3, or the Decentralized fixes in 3.4, for example — applies only to a project that has actually updated to that
+paid-use terms in 3.0, the contribution terms in 3.1, or the release pinning in 3.2, or the narrower dispute clause in 3.3, or the Decentralized fixes in 3.4, or Components in 3.5, for example — applies only to a project that has actually updated to that
 version's text.
 
 If you want the latest provisions, update your project's `LICENSE` file

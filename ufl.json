@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "3.4",
-  "spdxIdentifier": "LicenseRef-UFL-3.4",
+  "version": "3.5",
+  "spdxIdentifier": "LicenseRef-UFL-3.5",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -43,6 +43,11 @@
       "tag": "UFL-D-1a",
       "spdxSuffix": "-D",
       "summary": "Free use with no Paid Use. Disputes go to exclusive online ICC arbitration, individual claims only, with each party's liability limited to US$1 in value, payable in money or the project's native token."
+    },
+    "paid": {
+      "tag": "UFL-P-1a",
+      "spdxSuffix": "-P",
+      "summary": "Free to read and for non-production use; every production use, by anyone, is Paid Use at the Licensor's Published Price. Most useful as the scope of one Component."
     }
   },
   "adoptedBy": [
@@ -88,5 +93,20 @@
       "version": "2.2",
       "scope": "no-competing-service"
     }
-  ]
+  ],
+  "components": {
+    "since": "3.5",
+    "generatorFlag": "-C NAME=SCOPE:PATH[,PATH...]  (repeatable)",
+    "componentScopes": [
+      "unconditional",
+      "no-competing-service",
+      "no-third-party-hosting",
+      "noncommercial",
+      "paid"
+    ],
+    "restScopes": "any scope except decentralized",
+    "overlap": "a file that more than one Component covers belongs to the Component listed first",
+    "spdx": "LicenseRef-UFL-3.5-<L>[.<l>-<name>]... where <L> is the scope letter of the rest of the Software and <l>-<name> is each Component's scope letter and name; letters U C H N S D P as in spdxSuffix; example LicenseRef-UFL-3.5-U.P-snifrig-fix",
+    "example": "examples/snifrig"
+  }
 }
