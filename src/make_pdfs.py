@@ -117,15 +117,20 @@ if len(sys.argv) == 4 and sys.argv[1] == "--one":
     print(sys.argv[3], d[:16]); sys.exit(0)
 
 sums = []
-for key, name in NAMES.items():
+# reference copies: one per scope, plus the two Contract Release forms (since 3.6)
+VARIANTS = [(k, n, k, []) for k, n in NAMES.items()] + [
+    ("contract", "Contract Release", "unconditional", ["-K"]),
+    ("contract-decentralized", "Contract Release, Decentralized", "decentralized", ["-K"])]
+for key, name, scope_key, extra in VARIANTS:
     txt = subprocess.check_output(["sh", str(R / "generate.sh"), "-y", "[YEAR]", "-c", "[COPYRIGHT HOLDER]",
-                                   "-p", "[PROJECT NAME]", "-s", key, "-t", "[THRESHOLD]", "-k", "[NATIVE TOKEN]"], text=True)
+                                   "-p", "[PROJECT NAME]", "-s", scope_key, "-t", "[THRESHOLD]", "-k", "[NATIVE TOKEN]"] + extra,
+                                  text=True, stderr=subprocess.DEVNULL)
     (OUT / f"UFL-{VER}-{key}.txt").write_text(txt)
     note = ("Reference copy. This PDF is read-only. A Licensor adopts this text by filling in only the year, "
-            "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if key == "decentralized" else ",")
+            "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if scope_key == "decentralized" else ",")
             + " in its own LICENSE file (Section 2C). The SHA-256 below identifies this exact text.")
     pdf_path = OUT / f"UFL-{VER}-{key}.pdf"
-    digest = render_pdf(txt, name, pdf_path, tag=SCOPES[key]["tag"], blank_note=note)
+    digest = render_pdf(txt, name, pdf_path, tag=SCOPES[scope_key]["tag"] + ("-K" if extra else ""), blank_note=note)
     sums.append((hashlib.sha256(pdf_path.read_bytes()).hexdigest(), pdf_path.name))
     sums.append((digest, f"UFL-{VER}-{key}.txt"))
     print(name, "->", pdf_path.name, digest[:16])

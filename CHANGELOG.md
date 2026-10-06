@@ -4,6 +4,76 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.6 — October 2026
+
+Smart contracts. UFL assumed software a person runs, with an acceptance
+step shown before first use. A deployed contract has no user to show
+anything to, its bytecode cannot be changed, its source is public by
+design, and other contracts call it. 3.6 adds a Contract Release: a mode
+declared with the generators (`-K`) that adds fixed Contracts paragraphs to
+Section 1A. A license without `-K` is the 3.5 text with the version
+changed. 3.6 builds on 3.5 (Components, Paid, forward only).
+
+- **Use is free and unconditional for everyone.** Calling, integrating
+  with, and composing with a deployed contract, by wallets, scripts,
+  front ends, and other contracts, needs no payment, permission, or
+  acceptance, under any scope. Calling is not distributing, not
+  incorporating under Section 2(b), and does not make the caller a
+  derivative.
+- **What is reserved.** A copy of bytecode is a copy of the Software.
+  Deploying it, or a modified or similar version, to a chain where others
+  can call it is reserved by Section 2(a). Not reserved: publishing the
+  source, block-explorer verification, node copying, reading and study,
+  and running it on a local, private, or public test chain for evaluation,
+  development, testing, or demonstration when it holds nothing of real
+  value.
+- **Redeploying.** Section 2A applies to a redeployment as if the contract
+  were a fork of decentralized software: credit the origin (name it by chain
+  and address) in the source header and documentation, and keep the notice.
+  The redeployer takes the parts from the Software under this license and
+  redeploys at their own risk.
+- **Acceptance, stated plainly.** Calling a contract is not acceptance.
+  Sections 2 and 2A bind deployers and redeployers without acceptance.
+  Terms that need acceptance bind only a person who completes the Section 9
+  step in a front end, app, wallet, or tool the Licensor provides. A plain
+  caller is bound by none of them. The acceptance record stays on the
+  Licensee's own systems; nothing writes it to a chain.
+- **Releases.** A Release is a Deployment: chain, address, and hash of its
+  verified source. A proxy is not a Release; each implementation behind it
+  is its own Release with its own Ruling License. Pointing a proxy at a new
+  implementation is a later Release, with Section 1C's forward-only rule and
+  notice.
+- **Notice.** The source starts with an SPDX line (`LicenseRef-UFL-3.6-K`,
+  or `LicenseRef-UFL-3.6-D-K` for Decentralized) and a comment naming the
+  license, version, scope, canonical source, and the SHA-256 of the
+  project's license file. That notice is the Section 1C statement. Flattened
+  files may use an SPDX expression such as `MIT AND LicenseRef-UFL-3.6-K`.
+- **Third-party code** keeps its own license.
+- **As is, in plain sight.** The source carries a notice that contracts can
+  lose assets and cannot be changed once deployed. It binds nobody.
+- **Decentralized with `-K`.** Its limit of liability, payment, and
+  arbitration terms reach a person who completes the front-end step and a
+  person who redeploys. "The Software running" and "bypassing the step" mean
+  the front end, not the contract.
+- **Limits.** `-K` needs the Unconditional or Decentralized scope, and no
+  Components.
+
+Generators: `-K` (`--contract` in `generate.js`). `generate.sh -r -K` prints
+`UFL 3.6, Operational Scope: Unconditional, Contract Release
+(LicenseRef-UFL-3.6-K)`. Reference PDFs: `UFL-3.6-contract` and
+`UFL-3.6-contract-decentralized`. Example: `examples/hone-contracts`.
+
+**Migration for adopters.** Nothing to do for existing Releases. Contracts
+already deployed under another license (Hone's wHONE, sale, bridge, bonding
+curve, and exchange contracts under MIT) stay under it: a deployment's
+license is fixed when it is deployed. To use UFL for a new contract,
+generate the license with `-K`, put the header in each source file before
+compiling, because the SPDX line and comments change the metadata hash, and
+state the Release statement with the deployment.
+
+SPDX identifier: `LicenseRef-UFL-3.6`, with the suffixes as before, and
+`-K` for contracts.
+
 ## 3.5 — October 2026
 
 Components: one project, one LICENSE, parts with different Operational
