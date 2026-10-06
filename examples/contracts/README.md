@@ -1,22 +1,22 @@
-# Example: new Hone contracts under UFL 3.6 (Decentralized, Contract Release)
+# Example: new contracts under UFL 3.6 (Decentralized, Contract Release)
 
-The wHONE (ERC-20, multichain), sale, bridge, bonding curve, and exchange
-contracts already deployed under MIT stay MIT. A deployment's license is
+Contracts already deployed under another license, such as MIT,
+stay under it. A deployment's license is
 fixed when it is deployed, and nothing here changes it. This example is for
 new contracts and new implementations behind a proxy.
 
 ```sh
-sh generate.sh -y 2026 -c estejosh -p Hone -s decentralized -k HONE -K -o LICENSE
-sh generate.sh -r -s decentralized -k HONE -K
+sh generate.sh -y 2026 -c "Example Holder" -p "Example Project" -s decentralized -k EXMPL -K -o LICENSE
+sh generate.sh -r -s decentralized -k EXMPL -K
 # UFL 3.6, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.6-D-K)
 sha256sum LICENSE   # goes in each source header
 ```
 
-[`LICENSE`](./LICENSE) is that output, and [`WHONE.sol`](./WHONE.sol) shows
+[`LICENSE`](./LICENSE) is that output, and [`ExampleToken.sol`](./WHONE.sol) shows
 the header. Checklist for each new deployment:
 
 1. Generate the license, compute its SHA-256, and put the header at the top
-   of every Hone-written source file before the compile you will deploy. The
+   of every project-written source file before the compile you will deploy. The
    SPDX line and comments change the metadata hash.
 2. Imported libraries (OpenZeppelin and similar) stay in their own files with
    their own SPDX lines. If you flatten for verification, use one SPDX
@@ -29,7 +29,7 @@ the header. Checklist for each new deployment:
    provide. It names UFL 3.6, the Decentralized scope, the one-dollar limit,
    and the arbitration terms, and it records acceptance on the user's own
    machine. Do not write acceptance to a chain.
-6. Redeployers of a Hone contract must credit Hone, naming the origin chain
+6. Redeployers of the project's contract must credit the project, naming the origin chain
    and address, and keep the header. Plain callers owe nothing and are not
    bound by anything that needs acceptance.
 7. Check how each block explorer you use displays a `LicenseRef` SPDX line on

@@ -162,7 +162,7 @@ UFL 3.6, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.6-
 ```
 
 `-K` works with the Unconditional or Decentralized scope and no
-Components. See [`examples/hone-contracts`](./examples/hone-contracts).
+Components. See [`examples/contracts`](./examples/contracts).
 
 ## Paid use (since 3.0)
 

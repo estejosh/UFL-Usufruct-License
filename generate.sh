@@ -279,7 +279,11 @@ chain; reading and studying the Source; and running Bytecode on a local,
 private, or public test chain to evaluate, develop, test, or demonstrate
 it, so long as that deployment holds nothing of real value and is not
 offered to others as a way to use the Software in place of the
-Deployment.
+Deployment. Importing or inheriting the Source into other Source, or
+including it in another contract's Source, copies the Software and is a
+reserved act on the same terms as deploying its Bytecode. Using only the
+Deployment's published interface to call it is not copying and is free,
+as the paragraph on calling says.
 
 Section 2A applies to a redeployment of a Contract Release as if it were
 a fork of decentralized software, even though a contract is not a node,
@@ -313,7 +317,13 @@ bound by none of those terms and has the rights the law gives them
 against the Licensor. The step is shown and recorded as Section 9
 provides, and the record stays on the Licensee's own systems: neither a
 Deployment nor the Licensor's tools write a record of acceptance to a
-chain.
+chain. Where a Deployment's governance, whether a vote, a timelock, or
+another process the Software's own rules set, points a proxy back at an
+implementation that is already deployed, that is not a new Release and
+not a move to an earlier version of this license: the earlier
+implementation keeps the Ruling License it always had. Whether and when
+to do so is for that governance, and is not the Licensor's alone to
+decide.
 
 A Release of a Contract Release is one Deployment, identified by its
 chain, its address, and the hash of its verified Source, or a set of
@@ -339,12 +349,32 @@ text with the Deployment; the full text is in the Licensor's repository
 at the commit the Source was published from. Where Source is flattened
 into one file, the file's SPDX line may be an SPDX expression that lists
 each license that applies to code in the file, and this license applies
-only to the code that is under it.
+only to the code that is under it. This license governs the Release it
+is published with and the code that is under it. Other releases of the
+same project, including earlier ones under another license such as MIT,
+keep the terms they were published under. A person who forks, redeploys,
+verifies, lists, indexes, or builds on the Software is responsible for
+their own software and for the licenses it carries, and nothing here
+makes the Licensor responsible for what they publish. A block explorer
+or verification service that only displays Source is not making a
+reserved act.
 
-Source may import or include code the Licensor did not write, such as a
-library with its own license. That code stays under its own license,
-which this license neither replaces nor reduces, and the Licensor grants
-no rights in it.
+This notice states what a person who calls a Deployment should know.
+Where the Software is decentralized in fact, that is, it has no
+administrator key, no upgrade key, and no pause or seizure function held
+by the Licensor or anyone else, then once it is deployed it runs as
+public, shared software: it is maintained in public, anyone can read it,
+and anyone can propose updates to its Source, but there is no company or
+person who operates it, who can reverse or correct what it does, or who
+can be sued over it. A Deployment can hold or move assets, can lose them
+through an error in the Software or in anything it calls, and cannot be
+changed after it is deployed unless it was built to be upgraded. The
+Software, including each Deployment, is provided as is, as Section 5
+says, and a person who calls a Deployment does so at their own risk. A
+Licensor that keeps such a key or function must say so in the Source
+notice and must not describe the Software as decentralized. This
+paragraph is a notice. It does not limit any liability that the law does
+not allow to be limited, and it does not bind anyone to any term.
 
 A Deployment can hold or move assets, can lose them through an error in
 the Software or in anything it calls, and cannot be changed after it is

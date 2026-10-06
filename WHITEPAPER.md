@@ -633,11 +633,7 @@ deployed. Block explorers read the SPDX line and offer a fixed license list;
 how each shows a `LicenseRef` should be checked on a test network before a
 mainnet deployment.
 
-**Hone.** The wHONE, sale, bridge, bonding curve, and exchange contracts
-already deployed under MIT stay MIT: a deployment's license is fixed when it
-is deployed. New contracts, and new implementations behind a proxy, can use
-`-s decentralized -k HONE -K`. [`examples/hone-contracts`](./examples/hone-contracts)
-has the license and a header example.
+**Existing deployments.** Contracts already deployed under another license, such as MIT, stay under it: a deployment's license is fixed when it is deployed. New contracts, and new implementations behind a proxy, can use `-s decentralized -k NAME -K`. [`examples/contracts`](./examples/contracts) has the license and a header example.
 
 **Open questions for counsel.**
 

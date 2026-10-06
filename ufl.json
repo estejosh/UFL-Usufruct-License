@@ -119,6 +119,6 @@
     "components": "not allowed with -K",
     "spdx": "LicenseRef-UFL-3.6-K (unconditional) or LicenseRef-UFL-3.6-D-K (decentralized)",
     "release": "one Deployment: chain id + address + hash of verified Source; each proxy implementation is its own Release",
-    "example": "examples/hone-contracts"
+    "example": "examples/contracts"
   }
 }

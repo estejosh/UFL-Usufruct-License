@@ -61,11 +61,12 @@ changed. 3.6 builds on 3.5 (Components, Paid, forward only).
 Generators: `-K` (`--contract` in `generate.js`). `generate.sh -r -K` prints
 `UFL 3.6, Operational Scope: Unconditional, Contract Release
 (LicenseRef-UFL-3.6-K)`. Reference PDFs: `UFL-3.6-contract` and
-`UFL-3.6-contract-decentralized`. Example: `examples/hone-contracts`.
+`UFL-3.6-contract-decentralized`. Example: `examples/contracts`.
+
+Also in the Contracts paragraphs: importing or inheriting the Source counts as copying, while calling through the interface is free; a governance-approved return of a proxy to an already-deployed implementation is not a new Release and not a move to an earlier version; other releases of the same project keep their own licenses; forkers, verifiers and explorers answer for their own software; and the as-is notice says plainly that a decentralized deployment is public software with no one to operate or sue, and that a Licensor who keeps an admin, upgrade or pause key must not call it decentralized.
 
 **Migration for adopters.** Nothing to do for existing Releases. Contracts
-already deployed under another license (Hone's wHONE, sale, bridge, bonding
-curve, and exchange contracts under MIT) stay under it: a deployment's
+already deployed under another license (for example, ones under MIT) stay under it: a deployment's
 license is fixed when it is deployed. To use UFL for a new contract,
 generate the license with `-K`, put the header in each source file before
 compiling, because the SPDX line and comments change the metadata hash, and
