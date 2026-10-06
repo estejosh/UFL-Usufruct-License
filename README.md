@@ -90,7 +90,7 @@ Scope:` line at the top of the license text, the `scope` field in
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
 | Decentralized | `UFL-D-1a` | Nothing is withheld and nothing is paid. Disputes go to exclusive online ICC arbitration, and each party's liability to the other is limited to US$1 in value, payable in money or the project's native token (`-k`, optional). |
-| Paid (since 3.5) | `UFL-P-1a` | Every production use, by anyone. Reading the source and non-production use stay free. Meant for one Component of a larger project. |
+| Paid (since 3.5) | `UFL-P-1a` | Every use except reading the source, by anyone. A trial is a zero or trial-period Published Price, or a limited free Component. Meant for one Component of a larger project. |
 
 Sections 2 (redistribution reserved) and 2A (decentralized-fork
 attribution) are a separate, always-on axis — unaffected by which scope
@@ -250,6 +250,12 @@ left blank (and the threshold for Seat-Limited, or the native token, if any, for
 | Noncommercial | [UFL-3.5-noncommercial.pdf](./pdf/UFL-3.5-noncommercial.pdf) | [.txt](./pdf/UFL-3.5-noncommercial.txt) |
 | Decentralized | [UFL-3.5-decentralized.pdf](./pdf/UFL-3.5-decentralized.pdf) | [.txt](./pdf/UFL-3.5-decentralized.txt) |
 | Paid | [UFL-3.5-paid.pdf](./pdf/UFL-3.5-paid.pdf) | [.txt](./pdf/UFL-3.5-paid.txt) |
+
+A project that adopts UFL includes the PDF of its own license in its
+repository, next to `LICENSE`. Pick the reference PDF above that matches
+your scope, or, if you fill in blanks or declare Components, build one from
+your own generated file: `python3 src/make_pdfs.py --one LICENSE LICENSE.pdf`
+(needs `reportlab` and `pypdf`).
 
 The PDFs of earlier versions stay in [`pdf/`](./pdf) under their own names, unchanged.
 

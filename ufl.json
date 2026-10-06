@@ -47,7 +47,7 @@
     "paid": {
       "tag": "UFL-P-1a",
       "spdxSuffix": "-P",
-      "summary": "Free to read and for non-production use; every production use, by anyone, is Paid Use at the Licensor's Published Price. Most useful as the scope of one Component."
+      "summary": "Free to read the source. Every other use, by anyone, is Paid Use at the Licensor's Published Price, which may be zero or cover only a trial period. Most useful as the scope of one Component."
     }
   },
   "adoptedBy": [

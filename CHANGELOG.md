@@ -29,8 +29,11 @@ Release with no Components gets exactly the 3.4 text under the 3.5 name.
   withholds a use appears before that Component first runs, names the
   version, the Component and its scope, and shows where its Published
   Price is published.
-- **Paid scope (`-P`).** Free to read the source and for Non-Production
-  Use. Every Production Use, by anyone, personal or business, is Paid Use.
+- **Paid scope (`-P`).** Free to read the source. Every other use,
+  Non-Production Use included, by anyone, personal or business, is Paid
+  Use. A Licensor who wants a trial publishes a Published Price of zero,
+  or one that covers a trial period, or ships a limited free Component
+  beside the paid one. The license sets no trial terms of its own.
 - **Limits.** A Component's scope cannot be Seat-Limited or Decentralized,
   and Decentralized allows no Components. Decentralized withholds nothing
   and has its own dispute terms for the whole Software, which cannot
@@ -53,7 +56,8 @@ published versions are unchanged and each Release keeps its Ruling License
 (Section 1C). To adopt Components, regenerate your LICENSE with 3.5 and the
 new `-C` flags, state the new Release statement with the Release, put the
 gate for the paid Component in the Software (see `examples/snifrig`), and
-publish a Published Price for it. A single-scope project can move to 3.5
+publish a Published Price for it. Keep the PDF of your license in the
+repository (`python3 src/make_pdfs.py --one LICENSE LICENSE.pdf`). A single-scope project can move to 3.5
 with the same flags it used before and get the 3.4 text under a 3.5 name;
 there is no reason to move unless it wants a Component. Existing adopters
 (Custodly, Hone, Snifrig and others) are unaffected until they choose to.

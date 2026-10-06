@@ -594,9 +594,11 @@ const SCOPES = {
     suffix: "-P",
     body: [
       "Paid — Section 1's free grant is limited to reading and studying the",
-      "Software's source and to Non-Production Use. Every Production Use of the",
-      "Software, by any Licensee, whether an organization or an individual and",
-      "whether for business or personal purposes, is Paid Use under Section 8."
+      "Software's source. Every other use of the Software, Non-Production Use",
+      "included, by any Licensee, whether an organization or an individual and",
+      "whether for business or personal purposes, is Paid Use under Section 8.",
+      "The Licensor may publish a Published Price of zero, or one that covers",
+      "only a trial period."
     ]
   }
 };

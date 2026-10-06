@@ -120,7 +120,7 @@ Since 3.5, a project can also give separate parts of itself their own scope
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
 | **Decentralized** (since 3.3) | Nothing is withheld and nothing is paid. It replaces the dispute process and limits the Licensor's liability. |
-| **Paid** (since 3.5) | Every production use, by anyone. Reading the source and non-production use stay free. Meant for one Component. |
+| **Paid** (since 3.5) | Every use except reading the source, by anyone. Meant for one Component. |
 
 Section 2 (redistribution reserved) and Section 2A (the decentralized-
 fork attribution carve-out, below) sit on a separate, always-on axis,
@@ -412,11 +412,28 @@ same menu. No term of the license is added or changed by hand; the
 generators produce the Component text, and a license without Components is
 byte for byte the 3.4 text with the version number changed.
 
-**The Paid scope.** Free to read and study the source, and free for
-Non-Production Use (evaluating, developing, testing, demonstrating, as
-Section 1B already defines it). Every Production Use is Paid Use under
-Section 8, personal or business, individual or organization. Section 8 is
-unchanged: the Published Price is a price and nothing else.
+**The Paid scope.** Free to read and study the source, and nothing else:
+every other use is Paid Use under Section 8, Non-Production Use included,
+personal or business, individual or organization. For a tool like Snifrig's
+fixer that is the point: no fixing until paid, while the detector stays
+free. Section 8 is unchanged: the Published Price is a price and nothing
+else.
+
+*Trials.* The license sets no trial terms, because they differ by product.
+A Licensor who wants one has two tools. It can publish a Published Price of
+zero, or one that covers only a trial period (the scope says so), and issue
+trial keys. Or it can ship a limited free Component beside the paid one: a
+demo mode that fixes one item, say, with the full fixer paid. The developer
+decides how limited the free part is.
+
+*Per-seat and enterprise pricing.* Section 8 already allows a price per
+Seat, per device, per year, or by tier. A deal that does not fit a
+published price, such as an enterprise contract, is a separate written
+license from the Licensor for a price they negotiate. The Licensor owns the
+Software and may always do that; Section 8 says a use with no Published
+Price is not available under this license, so the separate license is the
+route. Publish the per-seat price for the sizes you want to sell by
+self-service, and point larger buyers to the developer.
 
 **What each question comes out to.**
 
@@ -457,23 +474,52 @@ paid, with no network at all. The reference design, in
 
 1. After payment, the Licensor signs a small record with an Ed25519 private
    key it keeps offline: license version, Component name, Licensee, seat
-   count, paid period start and end.
+   count, issue date, a short expiry (for example 30 days), and optionally
+   a hash of the machine the Licensee asked the key for.
 2. The Licensor delivers the signed key to the Licensee (a download or an
    email). The Software never fetches it.
 3. The Software embeds only the Licensor's public key. At start it verifies
-   the signature, the Component name, and that the local clock is inside the
-   paid period. It imports no network library and makes no call.
-4. Renewal is a new key for a new period at the Published Price in effect
-   then, as Section 8 says.
+   the signature, the Component name, the machine hash if there is one, and
+   that the local clock is inside the key's dates. It also refuses a clock
+   that has gone backwards past a date it already saw. It imports no
+   network library and makes no call.
+4. Renewal is a new paid period at the Published Price in effect then, as
+   Section 8 says. Within a paid period the Licensee signs in to its account
+   on the Licensor's website and downloads a fresh short key, a limited
+   number of times (say five) per period. That is the Licensee's own
+   request to the Licensor, not the Software reporting anything, so
+   Section 10 is intact.
 5. The seat count in the key is a record, not an enforcement: counting
    Seats is the Licensee's statement under Section 10, not something the
    Software can check offline.
 
-Whether the Software refuses to run a paid Component's production mode
-without a valid key is the Licensor's design choice. The license neither
-requires nor forbids it. The key check proves payment, not identity: a key
-can be shared, and the Licensor's remedies for that are the license's own
-(Sections 9, 12, and 14).
+Whether the Software refuses to run a paid Component without a valid key is
+the Licensor's design choice. The license neither requires nor forbids it.
+
+*What this does and does not stop.* Short-lived keys, a re-issue cap, and
+machine binding make sharing a key tedious: a shared key dies in weeks,
+only works on the machine it was made for, and the sharer runs out of
+re-issues. They do not make the software uncrackable. Anything that runs on
+a user's own machine can be patched to skip the check, and a patched copy
+can be posted anywhere, a torrent site included. No license text or key
+scheme changes that. What helps, in order of effect:
+
+1. Make the paid part worth paying for after the crack: ship the fixer's
+   data (signatures, fix recipes, rules) with each key period, so a cracked
+   binary goes stale and the paid user keeps getting updates.
+2. Keep the paid Component in its own package, built and signed by the
+   Licensor, and tell users the signed release is the only one that is
+   supported. Verifying a download's signature is easy for honest users.
+3. Rely on the law for the rest. Section 9 makes running without the step a
+   breach, Section 2 reserves distribution, and posting a patched copy is
+   copyright infringement the Licensor can take down.
+4. Do not turn to phone-home to fix it. Section 10 rules out the Software
+   reporting use to the Licensor, and a license that promised that and did it
+   anyway would be worse than a cracked binary.
+
+The key check proves payment, not identity, and a determined pirate beats
+it. It exists to keep honest users honest and to make casual sharing a bad
+deal.
 
 **Worked example.** [`examples/snifrig`](./examples/snifrig) has the
 generated LICENSE, the Release statement, who owes what, the acceptance
