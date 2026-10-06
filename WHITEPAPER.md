@@ -315,6 +315,19 @@ the Release, then the text in the repository at the commit the Release was
 made from. A project that skips the statement still has an answer, but a
 weaker one.
 
+**Forward only (since 3.5).** A Licensor may move to any later version of
+UFL whenever it likes, for the Releases it publishes after the move. It
+has to say so: in the first such Release's notes, and wherever it announces
+Releases, naming the version it left, the version it adopted, and what
+changed in the scope. And it never moves back. Once a Release is out under
+a version, no later Release goes out under an earlier one. This protects
+users from a project that adopts a newer, more protective version for
+credit and then quietly returns to an older one. The one exception is a
+patch release for an old Release's users, which keeps that Release's
+license; without it, a security fix to an old line would be forced onto
+new terms. A move reaches later Releases only: the Ruling License of every
+earlier Release stays fixed, as above.
+
 **The terms stay the same for everyone.** Section 2C still allows only two
 choices, version and Operational Scope, now made for each Release. Nothing
 else can be added, so a Ruling License is the canonical text of that
@@ -410,7 +423,8 @@ version and a scope and fill in the blanks, and nothing else. A Component
 list is another fill-in: names, patterns, and one scope per name from the
 same menu. No term of the license is added or changed by hand; the
 generators produce the Component text, and a license without Components is
-byte for byte the 3.4 text with the version number changed.
+the 3.4 text with the version number changed and one added paragraph in
+Section 1C (forward only, below).
 
 **The Paid scope.** Free to read and study the source, and nothing else:
 every other use is Paid Use under Section 8, Non-Production Use included,
@@ -675,7 +689,9 @@ updates it:
   as acceptance, and the token price source is defined.
 - **3.5** — Components: a Release may give separate parts of the Software
   their own Operational Scope, by generator flag, with a new Paid scope for
-  a part that is sold while the rest stays free.
+  a part that is sold while the rest stays free; and Section 1C now lets a
+  Licensor move to any later version at any time, with notice, and never
+  back.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

@@ -77,6 +77,20 @@ Licensee who uses that later Release does so under its Ruling License. A
 Licensee who keeps using an earlier Release keeps the Ruling License
 that Release states.
 
+A Licensor may move the Software to a later version of this license at
+any time, for the Releases it publishes after the move, by stating that
+version as the Ruling License of each of them. The Licensor gives notice
+of the move in the release notes of the first Release under the later
+version and wherever else it announces Releases, such as its README,
+repository, or website. The notice names the version moved from and the
+version moved to, and says what changed in the Operational Scope, if
+anything. A Licensor moves only forward: once a Release is published
+under a version of this license, no later Release is published under an
+earlier version. The one exception is a Release that only patches an
+earlier Release for that Release's users, which keeps the earlier
+Release's Ruling License. A move changes the Releases made after it and
+no earlier Release.
+
 ## 2. Reserved Rights
 
 The following rights are reserved to the Licensor and are NOT granted by

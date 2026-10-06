@@ -10,8 +10,18 @@ Components: one project, one LICENSE, parts with different Operational
 Scopes. The free core can stay free while one part, such as a tool that
 acts on what the core finds, is sold. A new **Paid** scope exists for that
 part. Every other section is unchanged apart from version strings, and a
-Release with no Components gets exactly the 3.4 text under the 3.5 name.
+Release with no Components gets the 3.4 text under the 3.5 name, plus the
+forward-only paragraph below.
 
+- **Forward only (Section 1C).** A Licensor may move the Software to any
+  later version of this license at any time, for the Releases it publishes
+  after the move, and must give notice: in the first such Release's notes
+  and wherever it announces Releases, naming the versions moved from and to
+  and any change in scope. A Licensor never moves back: once a Release is
+  published under a version, no later Release uses an earlier one. A Release
+  that only patches an earlier Release for its users keeps that earlier
+  Release's Ruling License. A move changes later Releases only; earlier
+  Releases keep their Ruling Licenses, as 3.2 already said.
 - **Components (Section 1A).** A Release may name Components, each a
   part of the Software identified by path, glob, directory, or package
   name, with its own scope. The scope stated first governs everything no
@@ -58,7 +68,8 @@ new `-C` flags, state the new Release statement with the Release, put the
 gate for the paid Component in the Software (see `examples/snifrig`), and
 publish a Published Price for it. Keep the PDF of your license in the
 repository (`python3 src/make_pdfs.py --one LICENSE LICENSE.pdf`). A single-scope project can move to 3.5
-with the same flags it used before and get the 3.4 text under a 3.5 name;
+with the same flags it used before and get the 3.4 text plus the
+forward-only rule under a 3.5 name;
 there is no reason to move unless it wants a Component. Existing adopters
 (Custodly, Hone, Snifrig and others) are unaffected until they choose to.
 

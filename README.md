@@ -188,6 +188,11 @@ Put that line in the Release's notes, its tag, or its package metadata.
   Anyone who keeps using the earlier Release keeps the earlier terms.
 - If a Release states nothing, the license text shipped with it governs,
   or else the text in the repository at the commit it was made from.
+- A Licensor can move to any later version of UFL at any time, for later
+  Releases, and must say so in the first such Release's notes and wherever
+  it announces Releases (since 3.5). It never moves back: no later Release
+  uses an earlier version. A patch release for an old Release's users keeps
+  that old Release's license.
 - This is the Licensor's choice for each Release. It is not an "or any
   later version" grant, and nobody moves to a newer version on their own.
 
