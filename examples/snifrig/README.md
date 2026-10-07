@@ -52,13 +52,14 @@ payment either way.
 
 ## The acceptance step (Section 9)
 
-The detector shows a Section 9 step only because Snifrig uses Notice Screens
-(Section 2D). It states that the detector shows one line, at most 8 seconds,
-at the end of a sniff report and with the upgrade prompt, that the user can
-close it sooner, and that it never appears in `--quiet`, JSON, or CI runs.
-The line may promote the author's other projects or clients who agreed to be
-named, labeled as a notice. No network call is made to show it, and the user
-can hide it for their own use. Before `fix/` first runs, the Software shows,
+The detector shows a Section 9 step only because Snifrig uses a Notice
+Screen (Section 2D). It states that the detector shows one line at startup,
+for at most 8 seconds, that the user can close it sooner, that it appears
+once per run, and that it never appears in `--quiet`, JSON, or CI runs. The
+line may promote the author's other projects, or clients who agreed to be
+named, labeled as a notice. No network call is made to show it. It is the
+price of the free detector, and `fix/` has none because it is paid.
+Before `fix/` first runs, the Software shows,
 and the user completes:
 
 ```

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-UFL-3.6-D-K
 // Usufruct License (UFL) 3.6, Operational Scope: Decentralized, Contract Release.
 // Canonical text: https://github.com/estejosh/UFL-Usufruct-License
-// License file SHA-256: 0889c5c5f98e5e95c8e8d648d5a1c4c2b857376465a6a2065b34d4b75287da38
+// License file SHA-256: 83e0ee7c578861b14618aa27fee82e7833d6256ea56476a7e61f2cd92e524727
 // Calling this contract is free for everyone. Redeploying it needs credit to
 // Example Project (chain and address of the origin) and this notice kept intact (Section 1A, Contracts).
 // Third-party imports below keep their own licenses.

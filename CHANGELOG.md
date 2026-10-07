@@ -18,15 +18,21 @@ Also in 3.6, for every scope: Section 2D Notice Screens and a key-gate
 paragraph in Section 8. Neither changes a scope, and a Licensor who uses
 neither is unaffected.
 
-- **Notice Screens (Section 2D).** A Licensor may show a short timed screen
-  that promotes its own products or anyone else's, such as a nag shown with
-  an upgrade prompt. The Section 9 step says what the screens are, how long
-  each lasts, and how often. Each screen ends by itself, can be closed
-  sooner, never blocks the work longer than its time, is labeled, stays out
-  of machine-read output, and uses no ad network, no tracking, and no network
-  call. Section 10 is unchanged. A Licensee may hide screens for its own use
-  unless the step makes them a required term of the free grant, and may not
-  remove them from a copy it distributes.
+- **Notice Screens (Section 2D).** A Licensor may show one short timed
+  screen, at startup only, that promotes its own products or anyone else's.
+  It covers the whole Software or named Components, and the Section 9 step
+  says which, what it is, and how long it lasts. It is a term of the free
+  grant: the user agrees to see it in return for free use, or pays the
+  Published Price. It appears once per run, ends by itself, can be closed
+  sooner, never blocks work longer than its time, is labeled, stays out of
+  machine-read output, and uses no ad network, no tracking, and no network
+  call. Dark patterns and pop-up nagging are disallowed by name (fake
+  errors, hidden or delayed close, timer resets, shaming wording,
+  pre-selected consent, reappearing). The Licensor states, to its knowledge,
+  that the content is lawful and not deceptive. A screen that breaks the
+  section is not a term of the grant, and the Licensee may remove it. A
+  Licensee may not remove a compliant screen, in use or in a distributed
+  copy, unless the step lets it hide the screen for its own use.
 - **License keys (Section 8).** A Licensor may build a Paid part so that it
   does not run without a valid key, checked on the Licensee's machine with
   no network call. A key covers the paid period, may be reissued a limited

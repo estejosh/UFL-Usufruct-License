@@ -551,18 +551,22 @@ license.
 ## Notice Screens and license keys (since 3.6)
 
 **Notice Screens.** A free product can pay for itself with a nag the user
-agrees to: a short screen shown with an upgrade prompt that promotes the
-Licensor's own work, or a sponsor's. Section 2D makes it a term the user
-accepts in the Section 9 step, and fixes what the user is owed in return. The
-screen ends by itself, can be closed sooner, never blocks the work longer than
-its time, is labeled as a notice, stays out of scripts and logs, and runs
-with no ad network, no tracking, and no network call. This is modeled on
+agrees to: one short screen at startup that promotes the Licensor's own work,
+or a sponsor's, for the whole Software or for named Components. Section 2D
+makes it a term the user accepts in the Section 9 step, in exchange for free
+use, and fixes what the user is owed in return. The screen appears once per
+run, ends by itself, can be closed sooner, never blocks the work longer than
+its time, is labeled, stays out of scripts and logs, and runs with no ad
+network, no tracking, and no network call. Dark patterns and pop-up nagging
+are disallowed in the license text itself, and a screen that uses them is
+void as a term and may be removed. The Licensor warrants only to its
+knowledge that the content is lawful and not deceptive. This is modeled on
 attribution-notice clauses (the Apache NOTICE file, GPL section 7(b)), but it
-goes further, since it promotes products and does not only credit authors. The
-old BSD advertising clause was disliked because notices stacked up, so the
-limits on length, frequency, and form are the point. Whether the rule against
-removing a notice from a distributed copy holds in a given court is a
-question for counsel.
+goes further, since it promotes products and does not only credit authors.
+The old BSD advertising clause was disliked because notices stacked up, so
+the limits on timing and form are the point. A consumer's mandatory rights
+cannot be waived by this term, and whether the rule against removing a
+notice holds in a given court is a question for counsel.
 
 **License keys.** A paid part may refuse to run without a valid key. The key
 is checked on the user's machine. Section 10 still forbids phone-home, so the
