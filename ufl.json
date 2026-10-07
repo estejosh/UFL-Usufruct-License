@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "3.5",
-  "spdxIdentifier": "LicenseRef-UFL-3.5",
+  "version": "3.6",
+  "spdxIdentifier": "LicenseRef-UFL-3.6",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -108,5 +108,17 @@
     "overlap": "a file that more than one Component covers belongs to the Component listed first",
     "spdx": "LicenseRef-UFL-3.5-<L>[.<l>-<name>]... where <L> is the scope letter of the rest of the Software and <l>-<name> is each Component's scope letter and name; letters U C H N S D P as in spdxSuffix; example LicenseRef-UFL-3.5-U.P-snifrig-fix",
     "example": "examples/snifrig"
+  },
+  "contracts": {
+    "since": "3.6",
+    "generatorFlag": "-K (js also --contract)",
+    "scopes": [
+      "unconditional",
+      "decentralized"
+    ],
+    "components": "not allowed with -K",
+    "spdx": "LicenseRef-UFL-3.6-K (unconditional) or LicenseRef-UFL-3.6-D-K (decentralized)",
+    "release": "one Deployment: chain id + address + hash of verified Source; each proxy implementation is its own Release",
+    "example": "examples/contracts"
   }
 }

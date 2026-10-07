@@ -4,6 +4,103 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.6 — October 2026
+
+Smart contracts. UFL assumed software a person runs, with an acceptance
+step shown before first use. A deployed contract has no user to show
+anything to, its bytecode cannot be changed, its source is public by
+design, and other contracts call it. 3.6 adds a Contract Release: a mode
+declared with the generators (`-K`) that adds fixed Contracts paragraphs to
+Section 1A. A license without `-K` is the 3.5 text with the version
+changed. 3.6 builds on 3.5 (Components, Paid, forward only).
+
+Also in 3.6, for every scope: Section 2D Notice Screens and a key-gate
+paragraph in Section 8. Neither changes a scope, and a Licensor who uses
+neither is unaffected.
+
+- **Notice Screens (Section 2D).** A Licensor may show one short timed
+  screen, at startup only, that promotes its own products or anyone else's.
+  It covers the whole Software or named Components, and the Section 9 step
+  says which, what it is, and how long it lasts. It is a term of the free
+  grant: the user agrees to see it in return for free use, or pays the
+  Published Price. It appears once per run, ends by itself, can be closed
+  sooner, never blocks work longer than its time, never covers the whole
+  screen or takes focus from other windows, is labeled, stays out of
+  machine-read output, and uses no ad network, no tracking, and no network
+  call. Dark patterns and pop-up nagging are disallowed by name (fake
+  errors, hidden or delayed close, timer resets, shaming wording,
+  pre-selected consent, reappearing). The Licensor states, to its knowledge,
+  that the content is lawful and not deceptive. A screen that breaks the
+  section is not a term of the grant, and the Licensee may remove it. A
+  Licensee may not remove a compliant screen, in use or in a distributed
+  copy, unless the step lets it hide the screen for its own use.
+- **License keys (Section 8).** A Licensor may build a Paid part so that it
+  does not run without a valid key, checked on the Licensee's machine with
+  no network call. A key covers the paid period, may be reissued a limited
+  number of times, and may not be shared. Bypassing, patching, or forging the
+  check or a key is a breach. A Licensor is not required to build this way.
+
+- **Use is free and unconditional for everyone.** Calling, integrating
+  with, and composing with a deployed contract, by wallets, scripts,
+  front ends, and other contracts, needs no payment, permission, or
+  acceptance, under any scope. Calling is not distributing, not
+  incorporating under Section 2(b), and does not make the caller a
+  derivative.
+- **What is reserved.** A copy of bytecode is a copy of the Software.
+  Deploying it, or a modified or similar version, to a chain where others
+  can call it is reserved by Section 2(a). Not reserved: publishing the
+  source, block-explorer verification, node copying, reading and study,
+  and running it on a local, private, or public test chain for evaluation,
+  development, testing, or demonstration when it holds nothing of real
+  value.
+- **Redeploying.** Section 2A applies to a redeployment as if the contract
+  were a fork of decentralized software: credit the origin (name it by chain
+  and address) in the source header and documentation, and keep the notice.
+  The redeployer takes the parts from the Software under this license and
+  redeploys at their own risk.
+- **Acceptance, stated plainly.** Calling a contract is not acceptance.
+  Sections 2 and 2A bind deployers and redeployers without acceptance.
+  Terms that need acceptance bind only a person who completes the Section 9
+  step in a front end, app, wallet, or tool the Licensor provides. A plain
+  caller is bound by none of them. The acceptance record stays on the
+  Licensee's own systems; nothing writes it to a chain.
+- **Releases.** A Release is a Deployment: chain, address, and hash of its
+  verified source. A proxy is not a Release; each implementation behind it
+  is its own Release with its own Ruling License. Pointing a proxy at a new
+  implementation is a later Release, with Section 1C's forward-only rule and
+  notice.
+- **Notice.** The source starts with an SPDX line (`LicenseRef-UFL-3.6-K`,
+  or `LicenseRef-UFL-3.6-D-K` for Decentralized) and a comment naming the
+  license, version, scope, canonical source, and the SHA-256 of the
+  project's license file. That notice is the Section 1C statement. Flattened
+  files may use an SPDX expression such as `MIT AND LicenseRef-UFL-3.6-K`.
+- **Third-party code** keeps its own license.
+- **As is, in plain sight.** The source carries a notice that contracts can
+  lose assets and cannot be changed once deployed. It binds nobody.
+- **Decentralized with `-K`.** Its limit of liability, payment, and
+  arbitration terms reach a person who completes the front-end step and a
+  person who redeploys. "The Software running" and "bypassing the step" mean
+  the front end, not the contract.
+- **Limits.** `-K` needs the Unconditional or Decentralized scope, and no
+  Components.
+
+Generators: `-K` (`--contract` in `generate.js`). `generate.sh -r -K` prints
+`UFL 3.6, Operational Scope: Unconditional, Contract Release
+(LicenseRef-UFL-3.6-K)`. Reference PDFs: `UFL-3.6-contract` and
+`UFL-3.6-contract-decentralized`. Example: `examples/contracts`.
+
+Also in the Contracts paragraphs: importing or inheriting the Source counts as copying, while calling through the interface is free; a governance-approved return of a proxy to an already-deployed implementation is not a new Release and not a move to an earlier version; other releases of the same project keep their own licenses; forkers, verifiers and explorers answer for their own software; and the as-is notice says plainly that a decentralized deployment is public software with no one to operate or sue, and that a Licensor who keeps an admin, upgrade or pause key must not call it decentralized.
+
+**Migration for adopters.** Nothing to do for existing Releases. Contracts
+already deployed under another license (for example, ones under MIT) stay under it: a deployment's
+license is fixed when it is deployed. To use UFL for a new contract,
+generate the license with `-K`, put the header in each source file before
+compiling, because the SPDX line and comments change the metadata hash, and
+state the Release statement with the deployment.
+
+SPDX identifier: `LicenseRef-UFL-3.6`, with the suffixes as before, and
+`-K` for contracts.
+
 ## 3.5 — October 2026
 
 Components: one project, one LICENSE, parts with different Operational

@@ -548,6 +548,162 @@ how the code is linked. A Licensor who wants a hard boundary should keep the
 paid Component in its own package. The clearer the boundary, the clearer the
 license.
 
+## Notice Screens and license keys (since 3.6)
+
+**Notice Screens.** A free product can pay for itself with a nag the user
+agrees to: one short screen at startup that promotes the Licensor's own work,
+or a sponsor's, for the whole Software or for named Components. Section 2D
+makes it a term the user accepts in the Section 9 step, in exchange for free
+use, and fixes what the user is owed in return. The screen appears once per
+run, ends by itself, can be closed sooner, never blocks the work longer than
+its time, never covers the whole screen, leaves the user free to use other windows, is labeled, stays out of scripts and logs, and runs with no ad
+network, no tracking, and no network call. Dark patterns and pop-up nagging
+are disallowed in the license text itself, and a screen that uses them is
+void as a term and may be removed. The Licensor warrants only to its
+knowledge that the content is lawful and not deceptive. This is modeled on
+attribution-notice clauses (the Apache NOTICE file, GPL section 7(b)), but it
+goes further, since it promotes products and does not only credit authors.
+The old BSD advertising clause was disliked because notices stacked up, so
+the limits on timing and form are the point. A consumer's mandatory rights
+cannot be waived by this term, and whether the rule against removing a
+notice holds in a given court is a question for counsel.
+
+**License keys.** A paid part may refuse to run without a valid key. The key
+is checked on the user's machine. Section 10 still forbids phone-home, so the
+reference design in `examples/snifrig/offline-key` signs a short-lived key
+after payment and verifies it locally. Section 8 makes sharing a key, or
+bypassing or forging the check, a breach. No scheme stops a determined
+cracker; the clause keeps honest users honest and gives the Licensor a
+contract and copyright claim against the rest.
+
+## Smart contracts (since 3.6)
+
+UFL assumed software that a person runs, with an acceptance step shown
+before first use (Section 9). A deployed smart contract breaks that:
+
+- Nobody runs it. Anyone can call it from a wallet, a script, or another
+  contract, with no screen to show terms on.
+- Its bytecode is fixed at deployment, so its license is fixed then too.
+- Its source is public on purpose, so others can verify it, and copying the
+  bytecode to a new address is trivial.
+- The SPDX line is part of the source and changes the compiler's metadata
+  hash, so the license has to be settled before deployment.
+- Contracts call each other. That is the point of them, and a license that
+  restricts calling defeats it.
+- A proxy keeps one address while the code behind it is swapped.
+
+**Where it fits: a mode, not a scope and not a second license.** A scope
+limits Section 1's use grant, and here use must stay free under every scope.
+A separate companion license would add a document and run into Section 15
+(entire license) and Section 2C (no added terms). So 3.6 adds a mode the
+Licensor declares with the generator (`-K`), the way Components were added:
+a fixed block of text in Section 1A, emitted only when `-K` is given. A
+license without it is the 3.5 text with the version changed. The mode works
+with the Unconditional scope and with the Decentralized scope. It is not
+combined with Components, and not with scopes that withhold uses, because
+calling must be free.
+
+**What the Contracts paragraphs say.**
+
+1. *Use is free.* Calling, integrating with, and composing with a
+   deployment, by anyone and by other contracts, needs no payment,
+   permission, or acceptance, under any scope. Calling is not distributing,
+   not incorporating under Section 2(b), and makes the caller no derivative.
+2. *Reserved rights.* A copy of bytecode is a copy of the Software, even if
+   the copier never saw the source. Deploying it, or a modified or similar
+   version, where others can call it is reserved under Section 2(a).
+   Publishing the source, explorer verification, node copying, reading, and
+   running it on a local, private, or public test chain with nothing of
+   value in it are not reserved.
+3. *Redeploying.* Section 2A applies as if the contract were a fork of
+   decentralized software: credit the origin by chain and address in the
+   verified source header and documentation (or metadata where the source is
+   not shown), and keep the notice. The parts taken from the Software stay
+   under UFL, and the redeployer redeploys at their own risk.
+4. *Acceptance, stated plainly.* Calling a contract is not acceptance, and
+   the license does not pretend it is. See the table below.
+5. *Release.* A deployment: chain, address, and hash of the verified source.
+   A proxy is not a Release; each implementation behind it is, with its own
+   Ruling License fixed when it is deployed. Pointing a proxy at a new
+   implementation is a later Release, so Section 1C's forward-only rule and
+   notice apply.
+6. *Notice.* The source starts with an SPDX line and a comment naming the
+   license, version, scope, canonical source, and the SHA-256 of the
+   project's license file. That notice is the Section 1C statement and counts
+   as including the license text with the deployment.
+7. *Third-party code* keeps its own license.
+8. *Assets.* A plain-language notice that contracts can lose assets and
+   cannot be changed once deployed, and that calling one is at the caller's
+   own risk. It is a notice, not a term.
+
+**Who is bound.**
+
+| Person | Bound by | How |
+|---|---|---|
+| Deployer or redeployer who has the source or the bytecode | Sections 2 and 2A, and, under Decentralized, the limit and arbitration terms and own-risk rule | Copyright. No acceptance is needed: they are limited in what they may do with someone else's work, and the Section 2A permission comes on conditions. |
+| Person who uses a front end, app, wallet, or tool the Licensor ships | Everything the scope calls for, through the Section 9 step in that tool | The Licensor's own step, shown before first use, recorded only on the user's machine. |
+| Plain caller (wallet, script, other contract) | Nothing that needs acceptance | No step is possible, so none is claimed. They have only the rights the law gives them. |
+
+Under Decentralized with `-K`, the scope's talk of the Software running and
+of bypassing its step means the front end, not the contract. The acceptance
+record stays on the user's own systems, as Section 9 says; nothing writes it
+to a chain. We did not choose an on-chain record: it would tie a wallet to an
+acceptance in public, and Section 9's rule exists to prevent that kind of
+record.
+
+**Notice in Solidity.** `// SPDX-License-Identifier: LicenseRef-UFL-3.6-K`
+(or `-D-K` under Decentralized), then a comment giving the license, version,
+scope, canonical URL, and the SHA-256 of the license file. The Solidity
+compiler accepts this with no warning (tested with solc 0.8.26), and an SPDX
+expression such as `MIT AND LicenseRef-UFL-3.6-K` for flattened files. Because
+the header changes the metadata hash, it goes in before the compile that is
+deployed. Block explorers read the SPDX line and offer a fixed license list;
+how each shows a `LicenseRef` should be checked on a test network before a
+mainnet deployment.
+
+**Existing deployments.** Contracts already deployed under another license, such as MIT, stay under it: a deployment's license is fixed when it is deployed. New contracts, and new implementations behind a proxy, can use `-s decentralized -k NAME -K`. [`examples/contracts`](./examples/contracts) has the license and a header example.
+
+**Open questions for counsel.**
+
+1. *Plain callers.* The design binds nobody who only calls. Is that the
+   right line? Would a court ever treat on-chain use as assent to terms the
+   caller never saw, and is it wise to say it does not?
+2. *Redeployers by conduct.* Terms that bind a redeployer (credit, own risk,
+   the dollar limit, arbitration) rest on exercising a permission on
+   conditions. Does that hold for someone who copies bytecode without ever
+   reading the license, and who may be in another country?
+3. *Bytecode with no source.* Is a bytecode copy infringing, and how does the
+   Licensor prove origin when the metadata hash is stripped or the bytecode
+   is altered?
+4. *Source on explorers.* Verified source is republished by third parties.
+   Does the license grant that republication cleanly, and is the carve-out
+   wide enough for forks of the chain and for archives?
+5. *Limits against people who are not bound.* The one-dollar limit and the
+   own-risk notice reach only people who accepted. Users who lose funds in an
+   immutable contract can still bring claims in tort or under consumer and
+   securities law. The notice may help but does not bind them.
+6. *Consumer and non-waivable law.* The carve-outs for liability the law does
+   not allow to be limited are kept. Is the arbitration clause enforceable
+   against consumers in the EU, UK, and California?
+7. *Proxies and upgrades.* An admin can change the code behind a proxy. Is
+   treating each implementation as a separate Release enough notice to
+   users, and does a forward-only rule suit a protocol that rolls back after
+   a bug?
+8. *Composability.* Is "calling is not a derivative" safe under copyright
+   law in every major jurisdiction, in particular for contracts that import
+   an interface or inherit from the source?
+9. *Third-party code.* Dual-license expressions and flattened files: is
+   `MIT AND LicenseRef-UFL-3.6-K` the right expression, and what do
+   verification services do with it?
+10. *Securities and token law.* A license cannot cure a token's regulatory
+    status. The native-token payment terms of the Decentralized scope used
+    with a contract should be reviewed on that footing.
+11. *Governing law and seat.* California law and a California seat are fixed
+    by the scope. Do they suit a multi-chain protocol with global users?
+12. *Existing MIT deployments.* Mixed deployments (MIT contracts calling UFL
+    contracts) are fine under the paragraphs on third-party code and free
+    calling. Confirm there is no copyleft-style conflict.
+
 ## Naming: why "Usufruct" over the alternatives
 
 Two other names were considered before settling on Usufruct.
@@ -692,6 +848,11 @@ updates it:
   a part that is sold while the rest stays free; and Section 1C now lets a
   Licensor move to any later version at any time, with notice, and never
   back.
+- **3.6** — smart contracts: a Contract Release mode (`-K`) whose fixed
+  paragraphs make calling free for everyone, reserve redeployment (with the
+  Section 2A credit exception), say plainly who is bound, treat each
+  deployment and proxy implementation as a Release, and fix the Solidity
+  notice.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

@@ -1,11 +1,11 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.5.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v3.6.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
 # Usage:
 #   ./generate.sh [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] \
-#     [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH]
+#     [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K] [-o OUTPUT_PATH]
 #   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
@@ -18,6 +18,10 @@
 # Component's SCOPE is one of unconditional, no-competing-service,
 # no-third-party-hosting, noncommercial, paid; SCOPE for the rest of the
 # Software may be any scope except decentralized, which allows no Components.
+# -K declares a Contract Release (since 3.6): the Software is, or includes,
+# smart contracts. It needs SCOPE unconditional or decentralized, allows no
+# Components, and adds the Contracts paragraphs to Section 1A and -K to the
+# SPDX suffix. With -r it adds ", Contract Release" to the Release statement.
 # A PATH is a path or glob relative to the root of the Release, or a package
 # name; it may not contain a backslash or a comma. A file that more than one
 # Component covers belongs to the Component listed first. TOKEN is
@@ -41,7 +45,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 3.5. See CHANGELOG.md for revisions.
+# Tracks UFL 3.6. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -52,10 +56,11 @@ SCOPE="unconditional"
 THRESHOLD=""
 TOKEN=""
 COMPS=""
+CONTRACT=0
 OUT=""
 RELEASE=0
 
-while getopts "y:c:p:s:t:k:C:o:rh" opt; do
+while getopts "y:c:p:s:t:k:C:o:rKh" opt; do
   case "$opt" in
     y) YEAR=$OPTARG ;;
     c) HOLDER=$OPTARG ;;
@@ -67,8 +72,9 @@ while getopts "y:c:p:s:t:k:C:o:rh" opt; do
 }$OPTARG" ;;
     o) OUT=$OPTARG ;;
     r) RELEASE=1 ;;
+    K) CONTRACT=1 ;;
     h)
-      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]..."
+      echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K]"
       echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid"
       echo "COMPONENT: NAME=SCOPE:PATH[,PATH...]  (SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid)"
       exit 0
@@ -232,6 +238,169 @@ scope_letter() {
     seat-limited) echo S ;; decentralized) echo D ;; paid) echo P ;;
   esac
 }
+contract_text() {
+cat <<'UFL_CONTRACT'
+Contracts. This Release is a Contract Release: the Software is, or
+includes, smart contracts, which are programs deployed to a blockchain
+or similar distributed ledger and executed by it. In the paragraphs
+below, "Source" means the human-readable source code of the Software,
+"Bytecode" means its compiled form, a "Deployment" means one deployment
+of that Bytecode at one address on one chain, and "calling" a Deployment
+means sending a transaction or message to it, reading from it, or
+invoking it from any wallet, script, application, or other contract,
+directly or through any intermediary. The choice to declare a Contract
+Release is made once for the Release, as the choice of scope is, and
+adds nothing to this license beyond these paragraphs. A Contract
+Release's scope may be Unconditional or Decentralized, and it declares
+no Components.
+
+Calling a Deployment, integrating with it, and composing with it,
+including by other contracts, is free and unconditional for everyone,
+under any Operational Scope. It needs no payment, permission, or
+acceptance. Nothing in this license limits which contract, wallet, or
+person may call a Deployment, or what they do with what it returns.
+Calling a Deployment is not distributing it, is not incorporating it
+into another product under Section 2(b), and does not make the calling
+contract, front end, script, or application a modified version or
+derivative of it. Writing code that uses a Deployment's published
+interface to call it is likewise free.
+
+Section 2(a) applies to a Contract Release in this way. A copy of
+Bytecode is a copy of the Software, whether or not the person who makes
+it has the Source. Deploying Bytecode of the Software, or Bytecode
+compiled from the Source or from a modified or substantially similar
+version of it, to a chain where anyone other than the person who
+deployed it can call it is a reserved act under Section 2(a), unless the
+paragraph on redeployment below permits it. These are not reserved acts
+for anyone: the Licensor's publication of the Source; the publication of
+verified Source by a block explorer or verification service; the copying
+of Bytecode by nodes and clients as an ordinary part of operating a
+chain; reading and studying the Source; and running Bytecode on a local,
+private, or public test chain to evaluate, develop, test, or demonstrate
+it, so long as that deployment holds nothing of real value and is not
+offered to others as a way to use the Software in place of the
+Deployment. Importing or inheriting the Source into other Source, or
+including it in another contract's Source, copies the Software and is a
+reserved act on the same terms as deploying its Bytecode. Using only the
+Deployment's published interface to call it is not copying and is free,
+as the paragraph on calling says.
+
+Section 2A applies to a redeployment of a Contract Release as if it were
+a fork of decentralized software, even though a contract is not a node,
+client, or peer. A person may redeploy the Software, or a modified
+version of it, on these conditions: (i) the redeployed Source carries at
+its top the notice described below, unchanged, and a statement that it
+is derived from [PROJECT NAME] that names the origin Deployment by chain
+and address, and the same credit appears in the redeployment's
+documentation, or, where the Source is not shown, in its published
+metadata; (ii) the parts taken from the Software stay under this
+license; and (iii) the person redeploys at their own risk, and the
+Licensor has no liability of any kind for the redeployment, for anything
+it does, or for any loss of assets in it. A redeployment without that
+credit, or with the notice removed or falsified, is not permitted by
+Section 2A and needs a separate license under Section 2(a). Section 2(c)
+is unchanged: a redeployment may not use the Licensor's name or marks to
+claim compatibility.
+
+A caller sees no terms before calling, and a Deployment cannot present
+the step that Section 9 describes. This license therefore does not treat
+calling a Deployment as acceptance of anything, and does not bind a
+person who only calls a Deployment to any term that depends on
+acceptance. Sections 2 and 2A bind a person who deploys or redeploys,
+without acceptance, because they limit what a person may do with someone
+else's copyrighted work. A term that needs acceptance, such as a limit
+of liability or a dispute process in the Operational Scope, binds a
+person who completes the Section 9 step in a front end, app, wallet, or
+tool that the Licensor provides for using the Deployment, and only that
+person. A person who completes no such step, a plain caller included, is
+bound by none of those terms and has the rights the law gives them
+against the Licensor. The step is shown and recorded as Section 9
+provides, and the record stays on the Licensee's own systems: neither a
+Deployment nor the Licensor's tools write a record of acceptance to a
+chain. Where a Deployment's governance, whether a vote, a timelock, or
+another process the Software's own rules set, points a proxy back at an
+implementation that is already deployed, that is not a new Release and
+not a move to an earlier version of this license: the earlier
+implementation keeps the Ruling License it always had. Whether and when
+to do so is for that governance, and is not the Licensor's alone to
+decide.
+
+A Release of a Contract Release is one Deployment, identified by its
+chain, its address, and the hash of its verified Source, or a set of
+Deployments published together from the same Source. Its Ruling License
+is the one its notice states. A proxy contract is not a Release of its
+own: each implementation contract that a proxy points to is its own
+Release, with its own Ruling License, fixed when that implementation is
+deployed. Pointing a proxy at a new implementation publishes a later
+Release, subject to Section 1C, including its rules that a Licensor
+moves only forward and gives notice of a move; the new implementation's
+notice, and the places where the Licensor announces upgrades, give that
+notice. The Ruling License of the implementation that was replaced, and
+the rights it gave, do not change.
+
+The Source of each Contract Release begins with an SPDX line naming this
+license's identifier as the generator prints it, followed by a comment
+that names this license, its version, and the Operational Scope, gives
+the canonical source https://github.com/estejosh/UFL-Usufruct-License,
+and states the SHA-256 hash of the license file kept in the Licensor's
+repository for that Release. That notice is the statement of the Ruling
+License that Section 1C calls for, and counts as including the license
+text with the Deployment; the full text is in the Licensor's repository
+at the commit the Source was published from. Where Source is flattened
+into one file, the file's SPDX line may be an SPDX expression that lists
+each license that applies to code in the file, and this license applies
+only to the code that is under it. This license governs the Release it
+is published with and the code that is under it. Other releases of the
+same project, including earlier ones under another license such as MIT,
+keep the terms they were published under. A person who forks, redeploys,
+verifies, lists, indexes, or builds on the Software is responsible for
+their own software and for the licenses it carries, and nothing here
+makes the Licensor responsible for what they publish. A block explorer
+or verification service that only displays Source is not making a
+reserved act.
+
+This notice states what a person who calls a Deployment should know.
+Where the Software is decentralized in fact, that is, it has no
+administrator key, no upgrade key, and no pause or seizure function held
+by the Licensor or anyone else, then once it is deployed it runs as
+public, shared software: it is maintained in public, anyone can read it,
+and anyone can propose updates to its Source, but there is no company or
+person who operates it, who can reverse or correct what it does, or who
+can be sued over it. A Deployment can hold or move assets, can lose them
+through an error in the Software or in anything it calls, and cannot be
+changed after it is deployed unless it was built to be upgraded. The
+Software, including each Deployment, is provided as is, as Section 5
+says, and a person who calls a Deployment does so at their own risk. A
+Licensor that keeps such a key or function must say so in the Source
+notice and must not describe the Software as decentralized. This
+paragraph is a notice. It does not limit any liability that the law does
+not allow to be limited, and it does not bind anyone to any term.
+
+A Deployment can hold or move assets, can lose them through an error in
+the Software or in anything it calls, and cannot be changed after it is
+deployed unless it was built to be upgraded. The Software, including
+each Deployment, is provided as is, as Section 5 says, to everyone who
+uses it, and a person who calls a Deployment does so at their own risk.
+This paragraph is a notice. It does not limit any liability that the law
+does not allow to be limited, and it does not bind anyone to any term.
+UFL_CONTRACT
+}
+contract_dec_text() {
+cat <<'UFL_CONTRACT_DEC'
+The Decentralized scope above applies to a Contract Release as the
+paragraph on acceptance says: to a person through the step in a front
+end, app, wallet, or tool that the Licensor provides, and to a person
+who redeploys under Section 2A, to whom its limit of liability, payment,
+and dispute terms also apply. Where the scope speaks of the Software
+running, or of its step being bypassed, removed, or forged, it means
+that front end, app, wallet, or tool and not a Deployment: a Deployment
+is called without any step, and calling one is not a breach. The scope's
+rule that Software without the step is licensed under the Unconditional
+scope applies to a Contract Release whose Licensor provides no such
+tool, and for it the paragraph on acceptance is all that binds anyone to
+a term that needs acceptance.
+UFL_CONTRACT_DEC
+}
 comp_intro() {
 cat <<'UFL_COMPONENTS'
 Components. This Release may declare Components in the header above. A
@@ -331,8 +500,30 @@ else
   SCOPE_BODY=$DEF_BODY
 fi
 
+# ---- Contract Release (since 3.6): the Software is, or includes, smart contracts.
+CONTRACT_STMT=""
+if [ "$CONTRACT" = 1 ]; then
+  [ -z "$COMPS" ] || die "Contract mode (-K) allows no Components (-C)."
+  case "$SCOPE" in
+    unconditional|decentralized) ;;
+    *) die "Contract mode (-K) requires SCOPE unconditional or decentralized." ;;
+  esac
+  NL='
+'
+  SCOPE_BODY="$DEF_BODY$NL$NL$(contract_text)"
+  if [ "$SCOPE" = "decentralized" ]; then
+    SCOPE_BODY="$SCOPE_BODY$NL$NL$(contract_dec_text)"
+  fi
+  SCOPE_SUFFIX="${SCOPE_SUFFIX}-K"
+  CONTRACT_STMT=", Contract Release"
+  COMP_HDR="Contract Release: the Software is, or includes, smart contracts (see Contracts, below)"
+  if [ "$RELEASE" != 1 ]; then
+    echo "Note: a Contract Release cannot show the Section 9 step in a contract. Your front ends and tools must, and the notice in the Contracts paragraphs goes at the top of each Source file." >&2
+  fi
+fi
+
 if [ "$RELEASE" = 1 ]; then
-  STMT="UFL 3.5, Operational Scope: $DEF_LINE$COMP_STMT (LicenseRef-UFL-3.5${SCOPE_SUFFIX})"
+  STMT="UFL 3.6, Operational Scope: $DEF_LINE$COMP_STMT$CONTRACT_STMT (LicenseRef-UFL-3.6${SCOPE_SUFFIX})"
   if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
   exit 0
 fi
@@ -348,9 +539,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.5\`|LicenseRef-UFL-3.5${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.5\`|\`UFL-3.5${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 3.5
+  -e "s|LicenseRef-UFL-3.6\`|LicenseRef-UFL-3.6${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-3.6\`|\`UFL-3.6${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 3.6
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -404,7 +595,7 @@ Release the Licensee uses.
 
 With each Release, the Licensor states which version of this license,
 and which Operational Scope, governs that Release (its "Ruling
-License"). The statement names both, for example "UFL 3.5, Operational
+License"). The statement names both, for example "UFL 3.6, Operational
 Scope: Noncommercial", and appears where users get the Release: in its
 release notes, its tag, or its package metadata. The Release includes
 the full text of its Ruling License. If a Release does not state its
@@ -518,6 +709,64 @@ never a retroactive edit: once a version of this license is published,
 its text is not changed, and a project that wants a later version's
 provisions adopts that version's text in full.
 
+## 2D. Notice Screens
+
+A Licensor may build into the Software a Notice Screen: one short, timed
+screen shown when the Software starts, that promotes the Licensor's own
+products or services, or those of anyone the Licensor chooses. The
+Licensor may apply it to the whole Software or only to named Components.
+A Licensor that does this states in the step described in Section 9
+which parts of the Software show it, what it is, how long it lasts, and
+that it appears only at startup, and the Licensee completes that step
+before first use. A Notice Screen is a term of the free grant for the
+parts it covers: the Licensee agrees to see it, in exchange for use that
+would otherwise cost the Published Price. A Licensee who does not want
+to see it can pay the Published Price under Section 8 where the
+Published Price allows, and a Licensor may let a paid use end the Notice
+Screen.
+
+A Notice Screen must: (a) appear once, at startup, and never again
+during that run; (b) end by itself after the time the step states, and
+let the user close it sooner by a plain action, including from the
+keyboard; (c) never keep the Software from doing its work for longer
+than that time, never cover the whole screen, never take focus from,
+cover, or block any other window, and leave the user free to load and
+use other windows and programs while it shows; (d) be text, images, or
+links shipped inside the Release, with no sound, no flashing, no window
+outside the Software, and no link opened unless the user chooses; (e) be
+labeled as a notice or as sponsored; (f) stay out of output that
+machines read, such as exit codes, logs, and structured data, and out of
+non-interactive runs; and (g) involve no ad network, no measurement of
+who saw or clicked it, and no network call to show it.
+
+Dark patterns and pop-up nagging are not allowed under this license. A
+Notice Screen must not: look like an error, a warning from the system, a
+security alert, or part of the Software's own output; hide, disable,
+delay, or disguise the way to close it; restart its timer or lengthen
+its time after it is closed; use wording that shames, frightens, or
+pressures the user; pre-select a purchase or any consent; ask for more
+than a plain choice to continue or close; reappear after it is closed,
+at any other time, or in a way that grows over time; or collect or send
+any data. The Licensor states, to the best of its knowledge, that the
+content of each Notice Screen, including content that promotes anyone
+else, is lawful and not deceptive, and the Licensor alone is responsible
+for that content.
+
+A screen that does not meet this section is not a term of the free
+grant. The Licensee has not agreed to it, may remove or disable it,
+including in a copy the Licensee distributes, and the Licensor may not
+treat doing so as a breach.
+
+Section 10 is unchanged: showing a Notice Screen is never a report of
+use, and a Notice Screen is not a way for the Licensor to learn who runs
+the Software.
+
+A Licensee will not remove, hide, or alter a Notice Screen that meets
+this section, in its own use or in a copy it distributes under Section 2
+or 2A, unless the step says that the Licensee may hide it for the
+Licensee's own use. This section does not require a Licensor to include
+any Notice Screen and does not change any Operational Scope.
+
 ## 3. Why "Usufruct"
 
 In civil law, a usufruct is the right to use property belonging to
@@ -603,6 +852,18 @@ renews at the Published Price in effect when the next period begins. A
 change to the Published Price applies only to periods that begin after
 the change. If the Licensor has not published a price for a withheld
 use, that use is not available under this license.
+
+A Licensor may build a part of the Software that is Paid Use so that it
+does not run until the Licensee enters a valid license key (a "key").
+The Software checks the key on the Licensee's own machine, without any
+network call, as Section 10 requires. A key is issued to the Licensee
+for the period the Published Price covers, may expire when that period
+ends, and may be reissued a limited number of times in a period, as the
+Published Price states. A Licensee will not use a key outside the Seats
+or devices the Published Price covers, will not use a key issued to
+someone else, and will not bypass, patch, disable, or forge the check or
+a key. A part built this way is not used until a valid key is entered.
+Nothing in this license requires a Licensor to build any part this way.
 
 ## 9. Acceptance
 
@@ -741,8 +1002,8 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.5` —
-not a bare `UFL-3.5`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.6` —
+not a bare `UFL-3.6`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 

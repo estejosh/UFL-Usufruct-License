@@ -1,10 +1,9 @@
 The Usufruct License (UFL) — Version 3.6
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
-Copyright (c) 2026 estejosh
+Copyright (c) [YEAR] [COPYRIGHT HOLDER]
 
-Operational Scope: Unconditional (the Software outside the Components below)
-Component snifrig-fix: Paid (fix/**, crates/snifrig-fix)
+Operational Scope: No-Competing-Service
 
 ## 1. Grant of Use
 
@@ -22,68 +21,11 @@ grant is licensed under Section 8, on the terms of this license.
 The Operational Scope declared above states the only limit, if any, on
 Section 1's free grant. Exactly one scope applies to this Software:
 
-Unconditional — Section 1's grant is unconditional: it includes running
-the Software, deploying it, integrating with it, and operating a product
-or service built on top of it, commercially or otherwise, at any scale,
-with no further condition.
-
-Components. This Release may declare Components in the header above. A
-Component is a part of the Software that the header identifies by file
-path, glob, directory, or package name, and for which it states its own
-Operational Scope. A path or glob is read relative to the root of the
-Release, where * matches within one path segment and ** matches across
-segments; a name that is not a path identifies the package of that name
-in the Release. The scope stated first governs all of the Software that
-no Component covers. Each Component is governed by the scope the header
-states for it. The statement above that exactly one scope applies is
-read as applying once to the Software outside the Components and once to
-each Component. In the scope that governs a Component, "the Software"
-means that Component, and in the scope stated first it means the
-Software outside the Components. A file or package that more than one
-Component covers belongs to the Component the header lists first.
-
-A use of a Component is any use of the Software that runs code of that
-Component, whether directly or through a call from other code. Code of a
-Component that is present in a copy of the Software but is never run is
-not used. A Licensee that uses only the Software outside the Components,
-and Components whose scope leaves that use free, owes nothing for any
-Component whose scope withholds a use. A Component whose scope withholds
-a use does not make any other part of the Software Paid Use and does not
-limit the Licensee's rights in any other part of it.
-
-Sections 8 through 13 apply to each Component whose scope withholds a
-use as if that Component were the whole Software. Each such Component
-has its own Published Price, which is a price for that Component only.
-Amounts owed, usage statements under Section 10, output marks under
-Section 11, and Retroactive Licenses under Section 12 are figured
-Component by Component, and each mark identifies only the Component that
-produced the output. Paying for Paid Use of one part of the Software
-covers only that part. The step that Section 9 requires is presented,
-for each Component whose scope withholds a use, before that Component
-first runs. It names this license's version, the Component, and its
-scope, and shows where that Component's Published Price is published.
-Sections 1C, 2 through 7, 14, and 15 treat the Software and all of its
-Components as one.
-
-A Release that declares Components makes the choice described in Section
-2C once for the Software outside the Components and once for each
-Component. The name of each Component, the paths or packages that
-identify it, and its scope are filled in as the copyright year, holder,
-and project name are, and no other term of this license changes. The
-scope of a Component may be any Operational Scope in this Section 1A
-except Seat-Limited and Decentralized. The scope of the Software outside
-the Components may be any Operational Scope except Decentralized, which
-applies only to a Release without Components. The statement of the
-Release's Ruling License under Section 1C names this version, the scope
-stated first, and each Component with its scope.
-
-Component snifrig-fix (covers fix/**, crates/snifrig-fix):
-Paid — Section 1's free grant is limited to reading and studying the
-Software's source. Every other use of the Software, Non-Production Use
-included, by any Licensee, whether an organization or an individual and
-whether for business or personal purposes, is Paid Use under Section 8.
-The Licensor may publish a Published Price of zero, or one that covers
-only a trial period.
+No-Competing-Service — Section 1's free grant excludes operating the
+Software, or a modified version or fork of it, as a product or service
+offered to third parties in competition with a product or service the
+Licensor offers using the Software. That excluded use is Paid Use under
+Section 8. All other uses described in Section 1 are unconditional.
 
 ## 1B. Definitions
 
@@ -162,7 +104,7 @@ except as Section 2A permits:
       service that is distributed, sold, or otherwise made available to
       third parties.
   (c) Using the Licensor's name, marks, or claims of compatibility
-      ("Snifrig-compatible," "built on Snifrig," etc.) in
+      ("[PROJECT NAME]-compatible," "built on [PROJECT NAME]," etc.) in
       connection with a distributed derivative.
 
 ## 2A. Forks of Decentralized or Network Software
@@ -174,7 +116,7 @@ modified version, fork, or independent reimplementation of it —
 including to operate a competing network — provided the distributed
 work:
 
-  (i) prominently and accurately credits Snifrig as the origin of
+  (i) prominently and accurately credits [PROJECT NAME] as the origin of
       the Software or protocol, in its README, whitepaper, or equivalent
       primary documentation; and
   (ii) keeps the canonical-source notice required by Section 7 intact.
@@ -521,5 +463,5 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.6-U.P-snifrig-fix` —
-not a bare `UFL-3.6-U.P-snifrig-fix`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.6-C` —
+not a bare `UFL-3.6-C`, which would misrepresent it as SPDX-registered.

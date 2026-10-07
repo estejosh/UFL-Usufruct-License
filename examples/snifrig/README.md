@@ -1,4 +1,4 @@
-# Worked example: free detector, paid fixer (UFL 3.5 Components)
+# Worked example: free detector, paid fixer (UFL 3.6 Components)
 
 Snifrig ships two parts in one repository. The monitor and detector are
 free for everyone. The fixer, which remediates what the detector finds,
@@ -26,12 +26,12 @@ The second command prints the Release statement (Section 1C) to publish
 with each Release:
 
 ```
-UFL 3.5, Operational Scope: Unconditional; Component snifrig-fix: Paid (LicenseRef-UFL-3.5-U.P-snifrig-fix)
+UFL 3.6, Operational Scope: Unconditional; Component snifrig-fix: Paid (LicenseRef-UFL-3.6-U.P-snifrig-fix)
 ```
 
 [`LICENSE`](./LICENSE) in this folder is that output, with estejosh as the
 copyright holder. Use the SPDX identifier
-`LicenseRef-UFL-3.5-U.P-snifrig-fix` in package metadata for every package
+`LicenseRef-UFL-3.6-U.P-snifrig-fix` in package metadata for every package
 in the repository, the free ones too: one LICENSE file governs them all.
 
 ## What each kind of user owes
@@ -52,11 +52,18 @@ payment either way.
 
 ## The acceptance step (Section 9)
 
-The detector needs no step. Before `fix/` first runs, the Software shows,
+The detector shows a Section 9 step only because Snifrig uses a Notice
+Screen (Section 2D). It states that the detector shows one line at startup,
+for at most 8 seconds, that the user can close it sooner, that it appears
+once per run, and that it never appears in `--quiet`, JSON, or CI runs. The
+line may promote the author's other projects, or clients who agreed to be
+named, labeled as a notice. No network call is made to show it. It is the
+price of the free detector, and `fix/` has none because it is paid.
+Before `fix/` first runs, the Software shows,
 and the user completes:
 
 ```
-Snifrig-fix is licensed under UFL 3.5 (LicenseRef-UFL-3.5-U.P-snifrig-fix).
+Snifrig-fix is licensed under UFL 3.6 (LicenseRef-UFL-3.6-U.P-snifrig-fix).
 Component: snifrig-fix    Operational Scope: Paid
 Production use needs Paid Use at the Published Price: https://example.com/snifrig/pricing
 Type "I accept" to continue. No key found: the fixer will not run.
