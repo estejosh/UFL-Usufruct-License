@@ -4,6 +4,78 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.5 — October 2026
+
+Components: one project, one LICENSE, parts with different Operational
+Scopes. The free core can stay free while one part, such as a tool that
+acts on what the core finds, is sold. A new **Paid** scope exists for that
+part. Every other section is unchanged apart from version strings, and a
+Release with no Components gets the 3.4 text under the 3.5 name, plus the
+forward-only paragraph below.
+
+- **Forward only (Section 1C).** A Licensor may move the Software to any
+  later version of this license at any time, for the Releases it publishes
+  after the move, and must give notice: in the first such Release's notes
+  and wherever it announces Releases, naming the versions moved from and to
+  and any change in scope. A Licensor never moves back: once a Release is
+  published under a version, no later Release uses an earlier one. A Release
+  that only patches an earlier Release for its users keeps that earlier
+  Release's Ruling License. A move changes later Releases only; earlier
+  Releases keep their Ruling Licenses, as 3.2 already said.
+- **Components (Section 1A).** A Release may name Components, each a
+  part of the Software identified by path, glob, directory, or package
+  name, with its own scope. The scope stated first governs everything no
+  Component covers. A file that two Components cover belongs to the one
+  listed first. The Component list is a fill-in, like the year, holder, and
+  project name, so Section 2C still holds: no term of the text changes.
+  The text appears only in a license generated with `-C`.
+- **What counts as use.** A Component is used only when code of it runs.
+  Code that is present and never run is not used. A user of the free core
+  owes nothing for a paid Component's existence.
+- **Sections 8 through 13 per Component.** Published Price, usage
+  statements, output marks, and Retroactive Licenses are figured one
+  Component at a time. Paying for one part covers only that part.
+- **Section 9 per Component.** The acceptance step for a Component that
+  withholds a use appears before that Component first runs, names the
+  version, the Component and its scope, and shows where its Published
+  Price is published.
+- **Paid scope (`-P`).** Free to read the source. Every other use,
+  Non-Production Use included, by anyone, personal or business, is Paid
+  Use. A Licensor who wants a trial publishes a Published Price of zero,
+  or one that covers a trial period, or ships a limited free Component
+  beside the paid one. The license sets no trial terms of its own.
+- **Limits.** A Component's scope cannot be Seat-Limited or Decentralized,
+  and Decentralized allows no Components. Decentralized withholds nothing
+  and has its own dispute terms for the whole Software, which cannot
+  coexist with a part that is paid.
+- **SPDX.** `LicenseRef-UFL-3.5-U.P-snifrig-fix`: the scope letter of the
+  rest of the Software, then `.` and each Component's scope letter, `-`,
+  and name. SPDX allows only letters, digits, `.` and `-` in a
+  `LicenseRef`, so the `+` and parentheses form is not used.
+- **Release statement.** `UFL 3.5, Operational Scope: Unconditional;
+  Component snifrig-fix: Paid (LicenseRef-UFL-3.5-U.P-snifrig-fix)`.
+
+Generators: `-C NAME=SCOPE:PATH[,PATH...]`, repeatable, in both
+`generate.sh` and `generate.js`; `-s paid`. `tests/run.sh` checks that
+every single-scope output equals the published 3.4 text apart from the
+version, that the shell and Node generators agree byte for byte, and that
+bad Component input is refused.
+
+**Migration for adopters.** Nothing to do if you are on 1.0 through 3.4:
+published versions are unchanged and each Release keeps its Ruling License
+(Section 1C). To adopt Components, regenerate your LICENSE with 3.5 and the
+new `-C` flags, state the new Release statement with the Release, put the
+gate for the paid Component in the Software (see `examples/snifrig`), and
+publish a Published Price for it. Keep the PDF of your license in the
+repository (`python3 src/make_pdfs.py --one LICENSE LICENSE.pdf`). A single-scope project can move to 3.5
+with the same flags it used before and get the 3.4 text plus the
+forward-only rule under a 3.5 name;
+there is no reason to move unless it wants a Component. Existing adopters
+(Custodly, Hone, Snifrig and others) are unaffected until they choose to.
+
+SPDX identifier: `LicenseRef-UFL-3.5`, with the `-C`, `-H`, `-N`, `-S`,
+`-D` suffixes as before and `-P` for Paid, or the combined form above.
+
 ## 3.4 — October 2026
 
 Fixes in the Decentralized scope, found in review after 3.3 was

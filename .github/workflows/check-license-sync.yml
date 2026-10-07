@@ -8,6 +8,7 @@ on:
       - "generate.js"
       - "src/**"
       - "templates/**"
+      - "tests/**"
       - ".github/workflows/check-license-sync.yml"
   pull_request:
     paths:
@@ -16,6 +17,7 @@ on:
       - "generate.js"
       - "src/**"
       - "templates/**"
+      - "tests/**"
       - ".github/workflows/check-license-sync.yml"
 
 jobs:
@@ -23,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: generate.js default (unconditional) output matches LICENSE.txt
         run: |
@@ -44,6 +49,9 @@ jobs:
                <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats, 2 computers, 2 mobile devices")
           diff <(sh generate.sh -y 2026 -c "Test Holder" -p TestProject -s decentralized -k TESTTOKEN) \
                <(node generate.js -y 2026 -c "Test Holder" -p TestProject -s decentralized -k TESTTOKEN)
+
+      - name: Component scopes and 3.4 equivalence (tests/run.sh)
+        run: sh tests/run.sh
 
       - name: LICENSE.txt and generators are what src/ builds
         run: |

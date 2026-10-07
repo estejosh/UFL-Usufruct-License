@@ -107,8 +107,10 @@ open too.
 Section 1 of the license grants unconditional use by default. As of
 version 2.0, a Licensor may instead narrow that grant to **exactly one**
 declared scope, stated on an `Operational Scope:` line at the top of the
-license text. Scopes are never combined or stacked — a project picks one
-from this menu, or none (which defaults to Unconditional):
+license text. Scopes are never combined or stacked over the same code — a
+project picks one from this menu, or none (which defaults to Unconditional).
+Since 3.5, a project can also give separate parts of itself their own scope
+(see Components, below):
 
 | Scope | What it restricts |
 |---|---|
@@ -118,6 +120,7 @@ from this menu, or none (which defaults to Unconditional):
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
 | **Decentralized** (since 3.3) | Nothing is withheld and nothing is paid. It replaces the dispute process and limits the Licensor's liability. |
+| **Paid** (since 3.5) | Every use except reading the source, by anyone. Meant for one Component. |
 
 Section 2 (redistribution reserved) and Section 2A (the decentralized-
 fork attribution carve-out, below) sit on a separate, always-on axis,
@@ -312,6 +315,19 @@ the Release, then the text in the repository at the commit the Release was
 made from. A project that skips the statement still has an answer, but a
 weaker one.
 
+**Forward only (since 3.5).** A Licensor may move to any later version of
+UFL whenever it likes, for the Releases it publishes after the move. It
+has to say so: in the first such Release's notes, and wherever it announces
+Releases, naming the version it left, the version it adopted, and what
+changed in the scope. And it never moves back. Once a Release is out under
+a version, no later Release goes out under an earlier one. This protects
+users from a project that adopts a newer, more protective version for
+credit and then quietly returns to an older one. The one exception is a
+patch release for an old Release's users, which keeps that Release's
+license; without it, a security fix to an old line would be forced onto
+new terms. A move reaches later Releases only: the Ruling License of every
+earlier Release stays fixed, as above.
+
 **The terms stay the same for everyone.** Section 2C still allows only two
 choices, version and Operational Scope, now made for each Release. Nothing
 else can be added, so a Ruling License is the canonical text of that
@@ -378,6 +394,159 @@ What it does not do: it does not make the project ownerless, it does not
 remove a user's non-waivable local rights, and it does not make a claim
 impossible. It makes a nominal claim not worth the arbitration fees, and
 it gives a serious one exactly one place to go.
+
+## Components (since 3.5)
+
+A single scope for a whole project is the wrong fit when the project is
+really two things. Take Snifrig. Its monitor and detector should be free to
+everyone, because the more machines they watch, the better. Its fixer, the
+part that remediates what the detector finds, is the product. Before 3.5 a
+Licensor had two bad options: make the whole thing Unconditional and give
+the fixer away, or pick a scope that withholds a use and make the detector
+paid too (there is no scope that is paid only for part of the code).
+
+3.5 lets one LICENSE give parts of the Software different scopes:
+
+```sh
+sh generate.sh -y 2026 -c "Snifrig Holder" -p Snifrig -s unconditional \
+  -C "snifrig-fix=paid:fix/**,crates/snifrig-fix" -o LICENSE
+```
+
+The `Operational Scope:` line in the header still names the scope for the
+rest of the Software. Under it, one `Component` line per part names the
+part, its scope, and the paths or packages that make it up. Section 1A
+carries a fixed block of text for Components, followed by each Component's
+scope text.
+
+**Why this stays inside Section 2C.** Section 2C lets a Licensor choose a
+version and a scope and fill in the blanks, and nothing else. A Component
+list is another fill-in: names, patterns, and one scope per name from the
+same menu. No term of the license is added or changed by hand; the
+generators produce the Component text, and a license without Components is
+the 3.4 text with the version number changed and one added paragraph in
+Section 1C (forward only, below).
+
+**The Paid scope.** Free to read and study the source, and nothing else:
+every other use is Paid Use under Section 8, Non-Production Use included,
+personal or business, individual or organization. For a tool like Snifrig's
+fixer that is the point: no fixing until paid, while the detector stays
+free. Section 8 is unchanged: the Published Price is a price and nothing
+else.
+
+*Trials.* The license sets no trial terms, because they differ by product.
+A Licensor who wants one has two tools. It can publish a Published Price of
+zero, or one that covers only a trial period (the scope says so), and issue
+trial keys. Or it can ship a limited free Component beside the paid one: a
+demo mode that fixes one item, say, with the full fixer paid. The developer
+decides how limited the free part is.
+
+*Per-seat and enterprise pricing.* Section 8 already allows a price per
+Seat, per device, per year, or by tier. A deal that does not fit a
+published price, such as an enterprise contract, is a separate written
+license from the Licensor for a price they negotiate. The Licensor owns the
+Software and may always do that; Section 8 says a use with no Published
+Price is not available under this license, so the separate license is the
+route. Publish the per-seat price for the sizes you want to sell by
+self-service, and point larger buyers to the developer.
+
+**What each question comes out to.**
+
+- *Does a user of the free core owe anything for the paid part?* No. A
+  Component is used only when code of it runs, and code that is present and
+  never run is not used. A paid Component does not make any other part Paid
+  Use.
+- *Can the core be Noncommercial and one Component Paid?* Yes. They are
+  different code. A company using only the core commercially owes for the
+  core; a home user running the Paid part owes for that part. Paying for
+  one never covers the other.
+- *What combinations are not allowed?* Decentralized allows no Components,
+  and no Component may be Decentralized or Seat-Limited. Decentralized says
+  nothing is Paid Use and sets one dispute process for the whole Software,
+  which cannot sit next to a paid part. A Seat-Limited Component would need
+  its own threshold, and the generator takes a threshold for the whole
+  Software only.
+- *Overlaps and leftovers.* Everything no Component covers belongs to the
+  scope stated first. A file two Components cover belongs to the one listed
+  first.
+- *Output marks (Section 11) and Retroactive Licenses (Section 12).* Both
+  are figured Component by Component. A mark on output identifies only the
+  Component that produced it. A Retroactive License reaches back for use of
+  the paid Component only, at that Component's Published Price.
+- *Acceptance (Section 9).* The step for a Component that withholds a use
+  appears before that Component first runs, names the version, the Component
+  and its scope, and shows where its Published Price is published.
+- *SPDX.* `LicenseRef-UFL-3.5-U.P-snifrig-fix`: the rest of the Software's
+  scope letter, then `.` plus each Component's letter, `-`, and name. An
+  SPDX `LicenseRef` allows only letters, digits, `.` and `-`, so a form with
+  `+` and parentheses would not be a valid identifier.
+
+**Checking payment offline.** Section 10 says the license does not require
+or permit the Software to send information about a Licensee's use to the
+Licensor for enforcement. A paid Component can still check that its user
+paid, with no network at all. The reference design, in
+[`examples/snifrig/offline-key`](./examples/snifrig/offline-key):
+
+1. After payment, the Licensor signs a small record with an Ed25519 private
+   key it keeps offline: license version, Component name, Licensee, seat
+   count, issue date, a short expiry (for example 30 days), and optionally
+   a hash of the machine the Licensee asked the key for.
+2. The Licensor delivers the signed key to the Licensee (a download or an
+   email). The Software never fetches it.
+3. The Software embeds only the Licensor's public key. At start it verifies
+   the signature, the Component name, the machine hash if there is one, and
+   that the local clock is inside the key's dates. It also refuses a clock
+   that has gone backwards past a date it already saw. It imports no
+   network library and makes no call.
+4. Renewal is a new paid period at the Published Price in effect then, as
+   Section 8 says. Within a paid period the Licensee signs in to its account
+   on the Licensor's website and downloads a fresh short key, a limited
+   number of times (say five) per period. That is the Licensee's own
+   request to the Licensor, not the Software reporting anything, so
+   Section 10 is intact.
+5. The seat count in the key is a record, not an enforcement: counting
+   Seats is the Licensee's statement under Section 10, not something the
+   Software can check offline.
+
+Whether the Software refuses to run a paid Component without a valid key is
+the Licensor's design choice. The license neither requires nor forbids it.
+
+*What this does and does not stop.* Short-lived keys, a re-issue cap, and
+machine binding make sharing a key tedious: a shared key dies in weeks,
+only works on the machine it was made for, and the sharer runs out of
+re-issues. They do not make the software uncrackable. Anything that runs on
+a user's own machine can be patched to skip the check, and a patched copy
+can be posted anywhere, a torrent site included. No license text or key
+scheme changes that. What helps, in order of effect:
+
+1. Make the paid part worth paying for after the crack: ship the fixer's
+   data (signatures, fix recipes, rules) with each key period, so a cracked
+   binary goes stale and the paid user keeps getting updates.
+2. Keep the paid Component in its own package, built and signed by the
+   Licensor, and tell users the signed release is the only one that is
+   supported. Verifying a download's signature is easy for honest users.
+3. Rely on the law for the rest. Section 9 makes running without the step a
+   breach, Section 2 reserves distribution, and posting a patched copy is
+   copyright infringement the Licensor can take down.
+4. Do not turn to phone-home to fix it. Section 10 rules out the Software
+   reporting use to the Licensor, and a license that promised that and did it
+   anyway would be worse than a cracked binary.
+
+The key check proves payment, not identity, and a determined pirate beats
+it. It exists to keep honest users honest and to make casual sharing a bad
+deal.
+
+**Worked example.** [`examples/snifrig`](./examples/snifrig) has the
+generated LICENSE, the Release statement, who owes what, the acceptance
+screen, and the key check.
+
+**Honest limits.** A Component boundary is a line in a repository, and
+software is often not that clean: a paid part linked into the same binary as
+the free core, a free part that calls the paid part, a user who copies the
+paid code into the free core and runs it there. The license answers by
+what runs and by Section 2's reservation of distribution, not by guessing
+how the code is linked. A Licensor who wants a hard boundary should keep the
+paid Component in its own package. The clearer the boundary, the clearer the
+license.
 
 ## Naming: why "Usufruct" over the alternatives
 
@@ -518,6 +687,11 @@ updates it:
   the arbitration has a California seat, costs and fees follow a
   frivolous-claim rule outside the cap, running the software is treated
   as acceptance, and the token price source is defined.
+- **3.5** — Components: a Release may give separate parts of the Software
+  their own Operational Scope, by generator flag, with a new Paid scope for
+  a part that is sold while the rest stays free; and Section 1C now lets a
+  Licensor move to any later version at any time, with notice, and never
+  back.
 
 See [`CHANGELOG.md`](./CHANGELOG.md) for the full text of each entry.
 Full version history is preserved in this repository's Git history and

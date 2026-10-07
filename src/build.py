@@ -1,9 +1,9 @@
-"""Single source of truth for UFL 3.4: src/template.txt + src/scopes.json ->
+"""Single source of truth for UFL 3.5: src/template.txt + src/scopes.json ->
 LICENSE.txt, and the template/scope blocks inside generate.sh and generate.js."""
 import json, re, textwrap
 from pathlib import Path
 R = Path(__file__).resolve().parent.parent; S = R / "src"
-VER_OLD, VER = "3.3", "3.4"
+VER_OLD, VER = "3.4", "3.5"
 
 def wrap_par(p, w=72):
     lines = p.split("\n")
@@ -31,6 +31,8 @@ def render_template():
 
 TPL = render_template()
 SC = json.loads((S / "scopes.json").read_text())
+CI = json.loads((S / "components.json").read_text())
+INTRO_LINES = "\n\n".join(textwrap.fill(p, 72, break_on_hyphens=False) for p in CI["intro"]).split("\n")
 def body_lines(key):
     return textwrap.fill(SC[key]["body"], 72, break_on_hyphens=False).split("\n")
 
@@ -46,6 +48,7 @@ for key in SC:
     lines = "\n".join(body_lines(key)).replace("@THRESHOLD@", "${THRESHOLD}").replace("@TOKEN@", "${TOKEN}")
     sh = re.sub(rf'(  {key}\)\n(?:    SCOPE_LINE=[^\n]*\n)(?:    SCOPE_SUFFIX=[^\n]*\n)    SCOPE_BODY=").*?(")(\n    ;;)',
                 lambda m: m.group(1) + lines + m.group(2) + m.group(3), sh, flags=re.S)
+sh = re.sub(r"(cat <<'UFL_COMPONENTS'\n).*?(\nUFL_COMPONENTS\n)", lambda m: m.group(1) + "\n".join(INTRO_LINES) + m.group(2), sh, flags=re.S)
 sh = sh.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
        .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}") \
        .replace(f"UFL {VER_OLD}, Operational", f"UFL {VER}, Operational")
@@ -61,6 +64,7 @@ scopes_js = "const SCOPES = {\n" + ",\n".join(
     f"  {json.dumps(k)}: {{\n    line: {json.dumps(SC[k]['line'], ensure_ascii=False)},\n    suffix: {json.dumps(SC[k]['suffix'])},\n    body: {jsbody(k)}\n  }}"
     for k in SC) + "\n};\n\nfunction buildScope(scopeKey, threshold, token) {\n  const s = SCOPES[scopeKey];\n  const t = (x) => x.split('@THRESHOLD@').join(threshold).split('@TOKEN@').join(token);\n  return { line: t(s.line), suffix: s.suffix, body: s.body.map(t) };\n}"
 js = re.sub(r"const SCOPES = \{.*?\n\};\n\nfunction buildScope\(scopeKey, threshold, token\) \{.*?\n\}", lambda m: scopes_js, js, flags=re.S)
+js = re.sub(r"const COMPONENT_INTRO = \[\n.*?\n\];", lambda m: "const COMPONENT_INTRO = [\n" + ",\n".join("  " + json.dumps(l, ensure_ascii=False) for l in INTRO_LINES) + "\n];", js, flags=re.S)
 js = js.replace(f"v{VER_OLD}", f"v{VER}").replace(f"Tracks UFL {VER_OLD}", f"Tracks UFL {VER}") \
        .replace(f"LicenseRef-UFL-{VER_OLD}", f"LicenseRef-UFL-{VER}").replace(f"`UFL-{VER_OLD}", f"`UFL-{VER}") \
        .replace(f"UFL {VER_OLD}, Operational", f"UFL {VER}, Operational")

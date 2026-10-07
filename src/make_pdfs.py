@@ -18,7 +18,7 @@ VER = json.loads((R / "ufl.json").read_text())["version"]
 SCOPES = json.loads((R / "ufl.json").read_text())["operationalScopes"]
 NAMES = {"unconditional": "Unconditional", "seat-limited": "Seat-Limited",
          "no-third-party-hosting": "No-Third-Party-Hosting",
-         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized"}
+         "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized", "paid": "Paid"}
 
 F = "/usr/share/fonts/truetype/dejavu/"
 pdfmetrics.registerFont(TTFont("Serif", F + "DejaVuSerif.ttf"))
@@ -68,19 +68,17 @@ def story_for(text):
         st.append(Paragraph(esc(" ".join(l.strip() for l in lines)), body))
     return st
 
-sums = []
-for key, name in NAMES.items():
-    txt = subprocess.check_output(["sh", str(R / "generate.sh"), "-y", "[YEAR]", "-c", "[COPYRIGHT HOLDER]",
-                                   "-p", "[PROJECT NAME]", "-s", key, "-t", "[THRESHOLD]", "-k", "[NATIVE TOKEN]"], text=True)
+def render_pdf(txt, name, pdf_path, tag=None, blank_note=None):
+    """Render a generated license text to the locked, read-only PDF. Returns the text digest."""
     digest = hashlib.sha256(txt.encode()).hexdigest()
-    spdx = f"LicenseRef-UFL-{VER}{SCOPES[key]['spdxSuffix']}"
+    m = re.search(r"use `(LicenseRef-UFL-[^`]+)`", txt)
+    spdx = m.group(1)
     scope_line = re.search(r"^Operational Scope: (.*)$", txt, re.M).group(1)
-    (OUT / f"UFL-{VER}-{key}.txt").write_text(txt)
-
+    comps = re.findall(r"^Component .*$", txt.split("## 1. Grant of Use")[0], re.M)
     buf = BytesIO()
     def footer(c, d):
         c.saveState(); c.setFont("Mono", 7.4); c.setFillColor(MUTED)
-        c.drawString(inch, 0.6 * inch, f"UFL {VER} · {name} · {spdx}")
+        c.drawString(inch, 0.6 * inch, f"UFL {VER} · {name} · {spdx}"[:110])
         c.drawRightString(letter[0] - inch, 0.6 * inch, "github.com/estejosh/UFL-Usufruct-License")
         c.drawString(inch, 0.45 * inch, f"SHA-256 of license text: {digest}")
         c.drawRightString(letter[0] - inch, 0.45 * inch, f"page {d.page}")
@@ -88,26 +86,46 @@ for key, name in NAMES.items():
     doc = SimpleDocTemplate(buf, pagesize=letter, leftMargin=inch, rightMargin=inch, topMargin=0.9 * inch,
                             bottomMargin=0.95 * inch, title=f"The Usufruct License {VER} — {name}",
                             author="estejosh/UFL-Usufruct-License", subject=f"{spdx} · Operational Scope: {name}",
-                            creator="UFL make_pdfs.py", keywords=f"UFL, {spdx}, {SCOPES[key]['tag']}")
+                            creator="UFL make_pdfs.py", keywords=f"UFL, {spdx}" + (f", {tag}" if tag else ""))
     st = [Paragraph(f"The Usufruct License (UFL)", title),
-          Paragraph(f"Version {VER} · Operational Scope: {esc(scope_line)}", scope_st),
-          Paragraph(f"{spdx} · repo tag {SCOPES[key]['tag']} · canonical text, whitepaper, and FAQ: "
-                    f"https://github.com/estejosh/UFL-Usufruct-License", meta),
-          Spacer(1, 4),
-          Paragraph("Copyright (c) [YEAR] [COPYRIGHT HOLDER]", meta),
-          Paragraph("Reference copy. This PDF is read-only. A Licensor adopts this text by filling in only the year, "
-                    "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if key == "decentralized" else ",")
-                    + " in its own LICENSE file (Section 2C). The SHA-256 below identifies this exact text.", meta),
-          Spacer(1, 6), HRFlowable(width="100%", thickness=0.8, color=MAROON), Spacer(1, 4)]
+          Paragraph(f"Version {VER} · Operational Scope: {esc(scope_line)}", scope_st)]
+    for c in comps:
+        st.append(Paragraph(esc(c), meta))
+    st += [Paragraph(f"{spdx}" + (f" · repo tag {tag}" if tag else "") + " · canonical text, whitepaper, and FAQ: "
+                     f"https://github.com/estejosh/UFL-Usufruct-License", meta),
+           Spacer(1, 4),
+           Paragraph(esc(re.search(r"^Copyright .*$", txt, re.M).group(0)), meta),
+           Paragraph(blank_note, meta),
+           Spacer(1, 6), HRFlowable(width="100%", thickness=0.8, color=MAROON), Spacer(1, 4)]
     st += story_for(txt)
     doc.build(st, onFirstPage=footer, onLaterPages=footer)
-
     w = PdfWriter(clone_from=PdfReader(BytesIO(buf.getvalue())))
     w.add_metadata({"/UFL-Version": VER, "/UFL-Scope": name, "/UFL-TextSHA256": digest})
     allowed = P.PRINT | P.PRINT_TO_REPRESENTATION | P.EXTRACT | P.EXTRACT_TEXT_AND_GRAPHICS
     w.encrypt(user_password="", owner_password=secrets.token_urlsafe(32), permissions_flag=allowed, algorithm="AES-256")
-    pdf_path = OUT / f"UFL-{VER}-{key}.pdf"
     with open(pdf_path, "wb") as f: w.write(f)
+    return digest
+
+import sys
+if len(sys.argv) == 4 and sys.argv[1] == "--one":
+    # python3 src/make_pdfs.py --one LICENSE LICENSE.pdf : the PDF of a project's own generated license
+    txt = Path(sys.argv[2]).read_text()
+    if f"Version {VER}" not in txt.splitlines()[0]:
+        sys.exit(f"{sys.argv[2]} is not a UFL {VER} license")
+    name = re.search(r"^Operational Scope: (.*)$", txt, re.M).group(1)
+    d = render_pdf(txt, name, sys.argv[3], blank_note="This PDF is read-only and reproduces the project's own LICENSE. The SHA-256 below identifies this exact text.")
+    print(sys.argv[3], d[:16]); sys.exit(0)
+
+sums = []
+for key, name in NAMES.items():
+    txt = subprocess.check_output(["sh", str(R / "generate.sh"), "-y", "[YEAR]", "-c", "[COPYRIGHT HOLDER]",
+                                   "-p", "[PROJECT NAME]", "-s", key, "-t", "[THRESHOLD]", "-k", "[NATIVE TOKEN]"], text=True)
+    (OUT / f"UFL-{VER}-{key}.txt").write_text(txt)
+    note = ("Reference copy. This PDF is read-only. A Licensor adopts this text by filling in only the year, "
+            "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if key == "decentralized" else ",")
+            + " in its own LICENSE file (Section 2C). The SHA-256 below identifies this exact text.")
+    pdf_path = OUT / f"UFL-{VER}-{key}.pdf"
+    digest = render_pdf(txt, name, pdf_path, tag=SCOPES[key]["tag"], blank_note=note)
     sums.append((hashlib.sha256(pdf_path.read_bytes()).hexdigest(), pdf_path.name))
     sums.append((digest, f"UFL-{VER}-{key}.txt"))
     print(name, "->", pdf_path.name, digest[:16])

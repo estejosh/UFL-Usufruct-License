@@ -1,5 +1,5 @@
 @@RAW
-The Usufruct License (UFL) — Version 3.4
+The Usufruct License (UFL) — Version 3.5
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -29,11 +29,13 @@ The Operational Scope declared above states the only limit, if any, on Section 1
 
 A "Release" is a version of the Software that the Licensor publishes under its own version number, tag, or date. This license applies to each Release separately, and where it refers to the Software, it means the Release the Licensee uses.
 
-With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.4, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
+With each Release, the Licensor states which version of this license, and which Operational Scope, governs that Release (its "Ruling License"). The statement names both, for example "UFL 3.5, Operational Scope: Noncommercial", and appears where users get the Release: in its release notes, its tag, or its package metadata. The Release includes the full text of its Ruling License. If a Release does not state its Ruling License, the license text included with it governs; if none is included, the license text in the Software's repository at the commit the Release was made from governs.
 
 A Release's Ruling License is fixed when the Release is published. For that Release, the Licensor grants every Licensee the rights its Ruling License gives, perpetually and irrevocably, on that Ruling License's own terms. Nothing the Licensor later does, including publishing a later Release, changing the license in the Software's repository, or adopting a later version of this license, changes, narrows, or ends those rights.
 
 The Licensor may license a later Release under a later version of this license, under a different Operational Scope, or under other terms. A Licensee who uses that later Release does so under its Ruling License. A Licensee who keeps using an earlier Release keeps the Ruling License that Release states.
+
+A Licensor may move the Software to a later version of this license at any time, for the Releases it publishes after the move, by stating that version as the Ruling License of each of them. The Licensor gives notice of the move in the release notes of the first Release under the later version and wherever else it announces Releases, such as its README, repository, or website. The notice names the version moved from and the version moved to, and says what changed in the Operational Scope, if anything. A Licensor moves only forward: once a Release is published under a version of this license, no later Release is published under an earlier version. The one exception is a Release that only patches an earlier Release for that Release's users, which keeps the earlier Release's Ruling License. A move changes the Releases made after it and no earlier Release.
 
 ## 2. Reserved Rights
 
@@ -152,6 +154,6 @@ If any provision of this license is held unenforceable, the remaining provisions
 @@RAW
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.4` —
-not a bare `UFL-3.4`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.5` —
+not a bare `UFL-3.5`, which would misrepresent it as SPDX-registered.
 @@END
