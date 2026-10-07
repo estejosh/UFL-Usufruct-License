@@ -14,6 +14,25 @@ declared with the generators (`-K`) that adds fixed Contracts paragraphs to
 Section 1A. A license without `-K` is the 3.5 text with the version
 changed. 3.6 builds on 3.5 (Components, Paid, forward only).
 
+Also in 3.6, for every scope: Section 2D Notice Screens and a key-gate
+paragraph in Section 8. Neither changes a scope, and a Licensor who uses
+neither is unaffected.
+
+- **Notice Screens (Section 2D).** A Licensor may show a short timed screen
+  that promotes its own products or anyone else's, such as a nag shown with
+  an upgrade prompt. The Section 9 step says what the screens are, how long
+  each lasts, and how often. Each screen ends by itself, can be closed
+  sooner, never blocks the work longer than its time, is labeled, stays out
+  of machine-read output, and uses no ad network, no tracking, and no network
+  call. Section 10 is unchanged. A Licensee may hide screens for its own use
+  unless the step makes them a required term of the free grant, and may not
+  remove them from a copy it distributes.
+- **License keys (Section 8).** A Licensor may build a Paid part so that it
+  does not run without a valid key, checked on the Licensee's machine with
+  no network call. A key covers the paid period, may be reissued a limited
+  number of times, and may not be shared. Bypassing, patching, or forging the
+  check or a key is a breach. A Licensor is not required to build this way.
+
 - **Use is free and unconditional for everyone.** Calling, integrating
   with, and composing with a deployed contract, by wallets, scripts,
   front ends, and other contracts, needs no payment, permission, or

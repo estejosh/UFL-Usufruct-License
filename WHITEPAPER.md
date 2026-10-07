@@ -548,6 +548,30 @@ how the code is linked. A Licensor who wants a hard boundary should keep the
 paid Component in its own package. The clearer the boundary, the clearer the
 license.
 
+## Notice Screens and license keys (since 3.6)
+
+**Notice Screens.** A free product can pay for itself with a nag the user
+agrees to: a short screen shown with an upgrade prompt that promotes the
+Licensor's own work, or a sponsor's. Section 2D makes it a term the user
+accepts in the Section 9 step, and fixes what the user is owed in return. The
+screen ends by itself, can be closed sooner, never blocks the work longer than
+its time, is labeled as a notice, stays out of scripts and logs, and runs
+with no ad network, no tracking, and no network call. This is modeled on
+attribution-notice clauses (the Apache NOTICE file, GPL section 7(b)), but it
+goes further, since it promotes products and does not only credit authors. The
+old BSD advertising clause was disliked because notices stacked up, so the
+limits on length, frequency, and form are the point. Whether the rule against
+removing a notice from a distributed copy holds in a given court is a
+question for counsel.
+
+**License keys.** A paid part may refuse to run without a valid key. The key
+is checked on the user's machine. Section 10 still forbids phone-home, so the
+reference design in `examples/snifrig/offline-key` signs a short-lived key
+after payment and verifies it locally. Section 8 makes sharing a key, or
+bypassing or forging the check, a breach. No scheme stops a determined
+cracker; the clause keeps honest users honest and gives the Licensor a
+contract and copyright claim against the rest.
+
 ## Smart contracts (since 3.6)
 
 UFL assumed software that a person runs, with an acceptance step shown

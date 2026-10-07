@@ -14,7 +14,7 @@ ARGS="-y [YEAR] -c [COPYRIGHT_HOLDER] -p [PROJECT_NAME]"
 
 for sc in $SCOPES; do
   sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s "$sc" -t '[THRESHOLD]' -k '[NATIVE TOKEN]' 2>/dev/null \
-    | sed 's/3\.6/3.5/g' > /tmp/ufl-t.$$
+    | sed 's/3\.6/3.5/g' | awk '/^## 2D\. /{skip=1} /^## 3\. /{skip=0} /^A Licensor may build a part of the Software that is Paid Use/{skip=2} skip==2&&/^$/{skip=0;next} !skip' > /tmp/ufl-t.$$
   if [ "$(cat /tmp/ufl-t.$$)" = "$(cat "pdf/UFL-3.5-$sc.txt")" ]; then ok "3.6 = 3.5 text (version aside): $sc"; else fail "3.5 text differs: $sc"; fi
 done
 rm -f /tmp/ufl-t.$$

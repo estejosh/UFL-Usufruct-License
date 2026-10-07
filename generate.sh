@@ -709,6 +709,45 @@ never a retroactive edit: once a version of this license is published,
 its text is not changed, and a project that wants a later version's
 provisions adopts that version's text in full.
 
+## 2D. Notice Screens
+
+A Licensor may build into the Software a Notice Screen: a short, timed
+screen or message, shown while the Software runs, that promotes the
+Licensor's own products or services, or those of anyone the Licensor
+chooses. Examples are an about line, a menu item, a link in a report, or
+a message shown with an upgrade prompt. A Licensor that does this states
+in the step described in Section 9 what the Notice Screens are, how long
+each lasts, and how often they appear, and the Licensee completes that
+step before first use. By completing it, the Licensee agrees to the
+Notice Screens for use under the free grant. The Published Price may end
+the Notice Screens for a use that is paid for.
+
+A Notice Screen must: (a) end by itself after the time the step states,
+and let the user close it sooner by a plain action, including from the
+keyboard; (b) never keep the Software from doing its work for longer
+than that time; (c) be text, images, or links shipped inside the
+Release, with no sound, no flashing, no window outside the Software, and
+no link opened unless the user chooses; (d) be labeled as a notice or as
+sponsored, and never look like an error, a warning from the system, or
+part of the Software's own output; (e) stay out of output that machines
+read, such as exit codes, logs, and structured data, and out of
+non-interactive runs; (f) be lawful and not deceptive, the Licensor
+alone being responsible for its content, including content that promotes
+anyone else; and (g) involve no ad network, no measurement of who saw or
+clicked it, and no network call to show it.
+
+Section 10 is unchanged: showing a Notice Screen is never a report of
+use, and a Notice Screen is not a way for the Licensor to learn who runs
+the Software.
+
+A Licensee may hide or shorten Notice Screens for its own use, by a
+setting or by a local change it does not distribute, unless the step
+says that a Notice Screen is a required term of the free grant. A
+Licensee will not remove, hide, or alter a Notice Screen in a copy it
+distributes under Section 2 or 2A. This section does not require a
+Licensor to include any Notice Screen and does not change any
+Operational Scope.
+
 ## 3. Why "Usufruct"
 
 In civil law, a usufruct is the right to use property belonging to
@@ -794,6 +833,18 @@ renews at the Published Price in effect when the next period begins. A
 change to the Published Price applies only to periods that begin after
 the change. If the Licensor has not published a price for a withheld
 use, that use is not available under this license.
+
+A Licensor may build a part of the Software that is Paid Use so that it
+does not run until the Licensee enters a valid license key (a "key").
+The Software checks the key on the Licensee's own machine, without any
+network call, as Section 10 requires. A key is issued to the Licensee
+for the period the Published Price covers, may expire when that period
+ends, and may be reissued a limited number of times in a period, as the
+Published Price states. A Licensee will not use a key outside the Seats
+or devices the Published Price covers, will not use a key issued to
+someone else, and will not bypass, patch, disable, or forge the check or
+a key. A part built this way is not used until a valid key is entered.
+Nothing in this license requires a Licensor to build any part this way.
 
 ## 9. Acceptance
 
