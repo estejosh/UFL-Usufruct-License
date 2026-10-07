@@ -556,7 +556,7 @@ or a sponsor's, for the whole Software or for named Components. Section 2D
 makes it a term the user accepts in the Section 9 step, in exchange for free
 use, and fixes what the user is owed in return. The screen appears once per
 run, ends by itself, can be closed sooner, never blocks the work longer than
-its time, is labeled, stays out of scripts and logs, and runs with no ad
+its time, never covers the whole screen, leaves the user free to use other windows, is labeled, stays out of scripts and logs, and runs with no ad
 network, no tracking, and no network call. Dark patterns and pop-up nagging
 are disallowed in the license text itself, and a screen that uses them is
 void as a term and may be removed. The Licensor warrants only to its

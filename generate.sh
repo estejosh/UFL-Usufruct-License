@@ -729,13 +729,15 @@ A Notice Screen must: (a) appear once, at startup, and never again
 during that run; (b) end by itself after the time the step states, and
 let the user close it sooner by a plain action, including from the
 keyboard; (c) never keep the Software from doing its work for longer
-than that time; (d) be text, images, or links shipped inside the
-Release, with no sound, no flashing, no window outside the Software, and
-no link opened unless the user chooses; (e) be labeled as a notice or as
-sponsored; (f) stay out of output that machines read, such as exit
-codes, logs, and structured data, and out of non-interactive runs; and
-(g) involve no ad network, no measurement of who saw or clicked it, and
-no network call to show it.
+than that time, never cover the whole screen, never take focus from,
+cover, or block any other window, and leave the user free to load and
+use other windows and programs while it shows; (d) be text, images, or
+links shipped inside the Release, with no sound, no flashing, no window
+outside the Software, and no link opened unless the user chooses; (e) be
+labeled as a notice or as sponsored; (f) stay out of output that
+machines read, such as exit codes, logs, and structured data, and out of
+non-interactive runs; and (g) involve no ad network, no measurement of
+who saw or clicked it, and no network call to show it.
 
 Dark patterns and pop-up nagging are not allowed under this license. A
 Notice Screen must not: look like an error, a warning from the system, a

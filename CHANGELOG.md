@@ -24,7 +24,8 @@ neither is unaffected.
   says which, what it is, and how long it lasts. It is a term of the free
   grant: the user agrees to see it in return for free use, or pays the
   Published Price. It appears once per run, ends by itself, can be closed
-  sooner, never blocks work longer than its time, is labeled, stays out of
+  sooner, never blocks work longer than its time, never covers the whole
+  screen or takes focus from other windows, is labeled, stays out of
   machine-read output, and uses no ad network, no tracking, and no network
   call. Dark patterns and pop-up nagging are disallowed by name (fake
   errors, hidden or delayed close, timer resets, shaming wording,
