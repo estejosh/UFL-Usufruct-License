@@ -18,7 +18,7 @@ def check(key, public_key_b64, component, today=None, machine=None, last_seen=No
     except (ValueError, InvalidSignature):
         return False, "key is not signed by the Licensor"
     d = json.loads(payload)
-    if d.get("license") != "UFL-3.6" or d.get("component") != component:
+    if d.get("license") != "UFL-3.7" or d.get("component") != component:
         return False, "key is for a different Component or license version"
     today = today or datetime.date.today().isoformat()
     # last_seen: the latest date this machine has run the Software, kept in a

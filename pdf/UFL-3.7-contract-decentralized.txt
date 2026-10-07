@@ -1,7 +1,7 @@
 The Usufruct License (UFL) — Version 3.7
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
-Copyright (c) 2026 Example Holder
+Copyright (c) [YEAR] [COPYRIGHT HOLDER]
 
 Operational Scope: Decentralized
 Contract Release: the Software is, or includes, smart contracts (see Contracts, below)
@@ -32,7 +32,7 @@ individual basis and not as a class or collective action, and no party
 consents to the jurisdiction of any court by using the Software. The
 arbitrator applies the UNIDROIT Principles of International Commercial
 Contracts and, for any matter they do not answer, California law. Native
-token of the Software: EXMPL. Each party's total liability to the
+token of the Software: [NATIVE TOKEN]. Each party's total liability to the
 other for all claims arising from the Software or this license is
 limited, to the extent the law allows, to one United States dollar in
 value. The paying party chooses whether to pay in money or, if a native
@@ -326,7 +326,7 @@ except as Section 2A permits:
       service that is distributed, sold, or otherwise made available to
       third parties.
   (c) Using the Licensor's name, marks, or claims of compatibility
-      ("Example Project-compatible," "built on Example Project," etc.) in
+      ("[PROJECT NAME]-compatible," "built on [PROJECT NAME]," etc.) in
       connection with a distributed derivative.
 
 ## 2A. Forks of Decentralized or Network Software
@@ -338,7 +338,7 @@ modified version, fork, or independent reimplementation of it —
 including to operate a competing network — provided the distributed
 work:
 
-  (i) prominently and accurately credits Example Project as the origin of
+  (i) prominently and accurately credits [PROJECT NAME] as the origin of
       the Software or protocol, in its README, whitepaper, or equivalent
       primary documentation; and
   (ii) keeps the canonical-source notice required by Section 7 intact.

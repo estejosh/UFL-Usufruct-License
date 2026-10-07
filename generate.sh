@@ -1,5 +1,5 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.6.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v3.7.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
@@ -45,7 +45,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 3.6. See CHANGELOG.md for revisions.
+# Tracks UFL 3.7. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -523,7 +523,7 @@ if [ "$CONTRACT" = 1 ]; then
 fi
 
 if [ "$RELEASE" = 1 ]; then
-  STMT="UFL 3.6, Operational Scope: $DEF_LINE$COMP_STMT$CONTRACT_STMT (LicenseRef-UFL-3.6${SCOPE_SUFFIX})"
+  STMT="UFL 3.7, Operational Scope: $DEF_LINE$COMP_STMT$CONTRACT_STMT (LicenseRef-UFL-3.7${SCOPE_SUFFIX})"
   if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
   exit 0
 fi
@@ -539,9 +539,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.6\`|LicenseRef-UFL-3.6${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.6\`|\`UFL-3.6${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 3.6
+  -e "s|LicenseRef-UFL-3.7\`|LicenseRef-UFL-3.7${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-3.7\`|\`UFL-3.7${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 3.7
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -565,6 +565,22 @@ The Operational Scope declared above states the only limit, if any, on
 Section 1's free grant. Exactly one scope applies to this Software:
 
 [OPERATIONAL SCOPE BODY]
+
+Splitting the Software. A Licensor may split the Software into parts
+that carry different Operational Scopes, for example a free core and a
+paid part, where this license allows Components, if the split is honest
+and clearly drawn. The header must name each part by path, glob,
+directory, or package and state its scope. The Licensor's README,
+pricing page, and any listing of the Software must describe each part's
+scope as the header states it, and must not describe as free a part that
+the header withholds. Parts are divided by what the Software is, never
+by who the user is. A Licensor must not move code between parts, or
+build the parts to depend on one another, in order to put a use that
+this license grants free into a paid part. Where the header and the
+Licensor's other statements disagree, or the header leaves a part
+unclear, the reading more favorable to the Licensee governs. A Licensor
+who does not draw the split this way has not split this license, and the
+whole Software takes the scope the header states first.
 
 ## 1B. Definitions
 
@@ -595,7 +611,7 @@ Release the Licensee uses.
 
 With each Release, the Licensor states which version of this license,
 and which Operational Scope, governs that Release (its "Ruling
-License"). The statement names both, for example "UFL 3.6, Operational
+License"). The statement names both, for example "UFL 3.7, Operational
 Scope: Noncommercial", and appears where users get the Release: in its
 release notes, its tag, or its package metadata. The Release includes
 the full text of its Ruling License. If a Release does not state its
@@ -1002,8 +1018,8 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.6` —
-not a bare `UFL-3.6`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.7` —
+not a bare `UFL-3.7`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 
