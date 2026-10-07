@@ -16,7 +16,7 @@ from pypdf.constants import UserAccessPermissions as P
 R = Path(__file__).resolve().parent.parent; OUT = R / "pdf"; OUT.mkdir(exist_ok=True)
 VER = json.loads((R / "ufl.json").read_text())["version"]
 SCOPES = json.loads((R / "ufl.json").read_text())["operationalScopes"]
-NAMES = {"unconditional": "Unconditional", "seat-limited": "Seat-Limited",
+NAMES = {"unconditional": "Unconditional", "seat-limited": "Seat-Limited", "institutional": "Institutional",
          "no-third-party-hosting": "No-Third-Party-Hosting",
          "no-competing-service": "No-Competing-Service", "noncommercial": "Noncommercial", "decentralized": "Decentralized", "paid": "Paid"}
 
@@ -127,7 +127,7 @@ for key, name, scope_key, extra in VARIANTS:
                                   text=True, stderr=subprocess.DEVNULL)
     (OUT / f"UFL-{VER}-{key}.txt").write_text(txt)
     note = ("Reference copy. This PDF is read-only. A Licensor adopts this text by filling in only the year, "
-            "copyright holder, and project name" + (", and the free threshold," if key == "seat-limited" else ", and the native token (or none)," if scope_key == "decentralized" else ",")
+            "copyright holder, and project name" + (", and the free threshold," if key in ("seat-limited", "institutional") else ", and the native token (or none)," if scope_key == "decentralized" else ",")
             + " in its own LICENSE file (Section 2C). The SHA-256 below identifies this exact text.")
     pdf_path = OUT / f"UFL-{VER}-{key}.pdf"
     digest = render_pdf(txt, name, pdf_path, tag=SCOPES[scope_key]["tag"] + ("-K" if extra else ""), blank_note=note)

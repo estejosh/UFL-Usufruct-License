@@ -23,7 +23,7 @@ def issue(priv, component, licensee, issued_at, not_after, seats=1, machine=None
     paid period. `machine` is an optional hash the Licensee supplies when
     asking for the key; the Software compares it locally. That limits sharing
     without the Software ever reporting anything."""
-    d = {"v": 1, "license": "UFL-3.7", "component": component, "licensee": licensee,
+    d = {"v": 1, "license": "UFL-3.8", "component": component, "licensee": licensee,
          "seats": seats, "issued_at": issued_at, "not_after": not_after}
     if machine: d["machine"] = machine
     payload = json.dumps(d, sort_keys=True, separators=(",", ":")).encode()

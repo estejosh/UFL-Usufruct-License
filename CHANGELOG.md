@@ -4,6 +4,28 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.8 — October 2026
+
+Institutional scope. A new Operational Scope, `-s institutional -t "25 seats"`,
+SPDX suffix `-I`, repo tag `UFL-I-1a`. It adds a scope and changes nothing
+else; the other scopes are the 3.7 text with the version changed (a test checks
+this). One clarifying edit: the Components paragraph now names Institutional
+with Seat-Limited and Decentralized as scopes a Component may not take.
+
+- **Home use is free.** Personal use by an individual, for no business or
+  organization, in any amount. Non-Production Use is free for everyone.
+- **Small organizations are free up to the stated number of seats.** Seats
+  are counted as in Section 1B, and organizations under common control count
+  together.
+- **Larger organizations negotiate.** Production Use beyond the threshold is
+  Paid Use. The Licensor either publishes a Published Price for it, so Sections
+  8 through 13 work as usual, or says the tier is by agreement only, in which
+  case a written enterprise license signed by the Licensor is required and
+  the use is not licensed until it is signed.
+
+Releases published under earlier versions keep their Ruling License (Section
+1C). A Licensor moves to 3.8 forward, with notice.
+
 ## 3.7 — October 2026
 
 Splitting the Software. 3.5 let a Licensor give parts of one repository

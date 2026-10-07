@@ -1,9 +1,9 @@
-"""Single source of truth for UFL 3.7: src/template.txt + src/scopes.json ->
+"""Single source of truth for UFL 3.8: src/template.txt + src/scopes.json ->
 LICENSE.txt, and the template/scope blocks inside generate.sh and generate.js."""
 import json, re, textwrap
 from pathlib import Path
 R = Path(__file__).resolve().parent.parent; S = R / "src"
-VER_OLD, VER = "3.6", "3.7"
+VER_OLD, VER = "3.7", "3.8"
 
 def wrap_par(p, w=72):
     lines = p.split("\n")

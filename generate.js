@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// generate.js — fill in a copy of the Usufruct License (UFL) v3.7.
+// generate.js — fill in a copy of the Usufruct License (UFL) v3.8.
 // Single-file Node script, no npm dependencies (built-in `fs` only).
 //
 // Usage:
@@ -8,7 +8,7 @@
 //   node generate.js -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]...
 //
 // SCOPE is one of: unconditional (default), no-competing-service,
-// no-third-party-hosting, noncommercial, seat-limited, decentralized, paid.
+// no-third-party-hosting, noncommercial, seat-limited, institutional, decentralized, paid.
 // SCOPE governs all of the Software that no Component covers. -C declares a
 // Component, a part of the Software with its own scope (since 3.5), as
 // NAME=SCOPE:PATH[,PATH...], for example
@@ -26,10 +26,11 @@
 // name; it may not contain a backslash or a comma. A file that more than one
 // Component covers belongs to the Component listed first. TOKEN is only used
 // when SCOPE is decentralized (the native token, default "none"). THRESHOLD is only
-// used (and required) when SCOPE is seat-limited — free text describing
-// the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
+// used (and required) when SCOPE is seat-limited or institutional — free text
+// describing the free tier, e.g. "2 seats, 2 computers, 2 mobile devices"
+// (seat-limited) or "25 seats" (institutional).
 // Any flag left out is prompted for, except THRESHOLD, which is only
-// prompted for when SCOPE is seat-limited. With no -o, the filled license
+// prompted for when SCOPE is seat-limited or institutional. With no -o, the filled license
 // is written to stdout.
 //
 // -r (js also --release-statement) prints the Release statement (Section 1C)
@@ -44,14 +45,14 @@
 //   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.js \
 //     | node - -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 //
-// Tracks UFL 3.7. See CHANGELOG.md for revisions.
+// Tracks UFL 3.8. See CHANGELOG.md for revisions.
 
 'use strict';
 
 const fs = require('fs');
 
 const TEMPLATE = [
-  "The Usufruct License (UFL) — Version 3.7",
+  "The Usufruct License (UFL) — Version 3.8",
   "Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License",
   "",
   "Copyright (c) [YEAR] [COPYRIGHT HOLDER]",
@@ -121,7 +122,7 @@ const TEMPLATE = [
   "",
   "With each Release, the Licensor states which version of this license,",
   "and which Operational Scope, governs that Release (its \"Ruling",
-  "License\"). The statement names both, for example \"UFL 3.7, Operational",
+  "License\"). The statement names both, for example \"UFL 3.8, Operational",
   "Scope: Noncommercial\", and appears where users get the Release: in its",
   "release notes, its tag, or its package metadata. The Release includes",
   "the full text of its Ruling License. If a Release does not state its",
@@ -528,8 +529,8 @@ const TEMPLATE = [
   "",
   "---",
   "SPDX identifier: UFL is not on the official SPDX license list. Per SPDX",
-  "convention for licenses outside that list, use `LicenseRef-UFL-3.7` —",
-  "not a bare `UFL-3.7`, which would misrepresent it as SPDX-registered.",
+  "convention for licenses outside that list, use `LicenseRef-UFL-3.8` —",
+  "not a bare `UFL-3.8`, which would misrepresent it as SPDX-registered.",
   ''
 ].join('\n');
 
@@ -739,11 +740,11 @@ const COMPONENT_INTRO = [
   "identify it, and its scope are filled in as the copyright year, holder,",
   "and project name are, and no other term of this license changes. The",
   "scope of a Component may be any Operational Scope in this Section 1A",
-  "except Seat-Limited and Decentralized. The scope of the Software outside",
-  "the Components may be any Operational Scope except Decentralized, which",
-  "applies only to a Release without Components. The statement of the",
-  "Release's Ruling License under Section 1C names this version, the scope",
-  "stated first, and each Component with its scope."
+  "except Seat-Limited, Institutional, and Decentralized. The scope of the",
+  "Software outside the Components may be any Operational Scope except",
+  "Decentralized, which applies only to a Release without Components. The",
+  "statement of the Release's Ruling License under Section 1C names this",
+  "version, the scope stated first, and each Component with its scope."
 ];
 
 const SCOPES = {
@@ -794,6 +795,24 @@ const SCOPES = {
       "Seat-Limited — Section 1's grant is unconditional for Non-Production",
       "Use. Production Use is free up to @THRESHOLD@; Production Use beyond",
       "that threshold is Paid Use under Section 8."
+    ]
+  },
+  "institutional": {
+    line: "Institutional — @THRESHOLD@ free, home use free",
+    suffix: "-I",
+    body: [
+      "Institutional — Section 1's free grant covers three uses: Non-Production",
+      "Use by anyone; personal use by an individual for the individual's own",
+      "purposes and not for any business or organization, in any amount; and",
+      "Production Use by an organization up to @THRESHOLD@, counting together",
+      "all organizations under common control. Production Use beyond that",
+      "threshold is Paid Use under Section 8. For that tier the Licensor either",
+      "publishes a Published Price or states that the tier is by agreement",
+      "only. Where the tier is by agreement only, the Licensee needs a written",
+      "enterprise license signed by the Licensor, whose price and terms the",
+      "Licensor and the Licensee negotiate under Section 2, and until it is",
+      "signed that use is not licensed. A signed enterprise license governs the",
+      "use it covers, and this license continues to apply to everything else."
     ]
   },
   "decentralized": {
@@ -892,7 +911,7 @@ function parseArgs(argv) {
     else if (a === '-h' || a === '--help') {
       process.stderr.write(
         'Usage: generate.js [-y YEAR] [-c "COPYRIGHT HOLDER"] [-p "PROJECT NAME"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K]\n' +
-        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid\n' +
+        'SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | institutional | decentralized | paid\n' +
         'COMPONENT: NAME=SCOPE:PATH[,PATH...]  (SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid)\n'
       );
       process.exit(0);
@@ -926,8 +945,8 @@ function fill(template, year, holder, project, scopeLine, scopeBodyLines, scopeS
     .split('[PROJECT NAME]').join(project)
     .split('[OPERATIONAL SCOPE BODY]').join(filledBody)
     .split('[OPERATIONAL SCOPE]').join(scopeLine)
-    .split('LicenseRef-UFL-3.7`').join('LicenseRef-UFL-3.7' + scopeSuffix + '`')
-    .split('`UFL-3.7`').join('`UFL-3.7' + scopeSuffix + '`');
+    .split('LicenseRef-UFL-3.8`').join('LicenseRef-UFL-3.8' + scopeSuffix + '`')
+    .split('`UFL-3.8`').join('`UFL-3.8' + scopeSuffix + '`');
 }
 
 function main() {
@@ -937,7 +956,7 @@ function main() {
   const holder = args.release ? '' : args.holder || prompt('Copyright holder: ');
   const project = args.release ? '' : args.project || prompt('Project name: ');
 
-  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'decentralized', 'paid'];
+  const validScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'seat-limited', 'institutional', 'decentralized', 'paid'];
   if (validScopes.indexOf(args.scope) === -1) {
     process.stderr.write('Unknown SCOPE: ' + args.scope + '\n');
     process.stderr.write('Must be one of: ' + validScopes.join(' | ') + '\n');
@@ -948,6 +967,9 @@ function main() {
   if (args.scope === 'seat-limited' && !threshold) {
     threshold = prompt('Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ');
   }
+  if (args.scope === 'institutional' && !threshold) {
+    threshold = prompt('Free organization threshold (e.g. "25 seats"): ');
+  }
 
   const token = args.token || 'none';
   if (args.scope === 'decentralized' && !args.release) {
@@ -956,7 +978,7 @@ function main() {
 
   const scope = buildScope(args.scope, threshold, token);
   const fail = (m) => { process.stderr.write(m + '\n'); process.exit(1); };
-  const letters = { 'unconditional': 'U', 'no-competing-service': 'C', 'no-third-party-hosting': 'H', 'noncommercial': 'N', 'seat-limited': 'S', 'decentralized': 'D', 'paid': 'P' };
+  const letters = { 'unconditional': 'U', 'no-competing-service': 'C', 'no-third-party-hosting': 'H', 'noncommercial': 'N', 'seat-limited': 'S', 'institutional': 'I', 'decentralized': 'D', 'paid': 'P' };
   const compScopes = ['unconditional', 'no-competing-service', 'no-third-party-hosting', 'noncommercial', 'paid'];
   let compHdr = '', compStmt = '', suffix = scope.suffix, bodyLines = scope.body, headerLine = scope.line;
   if (args.components.length) {
@@ -1001,7 +1023,7 @@ function main() {
     }
   }
   if (args.release) {
-    const stmt = 'UFL 3.7, Operational Scope: ' + scope.line + compStmt + contractStmt + ' (LicenseRef-UFL-3.7' + suffix + ')\n';
+    const stmt = 'UFL 3.8, Operational Scope: ' + scope.line + compStmt + contractStmt + ' (LicenseRef-UFL-3.8' + suffix + ')\n';
     if (args.out) { fs.writeFileSync(args.out, stmt); } else { process.stdout.write(stmt); }
     return;
   }

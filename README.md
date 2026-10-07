@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="./LICENSE.txt"><img alt="License: UFL-3.7" src="https://img.shields.io/badge/license-UFL--3.7-blue"></a>
-<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.7-lightgrey"></a>
+<a href="./LICENSE.txt"><img alt="License: UFL-3.8" src="https://img.shields.io/badge/license-UFL--3.8-blue"></a>
+<a href="./WHITEPAPER.md#faq"><img alt="SPDX status" src="https://img.shields.io/badge/SPDX-LicenseRef--UFL--3.8-lightgrey"></a>
 <a href="./examples/custodly/LICENSE"><img alt="Adopted by Custodly" src="https://img.shields.io/badge/adopted%20by-Custodly-informational"></a>
 <a href="./examples/hone/LICENSE"><img alt="Adopted by Hone" src="https://img.shields.io/badge/adopted%20by-Hone-informational"></a>
 </p>
@@ -34,7 +34,7 @@ also says what a contributor gives the project — see
 
 See it adopted: [Custodly](./examples/custodly/LICENSE) · [Hone](./examples/hone/LICENSE) — plus five more real-world adopters in [Adopted by](#adopted-by) below.
 
-Current version: **UFL-3.7**. First adopted (as UFL-1.0) by
+Current version: **UFL-3.8**. First adopted (as UFL-1.0) by
 [Custodly](https://github.com/estejosh/Custodly); adopted at UFL-1.1 by
 [Hone](https://github.com/shindevlin/hone).
 
@@ -86,6 +86,7 @@ Scope:` line at the top of the license text, the `scope` field in
 |---|---|---|
 | Unconditional (default) | `UFL-U-1a` | Nothing — Section 1's grant applies as written. |
 | Seat-Limited | `UFL-S-1a` | Production use beyond a stated seat/device/user threshold (Paid Use above it). |
+| Institutional | `UFL-I-1a` | Free for home use and for organizations up to a stated seat threshold; larger organizations negotiate a written enterprise license with the Licensor (or pay a Published Price if one is published). |
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
@@ -111,8 +112,8 @@ NAME=SCOPE:PATH[,PATH...]` declares a Component and may be repeated. A
 path is relative to the root of the Release (`*` within a segment, `**`
 across segments) or a package name. A file two Components cover belongs to
 the one listed first. A Component's scope may be unconditional,
-no-competing-service, no-third-party-hosting, noncommercial, or paid. Seat-Limited
-and Decentralized are not available for a Component, and Decentralized
+no-competing-service, no-third-party-hosting, noncommercial, or paid. Seat-Limited,
+Institutional, and Decentralized are not available for a Component, and Decentralized
 allows no Components.
 
 - A Component is used only when its code runs. A user of the free core
@@ -123,7 +124,7 @@ allows no Components.
 - The Section 9 step for a paid Component appears before it first runs
   and names the version, the Component, its scope, and where its Published
   Price is published.
-- The SPDX identifier is `LicenseRef-UFL-3.7-U.P-snifrig-fix`. `sh
+- The SPDX identifier is `LicenseRef-UFL-3.8-U.P-snifrig-fix`. `sh
   generate.sh -r ...` with the same flags prints the Release statement.
 - Checking payment offline, without sending anything to the Licensor, is
   shown in [`examples/snifrig`](./examples/snifrig).
@@ -137,7 +138,7 @@ license gains fixed Contracts paragraphs:
 ```sh
 sh generate.sh -y 2026 -c "Jane Doe" -p MyToken -s decentralized -k MYT -K -o LICENSE
 sh generate.sh -r -s decentralized -k MYT -K
-UFL 3.7, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.7-D-K)
+UFL 3.8, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.8-D-K)
 ```
 
 - **Calling is free for everyone**, including other contracts, under any
@@ -155,8 +156,8 @@ UFL 3.7, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.7-
   because it changes the metadata hash:
 
 ```solidity
-// SPDX-License-Identifier: LicenseRef-UFL-3.7-D-K
-// Usufruct License (UFL) 3.7, Operational Scope: Decentralized, Contract Release.
+// SPDX-License-Identifier: LicenseRef-UFL-3.8-D-K
+// Usufruct License (UFL) 3.8, Operational Scope: Decentralized, Contract Release.
 // Canonical text: https://github.com/estejosh/UFL-Usufruct-License
 // License file SHA-256: <sha256sum LICENSE>
 ```
@@ -193,11 +194,11 @@ not take effect and the project is licensed as Unconditional.
 The click-through must, before first use:
 
 - name the license version and the Operational Scope (for example,
-  "UFL 3.7, Decentralized");
+  "UFL 3.8, Decentralized");
 - show the limit of liability and the dispute process, or the full
   license text, and ask for an affirmative step (a button, a typed
   confirmation, or for headless use an explicit flag or setting naming the
-  version, such as `--accept-ufl 3.7`);
+  version, such as `--accept-ufl 3.8`);
 - not run at all until the step is done (a gate, not a notice);
 - record the version and time on the user's own machine only.
 
@@ -213,7 +214,7 @@ license text with it:
 
 ```
 ./generate.sh -r -s noncommercial
-UFL 3.7, Operational Scope: Noncommercial (LicenseRef-UFL-3.7-N)
+UFL 3.8, Operational Scope: Noncommercial (LicenseRef-UFL-3.8-N)
 ```
 
 Put that line in the Release's notes, its tag, or its package metadata.
@@ -280,19 +281,20 @@ What it does and does not do:
 
 [`pdf/`](./pdf) holds one read-only PDF per Operational Scope, plus the
 plain text it was made from, with the year, holder, and project name
-left blank (and the threshold for Seat-Limited, or the native token, if any, for Decentralized):
+left blank (and the threshold for Seat-Limited or Institutional, or the native token, if any, for Decentralized):
 
 | Scope | PDF | Text |
 |---|---|---|
-| Unconditional | [UFL-3.7-unconditional.pdf](./pdf/UFL-3.7-unconditional.pdf) | [.txt](./pdf/UFL-3.7-unconditional.txt) |
-| Seat-Limited | [UFL-3.7-seat-limited.pdf](./pdf/UFL-3.7-seat-limited.pdf) | [.txt](./pdf/UFL-3.7-seat-limited.txt) |
-| No-Third-Party-Hosting | [UFL-3.7-no-third-party-hosting.pdf](./pdf/UFL-3.7-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.7-no-third-party-hosting.txt) |
-| No-Competing-Service | [UFL-3.7-no-competing-service.pdf](./pdf/UFL-3.7-no-competing-service.pdf) | [.txt](./pdf/UFL-3.7-no-competing-service.txt) |
-| Noncommercial | [UFL-3.7-noncommercial.pdf](./pdf/UFL-3.7-noncommercial.pdf) | [.txt](./pdf/UFL-3.7-noncommercial.txt) |
-| Decentralized | [UFL-3.7-decentralized.pdf](./pdf/UFL-3.7-decentralized.pdf) | [.txt](./pdf/UFL-3.7-decentralized.txt) |
-| Paid | [UFL-3.7-paid.pdf](./pdf/UFL-3.7-paid.pdf) | [.txt](./pdf/UFL-3.7-paid.txt) |
-| Contract Release | [UFL-3.7-contract.pdf](./pdf/UFL-3.7-contract.pdf) | [.txt](./pdf/UFL-3.7-contract.txt) |
-| Contract Release, Decentralized | [UFL-3.7-contract-decentralized.pdf](./pdf/UFL-3.7-contract-decentralized.pdf) | [.txt](./pdf/UFL-3.7-contract-decentralized.txt) |
+| Unconditional | [UFL-3.8-unconditional.pdf](./pdf/UFL-3.8-unconditional.pdf) | [.txt](./pdf/UFL-3.8-unconditional.txt) |
+| Seat-Limited | [UFL-3.8-seat-limited.pdf](./pdf/UFL-3.8-seat-limited.pdf) | [.txt](./pdf/UFL-3.8-seat-limited.txt) |
+| Institutional | [UFL-3.8-institutional.pdf](./pdf/UFL-3.8-institutional.pdf) | [.txt](./pdf/UFL-3.8-institutional.txt) |
+| No-Third-Party-Hosting | [UFL-3.8-no-third-party-hosting.pdf](./pdf/UFL-3.8-no-third-party-hosting.pdf) | [.txt](./pdf/UFL-3.8-no-third-party-hosting.txt) |
+| No-Competing-Service | [UFL-3.8-no-competing-service.pdf](./pdf/UFL-3.8-no-competing-service.pdf) | [.txt](./pdf/UFL-3.8-no-competing-service.txt) |
+| Noncommercial | [UFL-3.8-noncommercial.pdf](./pdf/UFL-3.8-noncommercial.pdf) | [.txt](./pdf/UFL-3.8-noncommercial.txt) |
+| Decentralized | [UFL-3.8-decentralized.pdf](./pdf/UFL-3.8-decentralized.pdf) | [.txt](./pdf/UFL-3.8-decentralized.txt) |
+| Paid | [UFL-3.8-paid.pdf](./pdf/UFL-3.8-paid.pdf) | [.txt](./pdf/UFL-3.8-paid.txt) |
+| Contract Release | [UFL-3.8-contract.pdf](./pdf/UFL-3.8-contract.pdf) | [.txt](./pdf/UFL-3.8-contract.txt) |
+| Contract Release, Decentralized | [UFL-3.8-contract-decentralized.pdf](./pdf/UFL-3.8-contract-decentralized.pdf) | [.txt](./pdf/UFL-3.8-contract-decentralized.txt) |
 
 A project that adopts UFL includes the PDF of its own license in its
 repository, next to `LICENSE`. Pick the reference PDF above that matches
@@ -331,8 +333,8 @@ UFL's redistribution condition is unambiguous, but as of 2.0 you must
 also choose an Operational Scope — don't default one silently, ask.
 Generate a filled copy with the one-liner above (`-s unconditional` if
 there's no reason to restrict use); cite it as
-`LicenseRef-UFL-3.7<suffix>` (e.g. `LicenseRef-UFL-3.7-N` for
-Noncommercial), not a bare `UFL-3.7<suffix>` — see the FAQ in
+`LicenseRef-UFL-3.8<suffix>` (e.g. `LicenseRef-UFL-3.8-N` for
+Noncommercial), not a bare `UFL-3.8<suffix>` — see the FAQ in
 [`WHITEPAPER.md`](./WHITEPAPER.md) for why. Machine-readable metadata
 (version, identifier, scopes, file paths) is at
 [`ufl.json`](./ufl.json).
@@ -350,7 +352,7 @@ Copy `LICENSE.txt` into your repository as `LICENSE` (or `LICENSE.md`),
 fill in `[YEAR]`, `[COPYRIGHT HOLDER]`, and `[PROJECT NAME]`, choose an
 Operational Scope — by hand or with the generator above — and state in
 your README which version and scope you're under (e.g. "Licensed under
-UFL-3.7, Operational Scope: Noncommercial"). Keep the canonical-source
+UFL-3.8, Operational Scope: Noncommercial"). Keep the canonical-source
 line near the top intact — Section 7 requires it.
 
 Copying the license text itself for this purpose needs no separate
@@ -364,7 +366,7 @@ or propose a change for a future version instead of altering this one.
 ## Staying current
 
 Each copy of this license is pinned to the version it names on its own
-first line (e.g. "Version 3.7") — UFL is not an evergreen "or any later
+first line (e.g. "Version 3.8") — UFL is not an evergreen "or any later
 version" grant, so a newer release's provisions don't automatically
 reach projects already licensed under an older one. A new section, a new
 carve-out, or a new protection — Section 2B and 2C in 2.1/2.2, or the
