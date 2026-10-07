@@ -4,6 +4,30 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.7 — October 2026
+
+Splitting the Software. 3.5 let a Licensor give parts of one repository
+different Operational Scopes (Components), but only inside the Components
+paragraph, and without saying what makes a split honest. 3.7 adds one
+paragraph to Section 1A, for every scope, and changes nothing else.
+
+- **A split must be honest and clearly drawn.** The header names each part
+  and its scope. The README, pricing page, and listings describe each part as
+  the header does, and never call a withheld part free.
+- **By what the Software is, not by who the user is.** And no moving code
+  between parts, or making parts depend on one another, to put a free use
+  into a paid part.
+- **Doubt favors the Licensee.** If the header and the Licensor's other
+  statements disagree, or a part is unclear, the reading more favorable to
+  the Licensee governs.
+- **A bad split is no split.** The whole Software takes the first scope the
+  header states.
+
+Text otherwise equals 3.6 (a test checks this). Releases already published
+under 3.5 or 3.6 keep their Ruling License (Section 1C). A Licensor moves to
+3.7 forward, with notice. The seat, governing-law, liability, and consumer
+changes discussed for the next version are not in 3.7.
+
 ## 3.6 — October 2026
 
 Smart contracts. UFL assumed software a person runs, with an acceptance

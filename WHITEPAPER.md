@@ -548,6 +548,33 @@ how the code is linked. A Licensor who wants a hard boundary should keep the
 paid Component in its own package. The clearer the boundary, the clearer the
 license.
 
+## Splitting the Software honestly (since 3.7)
+
+A project can ship one part free and another part paid in the same repository.
+Components (3.5) made that possible. 3.7 says what makes a split legitimate,
+so that it stays fair to users and does not become a bait-and-switch.
+
+1. **Draw it in the header.** Each part is named by path, glob, directory, or
+   package, with its scope.
+2. **Say the same thing everywhere.** The README, pricing page, and listings
+   describe each part's scope as the header does. A part the header withholds is
+   never called free.
+3. **Split by what the Software is, not who the user is.** A part is paid
+   because it is the fixer, not because the user is a company.
+4. **No gaming.** A Licensor does not move code between parts, or make parts
+   depend on one another, to push a use the license grants free into a paid
+   part.
+5. **Doubt favors the user.** If the header and the Licensor's other statements
+   disagree, or a part is unclear, the reading better for the Licensee governs.
+6. **A bad split is no split.** A Licensor who does not draw the split this way
+   has not split the license, and the whole Software takes the first scope.
+
+Worked example: Snifrig (`examples/snifrig`). The detector is free
+(Unconditional). The fixer is a paid Component. The header lists the fixer's
+paths, the README says so, and the Published Price is in `PRICING.md`. If
+Snifrig also shipped a shared library that the detector needs, the library
+stays in the free part. Moving it into the fixer would break rule 4.
+
 ## Notice Screens and license keys (since 3.6)
 
 **Notice Screens.** A free product can pay for itself with a nag the user
@@ -655,7 +682,7 @@ record.
 (or `-D-K` under Decentralized), then a comment giving the license, version,
 scope, canonical URL, and the SHA-256 of the license file. The Solidity
 compiler accepts this with no warning (tested with solc 0.8.26), and an SPDX
-expression such as `MIT AND LicenseRef-UFL-3.6-K` for flattened files. Because
+expression such as `MIT AND LicenseRef-UFL-3.7-K` for flattened files. Because
 the header changes the metadata hash, it goes in before the compile that is
 deployed. Block explorers read the SPDX line and offer a fixed license list;
 how each shows a `LicenseRef` should be checked on a test network before a
@@ -693,7 +720,7 @@ mainnet deployment.
    law in every major jurisdiction, in particular for contracts that import
    an interface or inherit from the source?
 9. *Third-party code.* Dual-license expressions and flattened files: is
-   `MIT AND LicenseRef-UFL-3.6-K` the right expression, and what do
+   `MIT AND LicenseRef-UFL-3.7-K` the right expression, and what do
    verification services do with it?
 10. *Securities and token law.* A license cannot cure a token's regulatory
     status. The native-token payment terms of the Decentralized scope used
@@ -848,6 +875,7 @@ updates it:
   a part that is sold while the rest stays free; and Section 1C now lets a
   Licensor move to any later version at any time, with notice, and never
   back.
+- **3.7** — splitting the Software: a Licensor may split it into parts with different scopes if the split is honest and clearly drawn (Section 1A). A bad split falls back to the first scope.
 - **3.6** — smart contracts: a Contract Release mode (`-K`) whose fixed
   paragraphs make calling free for everyone, reserve redeployment (with the
   Section 2A credit exception), say plainly who is bound, treat each

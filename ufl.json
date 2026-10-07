@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "3.6",
-  "spdxIdentifier": "LicenseRef-UFL-3.6",
+  "version": "3.7",
+  "spdxIdentifier": "LicenseRef-UFL-3.7",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -117,7 +117,7 @@
       "decentralized"
     ],
     "components": "not allowed with -K",
-    "spdx": "LicenseRef-UFL-3.6-K (unconditional) or LicenseRef-UFL-3.6-D-K (decentralized)",
+    "spdx": "LicenseRef-UFL-3.7-K (unconditional) or LicenseRef-UFL-3.7-D-K (decentralized)",
     "release": "one Deployment: chain id + address + hash of verified Source; each proxy implementation is its own Release",
     "example": "examples/contracts"
   }
