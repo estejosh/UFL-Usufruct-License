@@ -37,12 +37,12 @@
     "seat-limited": {
       "tag": "UFL-S-1a",
       "spdxSuffix": "-S",
-      "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price."
+      "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price, or at a default of USD 120 per year for each seat (or device or user) beyond the threshold if none is published."
     },
     "institutional": {
       "tag": "UFL-I-1a",
       "spdxSuffix": "-I",
-      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Beyond it, Paid Use at the Licensor's Published Price; if none is published, a default of USD 100 per year for each Seat beyond the threshold. Large organizations may sign a negotiated enterprise license instead."
+      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Larger organizations always need a written enterprise license negotiated with the Licensor; until it is signed, that use is not licensed."
     },
     "decentralized": {
       "tag": "UFL-D-1a",

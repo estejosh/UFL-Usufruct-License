@@ -561,20 +561,25 @@ organizations deal with the Licensor. Institutional is that three-tier scope.
 - **Small organizations are free up to a stated number of seats**, such as 25.
   Seats are counted as in Section 1B, and organizations under common control
   count together, so splitting a company in two does not reset the count.
-- **Beyond the threshold is Paid Use, with a default price.** The Licensor
-  publishes a Published Price for that tier. If it publishes none, the license
-  supplies one: USD 100 per year for each Seat beyond the threshold, and
-  Sections 8 through 13 (periods, usage statements, retroactive licenses) work
-  on it. This closes the gap in Section 8, where a withheld use with no price
-  is simply unavailable. The Licensor may change the price by publishing
-  another, or may say the tier is by agreement only, in which case a signed
-  enterprise license is required and the use is not licensed until then. Any
-  Licensor and Licensee may sign an enterprise license in place of the price.
-- **Seats beyond the threshold only.** The default price is charged per Seat
-  above the threshold, not on every Seat, so there is no cliff at the
-  threshold. Enterprise pricing sits in the signed agreement.
+- **Beyond the threshold is always negotiated.** Production Use above the
+  threshold is Paid Use under Section 8, but only under a written enterprise
+  license signed by the Licensor, on terms the two negotiate under Section 2.
+  Until it is signed, that use is not licensed and the Licensor's copyright
+  remedies are open. No Published Price applies, and a price list the Licensor
+  shows is guidance only. A signed enterprise license governs the use it
+  covers; the license continues to apply to everything else.
 - **Not a Component scope.** The threshold applies to the whole Software, like
   Seat-Limited. Use Paid for a paid part.
+
+**Per-seat pricing is Seat-Limited, not Institutional.** Software that is simply
+sold per seat uses Seat-Limited. Since 3.8 it has a default price: if the
+Licensor publishes none, USD 120 per year for each Seat (or device or user, if
+that is what the threshold counts) beyond the free threshold, with Sections 8
+through 13 working on it. This closes the Section 8 gap where a withheld use
+with no price is unavailable. The Licensor changes it by publishing another
+price. The figure is a default for the many projects that publish nothing; it
+is meant to be high enough to mean something and low enough that nobody
+hesitates to leave it in place.
 
 Counsel questions: whether a negotiated-only tier invites an implied-license
 argument for organizations that use the Software without signing, and how to
@@ -907,7 +912,7 @@ updates it:
   a part that is sold while the rest stays free; and Section 1C now lets a
   Licensor move to any later version at any time, with notice, and never
   back.
-- **3.8** — Institutional scope: free for home use and for organizations up to a seat threshold, with a negotiated enterprise license (or a Published Price) beyond it (Section 1A). New scope, nothing else changes.
+- **3.8** — Institutional scope: free for home use and for organizations up to a seat threshold, with a negotiated enterprise license beyond it (Section 1A). Seat-Limited gains a default price of USD 120 per seat per year beyond the threshold when the Licensor publishes none.
 - **3.7** — splitting the Software: a Licensor may split it into parts with different scopes if the split is honest and clearly drawn (Section 1A). A bad split falls back to the first scope.
 - **3.6** — smart contracts: a Contract Release mode (`-K`) whose fixed
   paragraphs make calling free for everyone, reserve redeployment (with the

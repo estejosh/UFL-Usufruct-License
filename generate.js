@@ -794,7 +794,13 @@ const SCOPES = {
     body: [
       "Seat-Limited — Section 1's grant is unconditional for Non-Production",
       "Use. Production Use is free up to @THRESHOLD@; Production Use beyond",
-      "that threshold is Paid Use under Section 8."
+      "that threshold is Paid Use under Section 8. Its Published Price is the",
+      "price the Licensor publishes for it. If the Licensor publishes none,",
+      "then despite the last sentence of Section 8 the Published Price is the",
+      "default price of USD 120 per year for each Seat beyond the threshold,",
+      "or, where the threshold counts devices or users instead of Seats, for",
+      "each such device or user beyond it, and Sections 8 through 13 apply to",
+      "it."
     ]
   },
   "institutional": {
@@ -806,18 +812,14 @@ const SCOPES = {
       "purposes and not for any business or organization, in any amount; and",
       "Production Use by an organization up to @THRESHOLD@, counting together",
       "all organizations under common control. Production Use beyond that",
-      "threshold is Paid Use under Section 8, at the Published Price the",
-      "Licensor publishes for it. If the Licensor publishes none, then despite",
-      "the last sentence of Section 8 the Published Price is the default price",
-      "of USD 100 per year for each Seat beyond the threshold, and Sections 8",
-      "through 13 apply to it. The Licensor may instead state that the tier is",
-      "by agreement only, and then the Licensee needs a written enterprise",
-      "license signed by the Licensor, whose price and terms the Licensor and",
-      "the Licensee negotiate under Section 2, and until it is signed that use",
-      "is not licensed. A Licensor and a Licensee may at any time sign a",
-      "written enterprise license in place of the Published Price. It governs",
-      "the use it covers, and this license continues to apply to everything",
-      "else."
+      "threshold is Paid Use under Section 8, and it is always by agreement:",
+      "the Licensee needs a written enterprise license signed by the Licensor,",
+      "whose price and terms the Licensor and the Licensee negotiate under",
+      "Section 2, and until it is signed that use is not licensed. Section 8's",
+      "Published Price does not apply to it, and any price list the Licensor",
+      "shows is guidance that binds neither party. A signed enterprise license",
+      "governs the use it covers, and this license continues to apply to",
+      "everything else."
     ]
   },
   "decentralized": {

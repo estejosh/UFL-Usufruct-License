@@ -9,7 +9,7 @@ FAIL=0
 fail() { echo "FAIL: $*"; FAIL=1; }
 ok() { echo "ok:   $*"; }
 
-SCOPES="unconditional no-competing-service no-third-party-hosting noncommercial seat-limited decentralized paid"
+SCOPES="unconditional no-competing-service no-third-party-hosting noncommercial decentralized paid"
 NEWSCOPES="institutional"
 ARGS="-y [YEAR] -c [COPYRIGHT_HOLDER] -p [PROJECT_NAME]"
 
@@ -31,6 +31,9 @@ if git rev-parse -q --verify refs/tags/v3.6 >/dev/null 2>&1; then
   if git diff --quiet v3.6 -- 'pdf/UFL-3.5*' 'pdf/UFL-3.6*'; then ok "published pdf/ artifacts for 3.5 and 3.6 unchanged since v3.6"; else fail "3.5/3.6 pdf/ artifacts changed"; fi
 fi
 
+sh generate.sh -y 1 -c h -p p -s seat-limited -t "2 seats" 2>/dev/null | grep -q "default price of USD 120 per year for each Seat" && ok "seat-limited default price present" || fail "seat-limited default price"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "always by agreement" && ok "institutional negotiated only" || fail "institutional negotiated only"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "default price" && fail "institutional has a default price" || ok "institutional has no default price"
 for sc in $NEWSCOPES; do
   OUT=$(sh generate.sh -y 2026 -c H -p P -s "$sc" -t "25 seats" 2>/dev/null)
   echo "$OUT" | grep -q "^Operational Scope: Institutional — 25 seats free, home use free" && echo "$OUT" | grep -q "home use free\|personal use by an individual" && ok "institutional scope text present" || fail "institutional scope text"

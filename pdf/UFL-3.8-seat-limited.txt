@@ -23,7 +23,13 @@ Section 1's free grant. Exactly one scope applies to this Software:
 
 Seat-Limited — Section 1's grant is unconditional for Non-Production
 Use. Production Use is free up to [THRESHOLD]; Production Use beyond
-that threshold is Paid Use under Section 8.
+that threshold is Paid Use under Section 8. Its Published Price is the
+price the Licensor publishes for it. If the Licensor publishes none,
+then despite the last sentence of Section 8 the Published Price is the
+default price of USD 120 per year for each Seat beyond the threshold,
+or, where the threshold counts devices or users instead of Seats, for
+each such device or user beyond it, and Sections 8 through 13 apply to
+it.
 
 Splitting the Software. A Licensor may split the Software into parts
 that carry different Operational Scopes, for example a free core and a

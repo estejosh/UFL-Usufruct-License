@@ -6,26 +6,32 @@ the repository's own commit history for those.
 
 ## 3.8 — October 2026
 
-Institutional scope. A new Operational Scope, `-s institutional -t "25 seats"`,
-SPDX suffix `-I`, repo tag `UFL-I-1a`. It adds a scope and changes nothing
-else; the other scopes are the 3.7 text with the version changed (a test checks
-this). One clarifying edit: the Components paragraph now names Institutional
-with Seat-Limited and Decentralized as scopes a Component may not take.
+Institutional scope and a default price for Seat-Limited. Two changes, both
+in Section 1A.
+
+**Institutional (new).** `-s institutional -t "25 seats"`, SPDX suffix `-I`,
+repo tag `UFL-I-1a`.
 
 - **Home use is free.** Personal use by an individual, for no business or
   organization, in any amount. Non-Production Use is free for everyone.
 - **Small organizations are free up to the stated number of seats.** Seats
   are counted as in Section 1B, and organizations under common control count
   together.
-- **Larger organizations pay a default price, or negotiate.** Production Use
-  beyond the threshold is Paid Use. The Licensor publishes a Published Price
-  for it. If it publishes none, the default is USD 100 per year for each Seat
-  beyond the threshold, and Sections 8 through 13 apply. This overrides, for
-  this scope only, the rule in Section 8 that a withheld use with no
-  published price is unavailable. The Licensor may instead say the tier is by
-  agreement only, which requires a signed enterprise license and leaves the
-  use unlicensed until then. A Licensor and a Licensee may sign an enterprise
-  license in place of the price at any time.
+- **Larger organizations always negotiate.** Production Use beyond the
+  threshold needs a written enterprise license signed by the Licensor, on
+  terms the two negotiate under Section 2. Until it is signed, that use is not
+  licensed. No Published Price applies, and a price list is guidance only.
+
+**Seat-Limited (changed).** Production Use beyond the threshold is still Paid
+Use at the Licensor's Published Price. New: if the Licensor publishes none, the
+Published Price is a default of USD 120 per year for each Seat beyond the
+threshold (or each device or user, if the threshold counts those), and
+Sections 8 through 13 apply to it. This overrides, for this scope only, the
+rule in Section 8 that a withheld use with no published price is unavailable.
+
+Otherwise the other scopes are the 3.7 text with the version changed (a test
+checks this). The Components paragraph now names Institutional with
+Seat-Limited and Decentralized as scopes a Component may not take.
 
 Releases published under earlier versions keep their Ruling License (Section
 1C). A Licensor moves to 3.8 forward, with notice.
