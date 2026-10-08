@@ -116,6 +116,7 @@ Since 3.5, a project can also give separate parts of itself their own scope
 |---|---|
 | **Unconditional** (the default) | Nothing — Section 1's grant applies exactly as the Abstract describes. |
 | **Seat-Limited** | Production use beyond a stated seat, device, or user threshold; non-production use stays unlimited and free. |
+| **Institutional** | Free for home use and for organizations up to a stated seat threshold. Larger organizations negotiate a written enterprise license with the Licensor, or pay a Published Price if one is published. |
 | **No-Third-Party-Hosting** | Offering the Software to third parties as a hosted or managed service. |
 | **No-Competing-Service** | Operating the Software, or a fork of it, as a service competing with the Licensor's own offering. |
 | **Noncommercial** | Commercial use of any kind. |
@@ -460,7 +461,7 @@ self-service, and point larger buyers to the developer.
   core; a home user running the Paid part owes for that part. Paying for
   one never covers the other.
 - *What combinations are not allowed?* Decentralized allows no Components,
-  and no Component may be Decentralized or Seat-Limited. Decentralized says
+  and no Component may be Decentralized, Seat-Limited, or Institutional. Decentralized says
   nothing is Paid Use and sets one dispute process for the whole Software,
   which cannot sit next to a paid part. A Seat-Limited Component would need
   its own threshold, and the generator takes a threshold for the whole
@@ -547,6 +548,54 @@ what runs and by Section 2's reservation of distribution, not by guessing
 how the code is linked. A Licensor who wants a hard boundary should keep the
 paid Component in its own package. The clearer the boundary, the clearer the
 license.
+
+## Institutional scope (since 3.8)
+
+Many projects want three tiers: free for people at home, free for small
+organizations, and a negotiated deal for large ones. Seat-Limited gave a free
+production threshold but nothing special for home users or for how big
+organizations deal with the Licensor. Institutional is that three-tier scope.
+
+- **Home use is free.** Personal use by an individual, for no business or
+  organization, in any amount. Non-Production Use is free for everyone.
+- **Small organizations are free up to a stated number of seats**, such as 25.
+  Seats are counted as in Section 1B, and organizations under common control
+  count together, so splitting a company in two does not reset the count.
+- **Beyond the threshold is always negotiated.** Production Use above the
+  threshold is Paid Use under Section 8, but only under a written enterprise
+  license signed by the Licensor, on terms the two negotiate under Section 2.
+  Until it is signed, that use is not licensed and the Licensor's copyright
+  remedies are open. No Published Price applies, and a price list the Licensor
+  shows is guidance only. A signed enterprise license governs the use it
+  covers; the license continues to apply to everything else.
+- **A license check is allowed for the negotiated tier, and only there.**
+  Section 10 otherwise bars the Software from reporting use to the Licensor
+  to enforce the license. For use beyond the Institutional threshold, the
+  enterprise license may require a network check with the Licensor. It may
+  send only a license key or identifier, the seat count in use, the version,
+  and the time, and never the content of data, the identity of any individual,
+  or the identity of the Licensee's clients. The Software may carry the code
+  but must not run it for home use or for a small organization inside the
+  free threshold, and must not run it unless an enterprise license requires
+  it. The Section 9 step discloses the check, what it sends, and how often,
+  and the enterprise license says how long the Software keeps working if the
+  Licensor cannot be reached. The free tiers keep Section 10's rule.
+- **Not a Component scope.** The threshold applies to the whole Software, like
+  Seat-Limited. Use Paid for a paid part.
+
+**Per-seat pricing is Seat-Limited, not Institutional.** Software that is simply
+sold per seat uses Seat-Limited. Since 3.8 it has a default price: if the
+Licensor publishes none, USD 120 per year for each Seat (or device or user, if
+that is what the threshold counts) beyond the free threshold, with Sections 8
+through 13 working on it. This closes the Section 8 gap where a withheld use
+with no price is unavailable. The Licensor changes it by publishing another
+price. The figure is a default for the many projects that publish nothing; it
+is meant to be high enough to mean something and low enough that nobody
+hesitates to leave it in place.
+
+Counsel questions: whether a negotiated-only tier invites an implied-license
+argument for organizations that use the Software without signing, and how to
+word the common-control rule for affiliates and franchises.
 
 ## Splitting the Software honestly (since 3.7)
 
@@ -875,6 +924,7 @@ updates it:
   a part that is sold while the rest stays free; and Section 1C now lets a
   Licensor move to any later version at any time, with notice, and never
   back.
+- **3.8** — Institutional scope: free for home use and for organizations up to a seat threshold, with a negotiated enterprise license beyond it (Section 1A). Seat-Limited gains a default price of USD 120 per seat per year beyond the threshold when the Licensor publishes none.
 - **3.7** — splitting the Software: a Licensor may split it into parts with different scopes if the split is honest and clearly drawn (Section 1A). A bad split falls back to the first scope.
 - **3.6** — smart contracts: a Contract Release mode (`-K`) whose fixed
   paragraphs make calling free for everyone, reserve redeployment (with the

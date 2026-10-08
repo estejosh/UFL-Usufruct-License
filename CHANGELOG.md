@@ -4,6 +4,45 @@ Notable changes to the Usufruct License (UFL) text itself. This tracks
 revisions to the license, not to this repository's tooling or docs — see
 the repository's own commit history for those.
 
+## 3.8 — October 2026
+
+Institutional scope and a default price for Seat-Limited. Two changes, both
+in Section 1A.
+
+**Institutional (new).** `-s institutional -t "25 seats"`, SPDX suffix `-I`,
+repo tag `UFL-I-1a`.
+
+- **Home use is free.** Personal use by an individual, for no business or
+  organization, in any amount. Non-Production Use is free for everyone.
+- **Small organizations are free up to the stated number of seats.** Seats
+  are counted as in Section 1B, and organizations under common control count
+  together.
+- **Larger organizations always negotiate.** Production Use beyond the
+  threshold needs a written enterprise license signed by the Licensor, on
+  terms the two negotiate under Section 2. Until it is signed, that use is not
+  licensed. No Published Price applies, and a price list is guidance only.
+
+- **A license check is allowed for that negotiated tier only.** The
+  enterprise license may require a network check with the Licensor. It sends
+  only a license key or identifier, the seat count, the version, and the time,
+  and never content or identities. The free tiers (home use and small
+  organizations) never make it, and Section 10's rule against reporting use
+  still holds for them. The Section 9 step discloses the check.
+
+**Seat-Limited (changed).** Production Use beyond the threshold is still Paid
+Use at the Licensor's Published Price. New: if the Licensor publishes none, the
+Published Price is a default of USD 120 per year for each Seat beyond the
+threshold (or each device or user, if the threshold counts those), and
+Sections 8 through 13 apply to it. This overrides, for this scope only, the
+rule in Section 8 that a withheld use with no published price is unavailable.
+
+Otherwise the other scopes are the 3.7 text with the version changed (a test
+checks this). The Components paragraph now names Institutional with
+Seat-Limited and Decentralized as scopes a Component may not take.
+
+Releases published under earlier versions keep their Ruling License (Section
+1C). A Licensor moves to 3.8 forward, with notice.
+
 ## 3.7 — October 2026
 
 Splitting the Software. 3.5 let a Licensor give parts of one repository

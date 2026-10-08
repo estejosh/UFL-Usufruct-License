@@ -1,8 +1,8 @@
 {
   "name": "The Usufruct License",
   "shortName": "UFL",
-  "version": "3.7",
-  "spdxIdentifier": "LicenseRef-UFL-3.7",
+  "version": "3.8",
+  "spdxIdentifier": "LicenseRef-UFL-3.8",
   "spdxRegistered": false,
   "canonicalUrl": "https://github.com/estejosh/UFL-Usufruct-License",
   "licenseText": "LICENSE.txt",
@@ -37,7 +37,12 @@
     "seat-limited": {
       "tag": "UFL-S-1a",
       "spdxSuffix": "-S",
-      "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price."
+      "summary": "Free in production up to a stated seat/device/user threshold, unlimited free non-production use; production use beyond the threshold is Paid Use at the Licensor's Published Price, or at a default of USD 120 per year for each seat (or device or user) beyond the threshold if none is published."
+    },
+    "institutional": {
+      "tag": "UFL-I-1a",
+      "spdxSuffix": "-I",
+      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Larger organizations always need a written enterprise license negotiated with the Licensor; until it is signed, that use is not licensed. For that negotiated tier only, the enterprise license may require a limited license check over the network (license key, seat count, version, time; no content or identities)."
     },
     "decentralized": {
       "tag": "UFL-D-1a",

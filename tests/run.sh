@@ -1,6 +1,6 @@
 #!/bin/sh
-# Tests for UFL 3.7 generators. Run from the repo root: sh tests/run.sh
-# 1. Single-scope output equals the 3.6 text, apart from the version string.
+# Tests for UFL 3.8 generators. Run from the repo root: sh tests/run.sh
+# 1. Single-scope output equals the 3.7 text, apart from the version string.
 # 2. Published 3.4 (and older) artifacts in pdf/ are untouched since the v3.4 tag, if the tag exists.
 # 3. generate.sh and generate.js agree byte for byte, with and without Components.
 # 4. Bad Component input is rejected by both generators.
@@ -9,13 +9,14 @@ FAIL=0
 fail() { echo "FAIL: $*"; FAIL=1; }
 ok() { echo "ok:   $*"; }
 
-SCOPES="unconditional no-competing-service no-third-party-hosting noncommercial seat-limited decentralized paid"
+SCOPES="unconditional no-competing-service no-third-party-hosting noncommercial decentralized paid"
+NEWSCOPES="institutional"
 ARGS="-y [YEAR] -c [COPYRIGHT_HOLDER] -p [PROJECT_NAME]"
 
 for sc in $SCOPES; do
   sh generate.sh -y '[YEAR]' -c '[COPYRIGHT HOLDER]' -p '[PROJECT NAME]' -s "$sc" -t '[THRESHOLD]' -k '[NATIVE TOKEN]' 2>/dev/null \
-    | sed 's/3\.7/3.6/g' | awk '/^Splitting the Software\./{skip=1} skip&&/^$/{skip=0;next} !skip' > /tmp/ufl-t.$$
-  if [ "$(cat /tmp/ufl-t.$$)" = "$(cat "pdf/UFL-3.6-$sc.txt")" ]; then ok "3.7 = 3.6 text (version and Splitting paragraph aside): $sc"; else fail "3.6 text differs: $sc"; fi
+    | sed 's/3\.8/3.7/g' > /tmp/ufl-t.$$
+  if [ "$(cat /tmp/ufl-t.$$)" = "$(cat "pdf/UFL-3.7-$sc.txt")" ]; then ok "3.8 = 3.7 text (version aside): $sc"; else fail "3.7 text differs: $sc"; fi
 done
 rm -f /tmp/ufl-t.$$
 
@@ -23,9 +24,25 @@ if git rev-parse -q --verify refs/tags/v3.4 >/dev/null 2>&1; then
   if git diff --quiet v3.4 -- 'pdf/UFL-1.*' 'pdf/UFL-2.*' 'pdf/UFL-3.0*' 'pdf/UFL-3.1*' 'pdf/UFL-3.2*' 'pdf/UFL-3.3*' 'pdf/UFL-3.4*'; then ok "published pdf/ artifacts through 3.4 unchanged since v3.4"; else fail "published pdf/ artifacts changed"; fi
 fi
 
+if git rev-parse -q --verify refs/tags/v3.7 >/dev/null 2>&1; then
+  if git diff --quiet v3.7 -- 'pdf/UFL-3.7*'; then ok "published pdf/ artifacts for 3.7 unchanged since v3.7"; else fail "3.7 pdf/ artifacts changed"; fi
+fi
 if git rev-parse -q --verify refs/tags/v3.6 >/dev/null 2>&1; then
   if git diff --quiet v3.6 -- 'pdf/UFL-3.5*' 'pdf/UFL-3.6*'; then ok "published pdf/ artifacts for 3.5 and 3.6 unchanged since v3.6"; else fail "3.5/3.6 pdf/ artifacts changed"; fi
 fi
+
+sh generate.sh -y 1 -c h -p p -s seat-limited -t "2 seats" 2>/dev/null | grep -q "default price of USD 120 per year for each Seat" && ok "seat-limited default price present" || fail "seat-limited default price"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "always by agreement" && ok "institutional negotiated only" || fail "institutional negotiated only"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | tr "\n" " " | grep -q "check its license over the network" && ok "institutional license check clause present" || fail "institutional license check clause"
+sh generate.sh -y 1 -c h -p p -s unconditional 2>/dev/null | tr "\n" " " | grep -q "check its license over the network" && fail "license check clause leaked into another scope" || ok "license check clause only in institutional"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "default price" && fail "institutional has a default price" || ok "institutional has no default price"
+for sc in $NEWSCOPES; do
+  OUT=$(sh generate.sh -y 2026 -c H -p P -s "$sc" -t "25 seats" 2>/dev/null)
+  echo "$OUT" | grep -q "^Operational Scope: Institutional — 25 seats free, home use free" && echo "$OUT" | grep -q "home use free\|personal use by an individual" && ok "institutional scope text present" || fail "institutional scope text"
+done
+[ "$(sh generate.sh -r -s institutional -t '25 seats')" = "UFL 3.8, Operational Scope: Institutional — 25 seats free, home use free (LicenseRef-UFL-3.8-I)" ] && ok "institutional release statement" || fail "institutional release statement"
+sh generate.sh -y 1 -c h -p p -s unconditional -C "x=institutional:a" >/dev/null 2>&1 && fail "sh: institutional Component accepted" || ok "sh rejects institutional Component"
+node generate.js -y 1 -c h -p p -s unconditional -C "x=institutional:a" >/dev/null 2>&1 && fail "js: institutional Component accepted" || ok "js rejects institutional Component"
 
 parity() {
   A=$(sh generate.sh "$@" 2>&1; echo "rc=$?"); B=$(node generate.js "$@" 2>&1; echo "rc=$?")
@@ -33,6 +50,9 @@ parity() {
 }
 parity -y 2026 -c "Test Holder" -p TestProject -s unconditional
 parity -y 2026 -c "Test Holder" -p TestProject -s paid
+parity -y 2026 -c "Test Holder" -p TestProject -s institutional -t "25 seats"
+parity -y 2026 -c "Test Holder" -p TestProject -s institutional -t "25 seats" -C "fixer=paid:fix/**"
+parity -r -s institutional -t "25 seats"
 parity -y 2026 -c "Test Holder" -p TestProject -s seat-limited -t "2 seats" -C "fixer=paid:fix/**"
 parity -y 2026 -c "Test Holder" -p TestProject -s unconditional -C "fixer=paid:fix/**,crates/fixer"
 parity -y 2026 -c "Test Holder" -p TestProject -s noncommercial -C "fixer=paid:fix/**" -C "docs=unconditional:docs/**, site"
@@ -63,14 +83,14 @@ for badk in "-s noncommercial" "-s paid" "-s seat-limited -t 2" "-s no-competing
   if sh generate.sh -y 1 -c h -p p $badk -K >/dev/null 2>&1; then fail "sh accepted -K with: $badk"; else ok "sh rejects -K with: $badk"; fi
   if node generate.js -y 1 -c h -p p $badk -K >/dev/null 2>&1; then fail "js accepted -K with: $badk"; else ok "js rejects -K with: $badk"; fi
 done
-K1=$(sh generate.sh -r -s unconditional -K); [ "$K1" = "UFL 3.7, Operational Scope: Unconditional, Contract Release (LicenseRef-UFL-3.7-K)" ] && ok "contract release statement" || fail "contract statement: $K1"
-K2=$(sh generate.sh -r -s decentralized -k HONE -K); [ "$K2" = "UFL 3.7, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.7-D-K)" ] && ok "contract decentralized statement" || fail "contract dec statement: $K2"
+K1=$(sh generate.sh -r -s unconditional -K); [ "$K1" = "UFL 3.8, Operational Scope: Unconditional, Contract Release (LicenseRef-UFL-3.8-K)" ] && ok "contract release statement" || fail "contract statement: $K1"
+K2=$(sh generate.sh -r -s decentralized -k HONE -K); [ "$K2" = "UFL 3.8, Operational Scope: Decentralized, Contract Release (LicenseRef-UFL-3.8-D-K)" ] && ok "contract decentralized statement" || fail "contract dec statement: $K2"
 # a Contract Release license must contain the Contracts paragraphs, and a plain one must not
 sh generate.sh -y 1 -c h -p p -s unconditional -K 2>/dev/null | grep -q "^Contracts\. This Release is a Contract Release" && ok "Contracts text present with -K" || fail "Contracts text missing with -K"
 sh generate.sh -y 1 -c h -p p -s unconditional 2>/dev/null | grep -q "Contract Release" && fail "Contracts text leaked without -K" || ok "no Contracts text without -K"
 
 # SPDX string and Release statement for the worked example
 S=$(sh generate.sh -r -s unconditional -C "snifrig-fix=paid:fix/**")
-[ "$S" = "UFL 3.7, Operational Scope: Unconditional; Component snifrig-fix: Paid (LicenseRef-UFL-3.7-U.P-snifrig-fix)" ] && ok "release statement" || fail "release statement: $S"
+[ "$S" = "UFL 3.8, Operational Scope: Unconditional; Component snifrig-fix: Paid (LicenseRef-UFL-3.8-U.P-snifrig-fix)" ] && ok "release statement" || fail "release statement: $S"
 
 [ "$FAIL" = 0 ] && echo "ALL PASS" || { echo "FAILURES"; exit 1; }

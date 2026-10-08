@@ -1,4 +1,4 @@
-The Usufruct License (UFL) — Version 3.7
+The Usufruct License (UFL) — Version 3.8
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) 2026 Example Holder
@@ -278,7 +278,7 @@ Release the Licensee uses.
 
 With each Release, the Licensor states which version of this license,
 and which Operational Scope, governs that Release (its "Ruling
-License"). The statement names both, for example "UFL 3.7, Operational
+License"). The statement names both, for example "UFL 3.8, Operational
 Scope: Noncommercial", and appears where users get the Release: in its
 release notes, its tag, or its package metadata. The Release includes
 the full text of its Ruling License. If a Release does not state its
@@ -685,5 +685,5 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.7-D-K` —
-not a bare `UFL-3.7-D-K`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.8-D-K` —
+not a bare `UFL-3.8-D-K`, which would misrepresent it as SPDX-registered.

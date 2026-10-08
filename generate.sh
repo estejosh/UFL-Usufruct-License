@@ -1,5 +1,5 @@
 #!/bin/sh
-# generate.sh — fill in a copy of the Usufruct License (UFL) v3.7.
+# generate.sh — fill in a copy of the Usufruct License (UFL) v3.8.
 # POSIX shell, no dependencies beyond sed and awk (present on every POSIX
 # system).
 #
@@ -9,7 +9,7 @@
 #   ./generate.sh -r [-s SCOPE] [-t THRESHOLD]
 #
 # SCOPE is one of: unconditional (default), no-competing-service,
-# no-third-party-hosting, noncommercial, seat-limited, decentralized, paid.
+# no-third-party-hosting, noncommercial, seat-limited, institutional, decentralized, paid.
 # SCOPE governs all of the Software that no Component covers. -C declares a
 # Component, a part of the Software with its own scope (since 3.5), as
 # NAME=SCOPE:PATH[,PATH...], for example
@@ -27,10 +27,11 @@
 # Component covers belongs to the Component listed first. TOKEN is
 # used only when SCOPE is decentralized: the native token of the Software
 # (default "none"), in which the $1 remedy may be paid. THRESHOLD is only
-# used (and required) when SCOPE is seat-limited — free text describing
-# the free production tier, e.g. "2 seats, 2 computers, 2 mobile devices".
+# used (and required) when SCOPE is seat-limited or institutional — free text
+# describing the free tier, e.g. "2 seats, 2 computers, 2 mobile devices"
+# (seat-limited) or "25 seats" (institutional).
 # Any flag left out is prompted for, except THRESHOLD, which is only
-# prompted for when SCOPE is seat-limited. With no -o, the filled license
+# prompted for when SCOPE is seat-limited or institutional. With no -o, the filled license
 # is written to stdout.
 #
 # -r prints the Release statement (Section 1C) for SCOPE instead of a
@@ -45,7 +46,7 @@
 #   curl -s https://raw.githubusercontent.com/estejosh/UFL-Usufruct-License/main/generate.sh \
 #     | bash -s -- -y 2026 -c "Jane Doe" -p "MyProject" -s unconditional > LICENSE
 #
-# Tracks UFL 3.7. See CHANGELOG.md for revisions.
+# Tracks UFL 3.8. See CHANGELOG.md for revisions.
 
 set -eu
 
@@ -75,7 +76,7 @@ while getopts "y:c:p:s:t:k:C:o:rKh" opt; do
     K) CONTRACT=1 ;;
     h)
       echo "Usage: $0 [-y YEAR] [-c \"COPYRIGHT HOLDER\"] [-p \"PROJECT NAME\"] [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K] [-o OUTPUT_PATH] | -r [-s SCOPE] [-t THRESHOLD] [-k TOKEN] [-C COMPONENT]... [-K]"
-      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid"
+      echo "SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | institutional | decentralized | paid"
       echo "COMPONENT: NAME=SCOPE:PATH[,PATH...]  (SCOPE: unconditional | no-competing-service | no-third-party-hosting | noncommercial | paid)"
       exit 0
       ;;
@@ -88,16 +89,19 @@ done
 [ "$RELEASE" = 1 ] || [ -n "$PROJECT" ] || { printf 'Project name: ' >&2; read -r PROJECT; }
 
 case "$SCOPE" in
-  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|decentralized|paid) ;;
+  unconditional|no-competing-service|no-third-party-hosting|noncommercial|seat-limited|institutional|decentralized|paid) ;;
   *)
     echo "Unknown SCOPE: $SCOPE" >&2
-    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | decentralized | paid" >&2
+    echo "Must be one of: unconditional | no-competing-service | no-third-party-hosting | noncommercial | seat-limited | institutional | decentralized | paid" >&2
     exit 1
     ;;
 esac
 
 if [ "$SCOPE" = "seat-limited" ]; then
   [ -n "$THRESHOLD" ] || { printf 'Free production threshold (e.g. "2 seats, 2 computers, 2 mobile devices"): ' >&2; read -r THRESHOLD; }
+fi
+if [ "$SCOPE" = "institutional" ]; then
+  [ -n "$THRESHOLD" ] || { printf 'Free organization threshold (e.g. "25 seats"): ' >&2; read -r THRESHOLD; }
 fi
 
 # Decentralized only: the project's native token, if it has one.
@@ -213,7 +217,43 @@ intellectual property."
     SCOPE_SUFFIX="-S"
     SCOPE_BODY="Seat-Limited — Section 1's grant is unconditional for Non-Production
 Use. Production Use is free up to ${THRESHOLD}; Production Use beyond
-that threshold is Paid Use under Section 8."
+that threshold is Paid Use under Section 8. Its Published Price is the
+price the Licensor publishes for it. If the Licensor publishes none,
+then despite the last sentence of Section 8 the Published Price is the
+default price of USD 120 per year for each Seat beyond the threshold,
+or, where the threshold counts devices or users instead of Seats, for
+each such device or user beyond it, and Sections 8 through 13 apply to
+it."
+    ;;
+  institutional)
+    SCOPE_LINE="Institutional — ${THRESHOLD} free, home use free"
+    SCOPE_SUFFIX="-I"
+    SCOPE_BODY="Institutional — Section 1's free grant covers three uses: Non-Production
+Use by anyone; personal use by an individual for the individual's own
+purposes and not for any business or organization, in any amount; and
+Production Use by an organization up to ${THRESHOLD}, counting together
+all organizations under common control. Production Use beyond that
+threshold is Paid Use under Section 8, and it is always by agreement:
+the Licensee needs a written enterprise license signed by the Licensor,
+whose price and terms the Licensor and the Licensee negotiate under
+Section 2, and until it is signed that use is not licensed. Section 8's
+Published Price does not apply to it, and any price list the Licensor
+shows is guidance that binds neither party. The enterprise license may
+require the Software to check its license over the network with the
+Licensor. For Production Use beyond the threshold, and only for that
+use, Section 10's rule against sending information about use for
+enforcement does not apply to that check. The check may send only the
+license key or identifier, the number of Seats or other units in use,
+the Software's version, and the time. It may not send the content of any
+data the Software processes, the identity of any individual, or the
+identity of the Licensee's clients or customers. The Software may
+contain the means to make the check, but must not make it for any use
+that the free grant covers, and must not make it unless an enterprise
+license in force requires it. The Section 9 step for that use states
+that the check exists, what it sends, and how often, and the enterprise
+license states how long the Software keeps working if the Licensor
+cannot be reached. A signed enterprise license governs the use it
+covers, and this license continues to apply to everything else."
     ;;
   paid)
     SCOPE_LINE="Paid"
@@ -235,7 +275,7 @@ scope_letter() {
   case "$1" in
     unconditional) echo U ;; no-competing-service) echo C ;;
     no-third-party-hosting) echo H ;; noncommercial) echo N ;;
-    seat-limited) echo S ;; decentralized) echo D ;; paid) echo P ;;
+    seat-limited) echo S ;; institutional) echo I ;; decentralized) echo D ;; paid) echo P ;;
   esac
 }
 contract_text() {
@@ -447,11 +487,11 @@ Component. The name of each Component, the paths or packages that
 identify it, and its scope are filled in as the copyright year, holder,
 and project name are, and no other term of this license changes. The
 scope of a Component may be any Operational Scope in this Section 1A
-except Seat-Limited and Decentralized. The scope of the Software outside
-the Components may be any Operational Scope except Decentralized, which
-applies only to a Release without Components. The statement of the
-Release's Ruling License under Section 1C names this version, the scope
-stated first, and each Component with its scope.
+except Seat-Limited, Institutional, and Decentralized. The scope of the
+Software outside the Components may be any Operational Scope except
+Decentralized, which applies only to a Release without Components. The
+statement of the Release's Ruling License under Section 1C names this
+version, the scope stated first, and each Component with its scope.
 UFL_COMPONENTS
 }
 DEF_LINE=$SCOPE_LINE
@@ -523,7 +563,7 @@ if [ "$CONTRACT" = 1 ]; then
 fi
 
 if [ "$RELEASE" = 1 ]; then
-  STMT="UFL 3.7, Operational Scope: $DEF_LINE$COMP_STMT$CONTRACT_STMT (LicenseRef-UFL-3.7${SCOPE_SUFFIX})"
+  STMT="UFL 3.8, Operational Scope: $DEF_LINE$COMP_STMT$CONTRACT_STMT (LicenseRef-UFL-3.8${SCOPE_SUFFIX})"
   if [ -n "$OUT" ]; then printf '%s\n' "$STMT" > "$OUT"; else printf '%s\n' "$STMT"; fi
   exit 0
 fi
@@ -539,9 +579,9 @@ FILLED=$(sed \
   -e "s|\[COPYRIGHT HOLDER\]|$HOLDER_ESC|g" \
   -e "s|\[PROJECT NAME\]|$PROJECT_ESC|g" \
   -e "s|\[OPERATIONAL SCOPE\]|$SCOPE_LINE_ESC|g" \
-  -e "s|LicenseRef-UFL-3.7\`|LicenseRef-UFL-3.7${SCOPE_SUFFIX_ESC}\`|g" \
-  -e "s|\`UFL-3.7\`|\`UFL-3.7${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
-The Usufruct License (UFL) — Version 3.7
+  -e "s|LicenseRef-UFL-3.8\`|LicenseRef-UFL-3.8${SCOPE_SUFFIX_ESC}\`|g" \
+  -e "s|\`UFL-3.8\`|\`UFL-3.8${SCOPE_SUFFIX_ESC}\`|g" <<'UFL_TEMPLATE'
+The Usufruct License (UFL) — Version 3.8
 Canonical text, whitepaper, and FAQ: https://github.com/estejosh/UFL-Usufruct-License
 
 Copyright (c) [YEAR] [COPYRIGHT HOLDER]
@@ -611,7 +651,7 @@ Release the Licensee uses.
 
 With each Release, the Licensor states which version of this license,
 and which Operational Scope, governs that Release (its "Ruling
-License"). The statement names both, for example "UFL 3.7, Operational
+License"). The statement names both, for example "UFL 3.8, Operational
 Scope: Noncommercial", and appears where users get the Release: in its
 release notes, its tag, or its package metadata. The Release includes
 the full text of its Ruling License. If a Release does not state its
@@ -1018,8 +1058,8 @@ to the greatest extent the law allows.
 
 ---
 SPDX identifier: UFL is not on the official SPDX license list. Per SPDX
-convention for licenses outside that list, use `LicenseRef-UFL-3.7` —
-not a bare `UFL-3.7`, which would misrepresent it as SPDX-registered.
+convention for licenses outside that list, use `LicenseRef-UFL-3.8` —
+not a bare `UFL-3.8`, which would misrepresent it as SPDX-registered.
 UFL_TEMPLATE
 )
 
