@@ -561,16 +561,18 @@ organizations deal with the Licensor. Institutional is that three-tier scope.
 - **Small organizations are free up to a stated number of seats**, such as 25.
   Seats are counted as in Section 1B, and organizations under common control
   count together, so splitting a company in two does not reset the count.
-- **Beyond the threshold is Paid Use.** The Licensor either publishes a
-  Published Price for that tier, in which case Sections 8 through 13 work as
-  they do for any scope, or says the tier is by agreement only. Where it is by
-  agreement only, the organization needs a written enterprise license signed
-  by the Licensor, on terms the two negotiate under Section 2. Until it is
-  signed, that use is not licensed, and the Licensor's copyright remedies are
-  open. A signed enterprise license governs the use it covers; the license
-  continues to apply to everything else.
-- **Per-seat and enterprise pricing** sit in that agreement or in the
-  Published Price. The license does not set the number.
+- **Beyond the threshold is Paid Use, with a default price.** The Licensor
+  publishes a Published Price for that tier. If it publishes none, the license
+  supplies one: USD 100 per year for each Seat beyond the threshold, and
+  Sections 8 through 13 (periods, usage statements, retroactive licenses) work
+  on it. This closes the gap in Section 8, where a withheld use with no price
+  is simply unavailable. The Licensor may change the price by publishing
+  another, or may say the tier is by agreement only, in which case a signed
+  enterprise license is required and the use is not licensed until then. Any
+  Licensor and Licensee may sign an enterprise license in place of the price.
+- **Seats beyond the threshold only.** The default price is charged per Seat
+  above the threshold, not on every Seat, so there is no cliff at the
+  threshold. Enterprise pricing sits in the signed agreement.
 - **Not a Component scope.** The threshold applies to the whole Software, like
   Seat-Limited. Use Paid for a paid part.
 

@@ -42,7 +42,7 @@
     "institutional": {
       "tag": "UFL-I-1a",
       "spdxSuffix": "-I",
-      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Larger organizations need a written enterprise license negotiated with the Licensor, or pay a Published Price if the Licensor publishes one."
+      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Beyond it, Paid Use at the Licensor's Published Price; if none is published, a default of USD 100 per year for each Seat beyond the threshold. Large organizations may sign a negotiated enterprise license instead."
     },
     "decentralized": {
       "tag": "UFL-D-1a",

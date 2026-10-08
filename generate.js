@@ -806,13 +806,18 @@ const SCOPES = {
       "purposes and not for any business or organization, in any amount; and",
       "Production Use by an organization up to @THRESHOLD@, counting together",
       "all organizations under common control. Production Use beyond that",
-      "threshold is Paid Use under Section 8. For that tier the Licensor either",
-      "publishes a Published Price or states that the tier is by agreement",
-      "only. Where the tier is by agreement only, the Licensee needs a written",
-      "enterprise license signed by the Licensor, whose price and terms the",
-      "Licensor and the Licensee negotiate under Section 2, and until it is",
-      "signed that use is not licensed. A signed enterprise license governs the",
-      "use it covers, and this license continues to apply to everything else."
+      "threshold is Paid Use under Section 8, at the Published Price the",
+      "Licensor publishes for it. If the Licensor publishes none, then despite",
+      "the last sentence of Section 8 the Published Price is the default price",
+      "of USD 100 per year for each Seat beyond the threshold, and Sections 8",
+      "through 13 apply to it. The Licensor may instead state that the tier is",
+      "by agreement only, and then the Licensee needs a written enterprise",
+      "license signed by the Licensor, whose price and terms the Licensor and",
+      "the Licensee negotiate under Section 2, and until it is signed that use",
+      "is not licensed. A Licensor and a Licensee may at any time sign a",
+      "written enterprise license in place of the Published Price. It governs",
+      "the use it covers, and this license continues to apply to everything",
+      "else."
     ]
   },
   "decentralized": {

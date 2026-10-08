@@ -17,11 +17,15 @@ with Seat-Limited and Decentralized as scopes a Component may not take.
 - **Small organizations are free up to the stated number of seats.** Seats
   are counted as in Section 1B, and organizations under common control count
   together.
-- **Larger organizations negotiate.** Production Use beyond the threshold is
-  Paid Use. The Licensor either publishes a Published Price for it, so Sections
-  8 through 13 work as usual, or says the tier is by agreement only, in which
-  case a written enterprise license signed by the Licensor is required and
-  the use is not licensed until it is signed.
+- **Larger organizations pay a default price, or negotiate.** Production Use
+  beyond the threshold is Paid Use. The Licensor publishes a Published Price
+  for it. If it publishes none, the default is USD 100 per year for each Seat
+  beyond the threshold, and Sections 8 through 13 apply. This overrides, for
+  this scope only, the rule in Section 8 that a withheld use with no
+  published price is unavailable. The Licensor may instead say the tier is by
+  agreement only, which requires a signed enterprise license and leaves the
+  use unlicensed until then. A Licensor and a Licensee may sign an enterprise
+  license in place of the price at any time.
 
 Releases published under earlier versions keep their Ruling License (Section
 1C). A Licensor moves to 3.8 forward, with notice.

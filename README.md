@@ -86,7 +86,7 @@ Scope:` line at the top of the license text, the `scope` field in
 |---|---|---|
 | Unconditional (default) | `UFL-U-1a` | Nothing — Section 1's grant applies as written. |
 | Seat-Limited | `UFL-S-1a` | Production use beyond a stated seat/device/user threshold (Paid Use above it). |
-| Institutional | `UFL-I-1a` | Free for home use and for organizations up to a stated seat threshold; larger organizations negotiate a written enterprise license with the Licensor (or pay a Published Price if one is published). |
+| Institutional | `UFL-I-1a` | Free for home use and for organizations up to a stated seat threshold; beyond that, the Licensor's Published Price, or a default of USD 100 per year for each Seat beyond the threshold if none is published; large organizations may negotiate a written enterprise license. |
 | No-Third-Party-Hosting | `UFL-H-1a` | Offering it to third parties as a hosted or managed service. |
 | No-Competing-Service | `UFL-C-1a` | Operating it, or a fork of it, as a service competing with the Licensor's own offering. |
 | Noncommercial | `UFL-N-1a` | Commercial use. |
