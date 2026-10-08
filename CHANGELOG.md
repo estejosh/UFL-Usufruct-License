@@ -22,6 +22,13 @@ repo tag `UFL-I-1a`.
   terms the two negotiate under Section 2. Until it is signed, that use is not
   licensed. No Published Price applies, and a price list is guidance only.
 
+- **A license check is allowed for that negotiated tier only.** The
+  enterprise license may require a network check with the Licensor. It sends
+  only a license key or identifier, the seat count, the version, and the time,
+  and never content or identities. The free tiers (home use and small
+  organizations) never make it, and Section 10's rule against reporting use
+  still holds for them. The Section 9 step discloses the check.
+
 **Seat-Limited (changed).** Production Use beyond the threshold is still Paid
 Use at the Licensor's Published Price. New: if the Licensor publishes none, the
 Published Price is a default of USD 120 per year for each Seat beyond the

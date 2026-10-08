@@ -33,6 +33,8 @@ fi
 
 sh generate.sh -y 1 -c h -p p -s seat-limited -t "2 seats" 2>/dev/null | grep -q "default price of USD 120 per year for each Seat" && ok "seat-limited default price present" || fail "seat-limited default price"
 sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "always by agreement" && ok "institutional negotiated only" || fail "institutional negotiated only"
+sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | tr "\n" " " | grep -q "check its license over the network" && ok "institutional license check clause present" || fail "institutional license check clause"
+sh generate.sh -y 1 -c h -p p -s unconditional 2>/dev/null | tr "\n" " " | grep -q "check its license over the network" && fail "license check clause leaked into another scope" || ok "license check clause only in institutional"
 sh generate.sh -y 1 -c h -p p -s institutional -t "25 seats" 2>/dev/null | grep -q "default price" && fail "institutional has a default price" || ok "institutional has no default price"
 for sc in $NEWSCOPES; do
   OUT=$(sh generate.sh -y 2026 -c H -p P -s "$sc" -t "25 seats" 2>/dev/null)

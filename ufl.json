@@ -42,7 +42,7 @@
     "institutional": {
       "tag": "UFL-I-1a",
       "spdxSuffix": "-I",
-      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Larger organizations always need a written enterprise license negotiated with the Licensor; until it is signed, that use is not licensed."
+      "summary": "Free for personal use by an individual and for organizations up to a stated seat threshold. Larger organizations always need a written enterprise license negotiated with the Licensor; until it is signed, that use is not licensed. For that negotiated tier only, the enterprise license may require a limited license check over the network (license key, seat count, version, time; no content or identities)."
     },
     "decentralized": {
       "tag": "UFL-D-1a",

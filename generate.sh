@@ -238,9 +238,22 @@ the Licensee needs a written enterprise license signed by the Licensor,
 whose price and terms the Licensor and the Licensee negotiate under
 Section 2, and until it is signed that use is not licensed. Section 8's
 Published Price does not apply to it, and any price list the Licensor
-shows is guidance that binds neither party. A signed enterprise license
-governs the use it covers, and this license continues to apply to
-everything else."
+shows is guidance that binds neither party. The enterprise license may
+require the Software to check its license over the network with the
+Licensor. For Production Use beyond the threshold, and only for that
+use, Section 10's rule against sending information about use for
+enforcement does not apply to that check. The check may send only the
+license key or identifier, the number of Seats or other units in use,
+the Software's version, and the time. It may not send the content of any
+data the Software processes, the identity of any individual, or the
+identity of the Licensee's clients or customers. The Software may
+contain the means to make the check, but must not make it for any use
+that the free grant covers, and must not make it unless an enterprise
+license in force requires it. The Section 9 step for that use states
+that the check exists, what it sends, and how often, and the enterprise
+license states how long the Software keeps working if the Licensor
+cannot be reached. A signed enterprise license governs the use it
+covers, and this license continues to apply to everything else."
     ;;
   paid)
     SCOPE_LINE="Paid"

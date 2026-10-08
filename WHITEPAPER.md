@@ -568,6 +568,18 @@ organizations deal with the Licensor. Institutional is that three-tier scope.
   remedies are open. No Published Price applies, and a price list the Licensor
   shows is guidance only. A signed enterprise license governs the use it
   covers; the license continues to apply to everything else.
+- **A license check is allowed for the negotiated tier, and only there.**
+  Section 10 otherwise bars the Software from reporting use to the Licensor
+  to enforce the license. For use beyond the Institutional threshold, the
+  enterprise license may require a network check with the Licensor. It may
+  send only a license key or identifier, the seat count in use, the version,
+  and the time, and never the content of data, the identity of any individual,
+  or the identity of the Licensee's clients. The Software may carry the code
+  but must not run it for home use or for a small organization inside the
+  free threshold, and must not run it unless an enterprise license requires
+  it. The Section 9 step discloses the check, what it sends, and how often,
+  and the enterprise license says how long the Software keeps working if the
+  Licensor cannot be reached. The free tiers keep Section 10's rule.
 - **Not a Component scope.** The threshold applies to the whole Software, like
   Seat-Limited. Use Paid for a paid part.
 
